@@ -14,6 +14,21 @@
       "others": []
     }
   },
+  "Science Block": {
+    "radius": 10,
+    "location": {
+      "latitude": 100,
+      "longitude": 100
+    },
+    "categories": {
+      "computerLab": [],
+      "classroom": [],
+      "lectureTheatre": [],
+      "scienceLab": [],
+      "projectRoom": [],
+      "others": []
+    }
+  },
   "Shears Block": {
     "radius": 10,
     "location": {
@@ -44,19 +59,5 @@
       "others": []
     }
   },
-  "Marshall Block": {
-    "radius": 10,
-    "location": {
-      "latitude": 100,
-      "longitude": 100
-    },
-    "categories": {
-      "computerLab": [],
-      "classroom": [],
-      "lectureTheatre": [],
-      "scienceLab": [],
-      "projectRoom": [],
-      "others": []
-    }
   }
 }
