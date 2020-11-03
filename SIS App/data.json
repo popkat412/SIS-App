@@ -1,0 +1,62 @@
+{
+  "Raja Block": {
+    "radius": 10,
+    "location": {
+      "latitude": 100,
+      "longitude": 100
+    },
+    "categories": {
+      "computerLab": [],
+      "classroom": [],
+      "lectureTheatre": [],
+      "scienceLab": [],
+      "projectRoom": [],
+      "others": []
+    }
+  },
+  "Shears Block": {
+    "radius": 10,
+    "location": {
+      "latitude": 100,
+      "longitude": 100
+    },
+    "categories": {
+      "computerLab": [],
+      "classroom": [],
+      "lectureTheatre": [],
+      "scienceLab": [],
+      "projectRoom": [],
+      "others": []
+    }
+  },
+  "Yusof Ishak Block": {
+    "radius": 10,
+    "location": {
+      "latitude": 100,
+      "longitude": 100
+    },
+    "categories": {
+      "computerLab": [],
+      "classroom": [],
+      "lectureTheatre": [],
+      "scienceLab": [],
+      "projectRoom": [],
+      "others": []
+    }
+  },
+  "Marshall Block": {
+    "radius": 10,
+    "location": {
+      "latitude": 100,
+      "longitude": 100
+    },
+    "categories": {
+      "computerLab": [],
+      "classroom": [],
+      "lectureTheatre": [],
+      "scienceLab": [],
+      "projectRoom": [],
+      "others": []
+    }
+  }
+}

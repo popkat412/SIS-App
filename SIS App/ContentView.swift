@@ -7,10 +7,20 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack(alignment: .center, spacing: 0) {
+            MapView()
+                .edgesIgnoringSafeArea(.all)
+            NavigationView {
+                List {
+                    Text("Raja Block")
+                    Text("Shears Block")
+                }
+                .navigationBarTitle("Blocks", displayMode: .inline)
+            }
+        }
     }
 }
 
