@@ -1,0 +1,12 @@
+Lecture Theatre	: https://www.flaticon.com/free-icon/lecture_2825175?term=lecture&page=1&position=90
+Classrooms	: https://www.flaticon.com/free-icon/classroom_3492085?term=classroom&page=1&position=41
+Science	Lab	: https://www.flaticon.com/free-icon/lab-tool_2933877?term=science&page=1&position=39
+Computer Lab	: https://www.flaticon.com/free-icon/desktop_2933296?term=computer&page=1&position=15
+Discovery Lab	: https://www.flaticon.com/free-icon/research_944265?term=discovery&page=1&position=10
+Subject Room	: https://www.flaticon.com/free-icon/bookshelf_3100752
+Seminar Room	: https://www.flaticon.com/free-icon/meeting_490283
+Staff Room	: https://www.flaticon.com/free-icon/workspace_3063810?term=workspace&page=1&position=24
+
+Clock		: https://www.flaticon.com/free-icon/clock_2141330?term=clock&page=3&position=6
+Block		: https://www.flaticon.com/free-icon/hotel_3112927?term=building&page=1&position=42
+Classroom 1	: https://www.flaticon.com/free-icon/classroom_3492080?term=classroom&page=1&position=26#

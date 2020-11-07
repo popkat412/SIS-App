@@ -7,20 +7,40 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
+    let blocks = blocksFromJson()!
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             MapView()
                 .edgesIgnoringSafeArea(.all)
             NavigationView {
-                List {
-                    Text("Raja Block")
-                    Text("Shears Block")
+                List(blocks, id: \.name) { block in
+                    Text(block.name)
                 }
                 .navigationBarTitle("Blocks", displayMode: .inline)
             }
         }
+    }
+    
+    private static func blocksFromJson() -> [Block]? {
+        if let filepath = Bundle.main.path(forResource: "data.json", ofType: nil) {
+            do {
+                let contents = try String(contentsOfFile: filepath)
+
+                if let contentsData = contents.data(using: .utf8) {
+                    let result = try JSONDecoder().decode([Block].self, from: contentsData)
+                    return result
+                }
+
+            } catch {
+                print(error)
+
+            }
+        } else {
+            print("data.json not found :O")
+        }
+        return nil
     }
 }
 
