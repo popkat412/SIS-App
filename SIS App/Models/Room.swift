@@ -22,44 +22,4 @@ enum RoomCategory: String, Decodable {
     case staffRoom        // = "Staff Room"
     case combinedRoom     // = "Combined Room"
     case others           // = "Others"
-    
-//    enum CodingKeys: String, CodingKey {
-//        case computerLab
-//        case classroom
-//        case lectureTheatre
-//        case scienceLab
-//        case projectRoom
-//        case staffRoom
-//        case combinedRoom
-//        case others
-//    }
-//
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        print("Coding Path: \(container.codingPath)")
-//        print("Container: \(container)")
-//
-//        self = .others
-//
-//        let value = try container.decode()
-//
-//        switch value {
-//        case "computerLab":
-//            self = .computerLab
-//        case "classroom":
-//            self = .classroom
-//        case "lectureTheatre":
-//            self = .lectureTheatre
-//        case "scienceLab":
-//            self = .scienceLab
-//        case "projectRoom":
-//            self = .projectRoom
-//        case "staffRoom":
-//            self = .staffRoom
-//        case "combinedRoom":
-//            self = .combinedRoom
-//        default:
-//            self = .others
-//        }
-//    }
 }
