@@ -1,10 +1,20 @@
 [
   {
     "name": "Raja Block",
+    "location": {
+        "longitude": 103.844112,
+        "latitude": 1.346236
+    },
+    "radius": 43.92,
     "categories": {}
   },
   {
     "name": "Science Block",
+    "location": {
+        "longitude": 103.845913,
+        "latitude": 1.345748
+    },
+    "radius": 22.22,
     "categories": {
       "scienceLab": [
         { "name": "Chemistry Lab 1", "level": 1, "id": "S1-07" },
@@ -36,6 +46,11 @@
   },
   {
     "name": "Sheares Block",
+    "location": {
+        "longitude": 103.844805,
+        "latitude": 1.346454
+    },
+    "radius": 25.09,
     "categories": {
       "classroom": [
         { "name": "Class 2I", "level": 3, "id": "J3-1" },
@@ -78,10 +93,20 @@
   },
   {
     "name": "Yusof Ishak Block",
+    "location": {
+        "longitude": 103.845992,
+        "latitude": 1.346271
+    },
+    "radius": 73.84,
     "categories": {}
   },
   {
     "name": "Marshall Block",
+    "location": {
+        "longitude": 103.845492,
+        "latitude": 1.345649
+    },
+    "radius": 21.62,
     "categories": {
       "classroom": [
         { "name": "Class 1A", "level": 1, "id": "C1-17" },
@@ -107,6 +132,11 @@
   },
   {
     "name": "ARTSpace",
+    "location": {
+        "longitude": 103.844596,
+        "latitude": 1.347543
+    },
+    "radius": 32.42,
     "categories": {}
   }
 ]
