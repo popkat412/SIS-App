@@ -13,7 +13,7 @@ struct Room: Decodable {
     var id: String
 }
 
-enum RoomCategory: String, Decodable {
+enum RoomCategory: String, Decodable {    
     case computerLab      // = "Computer Lab"
     case classroom        // = "Classroom"
     case lectureTheatre   // = "Lecture Theatre"

@@ -6,15 +6,23 @@
 //
 
 import SwiftUI
+import CoreLocation
 import MapKit
 
 struct MapView: UIViewRepresentable {
+    let locationManager = CLLocationManager()
+    
     func makeUIView(context: Context) -> MKMapView {
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.startUpdatingLocation()
+        
         return MKMapView(frame: .zero)
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        // Raja block: 1.346232, 103.844188
+        // 1.346236, 103.844112
         
         let coordinate = CLLocationCoordinate2D(
             latitude: 1.346232,
@@ -22,8 +30,8 @@ struct MapView: UIViewRepresentable {
         )
         
         let span = MKCoordinateSpan(
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01
+            latitudeDelta: 0.001,
+            longitudeDelta: 0.001
         )
         
         let region = MKCoordinateRegion(
@@ -31,6 +39,7 @@ struct MapView: UIViewRepresentable {
             span: span
         )
         
+        uiView.showsUserLocation = true
         uiView.setRegion(region, animated: true)
     }
 }

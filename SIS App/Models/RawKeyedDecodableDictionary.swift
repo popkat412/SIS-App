@@ -33,6 +33,10 @@ struct RawKeyedDecodableDictionary<Key, Value>: Decodable where Key: Hashable & 
             wrappedValue[key] = value
         }
     }
+    
+    func toDictionary() -> [Key: Value] {
+        return Dictionary(uniqueKeysWithValues: wrappedValue.map {($0, $1)} )
+    }
 
 //    func encode(to encoder: Encoder) throws {
 //        let rawKeyedDictionary = Dictionary(uniqueKeysWithValues: wrappedValue.map { ($0.rawValue, $1) })

@@ -16,7 +16,10 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             NavigationView {
                 List(blocks, id: \.name) { block in
-                    Text(block.name)
+                    NavigationLink(
+                        destination: CategoriesView(categories: block.categories.toDictionary())) {
+                            Text(block.name)
+                        }
                 }
                 .navigationBarTitle("Blocks", displayMode: .inline)
             }
