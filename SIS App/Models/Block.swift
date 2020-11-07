@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Block: Decodable {
     var name: String
+    var location: Location
+    var radius: Double
     var categories: RawKeyedDecodableDictionary<RoomCategory, [Room]>
 }
