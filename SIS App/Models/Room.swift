@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Room: Decodable {
+struct Room: Decodable, Identifiable {
     var name: String
     var level: Int
     var id: String

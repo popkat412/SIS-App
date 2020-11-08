@@ -12,5 +12,5 @@ struct Block: Decodable {
     var name: String
     var location: Location
     var radius: Double
-    var categories: RawKeyedDecodableDictionary<RoomCategory, [Room]>
+    @RawKeyedDecodableDictionary var categories: [RoomCategory: [Room]]
 }

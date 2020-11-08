@@ -30,7 +30,7 @@ struct CategoryNames {
         if let filepath = Bundle.main.path(forResource: "categories.json", ofType: nil) {
             do {
                 let contents = try String(contentsOfFile: filepath)
-
+                
                 if let contentsData = contents.data(using: .utf8) {
                     categoryToName = try JSONDecoder().decode(RawKeyedDecodableDictionary<RoomCategory, String>.self, from: contentsData)
                 }
