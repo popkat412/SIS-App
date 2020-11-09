@@ -53,12 +53,12 @@
 		6202DDC925581EA70017BC49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6202DDCC255821520017BC49 /* CheckInSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckInSession.swift; path = "SIS App/Views/CheckInSession.swift"; sourceTree = SOURCE_ROOT; };
 		6202DDCF255827DF0017BC49 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryView.swift; path = "SIS App/Models/HistoryView.swift"; sourceTree = SOURCE_ROOT; };
-		6202DDD225583CC90017BC49 /* RoomParentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomParentInfo.swift; path = "SIS App/Views/RoomParentInfo.swift"; sourceTree = SOURCE_ROOT; };
+		6202DDD225583CC90017BC49 /* RoomParentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomParentInfo.swift; path = "SIS App/Utilities/RoomParentInfo.swift"; sourceTree = SOURCE_ROOT; };
 		6202DDD525595A230017BC49 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		621A77E925566CCE00636B27 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		621A877C2551832C00FA810F /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		621A87802551838900FA810F /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
-		62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+FormattedTime.swift"; path = "SIS App/Views/Date+FormattedTime.swift"; sourceTree = SOURCE_ROOT; };
+		62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+FormattedTime.swift"; path = "SIS App/Utilities/Date+FormattedTime.swift"; sourceTree = SOURCE_ROOT; };
 		62881EAD2556570A00787923 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		62881EB0255657EE00787923 /* CategoryNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNames.swift; sourceTree = "<group>"; };
 		62881EB325565C2200787923 /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
@@ -93,19 +93,26 @@
 		621A877F2551833200FA810F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */,
-				6202DDD225583CC90017BC49 /* RoomParentInfo.swift */,
-				6202DDD525595A230017BC49 /* DataProvider.swift */,
 				6202DDCC255821520017BC49 /* CheckInSession.swift */,
 				62DB8FDB2556A2E9006AA1D3 /* Level.swift */,
 				621A877C2551832C00FA810F /* Block.swift */,
 				621A77E925566CCE00636B27 /* Location.swift */,
 				621A87802551838900FA810F /* Room.swift */,
-				62EC2D77255642A90040AF5D /* RawKeyedDecodableDictionary.swift */,
 				62FF081925564B9A00FD5D65 /* CheckInManager.swift */,
-				62881EB0255657EE00787923 /* CategoryNames.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		62756C2A25598BEE0007C4F3 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */,
+				6202DDD225583CC90017BC49 /* RoomParentInfo.swift */,
+				6202DDD525595A230017BC49 /* DataProvider.swift */,
+				62EC2D77255642A90040AF5D /* RawKeyedDecodableDictionary.swift */,
+				62881EB0255657EE00787923 /* CategoryNames.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		62881EB625565C2600787923 /* Views */ = {
@@ -150,6 +157,7 @@
 		62E119E7253ADEBF0037CEC5 /* SIS App */ = {
 			isa = PBXGroup;
 			children = (
+				62756C2A25598BEE0007C4F3 /* Utilities */,
 				621A877F2551833200FA810F /* Models */,
 				62881EB725565C3300787923 /* Data */,
 				62881EB625565C2600787923 /* Views */,
