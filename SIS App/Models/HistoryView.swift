@@ -34,6 +34,7 @@ struct HistoryView_Previews: PreviewProvider {
 struct RowItem: View {
     var iconName: String
     var text: String
+    var font: Font = .body
     
     var body: some View {
         HStack {
@@ -42,6 +43,7 @@ struct RowItem: View {
                 .frame(width: 25, height: 25)
             
             Text(text)
+                .font(font)
                 .multilineTextAlignment(.leading)
         }
     }
@@ -51,12 +53,18 @@ struct HistoryRow: View {
     var session: CheckInSession
     
     var body: some View {
-        HStack {
-            RowItem(iconName: "time", text: session.formattedTiming)
+        VStack(alignment: .leading) {
+            RowItem(
+                iconName: "time",
+                text: session.formattedTiming,
+                font: .system(size: 20)
+            )
             
-            RowItem(iconName: "block", text: RoomParentInfo.getParent(of: session.room))
-            
-            RowItem(iconName: "room", text: session.room.name)
+            HStack {
+                RowItem(iconName: "block", text: RoomParentInfo.getParent(of: session.room))
+                
+                RowItem(iconName: "room", text: session.room.name)
+            }
         }
     }
 }

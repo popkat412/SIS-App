@@ -10,6 +10,7 @@ import SwiftUI
 struct CheckedInView: View {
     @EnvironmentObject var checkInManager: CheckInManager
     @State var clickedCheckOutButton = false
+    @State var checkOutTime: Date?
     
     let checkedInGradient = Gradient(colors: [
         Color(red: 35/225, green: 122/225, blue: 87/225),
@@ -20,21 +21,33 @@ struct CheckedInView: View {
         Color(red: 25/255, green: 22/255, blue: 84/255)
     ])
     
+    
     var body: some View {
         VStack {
             Spacer()
-            Image(systemName: "checkmark.seal.fill")
+            
+            Image(systemName: clickedCheckOutButton ? "square.and.arrow.up" : "square.and.arrow.down")
                 .font(.system(size: 100))
                 .foregroundColor(clickedCheckOutButton ? .blue : .green)
                 .padding(.bottom, 10)
+                .padding(.top, 20)
             Text(clickedCheckOutButton ? "Checked Out!" : "Checked In!")
                 .font(.title)
+                .padding(.bottom, 20)
+            
+            Text(clickedCheckOutButton ?
+                    "You checked out of \(checkInManager.currentSession?.room.name ?? "") at \(checkOutTime!.formattedTime)" :
+                    "You checked into \(checkInManager.currentSession?.room.name ?? "") at \(checkInManager.currentSession?.checkedIn.formattedTime ?? "")"
+            )
+            .padding()
+            
             Spacer()
             Button(action: {
                 if clickedCheckOutButton {
                     checkInManager.checkOut()
                 } else {
                     clickedCheckOutButton = true
+                    checkOutTime = Date()
                 }
             }, label: {
                 Text(clickedCheckOutButton ? "Back to Home" : "Check Out")
@@ -52,7 +65,9 @@ struct CheckedInView: View {
 
 struct CheckedInView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckedInView()
-            .environmentObject(CheckInManager())
+        Group {
+            CheckedInView()
+                .environmentObject(CheckInManager())
+        }
     }
 }

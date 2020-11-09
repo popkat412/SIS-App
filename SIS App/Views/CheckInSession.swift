@@ -24,17 +24,19 @@ struct Day: Identifiable {
 
 struct CheckInSession {
     var checkedIn: Date
-    var checkedOut: Date
+    var checkedOut: Date?
     var room: Room
     
     var formattedTiming: String {
         get {
             let formatter = DateFormatter()
-            formatter.dateFormat = "hh:mm a"
+            formatter.dateFormat = "h:mm a"
             
-            let formatted = "\(formatter.string(from: checkedIn)) - \(formatter.string(from: checkedOut))"
-        
-            return formatted
+            if checkedOut != nil {
+                 return "\(formatter.string(from: checkedIn)) - \(formatter.string(from: checkedOut!))"
+            } else {
+                return "\(formatter.string(from: checkedIn)) - ???"
+            }
         }
     }
 }

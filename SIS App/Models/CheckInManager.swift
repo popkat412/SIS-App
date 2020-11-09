@@ -15,21 +15,25 @@ class CheckInManager: ObservableObject {
     /// Used to check if the user is currently checked in or not
     /// This should check the persisted data (if any) from the `checkIn()` static method
     @Published private(set) var isCheckedIn = false
+    @Published private(set) var currentSession: CheckInSession?
     
     /// Used to check the user into a room.
     /// Note that this should persist if the user quits the app while checked in
     /// This should never be called when `isCheckedIn` is true
-    func checkIn(to: Room) {
+    func checkIn(to room: Room) {
         // TODO: Implement this
         isCheckedIn = true
+        currentSession = CheckInSession(checkedIn: Date(), checkedOut: nil, room: room)
     }
     
     /// Used to check the user out from the room they are currently checked into
     /// This should use the persisted data (if any) from the `checkIn()` static method
     /// This should never be called when `isCheckedIn` is false
     func checkOut() {
-        // TODO: Implement this
         isCheckedIn = false
+        currentSession?.checkedOut = Date()
+        // TODO: Save current session to CoreData
+        currentSession = nil
     }
     
     /// This should get the user's history from CoreData

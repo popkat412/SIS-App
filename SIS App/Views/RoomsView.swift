@@ -10,6 +10,7 @@ import SwiftUI
 struct RoomsView: View {
     @EnvironmentObject var checkInManager: CheckInManager
     var rooms: [Room]
+    var categoryName: String
     
     var body: some View {
         List {
@@ -24,9 +25,9 @@ struct RoomsView: View {
                         
                     }
                 }
-                
             }
         }
+        .navigationBarTitle(categoryName, displayMode: .inline)
     }
     
     private func roomSections() -> [Level] {
@@ -55,12 +56,15 @@ struct RoomsView: View {
 
 struct RoomsView_Previews: PreviewProvider {
     static var previews: some View {
-        RoomsView(rooms: [
-            Room(name: "Class 1A", level: 1, id: "ABC"),
-            Room(name: "Class 1B", level: 1, id: "ABC"),
-            Room(name: "Class 1C", level: 2, id: "ABC"),
-            Room(name: "Class 1D", level: 2, id: "ABC"),
-            Room(name: "Class 1E", level: 3, id: "ABC")
-        ])
+        RoomsView(
+            rooms: [
+                Room(name: "Class 1A", level: 1, id: "ABC"),
+                Room(name: "Class 1B", level: 1, id: "ABC"),
+                Room(name: "Class 1C", level: 2, id: "ABC"),
+                Room(name: "Class 1D", level: 2, id: "ABC"),
+                Room(name: "Class 1E", level: 3, id: "ABC")
+            ],
+            categoryName: "Test"
+        )
     }
 }

@@ -13,7 +13,10 @@ struct CategoriesView: View {
     
     var body: some View {
         List(Array(categories.keys), id: \.rawValue) { category in
-            NavigationLink(destination: RoomsView(rooms: categories[category]!)) {
+            NavigationLink(destination: RoomsView(
+                rooms: categories[category]!,
+                categoryName: CategoryNames.getName(of: category)
+            )) {
                 HStack {
                     Image(category.rawValue)
                         .resizable()

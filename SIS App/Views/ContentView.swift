@@ -17,6 +17,7 @@ struct ContentView: View {
                 }
             HistoryView()
                 .tabItem {
+                    Image(systemName: "list.dash")
                     Text("History")
                 }
         }
@@ -26,6 +27,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            // .previewDevice("iPad Pro (12.9-inch) (4th generation)")
             .environmentObject(CheckInManager())
     }
 }
