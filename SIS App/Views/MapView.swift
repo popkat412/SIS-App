@@ -63,7 +63,7 @@ class MapViewCoordinator: NSObject, CLLocationManagerDelegate {
         super.init()
         
         locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.startUpdatingLocation()
         locationManager.delegate = self

@@ -11,7 +11,7 @@ import CoreLocation
 struct HomeView: View {
     @EnvironmentObject var checkInManager: CheckInManager
     @State private var userLocation = CLLocation()
-    let blocks = blocksFromJson()!
+    let blocks = DataProvider.getBlocks()
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -39,25 +39,6 @@ struct HomeView: View {
                 }
             }
         }
-    }
-    
-    private static func blocksFromJson() -> [Block]? {
-        if let filepath = Bundle.main.path(forResource: "data.json", ofType: nil) {
-            do {
-                let contents = try String(contentsOfFile: filepath)
-                
-                if let contentsData = contents.data(using: .utf8) {
-                    let result = try JSONDecoder().decode([Block].self, from: contentsData)
-                    return result
-                }
-                
-            } catch {
-                print(error)
-            }
-        } else {
-            print("data.json not found :O")
-        }
-        return nil
     }
 }
 

@@ -15,6 +15,10 @@ struct ContentView: View {
                     Image(systemName: "house.fill")
                     Text("Home")
                 }
+            HistoryView()
+                .tabItem {
+                    Text("History")
+                }
         }
     }
 }

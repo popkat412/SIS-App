@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		6202DDC32556A7D50017BC49 /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 6202DDC22556A7D50017BC49 /* colors.json */; };
 		6202DDC62558102F0017BC49 /* CheckedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6202DDC52558102F0017BC49 /* CheckedInView.swift */; };
+		6202DDCA25581EA70017BC49 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6202DDC925581EA70017BC49 /* ContentView.swift */; };
+		6202DDCD255821520017BC49 /* CheckInSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6202DDCC255821520017BC49 /* CheckInSession.swift */; };
+		6202DDD0255827DF0017BC49 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6202DDCF255827DF0017BC49 /* HistoryView.swift */; };
+		6202DDD325583CC90017BC49 /* RoomParentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6202DDD225583CC90017BC49 /* RoomParentInfo.swift */; };
+		6202DDD625595A230017BC49 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6202DDD525595A230017BC49 /* DataProvider.swift */; };
 		621A77EA25566CCE00636B27 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A77E925566CCE00636B27 /* Location.swift */; };
 		621A877D2551832C00FA810F /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A877C2551832C00FA810F /* Block.swift */; };
 		621A87812551838900FA810F /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A87802551838900FA810F /* Room.swift */; };
@@ -20,7 +25,7 @@
 		62DB8FDF2556A6C0006AA1D3 /* LevelColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DB8FDE2556A6C0006AA1D3 /* LevelColors.swift */; };
 		62E119E9253ADEBF0037CEC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119E8253ADEBF0037CEC5 /* AppDelegate.swift */; };
 		62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119EA253ADEBF0037CEC5 /* SceneDelegate.swift */; };
-		62E119ED253ADEBF0037CEC5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119EC253ADEBF0037CEC5 /* ContentView.swift */; };
+		62E119ED253ADEBF0037CEC5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119EC253ADEBF0037CEC5 /* HomeView.swift */; };
 		62E119F0253ADEBF0037CEC5 /* SIS_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 62E119EE253ADEBF0037CEC5 /* SIS_App.xcdatamodeld */; };
 		62E119F2253ADEC10037CEC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F1253ADEC10037CEC5 /* Assets.xcassets */; };
 		62E119F5253ADEC10037CEC5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F4253ADEC10037CEC5 /* Preview Assets.xcassets */; };
@@ -47,6 +52,11 @@
 /* Begin PBXFileReference section */
 		6202DDC22556A7D50017BC49 /* colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
 		6202DDC52558102F0017BC49 /* CheckedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedInView.swift; sourceTree = "<group>"; };
+		6202DDC925581EA70017BC49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6202DDCC255821520017BC49 /* CheckInSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckInSession.swift; path = "SIS App/Views/CheckInSession.swift"; sourceTree = SOURCE_ROOT; };
+		6202DDCF255827DF0017BC49 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryView.swift; path = "SIS App/Models/HistoryView.swift"; sourceTree = SOURCE_ROOT; };
+		6202DDD225583CC90017BC49 /* RoomParentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomParentInfo.swift; path = "SIS App/Views/RoomParentInfo.swift"; sourceTree = SOURCE_ROOT; };
+		6202DDD525595A230017BC49 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		621A77E925566CCE00636B27 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		621A877C2551832C00FA810F /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		621A87802551838900FA810F /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
@@ -59,7 +69,7 @@
 		62E119E5253ADEBF0037CEC5 /* SIS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SIS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E119E8253ADEBF0037CEC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E119EA253ADEBF0037CEC5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		62E119EC253ADEBF0037CEC5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		62E119EC253ADEBF0037CEC5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		62E119EF253ADEBF0037CEC5 /* SIS_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SIS_App.xcdatamodel; sourceTree = "<group>"; };
 		62E119F1253ADEC10037CEC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62E119F4253ADEC10037CEC5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -85,6 +95,9 @@
 		621A877F2551833200FA810F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6202DDD225583CC90017BC49 /* RoomParentInfo.swift */,
+				6202DDD525595A230017BC49 /* DataProvider.swift */,
+				6202DDCC255821520017BC49 /* CheckInSession.swift */,
 				62DB8FDE2556A6C0006AA1D3 /* LevelColors.swift */,
 				62DB8FDB2556A2E9006AA1D3 /* Level.swift */,
 				621A877C2551832C00FA810F /* Block.swift */,
@@ -100,7 +113,9 @@
 		62881EB625565C2600787923 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				62E119EC253ADEBF0037CEC5 /* ContentView.swift */,
+				6202DDCF255827DF0017BC49 /* HistoryView.swift */,
+				62E119EC253ADEBF0037CEC5 /* HomeView.swift */,
+				6202DDC925581EA70017BC49 /* ContentView.swift */,
 				6202DDC52558102F0017BC49 /* CheckedInView.swift */,
 				62881EB325565C2200787923 /* RoomsView.swift */,
 				62E11A00253AE2440037CEC5 /* MapView.swift */,
@@ -237,14 +252,19 @@
 				62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */,
 				62E119E9253ADEBF0037CEC5 /* AppDelegate.swift in Sources */,
 				62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */,
+				6202DDD625595A230017BC49 /* DataProvider.swift in Sources */,
 				621A87812551838900FA810F /* Room.swift in Sources */,
 				62E11A01253AE2440037CEC5 /* MapView.swift in Sources */,
 				621A877D2551832C00FA810F /* Block.swift in Sources */,
+				6202DDD325583CC90017BC49 /* RoomParentInfo.swift in Sources */,
 				621A77EA25566CCE00636B27 /* Location.swift in Sources */,
+				6202DDCA25581EA70017BC49 /* ContentView.swift in Sources */,
 				6202DDC62558102F0017BC49 /* CheckedInView.swift in Sources */,
 				62DB8FDF2556A6C0006AA1D3 /* LevelColors.swift in Sources */,
-				62E119ED253ADEBF0037CEC5 /* ContentView.swift in Sources */,
+				62E119ED253ADEBF0037CEC5 /* HomeView.swift in Sources */,
 				62DB8FDC2556A2E9006AA1D3 /* Level.swift in Sources */,
+				6202DDD0255827DF0017BC49 /* HistoryView.swift in Sources */,
+				6202DDCD255821520017BC49 /* CheckInSession.swift in Sources */,
 				62EC2D78255642A90040AF5D /* RawKeyedDecodableDictionary.swift in Sources */,
 				6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */,
 				62881EB425565C2200787923 /* RoomsView.swift in Sources */,
