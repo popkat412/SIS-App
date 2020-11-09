@@ -7,19 +7,6 @@
 
 import SwiftUI
 
-struct LevelIcon: View {
-    var level: Int
-    
-    var body: some View {
-        ZStack {
-            Circle()
-                .fill(LevelColors.getColor(for: level))
-            Text("L\(level)")
-        }
-        .frame(width: 30, height: 30, alignment: .center)
-    }
-}
-
 struct RoomsView: View {
     @EnvironmentObject var checkInManager: CheckInManager
     var rooms: [Room]
@@ -32,10 +19,7 @@ struct RoomsView: View {
                         Button(action: {
                             checkInManager.checkIn(to: room)
                         }, label: {
-                            HStack {
-                                LevelIcon(level: level.level)
-                                Text(room.name)
-                            }
+                            Text(room.name)
                         })
                         
                     }

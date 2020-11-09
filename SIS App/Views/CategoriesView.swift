@@ -14,7 +14,12 @@ struct CategoriesView: View {
     var body: some View {
         List(Array(categories.keys), id: \.rawValue) { category in
             NavigationLink(destination: RoomsView(rooms: categories[category]!)) {
-                Text("\(CategoryNames.getName(of: category))")
+                HStack {
+                    Image(category.rawValue)
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                    Text("\(CategoryNames.getName(of: category))")
+                }
             }
         }
         .navigationBarTitle(blockName, displayMode: .inline)

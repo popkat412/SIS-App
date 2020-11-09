@@ -32,12 +32,15 @@ struct HistoryView_Previews: PreviewProvider {
 
 
 struct RowItem: View {
-    var icon: Image
+    var iconName: String
     var text: String
     
     var body: some View {
         HStack {
-            icon
+            Image(iconName)
+                .resizable()
+                .frame(width: 25, height: 25)
+            
             Text(text)
                 .multilineTextAlignment(.leading)
         }
@@ -49,11 +52,11 @@ struct HistoryRow: View {
     
     var body: some View {
         HStack {
-            RowItem(icon: Image(systemName: "clock"), text: session.formattedTiming)
+            RowItem(iconName: "time", text: session.formattedTiming)
             
-            RowItem(icon: Image(systemName: "house"), text: RoomParentInfo.getParent(of: session.room))
+            RowItem(iconName: "block", text: RoomParentInfo.getParent(of: session.room))
             
-            RowItem(icon: Image(systemName: "house"), text: session.room.name)
+            RowItem(iconName: "room", text: session.room.name)
         }
     }
 }
