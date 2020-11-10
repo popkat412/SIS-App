@@ -69,8 +69,8 @@
 		62881EB0255657EE00787923 /* CategoryNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNames.swift; sourceTree = "<group>"; };
 		62881EB325565C2200787923 /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
 		628D11D625598F8D00BF4D2E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = SOURCE_ROOT; };
-		628D11DD255997DB00BF4D2E /* colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = colors.json; path = "SIS App/Views/colors.json"; sourceTree = SOURCE_ROOT; };
-		628D11E0255997FC00BF4D2E /* LevelColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelColors.swift; path = "SIS App/Data/LevelColors.swift"; sourceTree = SOURCE_ROOT; };
+		628D11DD255997DB00BF4D2E /* colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = colors.json; path = "SIS App/Data/colors.json"; sourceTree = SOURCE_ROOT; };
+		628D11E0255997FC00BF4D2E /* LevelColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelColors.swift; path = "SIS App/Views/LevelColors.swift"; sourceTree = SOURCE_ROOT; };
 		628D11E4255AB42100BF4D2E /* RoomRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRow.swift; sourceTree = "<group>"; };
 		628D11E7255AB44D00BF4D2E /* LevelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelIcon.swift; sourceTree = "<group>"; };
 		6292DCBD25564F4000352527 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
