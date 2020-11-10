@@ -127,13 +127,13 @@
 		62881EB625565C2600787923 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				628D11D625598F8D00BF4D2E /* SearchView.swift */,
 				6202DDC925581EA70017BC49 /* ContentView.swift */,
 				62E119EC253ADEBF0037CEC5 /* HomeView.swift */,
 				6292DCBD25564F4000352527 /* CategoriesView.swift */,
 				62881EB325565C2200787923 /* RoomsView.swift */,
 				6202DDC52558102F0017BC49 /* CheckedInView.swift */,
 				6202DDCF255827DF0017BC49 /* HistoryView.swift */,
+				628D11D625598F8D00BF4D2E /* SearchView.swift */,
 				62E11A00253AE2440037CEC5 /* MapView.swift */,
 			);
 			path = Views;

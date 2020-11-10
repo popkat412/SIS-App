@@ -1,10 +1,14 @@
 {
-    "computerLab": "Computer Lab",
-    "classroom": "Classroom",
-    "lectureTheatre": "Lecture Theatre",
-    "scienceLab": "Science Lab",
-    "projectRoom": "Project Room",
-    "staffRoom": "Staff Room",
-    "combinedRoom": "Combined Room",
-    "others": "Others"
+  "computerLab": "Computer Lab",
+  "classroom": "Classroom",
+  "lectureTheatre": "Lecture Theatre",
+  "scienceLab": "Science Lab",
+  "projectRoom": "Project Room",
+  "staffRoom": "Staff Room",
+  "combinedRoom": "Combined Room",
+  "music": "Music",
+  "humanities": "Humanities",
+  "administration": "Administration",
+  "store": "Store",
+  "others": "Others"
 }

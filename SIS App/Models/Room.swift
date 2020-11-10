@@ -14,12 +14,11 @@ struct Room: Decodable, Identifiable {
 }
 
 enum RoomCategory: String, Decodable {    
-    case computerLab      // = "Computer Lab"
-    case classroom        // = "Classroom"
-    case lectureTheatre   // = "Lecture Theatre"
-    case scienceLab       // = "Science Lab"
-    case projectRoom      // = "Project Room"
-    case staffRoom        // = "Staff Room"
-    case combinedRoom     // = "Combined Room"
-    case others           // = "Others"
+    case classroom
+    case computerLab, scienceLab, music, humanities
+    case lectureTheatre
+    case projectRoom, combinedRoom
+    case staffRoom, administration
+    case store
+    case others
 }

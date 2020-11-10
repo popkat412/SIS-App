@@ -52,9 +52,9 @@ struct HomeView: View {
                         }
                     }
                     .navigationBarTitle("Blocks", displayMode: .inline)
-                    .sheet(isPresented: $showingSearch) {
-                        SearchView(showingSearch: $showingSearch)
-                    }
+                }
+                .sheet(isPresented: $showingSearch) {
+                    SearchView(showingSearch: $showingSearch)
                 }
             }
         }

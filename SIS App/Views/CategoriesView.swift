@@ -12,7 +12,9 @@ struct CategoriesView: View {
     var blockName: String
     
     var body: some View {
-        List(Array(categories.keys), id: \.rawValue) { category in
+        List(Array(categories.keys).sorted(by: { (cat1, cat2) in
+            cat1.rawValue < cat2.rawValue
+        }), id: \.rawValue) { category in
             NavigationLink(destination: RoomsView(
                 rooms: categories[category]!,
                 categoryName: CategoryNames.getName(of: category)

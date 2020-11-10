@@ -16,7 +16,9 @@ struct RoomsView: View {
         List {
             ForEach(roomSections()) { level in
                 Section(header: Text("Level \(level.level)")) {
-                    ForEach(level.rooms) { room in
+                    ForEach(level.rooms.sorted(by: { (room1, room2) in
+                        room1.name < room2.name
+                    })) { room in
                         Button(action: {
                             checkInManager.checkIn(to: room)
                         }, label: {
