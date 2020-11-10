@@ -10,7 +10,7 @@ import SwiftUI
 struct RoomRow: View {
     var room: Room
     var showLevelIcon = true
-    var showRoomId = false
+    var showRoomId = true
     var showRoomParent = true
     
     var body: some View {
@@ -38,8 +38,7 @@ struct RoomRow: View {
 struct RoomRow_Previews: PreviewProvider {
     static var previews: some View {
         RoomRow(
-            room: Room(name: "Class 1A", level: 1, id: "C1-17"),
-            showRoomId: true
+            room: Room(name: "Class 1A", level: 1, id: "C1-17")
         )
     }
 }

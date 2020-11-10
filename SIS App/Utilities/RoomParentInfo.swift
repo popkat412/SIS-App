@@ -19,30 +19,35 @@ struct RoomParentInfo {
             if let parent = roomIdToParent[room.id] {
                 return parent
             } else {
-                fatalError("\(room.id) not in dictionary")
+                // JSON file is not up to date
+                initRoomIdToParent(forceRegenerate: true)
+                return getParent(of: room)
             }
         } else {
             fatalError("initRoomIdToParent() failed")
         }
     }
     
-    static private func initRoomIdToParent() {
-        // Check if precomputed json exisists in documents directory
+    static private func initRoomIdToParent(forceRegenerate: Bool = false) {
+        print("initRoomIdToParent, forceRegenerate: \(forceRegenerate)")
+        
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
         let jsonFile = documentsDirectory.appendingPathComponent("roomIdToParent.json")
         
-        do {
-            let savedJson = try String(contentsOf: jsonFile)
-            print(savedJson)
-            
-            let decoder = JSONDecoder()
-            if let savedJsonData = savedJson.data(using: .utf8) {
-                roomIdToParent = try decoder.decode([String: String].self, from: savedJsonData)
-                return
+        if !forceRegenerate {
+            // Check if precomputed json exisists in documents directory
+            do {
+                let savedJson = try String(contentsOf: jsonFile)
+                
+                let decoder = JSONDecoder()
+                if let savedJsonData = savedJson.data(using: .utf8) {
+                    roomIdToParent = try decoder.decode([String: String].self, from: savedJsonData)
+                    return
+                }
+            } catch {
+                print("Error reading saved file / saved file doesn't exisist: \(error)")
             }
-        } catch {
-            print("Error reading saved file / saved file doesn't exisist: \(error)")
         }
         
         // Precompute the data

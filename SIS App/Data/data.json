@@ -96,10 +96,10 @@
         }
       ],
       "staffRoom": [
-        { "name": "[Staff Only] Preparation Room", "level": 1, "id": "S1-02" },
+        { "name": "Preparation Room", "level": 1, "id": "S1-02" },
         { "name": "Lab Staff Room", "level": 1, "id": "S1-06" },
-        { "name": "[Staff Only] Preparation Room", "level": 2, "id": "S2-02" },
-        { "name": "[Staff Only] Preparation Room", "level": 3, "id": "S3-06" }
+        { "name": "Preparation Room", "level": 2, "id": "S2-02" },
+        { "name": "Preparation Room", "level": 3, "id": "S3-06" }
       ],
       "projectRoom": [{ "name": "Project Room", "level": 2, "id": "S2-05" }]
     }
