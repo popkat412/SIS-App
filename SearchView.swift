@@ -8,19 +8,6 @@
 import SwiftUI
 import SwiftUIX
 
-struct LevelIcon: View {
-    var level: Int
-    
-    var body: some View {
-        ZStack {
-            Circle()
-                .fill(LevelColors.getColor(for: level))
-            Text("L\(level)")
-        }
-        .frame(width: 30, height: 30, alignment: .center)
-    }
-}
-
 struct SearchView: View {
     @EnvironmentObject var checkInManager: CheckInManager
     @State private var searchStr = "";
@@ -48,13 +35,7 @@ struct SearchView: View {
                     showingSearch = false
                     checkInManager.checkIn(to: room)
                 }, label: {
-                    HStack {
-                        LevelIcon(level: room.level)
-                        Text("\(room.name)")
-                        Spacer()
-                        Text("\(RoomParentInfo.getParent(of: room))")
-                            .foregroundColor(.gray)
-                    }
+                    RoomRow(room: room)
                 })
             }
         }

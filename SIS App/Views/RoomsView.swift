@@ -22,7 +22,12 @@ struct RoomsView: View {
                         Button(action: {
                             checkInManager.checkIn(to: room)
                         }, label: {
-                            Text(room.name)
+                            RoomRow(
+                                room: room,
+                                showLevelIcon: false,
+                                showRoomId: true,
+                                showRoomParent: false
+                            )
                         })
                         
                     }
