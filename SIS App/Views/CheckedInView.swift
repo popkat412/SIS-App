@@ -36,8 +36,8 @@ struct CheckedInView: View {
                 .padding(.bottom, 20)
             
             Text(clickedCheckOutButton ?
-                    "You checked out of \(checkInManager.currentSession?.room.name ?? "") at \(checkOutTime!.formattedTime)" :
-                    "You checked into \(checkInManager.currentSession?.room.name ?? "") at \(checkInManager.currentSession?.checkedIn.formattedTime ?? "")"
+                    "You checked out of \(checkInManager.currentSession?.target.name ?? "") at \(checkOutTime!.formattedTime)" :
+                    "You checked into \(checkInManager.currentSession?.target.name ?? "") at \(checkInManager.currentSession?.checkedIn.formattedTime ?? "")"
             )
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)

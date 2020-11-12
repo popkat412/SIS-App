@@ -22,10 +22,11 @@ struct Day: Identifiable {
     }
 }
 
-struct CheckInSession {
+struct CheckInSession: Identifiable {
     var checkedIn: Date
     var checkedOut: Date?
-    var room: Room
+    var target: CheckInTarget
+    var id = UUID()
     
     var formattedTiming: String {
         get {
@@ -39,8 +40,4 @@ struct CheckInSession {
             }
         }
     }
-}
-
-extension CheckInSession: Identifiable {
-    var id: String { room.id }
 }

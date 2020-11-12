@@ -61,9 +61,18 @@ struct HistoryRow: View {
             )
             
             HStack {
-                RowItem(iconName: "block", text: RoomParentInfo.getParent(of: session.room))
-                
-                RowItem(iconName: "room", text: session.room.name)
+                if let roomTarget = session.target as? Room {
+                    RowItem(
+                        iconName: "block",
+                        text: RoomParentInfo.getParent(of: roomTarget)
+                    )
+                    RowItem(
+                        iconName: "room",
+                        text: session.target.name
+                    )
+                } else if let blockTarget = session.target as? Block {
+                    RowItem(iconName: "block", text: blockTarget.name)
+                }
             }
         }
     }

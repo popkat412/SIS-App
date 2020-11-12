@@ -27,6 +27,7 @@
 		628D11E5255AB42100BF4D2E /* RoomRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E4255AB42100BF4D2E /* RoomRow.swift */; };
 		628D11E8255AB44D00BF4D2E /* LevelIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E7255AB44D00BF4D2E /* LevelIcon.swift */; };
 		6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292DCBD25564F4000352527 /* CategoriesView.swift */; };
+		62D5D63A255D38D60064D484 /* CheckInTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D639255D38D60064D484 /* CheckInTarget.swift */; };
 		62DB8FDC2556A2E9006AA1D3 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DB8FDB2556A2E9006AA1D3 /* Level.swift */; };
 		62E119E9253ADEBF0037CEC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119E8253ADEBF0037CEC5 /* AppDelegate.swift */; };
 		62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119EA253ADEBF0037CEC5 /* SceneDelegate.swift */; };
@@ -74,6 +75,7 @@
 		628D11E4255AB42100BF4D2E /* RoomRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRow.swift; sourceTree = "<group>"; };
 		628D11E7255AB44D00BF4D2E /* LevelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelIcon.swift; sourceTree = "<group>"; };
 		6292DCBD25564F4000352527 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		62D5D639255D38D60064D484 /* CheckInTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTarget.swift; sourceTree = "<group>"; };
 		62DB8FDB2556A2E9006AA1D3 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Level.swift; path = "SIS App/Views/Level.swift"; sourceTree = SOURCE_ROOT; };
 		62E119E5253ADEBF0037CEC5 /* SIS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SIS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E119E8253ADEBF0037CEC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				6202DDCC255821520017BC49 /* CheckInSession.swift */,
+				62D5D639255D38D60064D484 /* CheckInTarget.swift */,
 				62DB8FDB2556A2E9006AA1D3 /* Level.swift */,
 				621A877C2551832C00FA810F /* Block.swift */,
 				621A77E925566CCE00636B27 /* Location.swift */,
@@ -301,6 +304,7 @@
 				6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */,
 				62881EB425565C2200787923 /* RoomsView.swift in Sources */,
 				62881EB1255657EE00787923 /* CategoryNames.swift in Sources */,
+				62D5D63A255D38D60064D484 /* CheckInTarget.swift in Sources */,
 				62E119F0253ADEBF0037CEC5 /* SIS_App.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

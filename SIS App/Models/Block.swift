@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct Block: Decodable {
+struct Block: Decodable, CheckInTarget {
     var name: String
     var location: Location
     var radius: Double

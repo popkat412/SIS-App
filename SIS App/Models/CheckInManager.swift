@@ -23,7 +23,7 @@ class CheckInManager: ObservableObject {
     func checkIn(to room: Room) {
         // TODO: Implement this
         isCheckedIn = true
-        currentSession = CheckInSession(checkedIn: Date(), checkedOut: nil, room: room)
+        currentSession = CheckInSession(checkedIn: Date(), checkedOut: nil, target: room)
     }
     
     /// Used to check the user out from the room they are currently checked into
@@ -37,6 +37,7 @@ class CheckInManager: ObservableObject {
     }
     
     /// This should get the user's history from CoreData
+    /// The `CheckInSession`s should be sorted by date
     func getCheckInSessions() -> [Day] {
         // TODO: Implemenet this
         // For now, return dummy data
@@ -47,13 +48,18 @@ class CheckInManager: ObservableObject {
                     CheckInSession(
                         checkedIn: Date(timeIntervalSince1970: 1604840241),
                         checkedOut: Date(timeIntervalSince1970: 1604840241+3600),
-                        room: Room(name: "Class 1A", level: 1, id: "C1-17")
+                        target: Room(name: "Class 1A", level: 1, id: "C1-17")
                     ),
                     CheckInSession(
                         checkedIn: Date(timeIntervalSince1970: 1604840882),
                         checkedOut: Date(timeIntervalSince1970: 1604840882+3600),
-                        room: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
-                    )
+                        target: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
+                    ),
+                    CheckInSession(
+                        checkedIn: Date(timeIntervalSince1970: 1604841082),
+                        checkedOut: Date(timeIntervalSince1970: 1604841082+3600),
+                        target: Block(name: "Raja Block", location: Location(longitude: 1, latitude: 1), radius: 1)
+                    ),
                 ]
             ),
             Day(
@@ -62,12 +68,12 @@ class CheckInManager: ObservableObject {
                     CheckInSession(
                         checkedIn: Date(timeIntervalSince1970: 1604922272),
                         checkedOut: Date(timeIntervalSince1970: 1604922272+3600),
-                        room: Room(name: "Class 1A", level: 1, id: "C1-17")
+                        target: Room(name: "Class 1A", level: 1, id: "C1-17")
                     ),
                     CheckInSession(
                         checkedIn: Date(timeIntervalSince1970: 1604925272),
                         checkedOut: Date(timeIntervalSince1970: 1604925272+3600),
-                        room: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
+                        target: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
                     )
                 ]
             )
