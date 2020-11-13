@@ -7,10 +7,6 @@
 
 import Foundation
 
-//class CheckInInfo: ObservableObject {
-//    @Published var isCheckedIn = CheckInManager.isCheckedIn
-//}
-
 class CheckInManager: ObservableObject {
     /// Used to check if the user is currently checked in or not
     /// This should check the persisted data (if any) from the `checkIn()` static method
@@ -34,6 +30,12 @@ class CheckInManager: ObservableObject {
         currentSession?.checkedOut = Date()
         // TODO: Save current session to CoreData
         currentSession = nil
+    }
+    
+    /// This should use the session's UUID to figure out which session to change,
+    /// then update that session based on the other properties of the passed session
+    func updateCheckInSession(_ session: CheckInSession) {
+        // TODO: Implement this
     }
     
     /// This should get the user's history from CoreData

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RoomsView: View {
     @EnvironmentObject var checkInManager: CheckInManager
+    @Environment(\.onRoomSelection) var onRoomSelection
+
     var rooms: [Room]
     var categoryName: String
     
@@ -19,16 +21,17 @@ struct RoomsView: View {
                     ForEach(level.rooms.sorted(by: { (room1, room2) in
                         room1.name < room2.name
                     })) { room in
-                        Button(action: {
-                            checkInManager.checkIn(to: room)
-                        }, label: {
-                            RoomRow(
-                                room: room,
-                                showLevelIcon: false,
-                                showRoomId: true,
-                                showRoomParent: false
-                            )
-                        })
+                        Button(
+                            action: {
+                                onRoomSelection(room)
+                            }, label: {
+                                RoomRow(
+                                    room: room,
+                                    showLevelIcon: false,
+                                    showRoomId: true,
+                                    showRoomParent: false
+                                )
+                            })
                         
                     }
                 }

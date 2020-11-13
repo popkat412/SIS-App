@@ -10,6 +10,7 @@ import SwiftUIX
 
 struct SearchView: View {
     @EnvironmentObject var checkInManager: CheckInManager
+    @Environment(\.onRoomSelection) var onRoomSelection
     @State private var searchStr = "";
     @Binding var showingSearch: Bool
     
@@ -33,7 +34,7 @@ struct SearchView: View {
             List(DataProvider.getRoomsFromSearch(searchStr)) { room in
                 Button(action: {
                     showingSearch = false
-                    checkInManager.checkIn(to: room)
+                    onRoomSelection(room)
                 }, label: {
                     RoomRow(room: room)
                 })

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import UserNotifications
+import NotificationCenter
 
 struct ContentView: View {
     var body: some View {
@@ -21,13 +23,17 @@ struct ContentView: View {
                     Text("History")
                 }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .didEnterGeofence)) { event in
+            print("received did exit geofence")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .didExitGeofence)) { event in
+            print("received did exit geofence")
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            // .previewDevice("iPad Pro (12.9-inch) (4th generation)")
-            .environmentObject(CheckInManager())
     }
 }

@@ -16,6 +16,7 @@
 		621A77EA25566CCE00636B27 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A77E925566CCE00636B27 /* Location.swift */; };
 		621A877D2551832C00FA810F /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A877C2551832C00FA810F /* Block.swift */; };
 		621A87812551838900FA810F /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A87802551838900FA810F /* Room.swift */; };
+		6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */; };
 		62756C2825597B8E0007C4F3 /* Date+FormattedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */; };
 		62881EAE2556570A00787923 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 62881EAD2556570A00787923 /* categories.json */; };
 		62881EB1255657EE00787923 /* CategoryNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62881EB0255657EE00787923 /* CategoryNames.swift */; };
@@ -28,7 +29,11 @@
 		628D11E8255AB44D00BF4D2E /* LevelIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E7255AB44D00BF4D2E /* LevelIcon.swift */; };
 		6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292DCBD25564F4000352527 /* CategoriesView.swift */; };
 		62D5D63A255D38D60064D484 /* CheckInTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D639255D38D60064D484 /* CheckInTarget.swift */; };
+		62D5D63D255D3C5D0064D484 /* EditSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D63C255D3C5D0064D484 /* EditSessionView.swift */; };
+		62D5D640255D3E850064D484 /* ChooseRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D63F255D3E850064D484 /* ChooseRoomView.swift */; };
+		62D5D644255D40330064D484 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D643255D40330064D484 /* UserLocationManager.swift */; };
 		62DB8FDC2556A2E9006AA1D3 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DB8FDB2556A2E9006AA1D3 /* Level.swift */; };
+		62E05E59255EC32100BAE4FF /* NotificationCenter+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E05E58255EC32100BAE4FF /* NotificationCenter+CustomNames.swift */; };
 		62E119E9253ADEBF0037CEC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119E8253ADEBF0037CEC5 /* AppDelegate.swift */; };
 		62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119EA253ADEBF0037CEC5 /* SceneDelegate.swift */; };
 		62E119ED253ADEBF0037CEC5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119EC253ADEBF0037CEC5 /* HomeView.swift */; };
@@ -59,12 +64,13 @@
 		6202DDC52558102F0017BC49 /* CheckedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedInView.swift; sourceTree = "<group>"; };
 		6202DDC925581EA70017BC49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6202DDCC255821520017BC49 /* CheckInSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckInSession.swift; path = "SIS App/Views/CheckInSession.swift"; sourceTree = SOURCE_ROOT; };
-		6202DDCF255827DF0017BC49 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryView.swift; path = "SIS App/Models/HistoryView.swift"; sourceTree = SOURCE_ROOT; };
+		6202DDCF255827DF0017BC49 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryView.swift; path = "SIS App/Views/HistoryView.swift"; sourceTree = SOURCE_ROOT; };
 		6202DDD225583CC90017BC49 /* RoomParentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomParentInfo.swift; path = "SIS App/Utilities/RoomParentInfo.swift"; sourceTree = SOURCE_ROOT; };
 		6202DDD525595A230017BC49 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		621A77E925566CCE00636B27 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		621A877C2551832C00FA810F /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		621A87802551838900FA810F /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnRoomSelection.swift; path = "SIS App/Models/OnRoomSelection.swift"; sourceTree = SOURCE_ROOT; };
 		62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+FormattedTime.swift"; path = "SIS App/Utilities/Date+FormattedTime.swift"; sourceTree = SOURCE_ROOT; };
 		62881EAD2556570A00787923 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		62881EB0255657EE00787923 /* CategoryNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNames.swift; sourceTree = "<group>"; };
@@ -76,7 +82,11 @@
 		628D11E7255AB44D00BF4D2E /* LevelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelIcon.swift; sourceTree = "<group>"; };
 		6292DCBD25564F4000352527 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		62D5D639255D38D60064D484 /* CheckInTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTarget.swift; sourceTree = "<group>"; };
+		62D5D63C255D3C5D0064D484 /* EditSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSessionView.swift; sourceTree = "<group>"; };
+		62D5D63F255D3E850064D484 /* ChooseRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoomView.swift; sourceTree = "<group>"; };
+		62D5D643255D40330064D484 /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLocationManager.swift; path = "SIS App/Models/UserLocationManager.swift"; sourceTree = SOURCE_ROOT; };
 		62DB8FDB2556A2E9006AA1D3 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Level.swift; path = "SIS App/Views/Level.swift"; sourceTree = SOURCE_ROOT; };
+		62E05E58255EC32100BAE4FF /* NotificationCenter+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+CustomNames.swift"; sourceTree = "<group>"; };
 		62E119E5253ADEBF0037CEC5 /* SIS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SIS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E119E8253ADEBF0037CEC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E119EA253ADEBF0037CEC5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +99,7 @@
 		62E11A00253AE2440037CEC5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		62EC2D732556377D0040AF5D /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		62EC2D77255642A90040AF5D /* RawKeyedDecodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawKeyedDecodableDictionary.swift; sourceTree = "<group>"; };
+		62F9BBD1255ED62A0090FA2C /* SimulatedLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SimulatedLocation.gpx; sourceTree = "<group>"; };
 		62FF081925564B9A00FD5D65 /* CheckInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,7 +124,10 @@
 				621A877C2551832C00FA810F /* Block.swift */,
 				621A77E925566CCE00636B27 /* Location.swift */,
 				621A87802551838900FA810F /* Room.swift */,
+				62D5D643255D40330064D484 /* UserLocationManager.swift */,
+				62E05E58255EC32100BAE4FF /* NotificationCenter+CustomNames.swift */,
 				62FF081925564B9A00FD5D65 /* CheckInManager.swift */,
+				6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -136,10 +150,12 @@
 			children = (
 				6202DDC925581EA70017BC49 /* ContentView.swift */,
 				62E119EC253ADEBF0037CEC5 /* HomeView.swift */,
+				62D5D63F255D3E850064D484 /* ChooseRoomView.swift */,
 				6292DCBD25564F4000352527 /* CategoriesView.swift */,
 				62881EB325565C2200787923 /* RoomsView.swift */,
 				6202DDC52558102F0017BC49 /* CheckedInView.swift */,
 				6202DDCF255827DF0017BC49 /* HistoryView.swift */,
+				62D5D63C255D3C5D0064D484 /* EditSessionView.swift */,
 				628D11D625598F8D00BF4D2E /* SearchView.swift */,
 				628D11E7255AB44D00BF4D2E /* LevelIcon.swift */,
 				628D11E4255AB42100BF4D2E /* RoomRow.swift */,
@@ -161,6 +177,7 @@
 		62E119DC253ADEBF0037CEC5 = {
 			isa = PBXGroup;
 			children = (
+				62F9BBD1255ED62A0090FA2C /* SimulatedLocation.gpx */,
 				62E119E7253ADEBF0037CEC5 /* SIS App */,
 				62E119E6253ADEBF0037CEC5 /* Products */,
 			);
@@ -284,8 +301,10 @@
 				62E119E9253ADEBF0037CEC5 /* AppDelegate.swift in Sources */,
 				62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */,
 				6202DDD625595A230017BC49 /* DataProvider.swift in Sources */,
+				62E05E59255EC32100BAE4FF /* NotificationCenter+CustomNames.swift in Sources */,
 				621A87812551838900FA810F /* Room.swift in Sources */,
 				628D11E5255AB42100BF4D2E /* RoomRow.swift in Sources */,
+				6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */,
 				62E11A01253AE2440037CEC5 /* MapView.swift in Sources */,
 				621A877D2551832C00FA810F /* Block.swift in Sources */,
 				628D11E1255997FC00BF4D2E /* LevelColors.swift in Sources */,
@@ -294,13 +313,16 @@
 				628D11E8255AB44D00BF4D2E /* LevelIcon.swift in Sources */,
 				6202DDCA25581EA70017BC49 /* ContentView.swift in Sources */,
 				628D11D725598F8D00BF4D2E /* SearchView.swift in Sources */,
+				62D5D644255D40330064D484 /* UserLocationManager.swift in Sources */,
 				6202DDC62558102F0017BC49 /* CheckedInView.swift in Sources */,
 				62E119ED253ADEBF0037CEC5 /* HomeView.swift in Sources */,
+				62D5D640255D3E850064D484 /* ChooseRoomView.swift in Sources */,
 				62756C2825597B8E0007C4F3 /* Date+FormattedTime.swift in Sources */,
 				62DB8FDC2556A2E9006AA1D3 /* Level.swift in Sources */,
 				6202DDD0255827DF0017BC49 /* HistoryView.swift in Sources */,
 				6202DDCD255821520017BC49 /* CheckInSession.swift in Sources */,
 				62EC2D78255642A90040AF5D /* RawKeyedDecodableDictionary.swift in Sources */,
+				62D5D63D255D3C5D0064D484 /* EditSessionView.swift in Sources */,
 				6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */,
 				62881EB425565C2200787923 /* RoomsView.swift in Sources */,
 				62881EB1255657EE00787923 /* CategoryNames.swift in Sources */,

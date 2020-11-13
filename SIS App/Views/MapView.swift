@@ -10,69 +10,65 @@ import CoreLocation
 import MapKit
 
 struct MapView: UIViewRepresentable {
-    @Binding var userLocation: CLLocation
+    @EnvironmentObject var userLocationManager: UserLocationManager
 
     func makeUIView(context: Context) -> MKMapView {
-
-        return MKMapView(frame: .zero)
+        let mapView = MKMapView(frame: .zero)
+        
+        // Delegate
+        mapView.delegate = context.coordinator
+        
+        // Overlays (for debugging geofences)
+        for block in DataProvider.getBlocks() {
+            print("adding overlay... \(block.name)")
+            mapView.addOverlay(MKCircle(
+                                center: block.location.toCLLocation().coordinate,
+                                radius: block.radius)
+            )
+        }
+        
+        return mapView
     }
     
-    func updateUIView(_ uiView: MKMapView, context: Context) {
-        // 1.346236, 103.844112
-        
-//        let coordinate = CLLocationCoordinate2D(
-//            latitude: 1.346232,
-//            longitude: 103.844188
-//        )
-        let coordinate = userLocation.coordinate
-        
+    func updateUIView(_ mapView: MKMapView, context: Context) {
+        // Follow User Location
+        let coordinate = userLocationManager.userLocation?.coordinate ?? CLLocationCoordinate2D()
+        print("coordinate: \(coordinate)")
         let span = MKCoordinateSpan(
             latitudeDelta: 0.001,
             longitudeDelta: 0.001
         )
-        
         let region = MKCoordinateRegion(
             center: coordinate,
             span: span
         )
-        
-        uiView.showsUserLocation = true
-        uiView.setRegion(region, animated: true)
+        mapView.showsUserLocation = true
+        mapView.setRegion(region, animated: true)
+
     }
     
-    func makeCoordinator() -> MapViewCoordinator {
-        MapViewCoordinator(userLocation: $userLocation)
+    class Coordinator: NSObject, MKMapViewDelegate {
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            if overlay is MKCircle {
+                let circle = MKCircleRenderer(overlay: overlay)
+                circle.strokeColor = UIColor.red
+                circle.fillColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
+                circle.lineWidth = 1
+                return circle
+            }
+            return MKOverlayRenderer()
+        }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
     }
 }
 
 struct MapView_Previews: PreviewProvider {
-    @State static var testLocation = CLLocation()
-    
     static var previews: some View {
-        MapView(userLocation: $testLocation)
+        MapView()
+            .environmentObject(UserLocationManager())
     }
 }
 
-class MapViewCoordinator: NSObject, CLLocationManagerDelegate {
-    @Binding var userLocation: CLLocation
-    
-    let locationManager = CLLocationManager()
-    
-    init(userLocation: Binding<CLLocation>) {
-        self._userLocation = userLocation
-        super.init()
-        
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.startUpdatingLocation()
-        locationManager.delegate = self
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("didUpdateLocations")
-        if let currLocation = locations.last {
-            userLocation = currLocation
-        }
-    }
-}
