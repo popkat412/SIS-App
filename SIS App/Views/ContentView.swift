@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UserNotifications
 import NotificationCenter
 
 struct ContentView: View {
@@ -23,11 +22,12 @@ struct ContentView: View {
                     Text("History")
                 }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .didEnterGeofence)) { event in
-            print("received did exit geofence")
+        .onReceive(NotificationCenter.default.publisher(for: .didEnterBlock)) { event in
+            print("received did enter geofence: \((event.userInfo?["block"] as! Block).name )")
         }
-        .onReceive(NotificationCenter.default.publisher(for: .didExitGeofence)) { event in
-            print("received did exit geofence")
+        .onReceive(NotificationCenter.default.publisher(for: .didExitBlock)) { event in
+            print("received did exit geofence \((event.userInfo?["block"] as! Block).name )")
+            
         }
     }
 }

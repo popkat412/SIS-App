@@ -18,6 +18,7 @@
 		621A87812551838900FA810F /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A87802551838900FA810F /* Room.swift */; };
 		6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */; };
 		62756C2825597B8E0007C4F3 /* Date+FormattedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */; };
+		62868F332560009600F81842 /* UserNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62868F322560009600F81842 /* UserNotificationHelper.swift */; };
 		62881EAE2556570A00787923 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 62881EAD2556570A00787923 /* categories.json */; };
 		62881EB1255657EE00787923 /* CategoryNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62881EB0255657EE00787923 /* CategoryNames.swift */; };
 		62881EB425565C2200787923 /* RoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62881EB325565C2200787923 /* RoomsView.swift */; };
@@ -72,6 +73,7 @@
 		621A87802551838900FA810F /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnRoomSelection.swift; path = "SIS App/Models/OnRoomSelection.swift"; sourceTree = SOURCE_ROOT; };
 		62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+FormattedTime.swift"; path = "SIS App/Utilities/Date+FormattedTime.swift"; sourceTree = SOURCE_ROOT; };
+		62868F322560009600F81842 /* UserNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserNotificationHelper.swift; path = "SIS App/Views/UserNotificationHelper.swift"; sourceTree = SOURCE_ROOT; };
 		62881EAD2556570A00787923 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		62881EB0255657EE00787923 /* CategoryNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNames.swift; sourceTree = "<group>"; };
 		62881EB325565C2200787923 /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		62756C2A25598BEE0007C4F3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				62868F322560009600F81842 /* UserNotificationHelper.swift */,
 				628D11E0255997FC00BF4D2E /* LevelColors.swift */,
 				62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */,
 				6202DDD225583CC90017BC49 /* RoomParentInfo.swift */,
@@ -326,6 +329,7 @@
 				6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */,
 				62881EB425565C2200787923 /* RoomsView.swift in Sources */,
 				62881EB1255657EE00787923 /* CategoryNames.swift in Sources */,
+				62868F332560009600F81842 /* UserNotificationHelper.swift in Sources */,
 				62D5D63A255D38D60064D484 /* CheckInTarget.swift in Sources */,
 				62E119F0253ADEBF0037CEC5 /* SIS_App.xcdatamodeld in Sources */,
 			);

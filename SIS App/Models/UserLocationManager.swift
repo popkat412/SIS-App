@@ -11,8 +11,12 @@ import NotificationCenter
 
 class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published private(set) var userLocation: CLLocation?
+    var previousUserLocation: CLLocation?
     
     let locationManager = CLLocationManager()
+    
+    let schoolLocation = CLLocation(latitude: 1.347014, longitude: 103.845148)
+    let schoolRadius = 222.94
     
     override init() {
         super.init()
@@ -25,8 +29,6 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.startUpdatingLocation()
-        
-        // Geofencing
     }
     
     // MARK: Delegate Methods
@@ -35,19 +37,30 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("did update locations")
         if let location = locations.last {
+            previousUserLocation = userLocation
             userLocation = location
         }
-    }
-    
-    // Geofencing
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("📍 did enter region! \(region)")
-        NotificationCenter.default.post(name: .didEnterGeofence, object: nil, userInfo: ["region": region])
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        print("📍 did exit region! \(region)")
-        NotificationCenter.default.post(name: .didExitGeofence, object: nil, userInfo: ["region": region])
+        
+        if userLocation != nil && previousUserLocation != nil {
+            print("user locations are not nil :)")
+            if userLocation!.distance(from: schoolLocation) <= schoolRadius { // Inside of school
+                for block in DataProvider.getBlocks() {
+                    let currentlyInBlock = isInsideBlock(location: userLocation!, block: block)
+                    let previouslyInBlock = isInsideBlock(location: previousUserLocation!, block: block)
+                    if currentlyInBlock && !previouslyInBlock {
+                        // Entered a block!
+                        print("📍 entered a block: \(block.name)")
+                        NotificationCenter.default.post(name: .didEnterBlock, object: nil, userInfo: ["block": block])
+                    } else if !currentlyInBlock && previouslyInBlock {
+                        // Left a block!
+                        print("📍 left a block: \(block.name)")
+                        NotificationCenter.default.post(name: .didExitBlock, object: nil, userInfo: ["block": block])
+                    }
+                }
+            }
+        } else {
+            print("userlocation or previous user location is nil :(")
+        }
     }
     
     // Error handling
@@ -60,28 +73,7 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
     }
     
     // MARK: Helper Methods
-    private func makeRegion(with block: Block) -> CLCircularRegion {
-        return CLCircularRegion(
-            center: block.location.toCLLocation().coordinate,
-            radius: block.radius,
-            identifier: block.name
-        )
-    }
-    
-    private func startMonitoring(for block: Block) {
-        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
-            // TODO: Show some sort of alert to user
-            print("Geofences not avaliable on this device")
-            return
-        }
-        
-        if locationManager.authorizationStatus != .authorizedAlways {
-            // TODO: Show some sort of alert to user
-            print("Geofences will only work if you grant this app permission to always access your location")
-            return
-        }
-        
-        let fence = makeRegion(with: block)
-        locationManager.startMonitoring(for: fence)
+    private func isInsideBlock(location: CLLocation, block: Block) -> Bool {
+        return location.distance(from: block.location.toCLLocation()) <= block.radius
     }
 }

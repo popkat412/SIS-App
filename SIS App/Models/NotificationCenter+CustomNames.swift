@@ -8,6 +8,6 @@
 import Foundation
 
 extension Notification.Name {
-    static let didEnterGeofence = Notification.Name("didEnterGeofence")
-    static let didExitGeofence = Notification.Name("didExitGeofence")
+    static let didEnterBlock = Notification.Name("didEnterGeofence")
+    static let didExitBlock = Notification.Name("didExitGeofence")
 }
