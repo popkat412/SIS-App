@@ -66,7 +66,6 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
             } else if !isInsideSchool && previouslyInsideSchool {
                 print("📍 exited the schoool ")
                 NotificationCenter.default.post(name: .didExitSchool, object: nil)
-
             }
         } else {
             print("userlocation or previous user location is nil :(")
