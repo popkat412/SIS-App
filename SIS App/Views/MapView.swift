@@ -19,13 +19,17 @@ struct MapView: UIViewRepresentable {
         mapView.delegate = context.coordinator
         
         // Overlays (for debugging geofences)
-        for block in DataProvider.getBlocks() {
+        for block in DataProvider.getBlocks() { // Blocks
             print("adding overlay... \(block.name)")
             mapView.addOverlay(MKCircle(
                                 center: block.location.toCLLocation().coordinate,
                                 radius: block.radius)
             )
         }
+        mapView.addOverlay(MKCircle(
+                            center: SchoolLocationProvider.schoolLocation.coordinate,
+                            radius: SchoolLocationProvider.schoolRadius)
+        )
         
         return mapView
     }
@@ -33,7 +37,6 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ mapView: MKMapView, context: Context) {
         // Follow User Location
         let coordinate = userLocationManager.userLocation?.coordinate ?? CLLocationCoordinate2D()
-        print("coordinate: \(coordinate)")
         let span = MKCoordinateSpan(
             latitudeDelta: 0.001,
             longitudeDelta: 0.001

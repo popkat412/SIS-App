@@ -34,7 +34,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
+            
+            // ------- Custom Code (before scene has been drawn) --------- //
+            
             window.makeKeyAndVisible()
+            
+            // -------- Custom Code (after scene has been drawn) --------- //
+            UserNotificationHelper.requestAuth()
         }
     }
 

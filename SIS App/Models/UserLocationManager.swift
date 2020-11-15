@@ -15,9 +15,6 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
     
     let locationManager = CLLocationManager()
     
-    let schoolLocation = CLLocation(latitude: 1.347014, longitude: 103.845148)
-    let schoolRadius = 222.94
-    
     override init() {
         super.init()
         
@@ -29,21 +26,25 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.startUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = true
+
     }
     
     // MARK: Delegate Methods
     
     // User Location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("did update locations")
         if let location = locations.last {
             previousUserLocation = userLocation
             userLocation = location
         }
-        
+
         if userLocation != nil && previousUserLocation != nil {
-            print("user locations are not nil :)")
-            if userLocation!.distance(from: schoolLocation) <= schoolRadius { // Inside of school
+            
+            let isInsideSchool = userLocation!.distance(from: SchoolLocationProvider.schoolLocation) <= SchoolLocationProvider.schoolRadius
+            let previouslyInsideSchool = previousUserLocation!.distance(from: SchoolLocationProvider.schoolLocation) <= SchoolLocationProvider.schoolRadius
+            
+            if isInsideSchool { // Inside of school
                 for block in DataProvider.getBlocks() {
                     let currentlyInBlock = isInsideBlock(location: userLocation!, block: block)
                     let previouslyInBlock = isInsideBlock(location: previousUserLocation!, block: block)
@@ -57,6 +58,15 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
                         NotificationCenter.default.post(name: .didExitBlock, object: nil, userInfo: ["block": block])
                     }
                 }
+            }
+            
+            if isInsideSchool && !previouslyInsideSchool {
+                print("📍 entered the school")
+                NotificationCenter.default.post(name: .didEnterSchool, object: nil)
+            } else if !isInsideSchool && previouslyInsideSchool {
+                print("📍 exited the schoool ")
+                NotificationCenter.default.post(name: .didExitSchool, object: nil)
+
             }
         } else {
             print("userlocation or previous user location is nil :(")

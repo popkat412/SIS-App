@@ -19,6 +19,7 @@
 		6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */; };
 		62756C2825597B8E0007C4F3 /* Date+FormattedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */; };
 		62868F332560009600F81842 /* UserNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62868F322560009600F81842 /* UserNotificationHelper.swift */; };
+		62868F3925600FB200F81842 /* SchoolLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62868F3825600FB200F81842 /* SchoolLocationProvider.swift */; };
 		62881EAE2556570A00787923 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 62881EAD2556570A00787923 /* categories.json */; };
 		62881EB1255657EE00787923 /* CategoryNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62881EB0255657EE00787923 /* CategoryNames.swift */; };
 		62881EB425565C2200787923 /* RoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62881EB325565C2200787923 /* RoomsView.swift */; };
@@ -74,6 +75,8 @@
 		6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnRoomSelection.swift; path = "SIS App/Models/OnRoomSelection.swift"; sourceTree = SOURCE_ROOT; };
 		62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+FormattedTime.swift"; path = "SIS App/Utilities/Date+FormattedTime.swift"; sourceTree = SOURCE_ROOT; };
 		62868F322560009600F81842 /* UserNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserNotificationHelper.swift; path = "SIS App/Views/UserNotificationHelper.swift"; sourceTree = SOURCE_ROOT; };
+		62868F3625600F6700F81842 /* MoveInOutSchool.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MoveInOutSchool.gpx; sourceTree = "<group>"; };
+		62868F3825600FB200F81842 /* SchoolLocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchoolLocationProvider.swift; path = "SIS App/Views/SchoolLocationProvider.swift"; sourceTree = SOURCE_ROOT; };
 		62881EAD2556570A00787923 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		62881EB0255657EE00787923 /* CategoryNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNames.swift; sourceTree = "<group>"; };
 		62881EB325565C2200787923 /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
@@ -101,7 +104,7 @@
 		62E11A00253AE2440037CEC5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		62EC2D732556377D0040AF5D /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		62EC2D77255642A90040AF5D /* RawKeyedDecodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawKeyedDecodableDictionary.swift; sourceTree = "<group>"; };
-		62F9BBD1255ED62A0090FA2C /* SimulatedLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SimulatedLocation.gpx; sourceTree = "<group>"; };
+		62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = InsideSchool.gpx; sourceTree = "<group>"; };
 		62FF081925564B9A00FD5D65 /* CheckInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +140,7 @@
 		62756C2A25598BEE0007C4F3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				62868F3825600FB200F81842 /* SchoolLocationProvider.swift */,
 				62868F322560009600F81842 /* UserNotificationHelper.swift */,
 				628D11E0255997FC00BF4D2E /* LevelColors.swift */,
 				62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */,
@@ -180,7 +184,8 @@
 		62E119DC253ADEBF0037CEC5 = {
 			isa = PBXGroup;
 			children = (
-				62F9BBD1255ED62A0090FA2C /* SimulatedLocation.gpx */,
+				62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */,
+				62868F3625600F6700F81842 /* MoveInOutSchool.gpx */,
 				62E119E7253ADEBF0037CEC5 /* SIS App */,
 				62E119E6253ADEBF0037CEC5 /* Products */,
 			);
@@ -305,6 +310,7 @@
 				62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */,
 				6202DDD625595A230017BC49 /* DataProvider.swift in Sources */,
 				62E05E59255EC32100BAE4FF /* NotificationCenter+CustomNames.swift in Sources */,
+				62868F3925600FB200F81842 /* SchoolLocationProvider.swift in Sources */,
 				621A87812551838900FA810F /* Room.swift in Sources */,
 				628D11E5255AB42100BF4D2E /* RoomRow.swift in Sources */,
 				6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */,
