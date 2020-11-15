@@ -12,5 +12,5 @@ struct Block: Decodable, CheckInTarget {
     var name: String
     var location: Location
     var radius: Double
-    @RawKeyedCodableDictionary var categories: [RoomCategory: [Room]]
+    @RawKeyedDecodableDictionary var categories: [RoomCategory: [Room]]
 }

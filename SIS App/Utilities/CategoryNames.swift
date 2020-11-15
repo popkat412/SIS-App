@@ -8,7 +8,7 @@
 import Foundation
 
 struct CategoryNames {
-    private static var categoryToName: RawKeyedCodableDictionary<RoomCategory, String>?
+    private static var categoryToName: RawKeyedDecodableDictionary<RoomCategory, String>?
     
     static func getName(of category: RoomCategory) -> String {
         if categoryToName == nil {
@@ -32,7 +32,7 @@ struct CategoryNames {
                 let contents = try String(contentsOfFile: filepath)
                 
                 if let contentsData = contents.data(using: .utf8) {
-                    categoryToName = try JSONDecoder().decode(RawKeyedCodableDictionary<RoomCategory, String>.self, from: contentsData)
+                    categoryToName = try JSONDecoder().decode(RawKeyedDecodableDictionary<RoomCategory, String>.self, from: contentsData)
                 }
             } catch {
                 print(error)

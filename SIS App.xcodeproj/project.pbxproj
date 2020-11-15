@@ -45,7 +45,7 @@
 		62E119F8253ADEC10037CEC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F6253ADEC10037CEC5 /* LaunchScreen.storyboard */; };
 		62E11A01253AE2440037CEC5 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E11A00253AE2440037CEC5 /* MapView.swift */; };
 		62EC2D742556377D0040AF5D /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 62EC2D732556377D0040AF5D /* data.json */; };
-		62EC2D78255642A90040AF5D /* RawKeyedCodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */; };
+		62EC2D78255642A90040AF5D /* RawKeyedDecodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC2D77255642A90040AF5D /* RawKeyedDecodableDictionary.swift */; };
 		62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF081925564B9A00FD5D65 /* CheckInManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,7 +103,7 @@
 		62E119F9253ADEC10037CEC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62E11A00253AE2440037CEC5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		62EC2D732556377D0040AF5D /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawKeyedCodableDictionary.swift; sourceTree = "<group>"; };
+		62EC2D77255642A90040AF5D /* RawKeyedDecodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawKeyedDecodableDictionary.swift; sourceTree = "<group>"; };
 		62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = InsideSchool.gpx; sourceTree = "<group>"; };
 		62FF081925564B9A00FD5D65 /* CheckInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,7 +146,7 @@
 				62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */,
 				6202DDD225583CC90017BC49 /* RoomParentInfo.swift */,
 				6202DDD525595A230017BC49 /* DataProvider.swift */,
-				62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */,
+				62EC2D77255642A90040AF5D /* RawKeyedDecodableDictionary.swift */,
 				62881EB0255657EE00787923 /* CategoryNames.swift */,
 			);
 			path = Utilities;
@@ -330,7 +330,7 @@
 				62DB8FDC2556A2E9006AA1D3 /* Level.swift in Sources */,
 				6202DDD0255827DF0017BC49 /* HistoryView.swift in Sources */,
 				6202DDCD255821520017BC49 /* CheckInSession.swift in Sources */,
-				62EC2D78255642A90040AF5D /* RawKeyedCodableDictionary.swift in Sources */,
+				62EC2D78255642A90040AF5D /* RawKeyedDecodableDictionary.swift in Sources */,
 				62D5D63D255D3C5D0064D484 /* EditSessionView.swift in Sources */,
 				6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */,
 				62881EB425565C2200787923 /* RoomsView.swift in Sources */,

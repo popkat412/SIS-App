@@ -9,7 +9,7 @@
 import Foundation
 
 @propertyWrapper
-struct RawKeyedCodableDictionary<Key, Value>: Codable where Key: Hashable & RawRepresentable, Key.RawValue: Codable & Hashable, Value: Codable {
+struct RawKeyedDecodableDictionary<Key, Value>: Decodable where Key: Hashable & RawRepresentable, Key.RawValue: Decodable & Hashable, Value: Decodable {
     var wrappedValue: [Key: Value]
 
     init() {
@@ -38,9 +38,9 @@ struct RawKeyedCodableDictionary<Key, Value>: Codable where Key: Hashable & RawR
         return Dictionary(uniqueKeysWithValues: wrappedValue.map {($0, $1)} )
     }
 
-    func encode(to encoder: Encoder) throws {
-        let rawKeyedDictionary = Dictionary(uniqueKeysWithValues: wrappedValue.map { ($0.rawValue, $1) })
-        var container = encoder.singleValueContainer()
-        try container.encode(rawKeyedDictionary)
-    }
+//    func encode(to encoder: Encoder) throws {
+//        let rawKeyedDictionary = Dictionary(uniqueKeysWithValues: wrappedValue.map { ($0.rawValue, $1) })
+//        var container = encoder.singleValueContainer()
+//        try container.encode(rawKeyedDictionary)
+//    }
 }
