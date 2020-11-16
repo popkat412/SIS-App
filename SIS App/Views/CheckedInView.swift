@@ -9,8 +9,6 @@ import SwiftUI
 
 struct CheckedInView: View {
     @EnvironmentObject var checkInManager: CheckInManager
-    @State var clickedCheckOutButton = false
-    @State var checkOutTime: Date?
     
     let checkedInGradient = Gradient(colors: [
         Color(red: 35/225, green: 122/225, blue: 87/225),
@@ -26,18 +24,18 @@ struct CheckedInView: View {
         VStack {
             Spacer()
             
-            Image(systemName: clickedCheckOutButton ? "square.and.arrow.up" : "square.and.arrow.down")
+            Image(systemName: checkInManager.isCheckedIn ? "square.and.arrow.down" : "square.and.arrow.up")
                 .font(.system(size: 100))
-                .foregroundColor(clickedCheckOutButton ? .blue : .green)
+                .foregroundColor(checkInManager.isCheckedIn ? .green : .blue)
                 .padding(.bottom, 10)
                 .padding(.top, 20)
-            Text(clickedCheckOutButton ? "Checked Out!" : "Checked In!")
+            Text(checkInManager.isCheckedIn ? "Checked In!" : "Checked Out!")
                 .font(.title)
                 .padding(.bottom, 20)
             
-            Text(clickedCheckOutButton ?
-                    "You checked out of \(checkInManager.currentSession?.target.name ?? "") at \(checkOutTime!.formattedTime)" :
-                    "You checked into \(checkInManager.currentSession?.target.name ?? "") at \(checkInManager.currentSession?.checkedIn.formattedTime ?? "")"
+            Text(checkInManager.isCheckedIn ?
+                    "You checked into \(checkInManager.currentSession?.target.name ?? "") at \(checkInManager.currentSession?.checkedIn.formattedTime ?? "")":
+                    "You checked out of \(checkInManager.currentSession?.target.name ?? "") at \(Date().formattedTime)"
             )
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
@@ -45,19 +43,18 @@ struct CheckedInView: View {
             
             Spacer()
             Button(action: {
-                if clickedCheckOutButton {
-                    checkInManager.checkOut()
+                if !checkInManager.isCheckedIn {
+                    checkInManager.showCheckedInScreen = false
                 } else {
-                    clickedCheckOutButton = true
-                    checkOutTime = Date()
+                    checkInManager.checkOut(shouldUpdateUI: false)
                 }
             }, label: {
-                Text(clickedCheckOutButton ? "Back to Home" : "Check Out")
+                Text(checkInManager.isCheckedIn ? "Check Out" : "Back to Home")
                     .foregroundColor(.white)
             })
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
-            .background(LinearGradient(gradient: clickedCheckOutButton ? checkedOutGradient :  checkedInGradient, startPoint: .topLeading, endPoint: .bottomTrailing))
+            .background(LinearGradient(gradient: checkInManager.isCheckedIn ? checkedInGradient :  checkedOutGradient, startPoint: .topLeading, endPoint: .bottomTrailing))
             .cornerRadius(8)
             .padding(.horizontal, 20)
             .padding(.bottom, 40)

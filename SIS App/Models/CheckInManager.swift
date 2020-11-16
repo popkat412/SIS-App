@@ -12,9 +12,14 @@ class CheckInManager: ObservableObject {
     /// Used to check if the user is currently checked in or not
     /// This should check the persisted data (if any) from the `checkIn()` static method
     @Published private(set) var isCheckedIn = false
-    @Published private(set) var currentSession: CheckInSession?
+
+    /// This should control if the UI should show the check in screen or not, for better control over the UI
+    /// This prevents the UI immediately changing to show something different when `checkIn()` or `checkOut()` is called
+    @Published var showCheckedInScreen = false
     
-    let objectWillChange = ObservableObjectPublisher()
+    
+    /// The current check in session. This is nil when the user isn't checked in
+    @Published private(set) var currentSession: CheckInSession?
     
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBlock), name: .didEnterBlock, object: nil)
@@ -27,17 +32,19 @@ class CheckInManager: ObservableObject {
     /// Used to check the user into a room.
     /// Note that this should persist if the user quits the app while checked in
     /// This should never be called when `isCheckedIn` is true
-    func checkIn(to room: CheckInTarget) {
+    func checkIn(to room: CheckInTarget, shouldUpdateUI: Bool = true) {
         // TODO: Implement this
         isCheckedIn = true
+        if shouldUpdateUI { showCheckedInScreen = true }
         currentSession = CheckInSession(checkedIn: Date(), checkedOut: nil, target: room)
     }
     
     /// Used to check the user out from the room they are currently checked into
     /// This should use the persisted data (if any) from the `checkIn()` static method
     /// This should never be called when `isCheckedIn` is false
-    func checkOut() {
+    func checkOut(shouldUpdateUI: Bool = true) {
         isCheckedIn = false
+        if shouldUpdateUI { showCheckedInScreen = false }
         currentSession?.checkedOut = Date()
         // TODO: Save current session to CoreData
         
