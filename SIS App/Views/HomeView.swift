@@ -13,10 +13,11 @@ struct HomeView: View {
     @EnvironmentObject var userLocationManager: UserLocationManager
     
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
+        print("rebuilding home: \(checkInManager.isCheckedIn), \(checkInManager.showCheckedInScreen)")
+        return VStack(alignment: .center, spacing: 0) {
             MapView()
                 .edgesIgnoringSafeArea(.all)
-            if (checkInManager.isCheckedIn) {
+            if (checkInManager.showCheckedInScreen) {
                 CheckedInView()
             } else {
                 ChooseRoomView()
@@ -32,8 +33,9 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
-            .environmentObject(CheckInManager())
+        let checkInManager = CheckInManager()
+        return HomeView()
+            .environmentObject(checkInManager)
             .environmentObject(UserLocationManager())
     }
 }
