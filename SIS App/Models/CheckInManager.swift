@@ -52,10 +52,11 @@ class CheckInManager: ObservableObject {
         objectWillChange.send()
     }
     
-    /// This should use the session's UUID to figure out which session to change,
-    /// then update that session based on the other properties of the passed session
-    func updateCheckInSession(_ session: CheckInSession) {
+    /// This should use the UUID to figure out which session to change,
+    /// then update that session based on the properties of the passed session
+    func updateCheckInSession(id: UUID, newSession: CheckInSession) {
         // TODO: Implement this
+        objectWillChange.send()
     }
     
     /// This should get the user's history from CoreData

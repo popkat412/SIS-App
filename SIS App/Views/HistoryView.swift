@@ -10,25 +10,63 @@ import SwiftUI
 struct HistoryView: View {
     @EnvironmentObject var checkInManager: CheckInManager
 
-    @State private var showingEditSession = false
+    @State private var showingEditRoomScreen = false
     
     var body: some View {
-        NavigationView{
+        return NavigationView {
             List {
                 ForEach(checkInManager.getCheckInSessions()) { day in
                     Section(header: Text("\(day.formattedDate)")) {
                         ForEach(day.sessions) { session in
-                            Button(action: {
-                                showingEditSession = true
-                            }) {
-                                HistoryRow(session: session)
+                            HistoryRow(
+                                session: session,
+                                editable: true,
+                                onTargetPressed: {
+                                    showingEditRoomScreen = true
+                                },
+                                onCheckInDateUpdate: { newCheckInDate in
+                                    checkInManager.updateCheckInSession(
+                                        id: session.id,
+                                        newSession: session.newSessionWith(checkedIn: newCheckInDate)
+                                    )
+                                },
+                                onCheckOutDateUpdate: { newCheckOutDate in
+                                    checkInManager.updateCheckInSession(
+                                        id: session.id,
+                                        newSession: session.newSessionWith(checkedOut: newCheckOutDate)
+                                    )
+                                }
+                            )
+//                            .contextMenu {
+//                                Button(action: {
+//                                   showingEditRoomScreen = true
+//                                }) {
+//                                    Text("Edit Room")
+//                                }
+//                                Text("Edit Check In Time")
+//                                Text("Edit Check Out Time")
+//                            }
+                            .popover(isPresented: $showingEditRoomScreen) {
+                                ChooseRoomView(onBackButtonPressed: {
+                                    showingEditRoomScreen = false
+                                })
+                                    .environment(\.onRoomSelection) { room in
+                                        showingEditRoomScreen = false
+
+                                        var newSession = session
+                                        newSession.target = room
+                                        checkInManager.updateCheckInSession(
+                                            id: session.id,
+                                            newSession: newSession
+                                        )
+                                    }
                             }
-                            .sheet(isPresented: $showingEditSession) {
-                                EditSessionView(
-                                    session: session,
-                                    showingEditSession: $showingEditSession
-                                )
-                            }
+//                            .sheet(isPresented: $showingEditSession) {
+//                                EditSessionView(
+//                                    session: session,
+//                                    showingEditSession: $showingEditSession
+//                                )
+//                            }
                         }
                     }
                 }
@@ -70,14 +108,77 @@ struct HistoryRow: View {
     var showTiming = true
     var showTarget = true
     
+    var editable = false
+    var onTargetPressed: (() -> ())? = nil
+    var onCheckInDateUpdate: ((Date) -> ())? = nil
+    var onCheckOutDateUpdate: ((Date) -> ())? = nil
+    
+    @State private var checkInDate: Date
+    @State private var checkOutDate: Date
+    
+    init(session: CheckInSession, showTiming: Bool = true, showTarget: Bool = true) {
+        self.session = session
+        self.showTiming = showTiming
+        self.showTarget = showTarget
+        
+        self._checkInDate = .init(initialValue: self.session.checkedIn)
+        self._checkOutDate = .init(initialValue: self.session.checkedOut!)
+            // Force unwrapping because if this is to appear in history, they must have already checked out
+        
+        self.editable = false
+        self.onTargetPressed = nil
+        self.onCheckInDateUpdate = nil
+        self.onCheckOutDateUpdate = nil
+    }
+    
+    init(
+        session: CheckInSession, showTiming: Bool = true, showTarget: Bool = true,
+        editable: Bool,
+        onTargetPressed: @escaping (() -> ()),
+        onCheckInDateUpdate: @escaping ((Date) -> ()),
+        onCheckOutDateUpdate: @escaping ((Date) -> ())
+    ) {
+        self.init(session: session, showTiming: showTiming, showTarget: showTarget)
+        
+        if editable {
+            self.editable = true
+            self.onTargetPressed = onTargetPressed
+            self.onCheckInDateUpdate = onCheckInDateUpdate
+            self.onCheckOutDateUpdate = onCheckOutDateUpdate
+        }
+    }
+
+    
     var body: some View {
         VStack(alignment: .leading) {
             if showTiming {
-                HistoryRowItem(
-                    iconName: "time",
-                    text: session.formattedTiming,
-                    font: .system(size: 20)
-                )
+                if editable {
+                    HStack() {
+                        Image("time")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        
+                        DatePicker(
+                            selection: $checkInDate,
+                            displayedComponents: [.hourAndMinute],
+                            label: { EmptyView() }
+                        )
+                        .labelsHidden()
+                        Text("-")
+                        DatePicker(
+                            selection: $checkOutDate,
+                            displayedComponents: [.hourAndMinute],
+                            label: { EmptyView() }
+                        )
+                        .labelsHidden()
+                    }
+                } else {
+                    HistoryRowItem(
+                        iconName: "time",
+                        text: session.formattedTiming,
+                        font: .system(size: 20)
+                    )
+                }
             }
             
             if showTarget {
@@ -94,6 +195,16 @@ struct HistoryRow: View {
                     } else if let blockTarget = session.target as? Block {
                         HistoryRowItem(iconName: "block", text: blockTarget.name)
                     }
+                }
+                .onTapGesture {
+                    onTargetPressed?()
+                }
+                .conditionalModifier(editable) {
+                    $0
+                        .foregroundColor(.blue)
+                        .padding(7)
+                        .background(Color(white: 0.95))
+                        .cornerRadius(7)
                 }
             }
         }

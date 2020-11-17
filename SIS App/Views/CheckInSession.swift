@@ -40,4 +40,13 @@ struct CheckInSession: Identifiable {
             }
         }
     }
+    
+    func newSessionWith(checkedIn: Date? = nil, checkedOut: Date? = nil, target: CheckInTarget? = nil, id: UUID? = nil) -> CheckInSession {
+        return CheckInSession(
+            checkedIn: checkedIn ?? self.checkedIn,
+            checkedOut: checkedOut ?? self.checkedOut,
+            target: target ?? self.target,
+            id: id ?? self.id
+        )
+    }
 }
