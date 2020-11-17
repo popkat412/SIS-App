@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol CheckInTarget {
+protocol CheckInTarget: Codable {
     var name: String { get }
 }
