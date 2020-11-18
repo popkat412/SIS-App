@@ -152,16 +152,18 @@ struct HistoryRow: View {
                             .frame(width: 25, height: 25)
                         
                         DatePicker(
+                            "Check In Time",
                             selection: $checkInDate,
-                            displayedComponents: [.hourAndMinute],
-                            label: { EmptyView() }
+                            in: PartialRangeThrough(checkOutDate),
+                            displayedComponents: [.hourAndMinute]
                         )
                         .labelsHidden()
                         Text("-")
                         DatePicker(
+                            "Check Out Time",
                             selection: $checkOutDate,
-                            displayedComponents: [.hourAndMinute],
-                            label: { EmptyView() }
+                            in: PartialRangeFrom(checkInDate),
+                            displayedComponents: [.hourAndMinute]
                         )
                         .labelsHidden()
                     }
