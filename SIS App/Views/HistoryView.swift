@@ -37,15 +37,6 @@ struct HistoryView: View {
                                     )
                                 }
                             )
-//                            .contextMenu {
-//                                Button(action: {
-//                                   showingEditRoomScreen = true
-//                                }) {
-//                                    Text("Edit Room")
-//                                }
-//                                Text("Edit Check In Time")
-//                                Text("Edit Check Out Time")
-//                            }
                             .popover(isPresented: $showingEditRoomScreen) {
                                 ChooseRoomView(onBackButtonPressed: {
                                     showingEditRoomScreen = false
@@ -61,17 +52,20 @@ struct HistoryView: View {
                                         )
                                     }
                             }
-//                            .sheet(isPresented: $showingEditSession) {
-//                                EditSessionView(
-//                                    session: session,
-//                                    showingEditSession: $showingEditSession
-//                                )
-//                            }
+                        }
+                        .onDelete { offsets in
+                            // TODO: Test if this actually works
+                            // Need to wait until checkInManager and CoreData is implemented
+                            for index in offsets {
+                                checkInManager.deleteCheckInSession(id: day.sessions[index].id)
+                            }
                         }
                     }
                 }
             }
+            .listStyle(InsetListStyle()) // Must set this, if not addign the EditButton() ruins how the list looks
             .navigationBarTitle("History")
+            .navigationBarItems(trailing: EditButton())
         }
       
     }
