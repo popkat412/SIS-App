@@ -41,3 +41,46 @@ struct CheckInSession: Identifiable {
         }
     }
 }
+
+extension CheckInSession: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case checkedIn
+        case checkedOut
+        case target
+        case id
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.checkedIn = try container.decode(Date.self, forKey: .checkedIn)
+        self.checkedOut = try container.decodeIfPresent(Date.self, forKey: .checkedOut)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        if let roomTarget = try? container.decode(Room.self, forKey: .target) {
+            self.target = roomTarget
+        } else if let blockTarget = try? container.decode(Block.self, forKey: .target) {
+            self.target = blockTarget
+        } else {
+            self.target = Room(name: "Unknown Target :(", level: 0, id: "00-00")
+        }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(checkedIn, forKey: .checkedIn)
+        try container.encode(id, forKey: .id)
+        if checkedOut != nil {
+            try container.encode(checkedOut, forKey: .checkedOut)
+        } else {
+            try container.encodeNil(forKey: .checkedOut)
+        }
+        if let roomTarget = target as? Room {
+            try container.encode(roomTarget, forKey: .target)
+        } else if let blockTarget = target as? Block {
+            try container.encode(blockTarget, forKey: .target)
+        }
+    }
+    
+}

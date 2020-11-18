@@ -8,9 +8,9 @@
 import Foundation
 import CoreLocation
 
-struct Block: Decodable, CheckInTarget {
+struct Block: Codable, CheckInTarget {
     var name: String
     var location: Location
     var radius: Double
-    @RawKeyedDecodableDictionary var categories: [RoomCategory: [Room]]
+    @RawKeyedCodableDictionary var categories: [RoomCategory: [Room]]
 }
