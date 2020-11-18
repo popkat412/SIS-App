@@ -38,19 +38,18 @@ struct HistoryView: View {
                                 }
                             )
                             .popover(isPresented: $showingEditRoomScreen) {
-                                ChooseRoomView(onBackButtonPressed: {
+                                ChooseRoomView(onRoomSelection: { room in
+                                    showingEditRoomScreen = false
+
+                                    var newSession = session
+                                    newSession.target = room
+                                    checkInManager.updateCheckInSession(
+                                        id: session.id,
+                                        newSession: newSession
+                                    )
+                                }, onBackButtonPressed: {
                                     showingEditRoomScreen = false
                                 })
-                                    .environment(\.onRoomSelection) { room in
-                                        showingEditRoomScreen = false
-
-                                        var newSession = session
-                                        newSession.target = room
-                                        checkInManager.updateCheckInSession(
-                                            id: session.id,
-                                            newSession: newSession
-                                        )
-                                    }
                             }
                         }
                         .onDelete { offsets in
