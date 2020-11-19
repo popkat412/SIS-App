@@ -45,7 +45,7 @@
 		62E119F8253ADEC10037CEC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F6253ADEC10037CEC5 /* LaunchScreen.storyboard */; };
 		62E11A01253AE2440037CEC5 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E11A00253AE2440037CEC5 /* MapView.swift */; };
 		62EC2D742556377D0040AF5D /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 62EC2D732556377D0040AF5D /* data.json */; };
-		62EC2D78255642A90040AF5D /* RawKeyedDecodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC2D77255642A90040AF5D /* RawKeyedDecodableDictionary.swift */; };
+		62EC2D78255642A90040AF5D /* RawKeyedCodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */; };
 		62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF081925564B9A00FD5D65 /* CheckInManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +65,7 @@
 /* Begin PBXFileReference section */
 		6202DDC52558102F0017BC49 /* CheckedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedInView.swift; sourceTree = "<group>"; };
 		6202DDC925581EA70017BC49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		6202DDCC255821520017BC49 /* CheckInSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckInSession.swift; path = "SIS App/Views/CheckInSession.swift"; sourceTree = SOURCE_ROOT; };
+		6202DDCC255821520017BC49 /* CheckInSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckInSession.swift; path = "SIS App/Models/CheckInSession.swift"; sourceTree = SOURCE_ROOT; };
 		6202DDCF255827DF0017BC49 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryView.swift; path = "SIS App/Views/HistoryView.swift"; sourceTree = SOURCE_ROOT; };
 		6202DDD225583CC90017BC49 /* RoomParentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomParentInfo.swift; path = "SIS App/Utilities/RoomParentInfo.swift"; sourceTree = SOURCE_ROOT; };
 		6202DDD525595A230017BC49 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
@@ -74,19 +74,19 @@
 		621A87802551838900FA810F /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnRoomSelection.swift; path = "SIS App/Models/OnRoomSelection.swift"; sourceTree = SOURCE_ROOT; };
 		62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+FormattedTime.swift"; path = "SIS App/Utilities/Date+FormattedTime.swift"; sourceTree = SOURCE_ROOT; };
-		62868F322560009600F81842 /* UserNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserNotificationHelper.swift; path = "SIS App/Views/UserNotificationHelper.swift"; sourceTree = SOURCE_ROOT; };
+		62868F322560009600F81842 /* UserNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserNotificationHelper.swift; path = "SIS App/Utilities/UserNotificationHelper.swift"; sourceTree = SOURCE_ROOT; };
 		62868F3625600F6700F81842 /* MoveInOutSchool.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MoveInOutSchool.gpx; sourceTree = "<group>"; };
-		62868F3825600FB200F81842 /* SchoolLocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchoolLocationProvider.swift; path = "SIS App/Views/SchoolLocationProvider.swift"; sourceTree = SOURCE_ROOT; };
+		62868F3825600FB200F81842 /* SchoolLocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchoolLocationProvider.swift; path = "SIS App/Utilities/SchoolLocationProvider.swift"; sourceTree = SOURCE_ROOT; };
 		62881EAD2556570A00787923 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		62881EB0255657EE00787923 /* CategoryNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNames.swift; sourceTree = "<group>"; };
 		62881EB325565C2200787923 /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
 		628D11D625598F8D00BF4D2E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = SOURCE_ROOT; };
 		628D11DD255997DB00BF4D2E /* colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = colors.json; path = "SIS App/Data/colors.json"; sourceTree = SOURCE_ROOT; };
-		628D11E0255997FC00BF4D2E /* LevelColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelColors.swift; path = "SIS App/Views/LevelColors.swift"; sourceTree = SOURCE_ROOT; };
+		628D11E0255997FC00BF4D2E /* LevelColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelColors.swift; path = "SIS App/Utilities/LevelColors.swift"; sourceTree = SOURCE_ROOT; };
 		628D11E4255AB42100BF4D2E /* RoomRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRow.swift; sourceTree = "<group>"; };
 		628D11E7255AB44D00BF4D2E /* LevelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelIcon.swift; sourceTree = "<group>"; };
 		6292DCBD25564F4000352527 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
-		629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "View+ConditionalModifiers.swift"; path = "SIS App/Views/View+ConditionalModifiers.swift"; sourceTree = SOURCE_ROOT; };
+		629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "View+ConditionalModifiers.swift"; path = "SIS App/Utilities/View+ConditionalModifiers.swift"; sourceTree = SOURCE_ROOT; };
 		62D5D639255D38D60064D484 /* CheckInTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTarget.swift; sourceTree = "<group>"; };
 		62D5D63F255D3E850064D484 /* ChooseRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoomView.swift; sourceTree = "<group>"; };
 		62D5D643255D40330064D484 /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLocationManager.swift; path = "SIS App/Models/UserLocationManager.swift"; sourceTree = SOURCE_ROOT; };
@@ -103,7 +103,7 @@
 		62E119F9253ADEC10037CEC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62E11A00253AE2440037CEC5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		62EC2D732556377D0040AF5D /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		62EC2D77255642A90040AF5D /* RawKeyedDecodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawKeyedDecodableDictionary.swift; sourceTree = "<group>"; };
+		62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawKeyedCodableDictionary.swift; sourceTree = "<group>"; };
 		62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = InsideSchool.gpx; sourceTree = "<group>"; };
 		62FF081925564B9A00FD5D65 /* CheckInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,7 +147,7 @@
 				62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */,
 				6202DDD225583CC90017BC49 /* RoomParentInfo.swift */,
 				6202DDD525595A230017BC49 /* DataProvider.swift */,
-				62EC2D77255642A90040AF5D /* RawKeyedDecodableDictionary.swift */,
+				62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */,
 				62881EB0255657EE00787923 /* CategoryNames.swift */,
 			);
 			path = Utilities;
@@ -331,7 +331,7 @@
 				6202DDD0255827DF0017BC49 /* HistoryView.swift in Sources */,
 				629EB68025638E64000FADD9 /* View+ConditionalModifiers.swift in Sources */,
 				6202DDCD255821520017BC49 /* CheckInSession.swift in Sources */,
-				62EC2D78255642A90040AF5D /* RawKeyedDecodableDictionary.swift in Sources */,
+				62EC2D78255642A90040AF5D /* RawKeyedCodableDictionary.swift in Sources */,
 				6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */,
 				62881EB425565C2200787923 /* RoomsView.swift in Sources */,
 				62881EB1255657EE00787923 /* CategoryNames.swift in Sources */,
