@@ -12,6 +12,15 @@ struct DataProvider {
     private static var blocks: [Block]?
     private static var rooms: [Room]?
     
+    static var placeholderBlocks: [Block] {
+        [
+            Block(name: "Raja Block"),
+            Block(name: "Yusof Ishak Block"),
+            Block(name: "Sheares Block"),
+            Block(name: "Marshall Block")
+        ]
+    }
+    
     static func getBlocks(userLocation: CLLocation? = nil) -> [Block] {
         if blocks == nil {
             blocks = initBlocks()!
@@ -52,6 +61,7 @@ struct DataProvider {
         return results
     }
     
+    // MARK: Private Methods
     private static func initRooms() -> [Room] {
         if blocks == nil {
             blocks = initBlocks()!

@@ -10,25 +10,19 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+        SimpleEntry(date: Date(), blocks: DataProvider.placeholderBlocks)
     }
-
+    
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
+        let entry = SimpleEntry(date: Date(), blocks: DataProvider.placeholderBlocks)
         completion(entry)
     }
-
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
-            entries.append(entry)
-        }
-
+        let entries = [
+            SimpleEntry(date: Date(), blocks: DataProvider.placeholderBlocks)
+        ]
+        
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
@@ -36,20 +30,51 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let blocks: [Block]
 }
 
 struct SISAppWidgetEntryView : View {
     var entry: Provider.Entry
-
+    
     var body: some View {
-        Text(entry.date, style: .time)
+        VStack(alignment: .leading) {
+            Text("Click to check in:")
+            
+            HStack {
+                ForEach(0..<4) { i in
+                    VStack {
+                        Text(entry.blocks[i].shortName)
+                            .minimumScaleFactor(0.01)
+                            .lineLimit(
+                                entry
+                                    .blocks[i]
+                                    .shortName
+                                    .components(separatedBy: " ")
+                                    .count
+                            )
+                            .foregroundColor(.white)
+                            .padding(5)
+                            .frame(width: 66, height: 66)
+                            .background(
+                                ContainerRelativeShape()
+                                    .fill(Color.blue)
+                            )
+                    }
+                }
+            }
+            .padding()
+            .background(
+                ContainerRelativeShape()
+                    .fill(Color.green)
+            )
+        }
     }
 }
 
 @main
 struct SISAppWidget: Widget {
     let kind: String = "SISAppWidget"
-
+    
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             SISAppWidgetEntryView(entry: entry)
@@ -62,7 +87,7 @@ struct SISAppWidget: Widget {
 
 struct SISAppWidget_Previews: PreviewProvider {
     static var previews: some View {
-        SISAppWidgetEntryView(entry: SimpleEntry(date: Date()))
+        SISAppWidgetEntryView(entry: SimpleEntry(date: Date(), blocks: DataProvider.placeholderBlocks))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

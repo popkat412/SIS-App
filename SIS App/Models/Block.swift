@@ -10,6 +10,11 @@ import CoreLocation
 
 struct Block: Codable, CheckInTarget {
     var name: String
+    var shortName: String {
+        let suffix = " Block"
+        guard name.hasSuffix(suffix) else { return name } // E.g. ARTSpace
+        return String(name.dropLast(suffix.count))
+    }
     var location: Location
     var radius: Double
     @RawKeyedCodableDictionary var categories: [RoomCategory: [Room]]
