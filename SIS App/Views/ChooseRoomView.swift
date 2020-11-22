@@ -18,8 +18,6 @@ struct ChooseRoomView: View {
         self.onBackButtonPressed = onBackButtonPressed
     }
     
-    let blocks = DataProvider.getBlocks()
-    
     var body: some View {
         HStack {
             if onBackButtonPressed != nil {
@@ -44,17 +42,7 @@ struct ChooseRoomView: View {
             .buttonStyle(PlainButtonStyle())
         }
         NavigationView {
-            List(blocks.sorted(by: { (block1, block2) -> Bool in
-                // If location avaliable, sort by distance to nearest block
-                if let dist1 = userLocationManager.userLocation?.distance(from: block1.location.toCLLocation()),
-                   let dist2 = userLocationManager.userLocation?.distance(from: block2.location.toCLLocation()) {
-                    
-                    return dist1 - block1.radius < dist2 - block2.radius
-                }
-                
-                // Else sort by name
-                return block1.name < block2.name
-            }), id: \.name) { block in
+            List(DataProvider.getBlocks(userLocation: userLocationManager.userLocation), id: \.name) { block in
                 NavigationLink(
                     destination: CategoriesView(
                         categories: block.categories,
