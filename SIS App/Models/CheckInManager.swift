@@ -141,7 +141,7 @@ class CheckInManager: ObservableObject {
                     CheckInSession(
                         checkedIn: Date(timeIntervalSince1970: 1604841082),
                         checkedOut: Date(timeIntervalSince1970: 1604841082+3600),
-                        target: Block(name: "Raja Block", location: Location(longitude: 1, latitude: 1), radius: 1)
+                        target: Block(name: "Raja Block")
                     ),
                 ]
             ),
