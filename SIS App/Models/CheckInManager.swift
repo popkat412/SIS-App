@@ -23,11 +23,32 @@ class CheckInManager: ObservableObject {
     
     static let savedSessionsFilename = "savedSessions.json"
     static let currentSessionFilename = "currentSession.json"
+    static let savedSessionsFile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(CheckInManager.savedSessionsFilename)
     static let currentSessionFile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(CheckInManager.currentSessionFilename)
     
     init() {
         // TODO: Restore check in state here
-        checkInSessions = [CheckInSession]()
+        if FileManager.default.fileExists(atPath: CheckInManager.savedSessionsFile.path) {
+            print("📂✅ file exisists :)")
+            
+            // 1. Get file contents
+            var fileContents = ""
+            do {
+                fileContents = try String(contentsOf: CheckInManager.savedSessionsFile)
+            } catch {
+                print("❌ could not read string from file 0_o: \(error)")
+                return
+            }
+            
+            // 2. De-serialize json
+            do {
+                checkInSessions = try JSONDecoder().decode(CheckInSession.self, from: fileContents.data(using: .utf8)!)
+            } catch {
+                print("❌ could not de-serialize json ☹️: \(error)")
+                checkInSessions = [CheckInSession]()
+                return
+            }
+            
         
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBlock), name: .didEnterBlock, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didExitBlock), name: .didExitBlock, object: nil)
