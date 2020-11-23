@@ -28,8 +28,9 @@ class CheckInManager: ObservableObject {
     
     init() {
         // TODO: Restore check in state here
+        checkInSessions = [CheckInSession]()
         if FileManager.default.fileExists(atPath: CheckInManager.savedSessionsFile.path) {
-            print("📂✅ file exisists :)")
+            print("📂✅ saved sessions file exisists :)")
             
             // 1. Get file contents
             var fileContents = ""
@@ -42,13 +43,12 @@ class CheckInManager: ObservableObject {
             
             // 2. De-serialize json
             do {
-                checkInSessions = try JSONDecoder().decode(CheckInSession.self, from: fileContents.data(using: .utf8)!)
+                checkInSessions = try JSONDecoder().decode([CheckInSession].self, from: fileContents.data(using: .utf8)!)
             } catch {
                 print("❌ could not de-serialize json ☹️: \(error)")
-                checkInSessions = [CheckInSession]()
                 return
             }
-            
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBlock), name: .didEnterBlock, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didExitBlock), name: .didExitBlock, object: nil)
@@ -82,7 +82,7 @@ class CheckInManager: ObservableObject {
             showCheckedInScreen = true
             
             // 5. Delete file
-            deleteCurrentSessionFile()
+            CheckInManager.deleteCurrentSessionFile()
         }
     }
     
@@ -133,7 +133,7 @@ class CheckInManager: ObservableObject {
         
         currentSession = nil
         
-        deleteCurrentSessionFile()
+        CheckInManager.deleteCurrentSessionFile()
         
         objectWillChange.send()
     }
@@ -219,7 +219,7 @@ class CheckInManager: ObservableObject {
     }
     
     // MARK: Helper Methods
-    private func deleteCurrentSessionFile() {
+    private static func deleteCurrentSessionFile() {
         do {
             try FileManager.default.removeItem(at: CheckInManager.currentSessionFile)
         } catch {
