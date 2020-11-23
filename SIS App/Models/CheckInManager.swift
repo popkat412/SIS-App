@@ -141,8 +141,14 @@ class CheckInManager: ObservableObject {
     /// This should use the UUID to figure out which session to change,
     /// then update that session based on the properties of the passed session
     func updateCheckInSession(id: UUID, newSession: CheckInSession) {
-        // TODO: Implement this
-        objectWillChange.send()
+        let idx = checkInSessions.firstIndex { $0.id == id }
+        if let idx = idx {
+            checkInSessions[idx] = newSession
+            
+            writeSavedSessionsToFile()
+            objectWillChange.send()
+        }
+        
     }
     
     /// This deletes a session
@@ -226,5 +232,9 @@ class CheckInManager: ObservableObject {
             print("❌ could not delete file ☹️: \(error)")
             return
         }
+    }
+    
+    private func writeSavedSessionsToFile() {
+        // TODO: Implement this
     }
 }
