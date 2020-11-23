@@ -13,9 +13,14 @@ struct ChooseRoomView: View {
     @State var showingSearch = false
 
     var onBackButtonPressed: (() -> ())?
+    var onRoomSelection: ((Room) -> ())
     
-    init(onBackButtonPressed: (() -> ())? = nil) {
+    init(
+        onRoomSelection: @escaping ((Room) -> ()),
+        onBackButtonPressed: (() -> ())? = nil
+    ) {
         self.onBackButtonPressed = onBackButtonPressed
+        self.onRoomSelection = onRoomSelection
     }
     
     let blocks = DataProvider.getBlocks()
@@ -66,6 +71,9 @@ struct ChooseRoomView: View {
             }
             .navigationBarTitle("Blocks", displayMode: .inline)
         }
+        .environment(\.onRoomSelection) { room in
+            onRoomSelection(room)
+        }
         .sheet(isPresented: $showingSearch) {
             SearchView(showingSearch: $showingSearch)
         }
@@ -74,7 +82,7 @@ struct ChooseRoomView: View {
 
 struct ChooseRoomView_Previews: PreviewProvider {
     static var previews: some View {
-        ChooseRoomView()
+        ChooseRoomView { _ in }
             .environmentObject(UserLocationManager())
     }
 }
