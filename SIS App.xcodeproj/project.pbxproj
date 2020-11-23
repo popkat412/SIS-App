@@ -332,6 +332,7 @@
 				629EB68025638E64000FADD9 /* View+ConditionalModifiers.swift in Sources */,
 				6202DDCD255821520017BC49 /* CheckInSession.swift in Sources */,
 				62EC2D78255642A90040AF5D /* RawKeyedCodableDictionary.swift in Sources */,
+				62D5D63D255D3C5D0064D484 /* EditSessionView.swift in Sources */,
 				6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */,
 				62881EB425565C2200787923 /* RoomsView.swift in Sources */,
 				62881EB1255657EE00787923 /* CategoryNames.swift in Sources */,
