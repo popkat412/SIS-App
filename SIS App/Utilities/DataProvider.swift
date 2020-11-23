@@ -39,6 +39,14 @@ struct DataProvider {
         })
     }
     
+    static func getBlock(name: String) -> Block? {
+        if blocks == nil {
+            blocks = initBlocks()!
+        }
+        
+        return blocks!.first { $0.name == name }
+    }
+    
     static func getRoomsFromSearch(_ searchStr: String) -> [Room] {
         if rooms == nil {
             rooms = initRooms()

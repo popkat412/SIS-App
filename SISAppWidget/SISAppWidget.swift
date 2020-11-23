@@ -39,11 +39,12 @@ struct SISAppWidgetEntryView : View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Click to check in:")
+                .padding([.top, .leading])
             
             HStack {
                 ForEach(0..<4) { i in
-                    VStack {
-                        Text(entry.blocks[i].shortName)
+                    Link(destination: getDeeplinkURL(forIdx: i)) {
+                        Text("\(entry.blocks[i].shortName)")
                             .minimumScaleFactor(0.01)
                             .lineLimit(
                                 entry
@@ -54,20 +55,24 @@ struct SISAppWidgetEntryView : View {
                             )
                             .foregroundColor(.white)
                             .padding(5)
-                            .frame(width: 66, height: 66)
+                            .frame(width: 70, height: 70)
                             .background(
                                 ContainerRelativeShape()
                                     .fill(Color.blue)
-                            )
+                        )
                     }
                 }
             }
             .padding()
-            .background(
-                ContainerRelativeShape()
-                    .fill(Color.green)
-            )
         }
+    }
+    
+    private func getDeeplinkURL(forIdx index: Int) -> URL {
+        var urlComponents = URLComponents(string: DeeplinkURLInfo.baseURLString)!
+        urlComponents.queryItems = [
+            URLQueryItem(name: "block", value: entry.blocks[index].name)
+        ]
+        return urlComponents.url!
     }
 }
 
@@ -87,7 +92,12 @@ struct SISAppWidget: Widget {
 
 struct SISAppWidget_Previews: PreviewProvider {
     static var previews: some View {
-        SISAppWidgetEntryView(entry: SimpleEntry(date: Date(), blocks: DataProvider.placeholderBlocks))
+        SISAppWidgetEntryView(
+            entry: SimpleEntry(
+                date: Date(),
+                blocks: DataProvider.placeholderBlocks
+            )
+        )
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

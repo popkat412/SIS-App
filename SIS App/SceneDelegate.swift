@@ -43,6 +43,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             UserNotificationHelper.requestAuth()
         }
     }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        print("🌐 opening url: \(URLContexts)")
+        if let blockName = URLComponents(string: URLContexts.first?.url.absoluteString ?? "")?.queryItems?.first(where: { $0.name == "block" })?.value {
+            print("block name: \(blockName)")
+             checkInManager.checkIn(to: DataProvider.getBlock(name: blockName)!)
+        }
+    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
