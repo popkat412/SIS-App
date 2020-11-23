@@ -154,8 +154,9 @@ class CheckInManager: ObservableObject {
     /// This deletes a session
     /// This should use the UUID to figure out which session to delete
     func deleteCheckInSession(id: UUID) {
-        // TODO: Implement this
+        checkInSessions.removeAll { $0.id == id }
         
+        writeSavedSessionsToFile()
         objectWillChange.send()
     }
     
