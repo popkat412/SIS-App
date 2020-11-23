@@ -19,14 +19,18 @@ class CheckInManager: ObservableObject {
     /// The current check in session. This is nil when the user isn't checked in
     @Published private(set) var currentSession: CheckInSession?
     
+    private var checkInSessions: [CheckInSession]
+    
+    static let savedSessionsFilename = "savedSessions.json"
     static let currentSessionFilename = "currentSession.json"
     static let currentSessionFile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(CheckInManager.currentSessionFilename)
     
     init() {
+        // TODO: Restore check in state here
+        checkInSessions = [CheckInSession]()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBlock), name: .didEnterBlock, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didExitBlock), name: .didExitBlock, object: nil)
-        
-        // TODO: Restore check in state here
         
         
         // ------- [[ RESTORE CHECK IN STATE ]] ----------- //
