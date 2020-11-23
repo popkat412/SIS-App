@@ -117,6 +117,8 @@ class CheckInManager: ObservableObject {
             print("❌ oops, failed to write current session to file ☹️ \(error)")
             return
         }
+        
+        
     }
     
     /// Used to check the user out from the room they are currently checked into
@@ -129,12 +131,13 @@ class CheckInManager: ObservableObject {
         if shouldUpdateUI { showCheckedInScreen = false }
         currentSession?.checkedOut = Date()
         
-        // TODO: Save current session to CoreData
+        // -------- [[ ADD TO SAVED SESSIONS ]] ------- //
+        checkInSessions.append(currentSession!)
         
         currentSession = nil
         
+        writeSavedSessionsToFile()
         CheckInManager.deleteCurrentSessionFile()
-        
         objectWillChange.send()
     }
     
@@ -163,45 +166,50 @@ class CheckInManager: ObservableObject {
     /// This should get the user's history from CoreData
     /// The `CheckInSession`s should be sorted by date
     func getCheckInSessions() -> [Day] {
-        // TODO: Implemenet this
-        // For now, return dummy data
-        return [
-            Day(
-                date: Date(timeIntervalSince1970: 1604840241),
-                sessions: [
-                    CheckInSession(
-                        checkedIn: Date(timeIntervalSince1970: 1604840241),
-                        checkedOut: Date(timeIntervalSince1970: 1604840241+3600),
-                        target: Room(name: "Class 1A", level: 1, id: "C1-17")
-                    ),
-                    CheckInSession(
-                        checkedIn: Date(timeIntervalSince1970: 1604840882),
-                        checkedOut: Date(timeIntervalSince1970: 1604840882+3600),
-                        target: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
-                    ),
-                    CheckInSession(
-                        checkedIn: Date(timeIntervalSince1970: 1604841082),
-                        checkedOut: Date(timeIntervalSince1970: 1604841082+3600),
-                        target: Block(name: "Raja Block", location: Location(longitude: 1, latitude: 1), radius: 1)
-                    ),
-                ]
-            ),
-            Day(
-                date: Date(timeIntervalSince1970: 1604922272),
-                sessions: [
-                    CheckInSession(
-                        checkedIn: Date(timeIntervalSince1970: 1604922272),
-                        checkedOut: Date(timeIntervalSince1970: 1604922272+3600),
-                        target: Room(name: "Class 1A", level: 1, id: "C1-17")
-                    ),
-                    CheckInSession(
-                        checkedIn: Date(timeIntervalSince1970: 1604925272),
-                        checkedOut: Date(timeIntervalSince1970: 1604925272+3600),
-                        target: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
-                    )
-                ]
-            )
-        ]
+        return Dictionary(grouping: checkInSessions) { session -> Date in
+            Calendar.current.startOfDay(for: session.checkedIn)
+        }
+        .map { (key, value) in
+            Day(date: key, sessions: value)
+        }
+        
+//        return [
+//            Day(
+//                date: Date(timeIntervalSince1970: 1604840241),
+//                sessions: [
+//                    CheckInSession(
+//                        checkedIn: Date(timeIntervalSince1970: 1604840241),
+//                        checkedOut: Date(timeIntervalSince1970: 1604840241+3600),
+//                        target: Room(name: "Class 1A", level: 1, id: "C1-17")
+//                    ),
+//                    CheckInSession(
+//                        checkedIn: Date(timeIntervalSince1970: 1604840882),
+//                        checkedOut: Date(timeIntervalSince1970: 1604840882+3600),
+//                        target: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
+//                    ),
+//                    CheckInSession(
+//                        checkedIn: Date(timeIntervalSince1970: 1604841082),
+//                        checkedOut: Date(timeIntervalSince1970: 1604841082+3600),
+//                        target: Block(name: "Raja Block", location: Location(longitude: 1, latitude: 1), radius: 1)
+//                    ),
+//                ]
+//            ),
+//            Day(
+//                date: Date(timeIntervalSince1970: 1604922272),
+//                sessions: [
+//                    CheckInSession(
+//                        checkedIn: Date(timeIntervalSince1970: 1604922272),
+//                        checkedOut: Date(timeIntervalSince1970: 1604922272+3600),
+//                        target: Room(name: "Class 1A", level: 1, id: "C1-17")
+//                    ),
+//                    CheckInSession(
+//                        checkedIn: Date(timeIntervalSince1970: 1604925272),
+//                        checkedOut: Date(timeIntervalSince1970: 1604925272+3600),
+//                        target: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
+//                    )
+//                ]
+//            )
+//        ]
     }
     
     
