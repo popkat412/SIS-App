@@ -27,7 +27,6 @@ class CheckInManager: ObservableObject {
     static let currentSessionFile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(CheckInManager.currentSessionFilename)
     
     init() {
-        // TODO: Restore check in state here
         checkInSessions = [CheckInSession]()
         if FileManager.default.fileExists(atPath: CheckInManager.savedSessionsFile.path) {
             print("📂✅ saved sessions file exisists :)")
@@ -215,7 +214,6 @@ class CheckInManager: ObservableObject {
     
     /// This is the method that will be called when user enters a block
     /// This is supposed to automatically check the user into a block for them to edit later
-    /// TODO: Don't always automatically check in, perhaps like wait a minute to see if the user already checks in manually
     @objc func didEnterBlock(_ notification: Notification) {
         if isCheckedIn { return }
         let block = notification.userInfo?["block"] as! Block
@@ -226,7 +224,6 @@ class CheckInManager: ObservableObject {
     
     /// This is the method that will be called when user exits a block
     /// This is supposed to automatically check the user out of a block for them to edit later
-    /// TODO: Don't always automatically check out, perhaps like wait a minute to see if the user already manually
     @objc func didExitBlock(_ notification: Notification) {
         if !isCheckedIn { return }
         print("automatically checking out")
@@ -238,12 +235,27 @@ class CheckInManager: ObservableObject {
         do {
             try FileManager.default.removeItem(at: CheckInManager.currentSessionFile)
         } catch {
-            print("❌ could not delete file ☹️: \(error)")
+            print("❌ could not delete current sessions file ☹️: \(error)")
             return
         }
     }
     
     private func writeSavedSessionsToFile() {
-        // TODO: Implement this
+        var toWrite: Data!
+        do {
+            toWrite = try JSONEncoder().encode(checkInSessions)
+        } catch {
+            print("❌ error serializing saved sessions to json \(error)")
+            return
+        }
+        
+        // 2. Write that json to file
+        do {
+            try toWrite.write(to: CheckInManager.savedSessionsFile)
+        } catch {
+            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+            print("❌ oops, failed to write saved sessions to file ☹️ \(error)")
+            return
+        }
     }
 }
