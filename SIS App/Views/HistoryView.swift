@@ -25,12 +25,14 @@ struct HistoryView: View {
                                     showingEditRoomScreen = true
                                 },
                                 onCheckInDateUpdate: { newCheckInDate in
+                                    print("new check in date: \(newCheckInDate)")
                                     checkInManager.updateCheckInSession(
                                         id: session.id,
                                         newSession: session.newSessionWith(checkedIn: newCheckInDate)
                                     )
                                 },
                                 onCheckOutDateUpdate: { newCheckOutDate in
+                                    print("new check out date: \(newCheckOutDate)")
                                     checkInManager.updateCheckInSession(
                                         id: session.id,
                                         newSession: session.newSessionWith(checkedOut: newCheckOutDate)
@@ -41,11 +43,9 @@ struct HistoryView: View {
                                 ChooseRoomView(onRoomSelection: { room in
                                     showingEditRoomScreen = false
 
-                                    var newSession = session
-                                    newSession.target = room
                                     checkInManager.updateCheckInSession(
                                         id: session.id,
-                                        newSession: newSession
+                                        newSession: session.newSessionWith(target: room)
                                     )
                                 }, onBackButtonPressed: {
                                     showingEditRoomScreen = false
@@ -53,8 +53,6 @@ struct HistoryView: View {
                             }
                         }
                         .onDelete { offsets in
-                            // TODO: Test if this actually works
-                            // Need to wait until checkInManager and CoreData is implemented
                             for index in offsets {
                                 checkInManager.deleteCheckInSession(id: day.sessions[index].id)
                             }
@@ -158,7 +156,9 @@ struct HistoryRow: View {
                             displayedComponents: [.hourAndMinute]
                         )
                         .labelsHidden()
-                        Text("-")
+                        .onChange(of: checkInDate) { newValue in
+                            onCheckInDateUpdate?(newValue)
+                        }
                         DatePicker(
                             "Check Out Time",
                             selection: $checkOutDate,
@@ -166,6 +166,10 @@ struct HistoryRow: View {
                             displayedComponents: [.hourAndMinute]
                         )
                         .labelsHidden()
+                        .onChange(of: checkOutDate) { newValue in
+                            onCheckOutDateUpdate?(newValue)
+                        }
+                        
                     }
                 } else {
                     HistoryRowItem(
