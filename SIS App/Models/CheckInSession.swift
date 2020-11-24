@@ -20,6 +20,12 @@ struct Day: Identifiable {
             return formatter.string(from: date)
         }
     }
+
+    init(date: Date, sessions: [CheckInSession]) {
+        self.id = UUID()
+        self.date = date
+        self.sessions = sessions.sorted {$0.checkedIn > $1.checkedIn }
+    }
 }
 
 struct CheckInSession: Identifiable {
