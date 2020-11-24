@@ -19,69 +19,37 @@ class CheckInManager: ObservableObject {
     /// The current check in session. This is nil when the user isn't checked in
     @Published private(set) var currentSession: CheckInSession?
     
-    private var checkInSessions: [CheckInSession]
+    @Published var checkInSessions: [CheckInSession] {
+        didSet {
+            FileUtility.saveDataToJsonFile(filename: CheckInManager.savedSessionsFilename, data: checkInSessions)
+            objectWillChange.send()
+        }
+    }
     
     static let savedSessionsFilename = "savedSessions.json"
     static let currentSessionFilename = "currentSession.json"
-    static let savedSessionsFile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(CheckInManager.savedSessionsFilename)
-    static let currentSessionFile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(CheckInManager.currentSessionFilename)
+    
     
     init() {
-        checkInSessions = [CheckInSession]()
-        if FileManager.default.fileExists(atPath: CheckInManager.savedSessionsFile.path) {
-            print("📂✅ saved sessions file exisists :)")
-            
-            // 1. Get file contents
-            var fileContents = ""
-            do {
-                fileContents = try String(contentsOf: CheckInManager.savedSessionsFile)
-            } catch {
-                print("❌ could not read string from file 0_o: \(error)")
-                return
-            }
-            
-            // 2. De-serialize json
-            do {
-                checkInSessions = try JSONDecoder().decode([CheckInSession].self, from: fileContents.data(using: .utf8)!)
-            } catch {
-                print("❌ could not de-serialize json ☹️: \(error)")
-                return
-            }
-        }
+        checkInSessions = FileUtility.getDataFromJsonFile(
+            filename: CheckInManager.savedSessionsFilename,
+            dataType: [CheckInSession].self
+        )
+            ?? []
         
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBlock), name: .didEnterBlock, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didExitBlock), name: .didExitBlock, object: nil)
         
         
         // ------- [[ RESTORE CHECK IN STATE ]] ----------- //
-        // 1. Check if file exisists
-        print("📂 document's directory: \(CheckInManager.currentSessionFile.path)")
-        if FileManager.default.fileExists(atPath: CheckInManager.currentSessionFile.path) {
-            print("📂✅ file exisists :)")
-            
-            // 2. Get file contents
-            var fileContents = ""
-            do {
-                fileContents = try String(contentsOf: CheckInManager.currentSessionFile)
-            } catch {
-                print("❌ could not read string from file 0_o: \(error)")
-                return
-            }
-            
-            // 3. De-serialize json
-            do {
-                currentSession = try JSONDecoder().decode(CheckInSession.self, from: fileContents.data(using: .utf8)!)
-            } catch {
-                print("❌ could not de-serialize json ☹️: \(error)")
-                return
-            }
-            
-            // 4. Update variables
+        let previousCheckIn = FileUtility.getDataFromJsonFile(
+            filename: CheckInManager.currentSessionFilename,
+            dataType: CheckInSession.self
+        )
+        if previousCheckIn != nil {
+            currentSession = previousCheckIn
             isCheckedIn = true
             showCheckedInScreen = true
-            
-            // 5. Delete file
-            CheckInManager.deleteCurrentSessionFile()
         }
     }
     
@@ -98,26 +66,7 @@ class CheckInManager: ObservableObject {
         currentSession = CheckInSession(checkedIn: Date(), checkedOut: nil, target: room)
         
         // ------- [[ SAVE CURRENT SESSION TO FILE ]] ------ //
-        
-        // 1. Serialise current session into json
-        var toWrite: Data!
-        do {
-            toWrite = try JSONEncoder().encode(currentSession!)
-        } catch {
-            print("❌ error serializing current session to json \(error)")
-            return
-        }
-        
-        // 2. Write that json to file
-        do {
-            try toWrite.write(to: CheckInManager.currentSessionFile)
-        } catch {
-            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
-            print("❌ oops, failed to write current session to file ☹️ \(error)")
-            return
-        }
-        
-        
+        FileUtility.saveDataToJsonFile(filename: CheckInManager.currentSessionFilename, data: currentSession)
     }
     
     /// Used to check the user out from the room they are currently checked into
@@ -135,9 +84,7 @@ class CheckInManager: ObservableObject {
         
         currentSession = nil
         
-        writeSavedSessionsToFile()
-        CheckInManager.deleteCurrentSessionFile()
-        objectWillChange.send()
+        FileUtility.deleteFile(filename: CheckInManager.currentSessionFilename)
     }
     
     /// This should use the UUID to figure out which session to change,
@@ -146,9 +93,6 @@ class CheckInManager: ObservableObject {
         let idx = checkInSessions.firstIndex { $0.id == id }
         if let idx = idx {
             checkInSessions[idx] = newSession
-            
-            writeSavedSessionsToFile()
-            objectWillChange.send()
         }
         
     }
@@ -157,58 +101,57 @@ class CheckInManager: ObservableObject {
     /// This should use the UUID to figure out which session to delete
     func deleteCheckInSession(id: UUID) {
         checkInSessions.removeAll { $0.id == id }
-        
-        writeSavedSessionsToFile()
-        objectWillChange.send()
     }
     
     /// This should get the user's history from CoreData
     /// The `CheckInSession`s should be sorted by date
-    func getCheckInSessions() -> [Day] {
-        return Dictionary(grouping: checkInSessions) { session -> Date in
-            Calendar.current.startOfDay(for: session.checkedIn)
+    func getCheckInSessions(placholderData: Bool = false) -> [Day] {
+        if !placholderData {
+            return Dictionary(grouping: checkInSessions) { session -> Date in
+                Calendar.current.startOfDay(for: session.checkedIn)
+            }
+            .map { (key, value) in
+                Day(date: key, sessions: value)
+            }
+        } else {
+            return [
+                Day(
+                    date: Date(timeIntervalSince1970: 1604840241),
+                    sessions: [
+                        CheckInSession(
+                            checkedIn: Date(timeIntervalSince1970: 1604840241),
+                            checkedOut: Date(timeIntervalSince1970: 1604840241+3600),
+                            target: Room(name: "Class 1A", level: 1, id: "C1-17")
+                        ),
+                        CheckInSession(
+                            checkedIn: Date(timeIntervalSince1970: 1604840882),
+                            checkedOut: Date(timeIntervalSince1970: 1604840882+3600),
+                            target: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
+                        ),
+                        CheckInSession(
+                            checkedIn: Date(timeIntervalSince1970: 1604841082),
+                            checkedOut: Date(timeIntervalSince1970: 1604841082+3600),
+                            target: Block(name: "Raja Block")
+                        ),
+                    ]
+                ),
+                Day(
+                    date: Date(timeIntervalSince1970: 1604922272),
+                    sessions: [
+                        CheckInSession(
+                            checkedIn: Date(timeIntervalSince1970: 1604922272),
+                            checkedOut: Date(timeIntervalSince1970: 1604922272+3600),
+                            target: Room(name: "Class 1A", level: 1, id: "C1-17")
+                        ),
+                        CheckInSession(
+                            checkedIn: Date(timeIntervalSince1970: 1604925272),
+                            checkedOut: Date(timeIntervalSince1970: 1604925272+3600),
+                            target: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
+                        )
+                    ]
+                )
+            ]
         }
-        .map { (key, value) in
-            Day(date: key, sessions: value)
-        }
-        
-//        return [
-//            Day(
-//                date: Date(timeIntervalSince1970: 1604840241),
-//                sessions: [
-//                    CheckInSession(
-//                        checkedIn: Date(timeIntervalSince1970: 1604840241),
-//                        checkedOut: Date(timeIntervalSince1970: 1604840241+3600),
-//                        target: Room(name: "Class 1A", level: 1, id: "C1-17")
-//                    ),
-//                    CheckInSession(
-//                        checkedIn: Date(timeIntervalSince1970: 1604840882),
-//                        checkedOut: Date(timeIntervalSince1970: 1604840882+3600),
-//                        target: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
-//                    ),
-//                    CheckInSession(
-//                        checkedIn: Date(timeIntervalSince1970: 1604841082),
-//                        checkedOut: Date(timeIntervalSince1970: 1604841082+3600),
-//                        target: Block(name: "Raja Block", location: Location(longitude: 1, latitude: 1), radius: 1)
-//                    ),
-//                ]
-//            ),
-//            Day(
-//                date: Date(timeIntervalSince1970: 1604922272),
-//                sessions: [
-//                    CheckInSession(
-//                        checkedIn: Date(timeIntervalSince1970: 1604922272),
-//                        checkedOut: Date(timeIntervalSince1970: 1604922272+3600),
-//                        target: Room(name: "Class 1A", level: 1, id: "C1-17")
-//                    ),
-//                    CheckInSession(
-//                        checkedIn: Date(timeIntervalSince1970: 1604925272),
-//                        checkedOut: Date(timeIntervalSince1970: 1604925272+3600),
-//                        target: Room(name: "Computer Lab 3", level: 2, id: "J2-6")
-//                    )
-//                ]
-//            )
-//        ]
     }
     
     
@@ -228,34 +171,5 @@ class CheckInManager: ObservableObject {
         if !isCheckedIn { return }
         print("automatically checking out")
         checkOut()
-    }
-    
-    // MARK: Helper Methods
-    private static func deleteCurrentSessionFile() {
-        do {
-            try FileManager.default.removeItem(at: CheckInManager.currentSessionFile)
-        } catch {
-            print("❌ could not delete current sessions file ☹️: \(error)")
-            return
-        }
-    }
-    
-    private func writeSavedSessionsToFile() {
-        var toWrite: Data!
-        do {
-            toWrite = try JSONEncoder().encode(checkInSessions)
-        } catch {
-            print("❌ error serializing saved sessions to json \(error)")
-            return
-        }
-        
-        // 2. Write that json to file
-        do {
-            try toWrite.write(to: CheckInManager.savedSessionsFile)
-        } catch {
-            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
-            print("❌ oops, failed to write saved sessions to file ☹️ \(error)")
-            return
-        }
     }
 }
