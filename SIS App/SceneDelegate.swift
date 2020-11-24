@@ -46,9 +46,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         print("🌐 opening url: \(URLContexts)")
-        if let blockName = URLComponents(string: URLContexts.first?.url.absoluteString ?? "")?.queryItems?.first(where: { $0.name == "block" })?.value {
-            print("block name: \(blockName)")
-             checkInManager.checkIn(to: DataProvider.getBlock(name: blockName)!)
+        if let url = URLContexts.first?.url {
+            if let blockName = URLComponents(string: url.absoluteString)?.queryItems?.first(where: { $0.name == Constants.blockURLParameterName })?.value {
+                print("block name: \(blockName)")
+                checkInManager.checkIn(to: DataProvider.getBlock(name: blockName)!)
+            } else if url.pathComponents.contains(Constants.checkoutURLName) {
+                print("checking out from widget")
+                checkInManager.checkOut()
+            }
         }
     }
 
