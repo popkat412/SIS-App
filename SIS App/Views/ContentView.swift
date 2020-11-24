@@ -25,8 +25,7 @@ struct ContentView: View {
                 }
         }
         .onReceive(NotificationCenter.default.publisher(for: .didEnterBlock)) { event in
-            let block = (event.userInfo?["block"] as! Block)
-
+            let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
             print("received did enter geofence: \(block.name)")
 
             if !checkInManager.isCheckedIn {
@@ -37,7 +36,7 @@ struct ContentView: View {
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .didExitBlock)) { event in
-            let block = (event.userInfo?["block"] as! Block)
+            let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
 
             print("received did exit geofence \(block.name)")
 

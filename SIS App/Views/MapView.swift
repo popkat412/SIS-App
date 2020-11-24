@@ -27,10 +27,11 @@ struct MapView: UIViewRepresentable {
             )
             )
         }
-        mapView.addOverlay(MKCircle(
-            center: SchoolLocationProvider.schoolLocation.coordinate,
-            radius: SchoolLocationProvider.schoolRadius
-        )
+        mapView.addOverlay(
+            MKCircle(
+                center: Constants.schoolLocation.coordinate,
+                radius: Constants.schoolRadius
+            )
         )
 
         return mapView
