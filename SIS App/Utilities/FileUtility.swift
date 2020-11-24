@@ -63,7 +63,7 @@ struct FileUtility {
     
     // MARK: Helper Methods
     static func getURLFromFilename(_ filename: String) -> URL {
-        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.example.ri-safe-entry")!
+        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupIdentifier)!
         print("📂 App Group container path: \(url)")
         return url.appendingPathComponent(filename)
     }

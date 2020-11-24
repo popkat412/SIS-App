@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import WidgetKit
 
 class CheckInManager: ObservableObject {
     /// Used to check if the user is currently checked in or not
@@ -21,18 +22,15 @@ class CheckInManager: ObservableObject {
     
     @Published var checkInSessions: [CheckInSession] {
         didSet {
-            FileUtility.saveDataToJsonFile(filename: CheckInManager.savedSessionsFilename, data: checkInSessions)
+            FileUtility.saveDataToJsonFile(filename: Constants.savedSessionsFilename, data: checkInSessions)
             objectWillChange.send()
         }
     }
-    
-    static let savedSessionsFilename = "savedSessions.json"
-    static let currentSessionFilename = "currentSession.json"
-    
+
     
     init() {
         checkInSessions = FileUtility.getDataFromJsonFile(
-            filename: CheckInManager.savedSessionsFilename,
+            filename: Constants.savedSessionsFilename,
             dataType: [CheckInSession].self
         )
             ?? []
@@ -43,7 +41,7 @@ class CheckInManager: ObservableObject {
         
         // ------- [[ RESTORE CHECK IN STATE ]] ----------- //
         let previousCheckIn = FileUtility.getDataFromJsonFile(
-            filename: CheckInManager.currentSessionFilename,
+            filename: Constants.currentSessionFilename,
             dataType: CheckInSession.self
         )
         if previousCheckIn != nil {
@@ -66,7 +64,10 @@ class CheckInManager: ObservableObject {
         currentSession = CheckInSession(checkedIn: Date(), checkedOut: nil, target: room)
         
         // ------- [[ SAVE CURRENT SESSION TO FILE ]] ------ //
-        FileUtility.saveDataToJsonFile(filename: CheckInManager.currentSessionFilename, data: currentSession)
+        FileUtility.saveDataToJsonFile(filename: Constants.currentSessionFilename, data: currentSession)
+        
+        // ------- [[ UPDATE WIDGET ]] -------- //
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     /// Used to check the user out from the room they are currently checked into
@@ -82,9 +83,12 @@ class CheckInManager: ObservableObject {
         // -------- [[ ADD TO SAVED SESSIONS ]] ------- //
         checkInSessions.append(currentSession!)
         
+        // ------- [[ CLEANUP ]] -------- //
         currentSession = nil
+        FileUtility.deleteFile(filename: Constants.currentSessionFilename)
         
-        FileUtility.deleteFile(filename: CheckInManager.currentSessionFilename)
+        // ------- [[ UPDATE WIDGET ]] -------- //
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     /// This should use the UUID to figure out which session to change,
@@ -94,7 +98,6 @@ class CheckInManager: ObservableObject {
         if let idx = idx {
             checkInSessions[idx] = newSession
         }
-        
     }
     
     /// This deletes a session
@@ -159,7 +162,7 @@ class CheckInManager: ObservableObject {
     /// This is supposed to automatically check the user into a block for them to edit later
     @objc func didEnterBlock(_ notification: Notification) {
         if isCheckedIn { return }
-        let block = notification.userInfo?["block"] as! Block
+        let block = notification.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block
         print("automatically checking in to \(block.name)")
         checkIn(to: block)
     }
