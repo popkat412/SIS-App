@@ -5,36 +5,39 @@
 //  Created by Wang Yunze on 17/10/20.
 //
 
-import SwiftUI
 import CoreLocation
 import MapKit
+import SwiftUI
 
 struct MapView: UIViewRepresentable {
     @EnvironmentObject var userLocationManager: UserLocationManager
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
-        
+
         // Delegate
         mapView.delegate = context.coordinator
-        
+
         // Overlays (for debugging geofences)
         for block in DataProvider.getBlocks() { // Blocks
             print("adding overlay... \(block.name)")
             mapView.addOverlay(MKCircle(
-                                center: block.location.toCLLocation().coordinate,
-                                radius: block.radius)
+                center: block.location.toCLLocation().coordinate,
+                radius: block.radius
+            )
             )
         }
-        mapView.addOverlay(MKCircle(
-                            center: SchoolLocationProvider.schoolLocation.coordinate,
-                            radius: SchoolLocationProvider.schoolRadius)
+        mapView.addOverlay(
+            MKCircle(
+                center: Constants.schoolLocation.coordinate,
+                radius: Constants.schoolRadius
+            )
         )
-        
+
         return mapView
     }
-    
-    func updateUIView(_ mapView: MKMapView, context: Context) {
+
+    func updateUIView(_ mapView: MKMapView, context _: Context) {
         // Follow User Location
         let coordinate = userLocationManager.userLocation?.coordinate ?? CLLocationCoordinate2D()
         let span = MKCoordinateSpan(
@@ -47,11 +50,10 @@ struct MapView: UIViewRepresentable {
         )
         mapView.showsUserLocation = true
         mapView.setRegion(region, animated: true)
-
     }
-    
+
     class Coordinator: NSObject, MKMapViewDelegate {
-        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        func mapView(_: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if overlay is MKCircle {
                 let circle = MKCircleRenderer(overlay: overlay)
                 circle.strokeColor = UIColor.red
@@ -62,7 +64,7 @@ struct MapView: UIViewRepresentable {
             return MKOverlayRenderer()
         }
     }
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
@@ -74,4 +76,3 @@ struct MapView_Previews: PreviewProvider {
             .environmentObject(UserLocationManager())
     }
 }
-
