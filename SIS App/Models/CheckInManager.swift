@@ -20,12 +20,15 @@ class CheckInManager: ObservableObject {
     /// The current check in session. This is nil when the user isn't checked in
     @Published private(set) var currentSession: CheckInSession?
 
+    /// The list of all check in sessions in the user's history
     @Published var checkInSessions: [CheckInSession] {
         didSet {
             FileUtility.saveDataToJsonFile(filename: Constants.savedSessionsFilename, data: checkInSessions)
             objectWillChange.send()
         }
     }
+
+    var mostRecentSession: CheckInSession? { checkInSessions.last }
 
     init() {
         checkInSessions = FileUtility.getDataFromJsonFile(
