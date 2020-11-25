@@ -5,18 +5,18 @@
 //  Created by Wang Yunze on 20/11/20.
 //
 
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
+    func placeholder(in _: Context) -> SimpleEntry {
         SimpleEntry(
             date: Date(),
             blocks: DataProvider.placeholderBlocks
         )
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(in _: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(
             date: Date(),
             blocks: DataProvider.placeholderBlocks
@@ -24,21 +24,21 @@ struct Provider: TimelineProvider {
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in _: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         print("⌚️ rebuding timeline")
-        var entries: [SimpleEntry]!
+        var entry: SimpleEntry!
 
         if let currentSession = FileUtility.getDataFromJsonFile(filename: Constants.currentSessionFilename, dataType: CheckInSession.self) {
-            entries = [
-                SimpleEntry(date: Date(), checkInSession: currentSession)
-            ]
+            entry = SimpleEntry(date: Date(), checkInSession: currentSession)
         } else {
-            entries = [
-                SimpleEntry(date: Date(), blocks: DataProvider.placeholderBlocks)
-            ]
+            if let currentLocation = FileUtility.getDataFromJsonFile(filename: Constants.userLocationFilename, dataType: Location.self) {
+                entry = SimpleEntry(date: Date(), blocks: DataProvider.getBlocks(userLocation: currentLocation.toCLLocation()))
+            } else {
+                entry = SimpleEntry(date: Date(), blocks: DataProvider.placeholderBlocks)
+            }
         }
 
-        let timeline = Timeline(entries: entries, policy: .never)
+        let timeline = Timeline(entries: [entry], policy: .never)
         completion(timeline)
     }
 }
@@ -51,15 +51,15 @@ struct SimpleEntry: TimelineEntry {
 
     init(date: Date, blocks: [Block]) {
         self.date = date
-        self.isCheckedIn = false
+        isCheckedIn = false
         self.blocks = blocks
-        self.checkInSession = nil
+        checkInSession = nil
     }
 
     init(date: Date, checkInSession: CheckInSession) {
         self.date = date
-        self.isCheckedIn = true
-        self.blocks = nil
+        isCheckedIn = true
+        blocks = nil
         self.checkInSession = checkInSession
     }
 }
@@ -71,41 +71,41 @@ struct SISAppWidgetEntryView: View {
         VStack {
             if !entry.isCheckedIn {
                 VStack(alignment: .leading) {
-                Text("Click to check in:")
-                    .padding([.top, .leading])
+                    Text("Click to check in:")
+                        .padding([.top, .leading])
 
-                HStack {
-                    ForEach(0..<4) { i in
-                        Link(destination: getDeeplinkURL(forIdx: i)) {
-                            Text("\(entry.blocks![i].shortName)")
-                                .minimumScaleFactor(0.01)
-                                .lineLimit(
-                                    entry
-                                        .blocks![i]
-                                        .shortName
-                                        .components(separatedBy: " ")
-                                        .count
-                                )
-                                .foregroundColor(.white)
-                                .padding(5)
-                                .frame(width: 70, height: 70)
-                                .background(
-                                    ContainerRelativeShape()
-                                        .fill(Color.blue)
-                            )
+                    HStack {
+                        ForEach(0 ..< 4) { i in
+                            Link(destination: getDeeplinkURL(forIdx: i)) {
+                                Text("\(entry.blocks![i].shortName)")
+                                    .minimumScaleFactor(0.01)
+                                    .lineLimit(
+                                        entry
+                                            .blocks![i]
+                                            .shortName
+                                            .components(separatedBy: " ")
+                                            .count
+                                    )
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .frame(width: 70, height: 70)
+                                    .background(
+                                        ContainerRelativeShape()
+                                            .fill(Color.blue)
+                                    )
+                            }
                         }
                     }
-                }
-                .padding()
+                    .padding()
                 }
             } else {
                 VStack {
                     Text("Checked in to: ")
                         + Text("\(entry.checkInSession!.target.name)")
-                            .fontWeight(.bold)
+                        .fontWeight(.bold)
                         + Text(" at ")
                         + Text("\(entry.checkInSession!.checkedIn.formattedTime)")
-                            .fontWeight(.bold)
+                        .fontWeight(.bold)
 
                     Link(destination: getCheckoutDeeplinkURL()) {
                         Button(action: {}) {
@@ -123,7 +123,7 @@ struct SISAppWidgetEntryView: View {
     private func getDeeplinkURL(forIdx index: Int) -> URL {
         var urlComponents = URLComponents(string: Constants.baseURLString)!
         urlComponents.queryItems = [
-            URLQueryItem(name: Constants.blockURLParameterName, value: entry.blocks![index].name)
+            URLQueryItem(name: Constants.blockURLParameterName, value: entry.blocks![index].name),
         ]
         return urlComponents.url!
     }
@@ -152,7 +152,7 @@ struct SISAppWidget: Widget {
 struct SISAppWidget_Previews: PreviewProvider {
     static var previews: some View {
         SISAppWidgetEntryView(
-//            entry: SimpleEntry(
+            //            entry: SimpleEntry(
 //                date: Date(),
 //                blocks: DataProvider.placeholderBlocks
 //            )
@@ -164,6 +164,6 @@ struct SISAppWidget_Previews: PreviewProvider {
                 )
             )
         )
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
+        .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
