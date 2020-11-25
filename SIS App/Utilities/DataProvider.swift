@@ -60,21 +60,6 @@ struct DataProvider {
     }
 
     private static func initBlocks() -> [Block]? {
-        if let filepath = Bundle.main.path(forResource: "data.json", ofType: nil) {
-            do {
-                let contents = try String(contentsOfFile: filepath)
-
-                if let contentsData = contents.data(using: .utf8) {
-                    let result = try JSONDecoder().decode([Block].self, from: contentsData)
-                    return result
-                }
-
-            } catch {
-                print(error)
-            }
-        } else {
-            print("data.json not found :O")
-        }
-        return nil
+        FileUtility.getDataFromJsonAppbundleFile(filename: Constants.roomsFilename, dataType: [Block].self)
     }
 }

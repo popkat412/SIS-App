@@ -36,6 +36,12 @@ struct Constants {
     static let savedSessionsFilename = "savedSessions.json"
     static let currentSessionFilename = "currentSession.json"
 
+    static let roomsFilename = "data.json"
+    static let levelColorsFilename = "colors.json"
+    static let categoryToDisplayNameFilename = "categories.json"
+
+    static let roomIdToParentFilename = "roomIdToParent.json"
+
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.com.example.ri-safe-entry"
 
