@@ -125,6 +125,7 @@
 		621A77E925566CCE00636B27 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		621A877C2551832C00FA810F /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		621A87802551838900FA810F /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		62427C55256E2A3B00903491 /* SISAppWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SISAppWidgetExtension.entitlements; sourceTree = "<group>"; };
 		6258F05D256771E10021438C /* SISAppWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SISAppWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6258F05F256771E10021438C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		6258F061256771E10021438C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -278,6 +279,7 @@
 		62E119DC253ADEBF0037CEC5 = {
 			isa = PBXGroup;
 			children = (
+				62427C55256E2A3B00903491 /* SISAppWidgetExtension.entitlements */,
 				62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */,
 				62868F3625600F6700F81842 /* MoveInOutSchool.gpx */,
 				62E119E7253ADEBF0037CEC5 /* SIS App */,
@@ -532,7 +534,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = SISAppWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YALH67R4M9;
 				INFOPLIST_FILE = SISAppWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -553,7 +557,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = SISAppWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YALH67R4M9;
 				INFOPLIST_FILE = SISAppWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -717,6 +723,7 @@
 				CODE_SIGN_ENTITLEMENTS = "SIS App/SIS App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SIS App/Preview Content\"";
+				DEVELOPMENT_TEAM = YALH67R4M9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "SIS App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
