@@ -8,6 +8,8 @@
 import SwiftUI
 import WidgetKit
 
+// MARK: Timeline provider
+
 struct Provider: TimelineProvider {
     func placeholder(in _: Context) -> SimpleEntry {
         SimpleEntry(
@@ -26,15 +28,13 @@ struct Provider: TimelineProvider {
 
     func getTimeline(in _: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         print("⌚️ rebuding timeline")
-        var entry: SimpleEntry!
+        var entry = SimpleEntry(date: Date(), blocks: DataProvider.placeholderBlocks)
 
         if let currentSession = FileUtility.getDataFromJsonFile(filename: Constants.currentSessionFilename, dataType: CheckInSession.self) {
             entry = SimpleEntry(date: Date(), checkInSession: currentSession)
         } else {
             if let currentLocation = FileUtility.getDataFromJsonFile(filename: Constants.userLocationFilename, dataType: Location.self) {
                 entry = SimpleEntry(date: Date(), blocks: DataProvider.getBlocks(userLocation: currentLocation.toCLLocation()))
-            } else {
-                entry = SimpleEntry(date: Date(), blocks: DataProvider.placeholderBlocks)
             }
         }
 
@@ -42,6 +42,8 @@ struct Provider: TimelineProvider {
         completion(timeline)
     }
 }
+
+// MARK: Widget entry
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
@@ -66,6 +68,9 @@ struct SimpleEntry: TimelineEntry {
 
 struct SISAppWidgetEntryView: View {
     var entry: Provider.Entry
+    @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
+
+    // MARK: Widget view
 
     var body: some View {
         VStack {
@@ -89,10 +94,8 @@ struct SISAppWidgetEntryView: View {
                                     .foregroundColor(.white)
                                     .padding(5)
                                     .frame(width: 70, height: 70)
-                                    .background(
-                                        ContainerRelativeShape()
-                                            .fill(Color.blue)
-                                    )
+                                    .background(Color.blue)
+                                    .cornerRadius(13)
                             }
                         }
                     }
@@ -100,25 +103,57 @@ struct SISAppWidgetEntryView: View {
                 }
             } else {
                 VStack {
-                    Text("Checked in to: ")
+                    let formattedText = Text("Checked in to: ")
                         + Text("\(entry.checkInSession!.target.name)")
                         .fontWeight(.bold)
                         + Text(" at ")
                         + Text("\(entry.checkInSession!.checkedIn.formattedTime)")
                         .fontWeight(.bold)
 
+                    formattedText
+                        .padding()
+                        .fixedSize(horizontal: false, vertical: true)
+
                     Link(destination: getCheckoutDeeplinkURL()) {
                         Button(action: {}) {
                             Text("Check Out")
                         }
                         .buttonStyle(GradientButtonStyle(gradient: Constants.checkedInGradient))
-                        .padding(.top)
+                        .padding()
                     }
                 }
-                .padding()
+            }
+            if widgetFamily == .systemLarge {
+                Link(destination: getHistoryDeeplinkURL()) {
+                    VStack(alignment: .leading) {
+                        Spacer()
+
+                        let history = FileUtility.getDataFromJsonFile(filename: Constants.savedSessionsFilename, dataType: [CheckInSession].self)?.sorted { $0.checkedIn > $1.checkedIn }
+
+                        if let history = history {
+                            Divider()
+                            ForEach(0 ..< 2) { i in
+                                if i < history.count {
+                                    HistoryRow(session: history[i])
+                                } else {
+                                    Spacer()
+                                        .frame(height: 50)
+                                }
+                                Divider()
+                            }
+                            .padding(.horizontal)
+                        } else {
+                            Text("History Unavaliable ☹️")
+                        }
+
+                        Spacer()
+                    }
+                }
             }
         }
     }
+
+    // MARK: Helper functions
 
     private func getDeeplinkURL(forIdx index: Int) -> URL {
         var urlComponents = URLComponents(string: Constants.baseURLString)!
@@ -129,8 +164,14 @@ struct SISAppWidgetEntryView: View {
     }
 
     private func getCheckoutDeeplinkURL() -> URL {
-        let url = URL(string: Constants.checkoutURLName, relativeTo: URL(string: Constants.baseURLString)!)!
+        let url = URL(string: Constants.checkoutURLName, relativeTo: Constants.baseURL)!
         print("check out deeplink: \(url)")
+        return url
+    }
+
+    private func getHistoryDeeplinkURL() -> URL {
+        let url = URL(string: Constants.historyURLName, relativeTo: Constants.baseURL)!
+        print("history deeplink: \(url)")
         return url
     }
 }
@@ -152,18 +193,18 @@ struct SISAppWidget: Widget {
 struct SISAppWidget_Previews: PreviewProvider {
     static var previews: some View {
         SISAppWidgetEntryView(
-            //            entry: SimpleEntry(
-//                date: Date(),
-//                blocks: DataProvider.placeholderBlocks
-//            )
             entry: SimpleEntry(
                 date: Date(),
-                checkInSession: CheckInSession(
-                    checkedIn: Date(),
-                    target: Block(name: "Test Block")
-                )
+                blocks: DataProvider.placeholderBlocks
             )
+//            entry: SimpleEntry(
+//                date: Date(),
+//                checkInSession: CheckInSession(
+//                    checkedIn: Date(),
+//                    target: Block(name: "Test Block")
+//                )
+//            )
         )
-        .previewContext(WidgetPreviewContext(family: .systemMedium))
+        .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

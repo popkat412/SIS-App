@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var checkInManager = CheckInManager()
     var userLocationManager = UserLocationManager()
+    var navigationState = NavigationState()
 
     func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -27,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environment(\.managedObjectContext, context)
             .environmentObject(checkInManager)
             .environmentObject(userLocationManager)
+            .environmentObject(navigationState)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -52,6 +54,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             } else if url.pathComponents.contains(Constants.checkoutURLName) {
                 print("checking out from widget")
                 checkInManager.checkOut(shouldUpdateUI: false)
+            } else if url.pathComponents.contains(Constants.historyURLName) {
+                print("going to history from widget")
+                navigationState.tabbarSelection = .history
             }
         }
     }

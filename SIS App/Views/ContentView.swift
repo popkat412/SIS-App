@@ -5,30 +5,33 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
-import SwiftUI
 import NotificationCenter
+import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var checkInManager: CheckInManager
-    
+    @EnvironmentObject var navigationState: NavigationState
+
     var body: some View {
-        TabView {
+        TabView(selection: $navigationState.tabbarSelection) {
             HomeView()
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Home")
                 }
+                .tag(Tab.home)
             HistoryView()
                 .tabItem {
                     Image(systemName: "list.dash")
                     Text("History")
                 }
+                .tag(Tab.history)
         }
         .onReceive(NotificationCenter.default.publisher(for: .didEnterBlock)) { event in
             let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
-            
+
             print("received did enter geofence: \(block.name)")
-            
+
             if !checkInManager.isCheckedIn {
                 UserNotificationHelper.sendNotification(
                     title: "Remember to check in!",
@@ -38,9 +41,9 @@ struct ContentView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: .didExitBlock)) { event in
             let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
-            
-            print("received did exit geofence \(block.name )")
-            
+
+            print("received did exit geofence \(block.name)")
+
             if checkInManager.isCheckedIn {
                 UserNotificationHelper.sendNotification(
                     title: "Remember to check out!",
@@ -58,7 +61,7 @@ struct ContentView: View {
             UserNotificationHelper.sendNotification(
                 title: "Remember to check out!",
                 subtitle: "Please check out of the school via safe entry"
-             )
+            )
         }
     }
 }
@@ -66,9 +69,11 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let checkInManager = CheckInManager()
-        checkInManager.checkIn(to: Room(name: "Class 1A", level: 1, id: "C1-17"))
-        
+//        checkInManager.checkIn(to: Room(name: "Class 1A", level: 1, id: "C1-17"))
+
         return ContentView()
             .environmentObject(checkInManager)
+            .environmentObject(UserLocationManager())
+            .environmentObject(NavigationState())
     }
 }

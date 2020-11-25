@@ -25,6 +25,9 @@
 		6258F06E256771E30021438C /* SISAppWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6258F05D256771E10021438C /* SISAppWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */; };
 		62756C2825597B8E0007C4F3 /* Date+FormattedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */; };
+		627D553C256E5AC000DF3B32 /* View+ConditionalModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */; };
+		627D5540256E5AF200DF3B32 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627D553F256E5AF200DF3B32 /* HistoryRow.swift */; };
+		627D5541256E5AF200DF3B32 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627D553F256E5AF200DF3B32 /* HistoryRow.swift */; };
 		627DF44F256D0C9C006210E9 /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DF44E256D0C9C006210E9 /* FileUtility.swift */; };
 		627DF450256D0C9C006210E9 /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DF44E256D0C9C006210E9 /* FileUtility.swift */; };
 		62868F332560009600F81842 /* UserNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62868F322560009600F81842 /* UserNotificationHelper.swift */; };
@@ -39,6 +42,8 @@
 		628D11E8255AB44D00BF4D2E /* LevelIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E7255AB44D00BF4D2E /* LevelIcon.swift */; };
 		6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292DCBD25564F4000352527 /* CategoriesView.swift */; };
 		629EB68025638E64000FADD9 /* View+ConditionalModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */; };
+		62BFA55B256E5C8700CD327D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F1253ADEC10037CEC5 /* Assets.xcassets */; };
+		62BFA561256E8F2900CD327D /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BFA560256E8F2900CD327D /* NavigationState.swift */; };
 		62D5D63A255D38D60064D484 /* CheckInTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D639255D38D60064D484 /* CheckInTarget.swift */; };
 		62D5D640255D3E850064D484 /* ChooseRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D63F255D3E850064D484 /* ChooseRoomView.swift */; };
 		62D5D644255D40330064D484 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D643255D40330064D484 /* UserLocationManager.swift */; };
@@ -136,6 +141,7 @@
 		6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnRoomSelection.swift; path = "SIS App/Models/OnRoomSelection.swift"; sourceTree = SOURCE_ROOT; };
 		62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+FormattedTime.swift"; path = "SIS App/Utilities/Date+FormattedTime.swift"; sourceTree = SOURCE_ROOT; };
 		6278A18D256D04A2009A100F /* SIS App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SIS App.entitlements"; sourceTree = "<group>"; };
+		627D553F256E5AF200DF3B32 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
 		627DF44E256D0C9C006210E9 /* FileUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtility.swift; sourceTree = "<group>"; };
 		62868F322560009600F81842 /* UserNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserNotificationHelper.swift; path = "SIS App/Utilities/UserNotificationHelper.swift"; sourceTree = SOURCE_ROOT; };
 		62868F3625600F6700F81842 /* MoveInOutSchool.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MoveInOutSchool.gpx; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 		628D11E7255AB44D00BF4D2E /* LevelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelIcon.swift; sourceTree = "<group>"; };
 		6292DCBD25564F4000352527 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "View+ConditionalModifiers.swift"; path = "SIS App/Utilities/View+ConditionalModifiers.swift"; sourceTree = SOURCE_ROOT; };
+		62BFA560256E8F2900CD327D /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
 		62D5D639255D38D60064D484 /* CheckInTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTarget.swift; sourceTree = "<group>"; };
 		62D5D63F255D3E850064D484 /* ChooseRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoomView.swift; sourceTree = "<group>"; };
 		62D5D643255D40330064D484 /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLocationManager.swift; path = "SIS App/Models/UserLocationManager.swift"; sourceTree = SOURCE_ROOT; };
@@ -196,6 +203,7 @@
 		621A877F2551833200FA810F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				62BFA560256E8F2900CD327D /* NavigationState.swift */,
 				6202DDCC255821520017BC49 /* CheckInSession.swift */,
 				62D5D639255D38D60064D484 /* CheckInTarget.swift */,
 				62DB8FDB2556A2E9006AA1D3 /* Level.swift */,
@@ -249,6 +257,7 @@
 		62881EB625565C2600787923 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				627D553F256E5AF200DF3B32 /* HistoryRow.swift */,
 				6202DDC925581EA70017BC49 /* ContentView.swift */,
 				62E119EC253ADEBF0037CEC5 /* HomeView.swift */,
 				62D5D63F255D3E850064D484 /* ChooseRoomView.swift */,
@@ -416,6 +425,7 @@
 				62D90EC0256A8E8500DB4D4E /* colors.json in Resources */,
 				62D90EB6256A8E8500DB4D4E /* categories.json in Resources */,
 				62D90EB3256A8E8500DB4D4E /* data.json in Resources */,
+				62BFA55B256E5C8700CD327D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,12 +449,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				627D5541256E5AF200DF3B32 /* HistoryRow.swift in Sources */,
 				62D90EB7256A8E8500DB4D4E /* UserLocationManager.swift in Sources */,
 				62D90EBD256A8E8500DB4D4E /* Block.swift in Sources */,
 				627DF450256D0C9C006210E9 /* FileUtility.swift in Sources */,
 				62D90EBB256A8E8500DB4D4E /* RoomParentInfo.swift in Sources */,
 				62D90EC6256A8E8500DB4D4E /* CheckInTarget.swift in Sources */,
 				62D90EB5256A8E8500DB4D4E /* OnRoomSelection.swift in Sources */,
+				627D553C256E5AC000DF3B32 /* View+ConditionalModifiers.swift in Sources */,
 				62D90EBA256A8E8500DB4D4E /* Room.swift in Sources */,
 				62D90EB4256A8E8500DB4D4E /* UserNotificationHelper.swift in Sources */,
 				62D90EC3256A8E8500DB4D4E /* LevelColors.swift in Sources */,
@@ -469,6 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */,
+				62BFA561256E8F2900CD327D /* NavigationState.swift in Sources */,
 				62FC0BB9256D4A4D00EACA79 /* Constants.swift in Sources */,
 				62E119E9253ADEBF0037CEC5 /* AppDelegate.swift in Sources */,
 				62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */,
@@ -498,6 +511,7 @@
 				629EB68025638E64000FADD9 /* View+ConditionalModifiers.swift in Sources */,
 				6202DDCD255821520017BC49 /* CheckInSession.swift in Sources */,
 				62EC2D78255642A90040AF5D /* RawKeyedCodableDictionary.swift in Sources */,
+				627D5540256E5AF200DF3B32 /* HistoryRow.swift in Sources */,
 				6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */,
 				62881EB425565C2200787923 /* RoomsView.swift in Sources */,
 				62881EB1255657EE00787923 /* CategoryNames.swift in Sources */,
