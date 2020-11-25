@@ -66,7 +66,7 @@ extension CheckInSession: Codable {
         } else if let blockTarget = try? container.decode(Block.self, forKey: .target) {
             target = blockTarget
         } else {
-            target = Room(name: "Unknown Target :(", level: 0, id: "00-00")
+            target = Room("Unknown Target :(")
         }
     }
 
