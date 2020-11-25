@@ -8,7 +8,17 @@ Project Room	: https://www.flaticon.com/free-icon/meeting_490283
 Staff Room	: https://www.flaticon.com/free-icon/workspace_3063810?term=workspace&page=1&position=24
 Combined Room	: https://www.flaticon.com/free-icon/jigsaw_2362007?term=combined&page=1&position=11
 Others		: https://www.flaticon.com/free-icon/block_705977?term=mystery&page=1&position=1
+Store		: https://www.flaticon.com/free-icon/packages_2979677?term=boxes&page=1&position=50&related_item_id=2979677
+Music		: https://www.flaticon.com/free-icon/music_876817?term=music&page=1&position=1&related_item_id=876817
+Humanities	: https://www.flaticon.com/free-icon/document_1102457?term=essay&page=1&position=4&related_item_id=1102457
+Administration	: https://www.flaticon.com/free-icon/budget_2942269?term=administration&page=1&position=18&related_item_id=2942269
+
 
 Clock		: https://www.flaticon.com/free-icon/clock_2141330?term=clock&page=3&position=6
 Block		: https://www.flaticon.com/free-icon/hotel_3112927?term=building&page=1&position=42
 Room		: https://www.flaticon.com/free-icon/classroom_3492080?term=classroom&page=1&position=26#
+Science Lab	: https://www.flaticon.com/free-icon/atom_3254075?term=science&page=1&position=18&related_item_id=3254075
+Chemistry Lab 	: https://www.flaticon.com/free-icon/experiment_748518?term=experiment&page=1&position=29&related_item_id=748518
+Physics Lab	: https://www.flaticon.com/free-icon/newtons-cradle_2784529?term=pendulum&page=1&position=44&related_item_id=2784529
+Biology Lab	: https://www.flaticon.com/free-icon/biology_2941552?term=microscope&page=1&position=30&related_item_id=2941552
+
