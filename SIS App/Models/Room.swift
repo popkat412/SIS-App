@@ -13,7 +13,7 @@ struct Room: Decodable, Identifiable, CheckInTarget {
     var id: String
 }
 
-enum RoomCategory: String, Decodable {    
+enum RoomCategory: String, Decodable {
     case classroom
     case computerLab, scienceLab, music, humanities
     case lectureTheatre

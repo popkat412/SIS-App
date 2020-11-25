@@ -5,65 +5,63 @@
 //  Created by Wang Yunze on 12/11/20.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 import NotificationCenter
 
 class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published private(set) var userLocation: CLLocation?
     var previousUserLocation: CLLocation?
-    
+
     let locationManager = CLLocationManager()
-    
+
     override init() {
         super.init()
-        
+
         // Delegate
         locationManager.delegate = self
-        
+
         // User location
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.startUpdatingLocation()
         locationManager.allowsBackgroundLocationUpdates = true
-
     }
-    
+
     // MARK: Delegate Methods
-    
+
     // User Location
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             previousUserLocation = userLocation
             userLocation = location
         }
 
-        if userLocation != nil && previousUserLocation != nil {
-            
+        if userLocation != nil, previousUserLocation != nil {
             let isInsideSchool = userLocation!.distance(from: SchoolLocationProvider.schoolLocation) <= SchoolLocationProvider.schoolRadius
             let previouslyInsideSchool = previousUserLocation!.distance(from: SchoolLocationProvider.schoolLocation) <= SchoolLocationProvider.schoolRadius
-            
+
             if isInsideSchool { // Inside of school
                 for block in DataProvider.getBlocks() {
                     let currentlyInBlock = isInsideBlock(location: userLocation!, block: block)
                     let previouslyInBlock = isInsideBlock(location: previousUserLocation!, block: block)
-                    if currentlyInBlock && !previouslyInBlock {
+                    if currentlyInBlock, !previouslyInBlock {
                         // Entered a block!
                         print("📍 entered a block: \(block.name)")
                         NotificationCenter.default.post(name: .didEnterBlock, object: nil, userInfo: ["block": block])
-                    } else if !currentlyInBlock && previouslyInBlock {
+                    } else if !currentlyInBlock, previouslyInBlock {
                         // Left a block!
                         print("📍 left a block: \(block.name)")
                         NotificationCenter.default.post(name: .didExitBlock, object: nil, userInfo: ["block": block])
                     }
                 }
             }
-            
-            if isInsideSchool && !previouslyInsideSchool {
+
+            if isInsideSchool, !previouslyInsideSchool {
                 print("📍 entered the school")
                 NotificationCenter.default.post(name: .didEnterSchool, object: nil)
-            } else if !isInsideSchool && previouslyInsideSchool {
+            } else if !isInsideSchool, previouslyInsideSchool {
                 print("📍 exited the schoool ")
                 NotificationCenter.default.post(name: .didExitSchool, object: nil)
             }
@@ -71,18 +69,19 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
             print("userlocation or previous user location is nil :(")
         }
     }
-    
+
     // Error handling
-    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+    func locationManager(_: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
         print("Monitoring failed for region with identifier \(region?.identifier ?? "Unknown CLRegion") with error \(error)")
     }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+
+    func locationManager(_: CLLocationManager, didFailWithError error: Error) {
         print("Location Manager failed with the following error: \(error)")
     }
-    
+
     // MARK: Helper Methods
+
     private func isInsideBlock(location: CLLocation, block: Block) -> Bool {
-        return location.distance(from: block.location.toCLLocation()) <= block.radius
+        location.distance(from: block.location.toCLLocation()) <= block.radius
     }
 }

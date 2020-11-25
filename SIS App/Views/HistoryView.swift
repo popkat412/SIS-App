@@ -11,9 +11,9 @@ struct HistoryView: View {
     @EnvironmentObject var checkInManager: CheckInManager
 
     @State private var showingEditRoomScreen = false
-    
+
     var body: some View {
-        return NavigationView {
+        NavigationView {
             List {
                 ForEach(checkInManager.getCheckInSessions()) { day in
                     Section(header: Text("\(day.formattedDate)")) {
@@ -64,7 +64,6 @@ struct HistoryView: View {
             .navigationBarTitle("History")
             .navigationBarItems(trailing: EditButton())
         }
-      
     }
 }
 
@@ -75,18 +74,17 @@ struct HistoryView_Previews: PreviewProvider {
     }
 }
 
-
 struct HistoryRowItem: View {
     var iconName: String
     var text: String
     var font: Font = .body
-    
+
     var body: some View {
         HStack {
             Image(iconName)
                 .resizable()
                 .frame(width: 25, height: 25)
-            
+
             Text(text)
                 .font(font)
                 .multilineTextAlignment(.leading)
@@ -98,39 +96,39 @@ struct HistoryRow: View {
     var session: CheckInSession
     var showTiming = true
     var showTarget = true
-    
+
     var editable = false
-    var onTargetPressed: (() -> ())? = nil
-    var onCheckInDateUpdate: ((Date) -> ())? = nil
-    var onCheckOutDateUpdate: ((Date) -> ())? = nil
-    
+    var onTargetPressed: (() -> Void)?
+    var onCheckInDateUpdate: ((Date) -> Void)?
+    var onCheckOutDateUpdate: ((Date) -> Void)?
+
     @State private var checkInDate: Date
     @State private var checkOutDate: Date
-    
+
     init(session: CheckInSession, showTiming: Bool = true, showTarget: Bool = true) {
         self.session = session
         self.showTiming = showTiming
         self.showTarget = showTarget
-        
-        self._checkInDate = .init(initialValue: self.session.checkedIn)
-        self._checkOutDate = .init(initialValue: self.session.checkedOut!)
-            // Force unwrapping because if this is to appear in history, they must have already checked out
-        
-        self.editable = false
-        self.onTargetPressed = nil
-        self.onCheckInDateUpdate = nil
-        self.onCheckOutDateUpdate = nil
+
+        _checkInDate = .init(initialValue: self.session.checkedIn)
+        _checkOutDate = .init(initialValue: self.session.checkedOut!)
+        // Force unwrapping because if this is to appear in history, they must have already checked out
+
+        editable = false
+        onTargetPressed = nil
+        onCheckInDateUpdate = nil
+        onCheckOutDateUpdate = nil
     }
-    
+
     init(
         session: CheckInSession, showTiming: Bool = true, showTarget: Bool = true,
         editable: Bool,
-        onTargetPressed: @escaping (() -> ()),
-        onCheckInDateUpdate: @escaping ((Date) -> ()),
-        onCheckOutDateUpdate: @escaping ((Date) -> ())
+        onTargetPressed: @escaping (() -> Void),
+        onCheckInDateUpdate: @escaping ((Date) -> Void),
+        onCheckOutDateUpdate: @escaping ((Date) -> Void)
     ) {
         self.init(session: session, showTiming: showTiming, showTarget: showTarget)
-        
+
         if editable {
             self.editable = true
             self.onTargetPressed = onTargetPressed
@@ -139,16 +137,15 @@ struct HistoryRow: View {
         }
     }
 
-    
     var body: some View {
         VStack(alignment: .leading) {
             if showTiming {
                 if editable {
-                    HStack() {
+                    HStack {
                         Image("time")
                             .resizable()
                             .frame(width: 25, height: 25)
-                        
+
                         DatePicker(
                             "Check In Time",
                             selection: $checkInDate,
@@ -169,7 +166,6 @@ struct HistoryRow: View {
                         .onChange(of: checkOutDate) { newValue in
                             onCheckOutDateUpdate?(newValue)
                         }
-                        
                     }
                 } else {
                     HistoryRowItem(
@@ -179,7 +175,7 @@ struct HistoryRow: View {
                     )
                 }
             }
-            
+
             if showTarget {
                 HStack {
                     if let roomTarget = session.target as? Room {

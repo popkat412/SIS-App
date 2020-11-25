@@ -10,9 +10,9 @@ import SwiftUI
 struct CategoriesView: View {
     var categories: [RoomCategory: [Room]]
     var blockName: String
-    
+
     var body: some View {
-        List(Array(categories.keys).sorted(by: { (cat1, cat2) in
+        List(Array(categories.keys).sorted(by: { cat1, cat2 in
             cat1.rawValue < cat2.rawValue
         }), id: \.rawValue) { category in
             NavigationLink(destination: RoomsView(
@@ -36,11 +36,11 @@ struct CategoriesView_Previews: PreviewProvider {
         CategoriesView(
             categories: [
                 .classroom: [
-                    Room(name: "Class 1A", level: 1, id: "ABC")
+                    Room(name: "Class 1A", level: 1, id: "ABC"),
                 ],
                 .computerLab: [
-                    Room(name: "Computer Lab 1", level: 2, id: "DEF")
-                ]
+                    Room(name: "Computer Lab 1", level: 2, id: "DEF"),
+                ],
             ],
             blockName: "Test Block"
         )

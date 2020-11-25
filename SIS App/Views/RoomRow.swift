@@ -12,22 +12,22 @@ struct RoomRow: View {
     var showLevelIcon = true
     var showRoomId = true
     var showRoomParent = true
-    
+
     var body: some View {
         HStack {
-            if (showLevelIcon) {
+            if showLevelIcon {
                 LevelIcon(level: room.level)
             }
             Text("\(room.name)")
             Spacer()
-            if (showRoomId) {
+            if showRoomId {
                 Text("\(room.id)")
                     .foregroundColor(.gray)
             }
-            if (showRoomId && showRoomParent) {
+            if showRoomId && showRoomParent {
                 Text("-").foregroundColor(.gray)
             }
-            if (showRoomParent) {
+            if showRoomParent {
                 Text("\(RoomParentInfo.getParent(of: room))")
                     .foregroundColor(.gray)
             }
