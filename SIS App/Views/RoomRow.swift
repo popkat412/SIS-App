@@ -38,7 +38,7 @@ struct RoomRow: View {
 struct RoomRow_Previews: PreviewProvider {
     static var previews: some View {
         RoomRow(
-            room: Room(name: "Class 1A", level: 1, id: "C1-17")
+            room: Room("Class 1A")
         )
     }
 }

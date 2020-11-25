@@ -36,10 +36,10 @@ struct CategoriesView_Previews: PreviewProvider {
         CategoriesView(
             categories: [
                 .classroom: [
-                    Room(name: "Class 1A", level: 1, id: "ABC"),
+                    Room("Class 1A"),
                 ],
                 .computerLab: [
-                    Room(name: "Computer Lab 1", level: 2, id: "DEF"),
+                    Room("Computer Lab 1"),
                 ],
             ],
             blockName: "Test Block"
