@@ -19,12 +19,17 @@ class CheckInManager: ObservableObject {
     
     /// The current check in session. This is nil when the user isn't checked in
     @Published private(set) var currentSession: CheckInSession?
-    
+
+    /// The list of all check in sessions in the user's history
     @Published var checkInSessions: [CheckInSession] {
         didSet {
             FileUtility.saveDataToJsonFile(filename: Constants.savedSessionsFilename, data: checkInSessions)
             objectWillChange.send()
         }
+    }
+
+    var mostRecentSession: CheckInSession? {
+        get { checkInSessions.last }
     }
 
     
@@ -156,7 +161,6 @@ class CheckInManager: ObservableObject {
             ]
         }
     }
-    
     
     /// This is the method that will be called when user enters a block
     /// This is supposed to automatically check the user into a block for them to edit later
