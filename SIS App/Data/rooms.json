@@ -404,7 +404,7 @@
                     "name": "Project Room",
                     "level": 2,
                     "id": "S2-05",
-                    "iconName": "unknown"
+                    "iconName": "projectRoom"
                 }
             ]
         }
@@ -596,7 +596,7 @@
                     "name": "MT RM 1 (ML)",
                     "level": 3,
                     "id": "J3-6",
-                    "iconName": "classRoom"
+                    "iconName": "classroom"
                 }
             ]
         }
@@ -930,13 +930,13 @@
                     "name": "RA home room",
                     "level": 2,
                     "id": "C02-11",
-                    "iconName": "home"
+                    "iconName": "discovery"
                 },
                 {
                     "name": "AHU room 2",
                     "level": 2,
                     "id": "C02-26",
-                    "iconName": "question"
+                    "iconName": "others"
                 },
                 {
                     "name": "Math room 1",

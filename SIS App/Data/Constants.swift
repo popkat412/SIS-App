@@ -36,6 +36,8 @@ struct Constants {
     static let savedSessionsFilename = "savedSessions.json"
     static let currentSessionFilename = "currentSession.json"
 
+    static let roomsFilename = "rooms.json"
+
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.com.example.ri-safe-entry"
 

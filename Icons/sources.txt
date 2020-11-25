@@ -1,34 +1,34 @@
 Lecture Theatre	: https://www.flaticon.com/free-icon/lecture_2825175?term=lecture&page=1&position=90
-Classrooms	: https://www.flaticon.com/free-icon/classroom_3492085?term=classroom&page=1&position=41
-Science	Lab	: https://www.flaticon.com/free-icon/lab-tool_2933877?term=science&page=1&position=39
+Classrooms	    : https://www.flaticon.com/free-icon/classroom_3492085?term=classroom&page=1&position=41
+Science	Lab	    : https://www.flaticon.com/free-icon/lab-tool_2933877?term=science&page=1&position=39
 Computer Lab	: https://www.flaticon.com/free-icon/desktop_2933296?term=computer&page=1&position=15
 Discovery Lab	: https://www.flaticon.com/free-icon/research_944265?term=discovery&page=1&position=10
 Subject Room	: https://www.flaticon.com/free-icon/bookshelf_3100752
 Project Room	: https://www.flaticon.com/free-icon/meeting_490283
-Staff Room	: https://www.flaticon.com/free-icon/workspace_3063810?term=workspace&page=1&position=24
+Staff Room	    : https://www.flaticon.com/free-icon/workspace_3063810?term=workspace&page=1&position=24
 Combined Room	: https://www.flaticon.com/free-icon/jigsaw_2362007?term=combined&page=1&position=11
-Others		: https://www.flaticon.com/free-icon/block_705977?term=mystery&page=1&position=1
-Store		: https://www.flaticon.com/free-icon/packages_2979677?term=boxes&page=1&position=50&related_item_id=2979677
-Music		: https://www.flaticon.com/free-icon/music_876817?term=music&page=1&position=1&related_item_id=876817
-Humanities	: https://www.flaticon.com/free-icon/document_1102457?term=essay&page=1&position=4&related_item_id=1102457
+Others		    : https://www.flaticon.com/free-icon/block_705977?term=mystery&page=1&position=1
+Store		    : https://www.flaticon.com/free-icon/packages_2979590?term=boxes&page=1&position=96&related_item_id=2979590
+Music		    : https://www.flaticon.com/free-icon/musical-notes_2907253?term=music&page=1&position=6&related_item_id=2907253
+Humanities	    : https://www.flaticon.com/free-icon/human_995139?term=humanities&page=2&position=78&related_item_id=995139
 Administration	: https://www.flaticon.com/free-icon/budget_2942269?term=administration&page=1&position=18&related_item_id=2942269
-Clock		: https://www.flaticon.com/free-icon/clock_2141330?term=clock&page=3&position=6
-Block		: https://www.flaticon.com/free-icon/hotel_3112927?term=building&page=1&position=42
-Room		: https://www.flaticon.com/free-icon/classroom_3492080?term=classroom&page=1&position=26#
-Science Lab	: https://www.flaticon.com/free-icon/atom_3254075?term=science&page=1&position=18&related_item_id=3254075
+Clock		    : https://www.flaticon.com/free-icon/clock_2141330?term=clock&page=3&position=6
+Block		    : https://www.flaticon.com/free-icon/hotel_3112927?term=building&page=1&position=42
+Room		    : https://www.flaticon.com/free-icon/classroom_3492080?term=classroom&page=1&position=26#
+Science Lab	    : https://www.flaticon.com/free-icon/atom_3254075?term=science&page=1&position=18&related_item_id=3254075
 Chemistry Lab 	: https://www.flaticon.com/free-icon/experiment_748518?term=experiment&page=1&position=29&related_item_id=748518
-Physics Lab	: https://www.flaticon.com/free-icon/newtons-cradle_2784529?term=pendulum&page=1&position=44&related_item_id=2784529
-Biology Lab	: https://www.flaticon.com/free-icon/biology_2941552?term=microscope&page=1&position=30&related_item_id=2941552
-Math Room	: https://www.flaticon.com/free-icon/calculator_897368?term=math&page=1&position=3&related_item_id=897368
-Geography Room	: https://www.flaticon.com/free-icon/worldwide_814513?term=earth&page=1&position=3&related_item_id=814513
-Literature Room	: https://www.flaticon.com/free-icon/study_2972085?term=book&page=1&position=13&related_item_id=2972085
+Physics Lab	    : https://www.flaticon.com/free-icon/pendulum_3247974?term=pendulum&page=1&position=15&related_item_id=3247974
+Biology Lab	    : https://www.flaticon.com/free-icon/biology_2941552?term=microscope&page=1&position=30&related_item_id=2941552
+Math Room	    : https://www.flaticon.com/free-icon/calculator_897368?term=math&page=1&position=3&related_item_id=897368
+Geography Room	: https://www.flaticon.com/free-icon/planet-earth_921490?term=earth&page=1&position=6&related_item_id=921490
+Literature Room	: https://www.flaticon.com/free-icon/study_2972169?term=book&page=1&position=42&related_item_id=2972169
 History Room	: https://www.flaticon.com/free-icon/parchment_3068845?term=history&page=1&position=16&related_item_id=3068845
 Lecture Theatre	: https://www.flaticon.com/free-icon/lecture_2643368?term=lecture&page=1&position=6&related_item_id=2643368
-RGC		: https://www.flaticon.com/free-icon/guidance_2646033?term=guidance&page=1&position=6&related_item_id=2646033
-RAM		: https://www.flaticon.com/free-icon/exhibition_781940?term=museum&page=1&position=32&related_item_id=781940
+RGC		        : https://www.flaticon.com/free-icon/guidance_2646033?term=guidance&page=1&position=6&related_item_id=2646033
+RAM		        : https://www.flaticon.com/free-icon/exhibition_781940?term=museum&page=1&position=32&related_item_id=781940
 RA home room	: https://www.flaticon.com/free-icon/home_846551?term=home&page=1&position=4&related_item_id=846551
-Unknown		: https://www.flaticon.com/free-icon/question_2476199?term=question&page=1&position=2&related_item_id=2476199
-Estate		: https://www.flaticon.com/free-icon/house_602275?term=estate&page=1&position=1&related_item_id=602275
+Unknown		    : https://www.flaticon.com/free-icon/question_2476199?term=question&page=1&position=2&related_item_id=2476199
+Estate		    : https://www.flaticon.com/free-icon/house_602225?related_item_id=602175&term=estate
 Meeting Room	: https://www.flaticon.com/free-icon/meeting-room_2548899?term=meeting%20room&page=1&position=6&related_item_id=2548899
-Discovery	: https://www.flaticon.com/free-icon/search_639375?term=magnifying%20glass&page=1&position=13&related_item_id=639375
-Design Thinking	: https://www.flaticon.com/free-icon/vision_3776354?term=think&page=1&position=11&related_item_id=3776354
+Discovery	    : https://www.flaticon.com/free-icon/loupe_882988?term=magnifying%20glass&page=1&position=17&related_item_id=882988
+Design Thinking	: https://www.flaticon.com/free-icon/lightbulb_702797?term=light%20bulb&page=1&position=4&related_item_id=702797
