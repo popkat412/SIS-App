@@ -58,7 +58,7 @@ struct CheckedInView: View {
 struct CheckedInView_Previews: PreviewProvider {
     static var previews: some View {
         let checkInManager = CheckInManager()
-        checkInManager.checkIn(to: Block(name: "Test", location: Location(longitude: 1, latitude: 1), radius: 1))
+        checkInManager.checkIn(to: Block("Test"))
 
         return Group {
             CheckedInView()
