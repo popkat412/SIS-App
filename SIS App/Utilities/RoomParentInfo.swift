@@ -31,23 +31,9 @@ struct RoomParentInfo {
     private static func initRoomIdToParent(forceRegenerate: Bool = false) {
         print("initRoomIdToParent, forceRegenerate: \(forceRegenerate)")
 
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        let jsonFile = documentsDirectory.appendingPathComponent("roomIdToParent.json")
-
         if !forceRegenerate {
-            // Check if precomputed json exisists in documents directory
-            do {
-                let savedJson = try String(contentsOf: jsonFile)
-
-                let decoder = JSONDecoder()
-                if let savedJsonData = savedJson.data(using: .utf8) {
-                    roomIdToParent = try decoder.decode([String: String].self, from: savedJsonData)
-                    return
-                }
-            } catch {
-                print("Error reading saved file / saved file doesn't exisist: \(error)")
-            }
+            roomIdToParent = FileUtility.getDataFromJsonFile(filename: Constants.roomIdToParentFilename, dataType: [String: String].self)
+            if roomIdToParent != nil { return }
         }
 
         // Precompute the data
@@ -61,12 +47,6 @@ struct RoomParentInfo {
         }
 
         // Store precomputed data in json
-        do {
-            let encoder = JSONEncoder()
-            let toSave = try encoder.encode(roomIdToParent)
-            try toSave.write(to: jsonFile)
-        } catch {
-            print("error writing to file: \(error)")
-        }
+        FileUtility.saveDataToJsonFile(filename: Constants.roomIdToParentFilename, data: roomIdToParent)
     }
 }

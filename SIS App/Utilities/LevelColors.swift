@@ -35,23 +35,12 @@ struct LevelColors {
     }
 
     private static func initColors() {
-        if let filepath = Bundle.main.path(forResource: "colors.json", ofType: nil) {
-            do {
-                let contents = try String(contentsOfFile: filepath)
-
-                if let contentsData = contents.data(using: .utf8) {
-                    let temp = try JSONDecoder().decode([Int: MyColor].self, from: contentsData)
-
-                    levelToColor = [Int: Color]()
-                    for (key, value) in temp {
-                        levelToColor![key] = value.toSwiftUIColor()
-                    }
-                }
-            } catch {
-                print(error)
+        let temp = FileUtility.getDataFromJsonAppbundleFile(filename: Constants.levelColorsFilename, dataType: [Int: MyColor].self)
+        if let temp = temp {
+            levelToColor = [Int: Color]()
+            for (key, value) in temp {
+                levelToColor![key] = value.toSwiftUIColor()
             }
-        } else {
-            print("data.json not found :O")
         }
     }
 }

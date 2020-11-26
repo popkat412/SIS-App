@@ -17,13 +17,13 @@ struct CategoriesView: View {
         }), id: \.rawValue) { category in
             NavigationLink(destination: RoomsView(
                 rooms: categories[category]!,
-                categoryName: CategoryNames.getName(of: category)
+                categoryName: CategoryDisplayNames.getName(of: category)
             )) {
                 HStack {
                     Image(category.rawValue)
                         .resizable()
                         .frame(width: 25, height: 25)
-                    Text("\(CategoryNames.getName(of: category))")
+                    Text("\(CategoryDisplayNames.getName(of: category))")
                 }
             }
         }

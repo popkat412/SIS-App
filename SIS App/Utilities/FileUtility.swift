@@ -34,6 +34,25 @@ struct FileUtility {
         }
     }
 
+    static func getDataFromJsonAppbundleFile<T: Decodable>(filename: String, dataType _: T.Type) -> T? {
+        if let filepath = Bundle.main.path(forResource: filename, ofType: nil) {
+            do {
+                let contents = try String(contentsOfFile: filepath)
+
+                if let contentsData = contents.data(using: .utf8) {
+                    let result = try JSONDecoder().decode(T.self, from: contentsData)
+                    return result
+                }
+
+            } catch {
+                print(error)
+            }
+        } else {
+            print("\(filename) not found :O")
+        }
+        return nil
+    }
+
     static func saveDataToJsonFile<T: Encodable>(filename: String, data: T) {
         var toWrite: Data!
         do {
