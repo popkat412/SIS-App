@@ -14,8 +14,11 @@ struct Constants {
     static let urlScheme = "com.example.ri-safe-entry"
     static let urlHost = "widgetlink"
     static let baseURLString = "\(urlScheme)://\(urlHost)"
+    static let baseURL = URL(string: Constants.baseURLString)!
+
     static let blockURLParameterName = "block"
     static let checkoutURLName = "checkout"
+    static let historyURLName = "history"
 
     // -------- [[ SCHOOL LOCATION INFO ]] --------- //
     static let schoolLocation = CLLocation(latitude: 1.347014, longitude: 103.845148)
@@ -35,6 +38,7 @@ struct Constants {
     // ------ [[ FILENAMES ]] --------- //
     static let savedSessionsFilename = "savedSessions.json"
     static let currentSessionFilename = "currentSession.json"
+    static let userLocationFilename = "userLocation.json"
 
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.com.example.ri-safe-entry"

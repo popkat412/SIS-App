@@ -10,19 +10,22 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var checkInManager: CheckInManager
+    @EnvironmentObject var navigationState: NavigationState
 
     var body: some View {
-        TabView {
+        TabView(selection: $navigationState.tabbarSelection) {
             HomeView()
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Home")
                 }
+                .tag(Tab.home)
             HistoryView()
                 .tabItem {
                     Image(systemName: "list.dash")
                     Text("History")
                 }
+                .tag(Tab.history)
         }
         .onReceive(NotificationCenter.default.publisher(for: .didEnterBlock)) { event in
             let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
@@ -69,5 +72,7 @@ struct ContentView_Previews: PreviewProvider {
 
         return ContentView()
             .environmentObject(checkInManager)
+            .environmentObject(UserLocationManager())
+            .environmentObject(NavigationState())
     }
 }

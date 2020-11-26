@@ -59,7 +59,6 @@ struct CheckedInView_Previews: PreviewProvider {
     static var previews: some View {
         let checkInManager = CheckInManager()
         checkInManager.checkIn(to: Block("Test"))
-
         return Group {
             CheckedInView()
                 .environmentObject(checkInManager)

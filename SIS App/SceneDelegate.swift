@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var checkInManager = CheckInManager()
     var userLocationManager = UserLocationManager()
+    var navigationState = NavigationState()
 
     func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -27,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environment(\.managedObjectContext, context)
             .environmentObject(checkInManager)
             .environmentObject(userLocationManager)
+            .environmentObject(navigationState)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -40,6 +42,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             // -------- Custom Code (after scene has been drawn) --------- //
             UserNotificationHelper.requestAuth()
+        }
+    }
+
+    func scene(_: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        print("🌐 opening url: \(URLContexts)")
+        if let url = URLContexts.first?.url {
+            if let blockName = URLComponents(string: url.absoluteString)?.queryItems?.first(where: { $0.name == Constants.blockURLParameterName })?.value {
+                print("block name: \(blockName)")
+                checkInManager.checkIn(to: DataProvider.getBlock(name: blockName)!)
+            } else if url.pathComponents.contains(Constants.checkoutURLName) {
+                print("checking out from widget")
+                checkInManager.checkOut(shouldUpdateUI: false)
+            } else if url.pathComponents.contains(Constants.historyURLName) {
+                print("going to history from widget")
+                navigationState.tabbarSelection = .history
+            }
         }
     }
 

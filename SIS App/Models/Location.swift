@@ -15,4 +15,14 @@ struct Location: Codable {
     func toCLLocation() -> CLLocation {
         CLLocation(latitude: latitude, longitude: longitude)
     }
+
+    init(longitude: Double, latitude: Double) {
+        self.longitude = longitude
+        self.latitude = latitude
+    }
+
+    init(fromCLLocation loc: CLLocation) {
+        longitude = loc.coordinate.longitude
+        latitude = loc.coordinate.latitude
+    }
 }
