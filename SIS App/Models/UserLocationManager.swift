@@ -91,6 +91,6 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
     // MARK: Helper Methods
 
     private func isInsideBlock(location: CLLocation, block: Block) -> Bool {
-        return location.distance(from: block.location.toCLLocation()) <= block.radius
+        location.distance(from: block.location.toCLLocation()) <= block.radius
     }
 }

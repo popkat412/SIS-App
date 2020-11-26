@@ -13,7 +13,7 @@ struct HistoryView: View {
     @State private var showingEditRoomScreen = false
 
     var body: some View {
-        return NavigationView {
+        NavigationView {
             List {
                 ForEach(checkInManager.getCheckInSessions()) { day in
                     Section(header: Text("\(day.formattedDate)")) {

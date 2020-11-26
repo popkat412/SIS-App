@@ -9,10 +9,10 @@ import Foundation
 
 struct FileUtility {
     // MARK: API
-    static func getDataFromJsonFile<T: Decodable>(filename: String, dataType: T.Type) -> T? {
+
+    static func getDataFromJsonFile<T: Decodable>(filename: String, dataType _: T.Type) -> T? {
         if FileManager.default.fileExists(atPath: getPathFromFilename(filename)) {
             print("📂✅ \(filename) exisists :)")
-            
             // 1. Get file contents
             var fileContents = ""
             do {
@@ -21,7 +21,7 @@ struct FileUtility {
                 print("❌ could not read string from file \(filename) 0_o: \(error)")
                 return nil
             }
-            
+
             // 2. De-serialize json
             do {
                 return try JSONDecoder().decode(T.self, from: fileContents.data(using: .utf8)!)
@@ -33,7 +33,7 @@ struct FileUtility {
             return nil
         }
     }
-    
+
     static func saveDataToJsonFile<T: Encodable>(filename: String, data: T) {
         var toWrite: Data!
         do {
@@ -42,7 +42,7 @@ struct FileUtility {
             print("❌ error serializing \(filename) to json \(error)")
             return
         }
-        
+
         // 2. Write that json to file
         do {
             try toWrite.write(to: getURLFromFilename(filename))
@@ -52,7 +52,7 @@ struct FileUtility {
             return
         }
     }
-    
+
     static func deleteFile(filename: String) {
         do {
             try FileManager.default.removeItem(at: getURLFromFilename(filename))
@@ -60,14 +60,15 @@ struct FileUtility {
             print("❌ could not delete file \(filename) ☹️: \(error)")
         }
     }
-    
+
     // MARK: Helper Methods
+
     static func getURLFromFilename(_ filename: String) -> URL {
         let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupIdentifier)!
         print("📂 App Group container path: \(url)")
         return url.appendingPathComponent(filename)
     }
-    
+
     static func getPathFromFilename(_ filename: String) -> String {
         getURLFromFilename(filename).path
     }

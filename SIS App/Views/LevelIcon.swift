@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LevelIcon: View {
     var level: Int
-    
+
     var body: some View {
         ZStack {
             Circle()

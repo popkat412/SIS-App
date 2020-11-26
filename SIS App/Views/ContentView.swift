@@ -29,7 +29,6 @@ struct ContentView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: .didEnterBlock)) { event in
             let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
-
             print("received did enter geofence: \(block.name)")
 
             if !checkInManager.isCheckedIn {
@@ -69,7 +68,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let checkInManager = CheckInManager()
-//        checkInManager.checkIn(to: Room(name: "Class 1A", level: 1, id: "C1-17"))
+        checkInManager.checkIn(to: Room(name: "Class 1A", level: 1, id: "C1-17"))
 
         return ContentView()
             .environmentObject(checkInManager)

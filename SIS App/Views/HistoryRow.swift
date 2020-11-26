@@ -124,7 +124,7 @@ struct HistoryRow: View {
 struct HistoryRow_Previews: PreviewProvider {
     static var previews: some View {
         HistoryRow(session: CheckInSession(
-            checkedIn: Date(), target: Block(name: "Test")
+            checkedIn: Date(), target: Block("Test")
         ))
     }
 }

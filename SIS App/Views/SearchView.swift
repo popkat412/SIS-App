@@ -11,9 +11,9 @@ import SwiftUIX
 struct SearchView: View {
     @EnvironmentObject var checkInManager: CheckInManager
     @Environment(\.onRoomSelection) var onRoomSelection
-    @State private var searchStr = "";
+    @State private var searchStr = ""
     @Binding var showingSearch: Bool
-    
+
     var body: some View {
         VStack {
             HStack(spacing: 20) {
@@ -30,7 +30,7 @@ struct SearchView: View {
                     )
             }
             .padding(.horizontal)
-            
+
             List(DataProvider.getRoomsFromSearch(searchStr)) { room in
                 Button(action: {
                     showingSearch = false

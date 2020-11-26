@@ -9,11 +9,11 @@ import SwiftUI
 
 struct CheckedInView: View {
     @EnvironmentObject var checkInManager: CheckInManager
-    
+
     var body: some View {
         VStack {
             Spacer()
-            
+
             Image(systemName: checkInManager.isCheckedIn ? "square.and.arrow.down" : "square.and.arrow.up")
                 .font(.system(size: 100))
                 .foregroundColor(checkInManager.isCheckedIn ? .green : .blue)
@@ -22,15 +22,15 @@ struct CheckedInView: View {
             Text(checkInManager.isCheckedIn ? "Checked In!" : "Checked Out!")
                 .font(.title)
                 .padding(.bottom, 20)
-            
+
             Text(checkInManager.isCheckedIn
-                    ? "You checked into \(checkInManager.currentSession?.target.name ?? "") at \(checkInManager.currentSession?.checkedIn.formattedTime ?? "Unknown Session")"
-                    : "You checked out of \(checkInManager.mostRecentSession?.target.name ?? "Unknown Session") at \(Date().formattedTime)"
+                ? "You checked into \(checkInManager.currentSession?.target.name ?? "") at \(checkInManager.currentSession?.checkedIn.formattedTime ?? "Unknown Session")"
+                : "You checked out of \(checkInManager.mostRecentSession?.target.name ?? "Unknown Session") at \(Date().formattedTime)"
             )
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
             .padding()
-            
+
             Spacer()
             Button(action: {
                 if !checkInManager.isCheckedIn {
@@ -42,15 +42,15 @@ struct CheckedInView: View {
                 Text(checkInManager.isCheckedIn ? "Check Out" : "Back to Home")
                     .foregroundColor(.white)
             })
-            .buttonStyle(
-                GradientButtonStyle(
-                    gradient: checkInManager.isCheckedIn
-                        ? Constants.checkedInGradient
-                        : Constants.checkedOutGradient
+                .buttonStyle(
+                    GradientButtonStyle(
+                        gradient: checkInManager.isCheckedIn
+                            ? Constants.checkedInGradient
+                            : Constants.checkedOutGradient
+                    )
                 )
-            )
-            .padding(.horizontal, 20)
-            .padding(.bottom, 40)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 40)
         }
     }
 }
@@ -58,8 +58,7 @@ struct CheckedInView: View {
 struct CheckedInView_Previews: PreviewProvider {
     static var previews: some View {
         let checkInManager = CheckInManager()
-        checkInManager.checkIn(to: Block(name: "Test"))
-        
+        checkInManager.checkIn(to: Block("Test"))
         return Group {
             CheckedInView()
                 .environmentObject(checkInManager)

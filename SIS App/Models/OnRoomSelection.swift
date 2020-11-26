@@ -9,13 +9,13 @@ import Foundation
 import SwiftUI
 
 struct OnRoomSelectionKey: EnvironmentKey {
-    static var defaultValue: (Room) -> () = { room in
+    static var defaultValue: (Room) -> Void = { room in
         print("default check into \(room)")
     }
 }
 
 extension EnvironmentValues {
-    var onRoomSelection: (Room) -> () {
+    var onRoomSelection: (Room) -> Void {
         get { self[OnRoomSelectionKey.self] }
         set { self[OnRoomSelectionKey.self] = newValue }
     }

@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct GradientButtonStyle: ButtonStyle  {
+struct GradientButtonStyle: ButtonStyle {
     var gradient: Gradient
-    
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .foregroundColor(.white)

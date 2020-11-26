@@ -11,20 +11,18 @@ struct Day: Identifiable {
     var id = UUID()
     var date: Date
     var sessions: [CheckInSession]
-    
+
     var formattedDate: String {
-        get {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd MMMM y"
-            
-            return formatter.string(from: date)
-        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMMM y"
+
+        return formatter.string(from: date)
     }
 
     init(date: Date, sessions: [CheckInSession]) {
-        self.id = UUID()
+        id = UUID()
         self.date = date
-        self.sessions = sessions.sorted {$0.checkedIn > $1.checkedIn }
+        self.sessions = sessions.sorted { $0.checkedIn > $1.checkedIn }
     }
 }
 
@@ -33,22 +31,20 @@ struct CheckInSession: Identifiable {
     var checkedOut: Date?
     var target: CheckInTarget
     var id = UUID()
-    
+
     var formattedTiming: String {
-        get {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "h:mm a"
-            
-            if checkedOut != nil {
-                 return "\(formatter.string(from: checkedIn)) - \(formatter.string(from: checkedOut!))"
-            } else {
-                return "\(formatter.string(from: checkedIn)) - ???"
-            }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+
+        if checkedOut != nil {
+            return "\(formatter.string(from: checkedIn)) - \(formatter.string(from: checkedOut!))"
+        } else {
+            return "\(formatter.string(from: checkedIn)) - ???"
         }
     }
-    
+
     func newSessionWith(checkedIn: Date? = nil, checkedOut: Date? = nil, target: CheckInTarget? = nil, id: UUID? = nil) -> CheckInSession {
-        return CheckInSession(
+        CheckInSession(
             checkedIn: checkedIn ?? self.checkedIn,
             checkedOut: checkedOut ?? self.checkedOut,
             target: target ?? self.target,
@@ -58,32 +54,31 @@ struct CheckInSession: Identifiable {
 }
 
 extension CheckInSession: Codable {
-    
     enum CodingKeys: String, CodingKey {
         case checkedIn
         case checkedOut
         case target
         case id
     }
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.checkedIn = try container.decode(Date.self, forKey: .checkedIn)
-        self.checkedOut = try container.decodeIfPresent(Date.self, forKey: .checkedOut)
-        self.id = try container.decode(UUID.self, forKey: .id)
+
+        checkedIn = try container.decode(Date.self, forKey: .checkedIn)
+        checkedOut = try container.decodeIfPresent(Date.self, forKey: .checkedOut)
+        id = try container.decode(UUID.self, forKey: .id)
         if let roomTarget = try? container.decode(Room.self, forKey: .target) {
-            self.target = roomTarget
+            target = roomTarget
         } else if let blockTarget = try? container.decode(Block.self, forKey: .target) {
-            self.target = blockTarget
+            target = blockTarget
         } else {
-            self.target = Room(name: "Unknown Target :(", level: 0, id: "00-00")
+            target = Room("Unknown Target :(")
         }
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
+
         try container.encode(checkedIn, forKey: .checkedIn)
         try container.encode(id, forKey: .id)
         if checkedOut != nil {
@@ -97,5 +92,4 @@ extension CheckInSession: Codable {
             try container.encode(blockTarget, forKey: .target)
         }
     }
-    
 }
