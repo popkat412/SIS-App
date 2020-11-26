@@ -15,7 +15,7 @@ struct HistoryView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(checkInManager.getCheckInSessions()) { day in
+                ForEach(checkInManager.getCheckInSessions(usingPlaceholderData: true)) { day in
                     Section(header: Text("\(day.formattedDate)")) {
                         ForEach(day.sessions) { session in
                             HistoryRow(

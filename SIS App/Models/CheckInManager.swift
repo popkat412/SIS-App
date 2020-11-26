@@ -107,13 +107,16 @@ class CheckInManager: ObservableObject {
 
     /// This should get the user's history from CoreData
     /// The `CheckInSession`s should be sorted by date
-    func getCheckInSessions(placholderData: Bool = false) -> [Day] {
-        if !placholderData {
+    func getCheckInSessions(usingPlaceholderData: Bool = false) -> [Day] {
+        if !usingPlaceholderData {
             return Dictionary(grouping: checkInSessions) { session -> Date in
                 Calendar.current.startOfDay(for: session.checkedIn)
             }
             .map { key, value in
                 Day(date: key, sessions: value)
+            }
+            .sorted { day1, day2 in
+                day1.sessions.first!.checkedIn > day2.sessions.first!.checkedIn
             }
         } else {
             return [
@@ -153,6 +156,9 @@ class CheckInManager: ObservableObject {
                     ]
                 ),
             ]
+            .sorted { day1, day2 in
+                day1.sessions.first!.checkedIn > day2.sessions.first!.checkedIn
+            }
         }
     }
 
