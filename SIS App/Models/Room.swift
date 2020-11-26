@@ -11,17 +11,20 @@ struct Room: Decodable, Identifiable, CheckInTarget {
     var name: String
     var level: Int
     var id: String
+    var iconName: String
 
-    init(name: String, level: Int, id: String) {
+    init(name: String, level: Int, id: String, iconName: String? = nil) {
         self.name = name
         self.level = level
         self.id = id
+        self.iconName = iconName ?? ""
     }
 
     init(_ name: String) {
         self.name = name
         level = 1
         id = "0000"
+        iconName = ""
     }
 }
 

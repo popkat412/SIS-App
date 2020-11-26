@@ -11,6 +11,8 @@ struct RoomParentInfo {
     private static var roomIdToParent: [String: String]?
 
     static func getParent(of room: Room) -> String {
+        if room.id == "0000" { return "Test Block" }
+
         if roomIdToParent == nil {
             initRoomIdToParent()
         }
@@ -21,7 +23,8 @@ struct RoomParentInfo {
             } else {
                 // JSON file is not up to date
                 initRoomIdToParent(forceRegenerate: true)
-                return getParent(of: room)
+                print("😱 room id to parent: \(String(describing: self.roomIdToParent)), room id: \(room.id)")
+                return self.roomIdToParent![room.id]!
             }
         } else {
             fatalError("initRoomIdToParent() failed")

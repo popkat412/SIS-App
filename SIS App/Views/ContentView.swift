@@ -68,7 +68,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let checkInManager = CheckInManager()
-        checkInManager.checkIn(to: Room(name: "Class 1A", level: 1, id: "C1-17"))
 
         return ContentView()
             .environmentObject(checkInManager)

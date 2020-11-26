@@ -11,10 +11,12 @@ struct LevelIcon: View {
     var level: Int
 
     var body: some View {
+        let levelColor = LevelColors.getColor(for: level)
         ZStack {
             Circle()
-                .fill(LevelColors.getColor(for: level))
+                .fill(levelColor.background)
             Text("L\(level)")
+                .foregroundColor(levelColor.text)
         }
         .frame(width: 30, height: 30, alignment: .center)
     }

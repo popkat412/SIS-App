@@ -13,6 +13,9 @@
 		6202DDD0255827DF0017BC49 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6202DDCF255827DF0017BC49 /* HistoryView.swift */; };
 		6202DDD325583CC90017BC49 /* RoomParentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6202DDD225583CC90017BC49 /* RoomParentInfo.swift */; };
 		6202DDD625595A230017BC49 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6202DDD525595A230017BC49 /* DataProvider.swift */; };
+		620B53EF256F600D00565260 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292DCBD25564F4000352527 /* CategoriesView.swift */; };
+		620B53F0256F600D00565260 /* RoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62881EB325565C2200787923 /* RoomsView.swift */; };
+		620B5407256F616F00565260 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627D553F256E5AF200DF3B32 /* HistoryRow.swift */; };
 		621A77EA25566CCE00636B27 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A77E925566CCE00636B27 /* Location.swift */; };
 		621A877D2551832C00FA810F /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A877C2551832C00FA810F /* Block.swift */; };
 		621A87812551838900FA810F /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A87802551838900FA810F /* Room.swift */; };
@@ -28,26 +31,23 @@
 		6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */; };
 		62756C2825597B8E0007C4F3 /* Date+FormattedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */; };
 		627D553C256E5AC000DF3B32 /* View+ConditionalModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */; };
-		627D5540256E5AF200DF3B32 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627D553F256E5AF200DF3B32 /* HistoryRow.swift */; };
 		627D5541256E5AF200DF3B32 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627D553F256E5AF200DF3B32 /* HistoryRow.swift */; };
 		62868F332560009600F81842 /* UserNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62868F322560009600F81842 /* UserNotificationHelper.swift */; };
 		62881EAE2556570A00787923 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 62881EAD2556570A00787923 /* categories.json */; };
 		62881EB1255657EE00787923 /* CategoryDisplayNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62881EB0255657EE00787923 /* CategoryDisplayNames.swift */; };
-		62881EB425565C2200787923 /* RoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62881EB325565C2200787923 /* RoomsView.swift */; };
 		628D11D725598F8D00BF4D2E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11D625598F8D00BF4D2E /* SearchView.swift */; };
 		628D11DB2559970300BF4D2E /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 628D11DA2559970300BF4D2E /* SwiftUIX */; };
 		628D11DE255997DB00BF4D2E /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 628D11DD255997DB00BF4D2E /* colors.json */; };
 		628D11E1255997FC00BF4D2E /* LevelColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E0255997FC00BF4D2E /* LevelColors.swift */; };
 		628D11E5255AB42100BF4D2E /* RoomRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E4255AB42100BF4D2E /* RoomRow.swift */; };
 		628D11E8255AB44D00BF4D2E /* LevelIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E7255AB44D00BF4D2E /* LevelIcon.swift */; };
-		6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6292DCBD25564F4000352527 /* CategoriesView.swift */; };
 		629EB68025638E64000FADD9 /* View+ConditionalModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */; };
+		62A53B4B256E41A30092E891 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A53B4A256E41A30092E891 /* IconView.swift */; };
 		62BFA55B256E5C8700CD327D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F1253ADEC10037CEC5 /* Assets.xcassets */; };
 		62BFA561256E8F2900CD327D /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BFA560256E8F2900CD327D /* NavigationState.swift */; };
 		62D5D63A255D38D60064D484 /* CheckInTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D639255D38D60064D484 /* CheckInTarget.swift */; };
 		62D5D640255D3E850064D484 /* ChooseRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D63F255D3E850064D484 /* ChooseRoomView.swift */; };
 		62D5D644255D40330064D484 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D643255D40330064D484 /* UserLocationManager.swift */; };
-		62D90EB3256A8E8500DB4D4E /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 62EC2D732556377D0040AF5D /* data.json */; };
 		62D90EB4256A8E8500DB4D4E /* UserNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62868F322560009600F81842 /* UserNotificationHelper.swift */; };
 		62D90EB5256A8E8500DB4D4E /* OnRoomSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */; };
 		62D90EB6256A8E8500DB4D4E /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 62881EAD2556570A00787923 /* categories.json */; };
@@ -65,19 +65,17 @@
 		62D90EC2256A8E8500DB4D4E /* NotificationCenter+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E05E58255EC32100BAE4FF /* NotificationCenter+CustomNames.swift */; };
 		62D90EC3256A8E8500DB4D4E /* LevelColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E0255997FC00BF4D2E /* LevelColors.swift */; };
 		62D90EC4256A8E8500DB4D4E /* RawKeyedCodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */; };
-		62D90EC5256A8E8500DB4D4E /* CategoryNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62881EB0255657EE00787923 /* CategoryNames.swift */; };
 		62D90EC6256A8E8500DB4D4E /* CheckInTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D639255D38D60064D484 /* CheckInTarget.swift */; };
 		62DB8FDC2556A2E9006AA1D3 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DB8FDB2556A2E9006AA1D3 /* Level.swift */; };
 		62E05E59255EC32100BAE4FF /* NotificationCenter+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E05E58255EC32100BAE4FF /* NotificationCenter+CustomNames.swift */; };
 		62E119E9253ADEBF0037CEC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119E8253ADEBF0037CEC5 /* AppDelegate.swift */; };
 		62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119EA253ADEBF0037CEC5 /* SceneDelegate.swift */; };
 		62E119ED253ADEBF0037CEC5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E119EC253ADEBF0037CEC5 /* HomeView.swift */; };
-		62E119F0253ADEBF0037CEC5 /* SIS_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 62E119EE253ADEBF0037CEC5 /* SIS_App.xcdatamodeld */; };
 		62E119F2253ADEC10037CEC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F1253ADEC10037CEC5 /* Assets.xcassets */; };
 		62E119F5253ADEC10037CEC5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F4253ADEC10037CEC5 /* Preview Assets.xcassets */; };
 		62E119F8253ADEC10037CEC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F6253ADEC10037CEC5 /* LaunchScreen.storyboard */; };
 		62E11A01253AE2440037CEC5 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E11A00253AE2440037CEC5 /* MapView.swift */; };
-		62EC2D742556377D0040AF5D /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 62EC2D732556377D0040AF5D /* data.json */; };
+		62EC2D742556377D0040AF5D /* rooms.json in Resources */ = {isa = PBXBuildFile; fileRef = 62EC2D732556377D0040AF5D /* rooms.json */; };
 		62EC2D78255642A90040AF5D /* RawKeyedCodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */; };
 		62FC0BB4256D48F900EACA79 /* GradientButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */; };
 		62FC0BB5256D48F900EACA79 /* GradientButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */; };
@@ -155,6 +153,7 @@
 		628D11E7255AB44D00BF4D2E /* LevelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelIcon.swift; sourceTree = "<group>"; };
 		6292DCBD25564F4000352527 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "View+ConditionalModifiers.swift"; path = "SIS App/Utilities/View+ConditionalModifiers.swift"; sourceTree = SOURCE_ROOT; };
+		62A53B4A256E41A30092E891 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		62BFA560256E8F2900CD327D /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
 		62D5D639255D38D60064D484 /* CheckInTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTarget.swift; sourceTree = "<group>"; };
 		62D5D63F255D3E850064D484 /* ChooseRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoomView.swift; sourceTree = "<group>"; };
@@ -171,7 +170,7 @@
 		62E119F7253ADEC10037CEC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62E119F9253ADEC10037CEC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62E11A00253AE2440037CEC5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		62EC2D732556377D0040AF5D /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		62EC2D732556377D0040AF5D /* rooms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rooms.json; sourceTree = "<group>"; };
 		62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawKeyedCodableDictionary.swift; sourceTree = "<group>"; };
 		62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = InsideSchool.gpx; sourceTree = "<group>"; };
 		62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButtonStyle.swift; sourceTree = "<group>"; };
@@ -262,6 +261,7 @@
 				62E119EC253ADEBF0037CEC5 /* HomeView.swift */,
 				62D5D63F255D3E850064D484 /* ChooseRoomView.swift */,
 				6292DCBD25564F4000352527 /* CategoriesView.swift */,
+				62A53B4A256E41A30092E891 /* IconView.swift */,
 				62881EB325565C2200787923 /* RoomsView.swift */,
 				6202DDC52558102F0017BC49 /* CheckedInView.swift */,
 				62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */,
@@ -279,7 +279,7 @@
 			children = (
 				62FC0BB8256D4A4D00EACA79 /* Constants.swift */,
 				628D11DD255997DB00BF4D2E /* colors.json */,
-				62EC2D732556377D0040AF5D /* data.json */,
+				62EC2D732556377D0040AF5D /* rooms.json */,
 				62881EAD2556570A00787923 /* categories.json */,
 			);
 			path = Data;
@@ -384,7 +384,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					6258F05C256771E10021438C = {
 						CreatedOnToolsVersion = 12.2;
@@ -424,7 +424,6 @@
 				6258F068256771E30021438C /* Assets.xcassets in Resources */,
 				62D90EC0256A8E8500DB4D4E /* colors.json in Resources */,
 				62D90EB6256A8E8500DB4D4E /* categories.json in Resources */,
-				62D90EB3256A8E8500DB4D4E /* data.json in Resources */,
 				62BFA55B256E5C8700CD327D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,7 +437,7 @@
 				62E119F2253ADEC10037CEC5 /* Assets.xcassets in Resources */,
 				628D11DE255997DB00BF4D2E /* colors.json in Resources */,
 				62881EAE2556570A00787923 /* categories.json in Resources */,
-				62EC2D742556377D0040AF5D /* data.json in Resources */,
+				62EC2D742556377D0040AF5D /* rooms.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,7 +468,6 @@
 				6258F06A256771E30021438C /* SISAppWidget.intentdefinition in Sources */,
 				62D90EC2256A8E8500DB4D4E /* NotificationCenter+CustomNames.swift in Sources */,
 				62D90EB9256A8E8500DB4D4E /* Date+FormattedTime.swift in Sources */,
-				62D90EC5256A8E8500DB4D4E /* CategoryNames.swift in Sources */,
 				62FC0BB5256D48F900EACA79 /* GradientButtonStyle.swift in Sources */,
 				6258F065256771E10021438C /* SISAppWidget.swift in Sources */,
 				62FC0BBA256D4A4D00EACA79 /* Constants.swift in Sources */,
@@ -480,6 +478,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				620B5407256F616F00565260 /* HistoryRow.swift in Sources */,
+				620B53EF256F600D00565260 /* CategoriesView.swift in Sources */,
+				620B53F0256F600D00565260 /* RoomsView.swift in Sources */,
 				62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */,
 				62BFA561256E8F2900CD327D /* NavigationState.swift in Sources */,
 				62FC0BB9256D4A4D00EACA79 /* Constants.swift in Sources */,
@@ -510,14 +511,11 @@
 				629EB68025638E64000FADD9 /* View+ConditionalModifiers.swift in Sources */,
 				6202DDCD255821520017BC49 /* CheckInSession.swift in Sources */,
 				62EC2D78255642A90040AF5D /* RawKeyedCodableDictionary.swift in Sources */,
-				627D5540256E5AF200DF3B32 /* HistoryRow.swift in Sources */,
-				6292DCBE25564F4000352527 /* CategoriesView.swift in Sources */,
-				62881EB425565C2200787923 /* RoomsView.swift in Sources */,
 				62881EB1255657EE00787923 /* CategoryDisplayNames.swift in Sources */,
 				62868F332560009600F81842 /* UserNotificationHelper.swift in Sources */,
 				62D5D63A255D38D60064D484 /* CheckInTarget.swift in Sources */,
-				62E119F0253ADEBF0037CEC5 /* SIS_App.xcdatamodeld in Sources */,
 				6255C34D256E49450052B38C /* FileUtility.swift in Sources */,
+				62A53B4B256E41A30092E891 /* IconView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

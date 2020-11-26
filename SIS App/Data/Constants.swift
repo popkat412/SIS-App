@@ -40,7 +40,7 @@ struct Constants {
     static let currentSessionFilename = "currentSession.json"
     static let userLocationFilename = "userLocation.json"
 
-    static let roomsFilename = "data.json"
+    static let roomsFilename = "rooms.json"
     static let levelColorsFilename = "colors.json"
     static let categoryToDisplayNameFilename = "categories.json"
 

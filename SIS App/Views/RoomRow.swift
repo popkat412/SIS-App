@@ -10,6 +10,7 @@ import SwiftUI
 struct RoomRow: View {
     var room: Room
     var showLevelIcon = true
+    var showRoomIcon = true
     var showRoomId = true
     var showRoomParent = true
 
@@ -17,6 +18,9 @@ struct RoomRow: View {
         HStack {
             if showLevelIcon {
                 LevelIcon(level: room.level)
+            }
+            if showRoomIcon {
+                IconView(room.iconName)
             }
             Text("\(room.name)")
             Spacer()

@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct LevelColors {
-    private static var levelToColor: [Int: Color]?
+    typealias LevelColor = (background: Color, text: Color)
+    typealias LevelToColor = [Int: LevelColor]
 
-    static func getColor(for level: Int) -> Color {
+    private static var levelToColor: LevelToColor?
+
+    static func getColor(for level: Int) -> LevelColor {
         if levelToColor == nil {
             initColors()
         }
@@ -27,7 +30,7 @@ struct LevelColors {
     }
 
     private struct MyColor: Decodable {
-        var red, green, blue, opacity: Double
+        var red, green, blue, opacity, text_color: Double
 
         func toSwiftUIColor() -> Color {
             Color(.sRGB, red: red, green: green, blue: blue, opacity: opacity)
@@ -37,9 +40,12 @@ struct LevelColors {
     private static func initColors() {
         let temp = FileUtility.getDataFromJsonAppbundleFile(filename: Constants.levelColorsFilename, dataType: [Int: MyColor].self)
         if let temp = temp {
-            levelToColor = [Int: Color]()
+            levelToColor = LevelToColor()
             for (key, value) in temp {
-                levelToColor![key] = value.toSwiftUIColor()
+                levelToColor![key] = (
+                    background: value.toSwiftUIColor(),
+                    text: value.text_color == 0 ? .black : .white
+                )
             }
         }
     }

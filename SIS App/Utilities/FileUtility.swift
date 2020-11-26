@@ -13,6 +13,7 @@ struct FileUtility {
     static func getDataFromJsonFile<T: Decodable>(filename: String, dataType _: T.Type) -> T? {
         if FileManager.default.fileExists(atPath: getPathFromFilename(filename)) {
             print("📂✅ \(filename) exisists :)")
+
             // 1. Get file contents
             var fileContents = ""
             do {

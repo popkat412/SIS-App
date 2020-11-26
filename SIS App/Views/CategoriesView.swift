@@ -12,17 +12,15 @@ struct CategoriesView: View {
     var blockName: String
 
     var body: some View {
-        List(Array(categories.keys).sorted(by: { cat1, cat2 in
-            cat1.rawValue < cat2.rawValue
+        List(Array(categories.keys).sorted(by: {
+            $0.rawValue < $1.rawValue
         }), id: \.rawValue) { category in
             NavigationLink(destination: RoomsView(
                 rooms: categories[category]!,
                 categoryName: CategoryDisplayNames.getName(of: category)
             )) {
                 HStack {
-                    Image(category.rawValue)
-                        .resizable()
-                        .frame(width: 25, height: 25)
+                    IconView(category.rawValue)
                     Text("\(CategoryDisplayNames.getName(of: category))")
                 }
             }
