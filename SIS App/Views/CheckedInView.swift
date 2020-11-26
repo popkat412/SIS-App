@@ -24,12 +24,12 @@ struct CheckedInView: View {
                 .padding(.bottom, 20)
 
             Text(checkInManager.isCheckedIn
-                ? "You checked into \(checkInManager.currentSession?.target.name ?? "") at \(checkInManager.currentSession?.checkedIn.formattedTime ?? "")"
-                // TODO: This doesn't work becuase currentSession will be nil
-                : "You checked out of \(checkInManager.currentSession?.target.name ?? "") at \(Date().formattedTime)")
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding()
+                ? "You checked into \(checkInManager.currentSession?.target.name ?? "") at \(checkInManager.currentSession?.checkedIn.formattedTime ?? "Unknown Session")"
+                : "You checked out of \(checkInManager.mostRecentSession?.target.name ?? "Unknown Session") at \(Date().formattedTime)"
+            )
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+            .padding()
 
             Spacer()
             Button(action: {
@@ -58,8 +58,7 @@ struct CheckedInView: View {
 struct CheckedInView_Previews: PreviewProvider {
     static var previews: some View {
         let checkInManager = CheckInManager()
-        checkInManager.checkIn(to: Block(name: "Test", location: Location(longitude: 1, latitude: 1), radius: 1))
-
+        checkInManager.checkIn(to: Block("Test"))
         return Group {
             CheckedInView()
                 .environmentObject(checkInManager)

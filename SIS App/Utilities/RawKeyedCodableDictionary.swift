@@ -28,14 +28,15 @@ struct RawKeyedCodableDictionary<Key, Value>: Codable where Key: Hashable & RawR
         for (rawKey, value) in rawKeyedDictionary {
             guard let key = Key(rawValue: rawKey) else {
                 throw DecodingError.dataCorruptedError(
-                    in: container, debugDescription: "Invalid key: cannot initalize \(Key.self) from invalid \(Key.RawValue.self) value \(rawKey)")
+                    in: container, debugDescription: "Invalid key: cannot initalize \(Key.self) from invalid \(Key.RawValue.self) value \(rawKey)"
+                )
             }
             wrappedValue[key] = value
         }
     }
-    
+
     func toDictionary() -> [Key: Value] {
-        return Dictionary(uniqueKeysWithValues: wrappedValue.map {($0, $1)} )
+        Dictionary(uniqueKeysWithValues: wrappedValue.map { ($0, $1) })
     }
 
     func encode(to encoder: Encoder) throws {

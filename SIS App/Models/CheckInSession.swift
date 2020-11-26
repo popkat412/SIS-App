@@ -18,6 +18,12 @@ struct Day: Identifiable {
 
         return formatter.string(from: date)
     }
+
+    init(date: Date, sessions: [CheckInSession]) {
+        id = UUID()
+        self.date = date
+        self.sessions = sessions.sorted { $0.checkedIn > $1.checkedIn }
+    }
 }
 
 struct CheckInSession: Identifiable {
@@ -38,7 +44,7 @@ struct CheckInSession: Identifiable {
     }
 
     func newSessionWith(checkedIn: Date? = nil, checkedOut: Date? = nil, target: CheckInTarget? = nil, id: UUID? = nil) -> CheckInSession {
-        return CheckInSession(
+        CheckInSession(
             checkedIn: checkedIn ?? self.checkedIn,
             checkedOut: checkedOut ?? self.checkedOut,
             target: target ?? self.target,

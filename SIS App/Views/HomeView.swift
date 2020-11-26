@@ -5,19 +5,19 @@
 //  Created by Wang Yunze on 17/10/20.
 //
 
-import SwiftUI
 import CoreLocation
+import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var checkInManager: CheckInManager
     @EnvironmentObject var userLocationManager: UserLocationManager
-    
+
     var body: some View {
         print("rebuilding home: \(checkInManager.isCheckedIn), \(checkInManager.showCheckedInScreen)")
         return VStack(alignment: .center, spacing: 0) {
             MapView()
                 .edgesIgnoringSafeArea(.all)
-            if (checkInManager.showCheckedInScreen) {
+            if checkInManager.showCheckedInScreen {
                 CheckedInView()
             } else {
                 ChooseRoomView { room in
@@ -28,7 +28,6 @@ struct HomeView: View {
         }
     }
 }
-
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

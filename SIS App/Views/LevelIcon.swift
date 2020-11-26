@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LevelIcon: View {
-    var level: Int  
-    
+    var level: Int
+
     var body: some View {
         let levelColor = LevelColors.getColor(for: level)
         ZStack {

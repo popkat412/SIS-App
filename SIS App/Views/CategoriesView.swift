@@ -17,11 +17,11 @@ struct CategoriesView: View {
         }), id: \.rawValue) { category in
             NavigationLink(destination: RoomsView(
                 rooms: categories[category]!,
-                categoryName: CategoryNames.getName(of: category)
+                categoryName: CategoryDisplayNames.getName(of: category)
             )) {
                 HStack {
                     IconView(category.rawValue)
-                    Text("\(CategoryNames.getName(of: category))")
+                    Text("\(CategoryDisplayNames.getName(of: category))")
                 }
             }
         }

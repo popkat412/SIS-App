@@ -8,10 +8,20 @@
 import CoreLocation
 import Foundation
 import NotificationCenter
+import WidgetKit
 
 class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published private(set) var userLocation: CLLocation?
-    var previousUserLocation: CLLocation?
+    @Published var userLocation: CLLocation? {
+        didSet {
+            FileUtility.saveDataToJsonFile(filename: Constants.userLocationFilename, data: Location(fromCLLocation: userLocation!))
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        willSet {
+            previousUserLocation = userLocation
+        }
+    }
+
+    private(set) var previousUserLocation: CLLocation?
 
     let locationManager = CLLocationManager()
 
@@ -34,7 +44,6 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
     // User Location
     func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            previousUserLocation = userLocation
             userLocation = location
         }
 
@@ -82,6 +91,6 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
     // MARK: Helper Methods
 
     private func isInsideBlock(location: CLLocation, block: Block) -> Bool {
-        return location.distance(from: block.location.toCLLocation()) <= block.radius
+        location.distance(from: block.location.toCLLocation()) <= block.radius
     }
 }
