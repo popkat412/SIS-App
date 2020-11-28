@@ -48,7 +48,11 @@ struct Constants {
 
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.com.example.ri-safe-entry"
+    static let remindUserFillInRoomsNotificationIdentifier = "remind-user-fill-in-rooms"
 
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"
+
+    // ------ [[ OTHER ]] ------ //
+    static let remindUserFillInRoomsTime = DateComponents(hour: 18)
 }

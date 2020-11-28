@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import UserNotifications
 import WidgetKit
 
 class CheckInManager: ObservableObject {
+    // MARK: Properties
+
     /// Used to check if the user is currently checked in or not
     /// This should check the persisted data (if any) from the `checkIn()` static method
     @Published private(set) var isCheckedIn = false
@@ -24,6 +27,8 @@ class CheckInManager: ObservableObject {
     @Published var checkInSessions: [CheckInSession] {
         didSet {
             FileUtility.saveDataToJsonFile(filename: Constants.savedSessionsFilename, data: checkInSessions)
+            updateReminderNotification()
+
             objectWillChange.send()
         }
     }
@@ -51,6 +56,8 @@ class CheckInManager: ObservableObject {
             showCheckedInScreen = true
         }
     }
+
+    // MARK: API
 
     /// Used to check the user into a room.
     /// Note that this should persist if the user quits the app while checked in
@@ -177,5 +184,31 @@ class CheckInManager: ObservableObject {
         if !isCheckedIn { return }
         print("automatically checking out")
         checkOut()
+    }
+
+    // MARK: Private methods
+
+    private func updateReminderNotification() {
+        let hasSpecificRooms = checkInSessions.reduce(false) { $1.target is Room }
+        print("hasSpecificRooms: \(hasSpecificRooms)")
+
+        UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier) { result in
+
+            print("has scheduled \(Constants.remindUserFillInRoomsNotificationIdentifier): \(result)")
+
+            if result, hasSpecificRooms {
+                print("cancelling \(Constants.remindUserFillInRoomsNotificationIdentifier)")
+                UserNotificationHelper.cancelScheduledNotification(withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier)
+
+            } else if !hasSpecificRooms, !result {
+                print("scheduling \(Constants.remindUserFillInRoomsNotificationIdentifier)")
+                UserNotificationHelper.sendNotification(
+                    title: "Remember to fill in rooms",
+                    subtitle: "just do it be a good responsible boi",
+                    withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier,
+                    trigger: UNCalendarNotificationTrigger(dateMatching: Constants.remindUserFillInRoomsTime, repeats: false)
+                )
+            }
+        }
     }
 }
