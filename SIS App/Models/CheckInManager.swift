@@ -189,7 +189,9 @@ class CheckInManager: ObservableObject {
     // MARK: Private methods
 
     private func updateReminderNotification() {
-        let hasSpecificRooms = checkInSessions.reduce(false) { $1.target is Room }
+        let hasSpecificRooms = checkInSessions
+            .filter { Calendar.current.isDateInToday($0.checkedIn) }
+            .reduce(false) { $1.target is Room }
         print("hasSpecificRooms: \(hasSpecificRooms)")
 
         UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier) { result in
