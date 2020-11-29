@@ -12,6 +12,8 @@ struct HistoryRow: View {
     var showTiming = true
     var showTarget = true
 
+    @Binding var currentlySelectedSession: CheckInSession?
+
     var editable = false
     var onTargetPressed: (() -> Void)?
     var onCheckInDateUpdate: ((Date) -> Void)?
@@ -26,8 +28,8 @@ struct HistoryRow: View {
         self.showTarget = showTarget
 
         _checkInDate = .init(initialValue: self.session.checkedIn)
-        _checkOutDate = .init(initialValue: self.session.checkedOut!)
-        // Force unwrapping because if this is to appear in history, they must have already checked out
+        _checkOutDate = .init(initialValue: self.session.checkedOut!) // Force unwrapping because if this is to appear in history, they must have already checked out
+        _currentlySelectedSession = .constant(nil)
 
         editable = false
         onTargetPressed = nil
@@ -38,6 +40,7 @@ struct HistoryRow: View {
     init(
         session: CheckInSession, showTiming: Bool = true, showTarget: Bool = true,
         editable: Bool,
+        currentlySelectedSession: Binding<CheckInSession?>? = nil,
         onTargetPressed: @escaping (() -> Void),
         onCheckInDateUpdate: @escaping ((Date) -> Void),
         onCheckOutDateUpdate: @escaping ((Date) -> Void)
@@ -46,6 +49,7 @@ struct HistoryRow: View {
 
         if editable {
             self.editable = true
+            _currentlySelectedSession = currentlySelectedSession ?? .constant(nil)
             self.onTargetPressed = onTargetPressed
             self.onCheckInDateUpdate = onCheckInDateUpdate
             self.onCheckOutDateUpdate = onCheckOutDateUpdate
@@ -69,6 +73,7 @@ struct HistoryRow: View {
                         )
                         .labelsHidden()
                         .onChange(of: checkInDate) { newValue in
+                            currentlySelectedSession = session
                             onCheckInDateUpdate?(newValue)
                         }
                         DatePicker(
@@ -79,6 +84,7 @@ struct HistoryRow: View {
                         )
                         .labelsHidden()
                         .onChange(of: checkOutDate) { newValue in
+                            currentlySelectedSession = session
                             onCheckOutDateUpdate?(newValue)
                         }
                     }
@@ -107,6 +113,7 @@ struct HistoryRow: View {
                     }
                 }
                 .onTapGesture {
+                    currentlySelectedSession = session
                     onTargetPressed?()
                 }
                 .conditionalModifier(editable) {
