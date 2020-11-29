@@ -203,8 +203,8 @@ class CheckInManager: ObservableObject {
             } else if !hasSpecificRooms, !result {
                 print("scheduling \(Constants.remindUserFillInRoomsNotificationIdentifier)")
                 UserNotificationHelper.sendNotification(
-                    title: "Remember to fill in rooms",
-                    subtitle: "just do it be a good responsible boi",
+                    title: "Please fill in your check in history",
+                    subtitle: "Filling in specific rooms helps aid contact tracing",
                     withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier,
                     trigger: UNCalendarNotificationTrigger(dateMatching: Constants.remindUserFillInRoomsTime, repeats: false)
                 )
