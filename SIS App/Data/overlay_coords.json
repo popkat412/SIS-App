@@ -57,4 +57,33 @@
     ]
   }
   
+  {
+    "block": "Canteen Hall",
+    "boundary": [
+      {"longitude": 1.3482060528418809, "latitude": 103.84563171432053},
+      {"longitude": 1.3481470986554924, "latitude": 103.84589326999628},
+      {"longitude": 1.3471370033606838, "latitude": 103.84567358731617},
+      {"longitude": 1.3471885798206116, "latitude": 103.84539887314689}
+    ]
+  }
+
+  {
+    "block": "Artspace",
+    "boundary": [
+      {"longitude": 1.3477237308573302, "latitude": 103.84446942754298},
+      {"longitude": 1.3477147022459097, "latitude": 103.84475545172587},
+      {"longitude": 1.3472670808642533, "latitude": 103.844738471909},
+      {"longitude": 1.3472790337354228, "latitude": 103.84444909407691}
+    ]
+  }
+
+  {
+    "block": "HML Dining Hall",
+    "boundary": [
+      {"longitude": 1.3470674191351402, "latitude": 103.84467219806871},
+      {"longitude": 1.347052421801224, "latitude": 103.84499854585923},
+      {"longitude": 1.3467834059981234, "latitude": 103.84498616264912},
+      {"longitude": 1.346804961053781, "latitude": 103.8446652486719}
+    ]
+  }
 ]
