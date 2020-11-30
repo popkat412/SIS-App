@@ -5,6 +5,7 @@
 //  Created by Wang Yunze on 17/10/20.
 //
 
+import CoreLocation
 import SwiftUI
 import UIKit
 
@@ -42,6 +43,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             // -------- Custom Code (after scene has been drawn) --------- //
             UserNotificationHelper.requestAuth()
+
+            let scheduleEnterOrExitSchoolNotification: (Bool) -> Void = { enteringSchool in
+                print("📣 scheduling notification...")
+                UserNotificationHelper.sendNotification(
+                    title: "You \(enteringSchool ? "entered" : "exited") the school!",
+                    subtitle: enteringSchool
+                        ? "Remember to open the app in the backgorund"
+                        : "Remember to check out of the school through safe-entry",
+                    identifier: enteringSchool
+                        ? Constants.userEnteredSchoolNotificationIdentifier
+                        : Constants.userExitedSchoolNotificationIdentifier,
+                    trigger: {
+                        let region = CLCircularRegion(
+                            center: Constants.schoolLocation.coordinate,
+                            radius: Constants.schoolRadius,
+                            identifier: Constants.schoolRegionId
+                        )
+                        region.notifyOnExit = !enteringSchool
+                        region.notifyOnEntry = enteringSchool
+                        return UNLocationNotificationTrigger(region: region, repeats: true)
+                    }()
+                )
+            }
+            scheduleEnterOrExitSchoolNotification(true)
+            scheduleEnterOrExitSchoolNotification(false)
         }
     }
 

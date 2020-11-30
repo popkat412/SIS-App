@@ -50,18 +50,18 @@ struct ContentView: View {
                 )
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .didEnterSchool)) { _ in
-            UserNotificationHelper.sendNotification(
-                title: "Remember to check in!",
-                subtitle: "Please check into the school via safe entry"
-            )
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .didExitSchool)) { _ in
-            UserNotificationHelper.sendNotification(
-                title: "Remember to check out!",
-                subtitle: "Please check out of the school via safe entry"
-            )
-        }
+//        .onReceive(NotificationCenter.default.publisher(for: .didEnterSchool)) { _ in
+//            UserNotificationHelper.sendNotification(
+//                title: "Remember to check in!",
+//                subtitle: "Please check into the school via safe entry"
+//            )
+//        }
+//        .onReceive(NotificationCenter.default.publisher(for: .didExitSchool)) { _ in
+//            UserNotificationHelper.sendNotification(
+//                title: "Remember to check out!",
+//                subtitle: "Please check out of the school via safe entry"
+//            )
+//        }
     }
 }
 

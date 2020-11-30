@@ -48,6 +48,8 @@ struct Constants {
 
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.com.example.ri-safe-entry"
+    static let userEnteredSchoolNotificationIdentifier = "user-entered-school"
+    static let userExitedSchoolNotificationIdentifier = "user-exiteds-school"
 
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"

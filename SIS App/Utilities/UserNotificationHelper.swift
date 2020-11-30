@@ -9,7 +9,7 @@ import Foundation
 import UserNotifications
 
 struct UserNotificationHelper {
-    static func sendNotification(title: String, subtitle: String) {
+    static func sendNotification(title: String, subtitle: String, identifier: String? = nil, trigger: UNNotificationTrigger? = nil) {
         print("sending notification: \(title)")
 
         let content = UNMutableNotificationContent()
@@ -17,7 +17,11 @@ struct UserNotificationHelper {
         content.subtitle = subtitle
         content.sound = UNNotificationSound.default
 
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        let request = UNNotificationRequest(
+            identifier: identifier ?? UUID().uuidString,
+            content: content,
+            trigger: trigger
+        )
 
         UNUserNotificationCenter.current().add(request)
     }

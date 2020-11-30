@@ -49,7 +49,7 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
 
         if userLocation != nil, previousUserLocation != nil {
             let isInsideSchool = userLocation!.distance(from: Constants.schoolLocation) <= Constants.schoolRadius
-            let previouslyInsideSchool = previousUserLocation!.distance(from: Constants.schoolLocation) <= Constants.schoolRadius
+//            let previouslyInsideSchool = previousUserLocation!.distance(from: Constants.schoolLocation) <= Constants.schoolRadius
 
             if isInsideSchool { // Inside of school
                 for block in DataProvider.getBlocks() {
@@ -67,13 +67,13 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
                 }
             }
 
-            if isInsideSchool, !previouslyInsideSchool {
-                print("📍 entered the school")
-                NotificationCenter.default.post(name: .didEnterSchool, object: nil)
-            } else if !isInsideSchool, previouslyInsideSchool {
-                print("📍 exited the schoool ")
-                NotificationCenter.default.post(name: .didExitSchool, object: nil)
-            }
+//            if isInsideSchool, !previouslyInsideSchool {
+//                print("📍 entered the school")
+//                NotificationCenter.default.post(name: .didEnterSchool, object: nil)
+//            } else if !isInsideSchool, previouslyInsideSchool {
+//                print("📍 exited the schoool ")
+//                NotificationCenter.default.post(name: .didExitSchool, object: nil)
+//            }
         } else {
             print("userlocation or previous user location is nil :(")
         }

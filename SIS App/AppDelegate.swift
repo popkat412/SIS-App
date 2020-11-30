@@ -78,12 +78,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+// MARK: User Notification Delegate
+
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_: UNUserNotificationCenter, didReceive _: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("📣 received notification response: \(response.notification.request.identifier)")
+        if response.notification.request.identifier == Constants.userEnteredSchoolNotificationIdentifier {
+            sceneDelegate?.userLocationManager.locationManager.startUpdatingLocation()
+        } else if response.notification.request.identifier == Constants.userExitedSchoolNotificationIdentifier {
+            sceneDelegate?.userLocationManager.locationManager.stopUpdatingLocation()
+        }
         completionHandler()
     }
 
     func userNotificationCenter(_: UNUserNotificationCenter, willPresent _: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler(UNNotificationPresentationOptions.banner)
+        print("📣 will present notification")
+        completionHandler(.banner)
     }
+}
+
+extension AppDelegate {
+    var sceneDelegate: SceneDelegate? { UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate }
 }
