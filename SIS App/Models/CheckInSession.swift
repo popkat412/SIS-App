@@ -43,6 +43,11 @@ struct CheckInSession: Identifiable {
         }
     }
 
+    var dateInterval: DateInterval? {
+        guard let checkedOut = checkedOut else { return nil }
+        return DateInterval(start: checkedIn, end: checkedOut)
+    }
+
     func newSessionWith(checkedIn: Date? = nil, checkedOut: Date? = nil, target: CheckInTarget? = nil, id: UUID? = nil) -> CheckInSession {
         CheckInSession(
             checkedIn: checkedIn ?? self.checkedIn,
@@ -50,6 +55,11 @@ struct CheckInSession: Identifiable {
             target: target ?? self.target,
             id: id ?? self.id
         )
+    }
+
+    func checkIntersection(with other: CheckInSession) -> DateInterval? {
+        guard let a = dateInterval, let b = other.dateInterval else { return nil }
+        return a.intersection(with: b)
     }
 }
 

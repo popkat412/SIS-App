@@ -12,6 +12,9 @@ struct HistoryView: View {
 
     @State private var showingEditRoomScreen = false
 
+    @State private var showingErrorAlert = false
+    @State private var currentError: SessionInvalidError?
+
     var body: some View {
         NavigationView {
             List {
@@ -24,16 +27,16 @@ struct HistoryView: View {
                                 onTargetPressed: {
                                     showingEditRoomScreen = true
                                 },
-                                onCheckInDateUpdate: { newCheckInDate in
+                                onCheckInDateUpdate: { newCheckInDate, _ in
                                     print("new check in date: \(newCheckInDate)")
-                                    checkInManager.updateCheckInSession(
+                                    return checkInManager.updateCheckInSession(
                                         id: session.id,
                                         newSession: session.newSessionWith(checkedIn: newCheckInDate)
                                     )
                                 },
-                                onCheckOutDateUpdate: { newCheckOutDate in
+                                onCheckOutDateUpdate: { newCheckOutDate, _ in
                                     print("new check out date: \(newCheckOutDate)")
-                                    checkInManager.updateCheckInSession(
+                                    return checkInManager.updateCheckInSession(
                                         id: session.id,
                                         newSession: session.newSessionWith(checkedOut: newCheckOutDate)
                                     )
@@ -60,7 +63,7 @@ struct HistoryView: View {
                     }
                 }
             }
-            .listStyle(InsetListStyle()) // Must set this, if not addign the EditButton() ruins how the list looks
+            .listStyle(InsetListStyle()) // Must set this, if not adding the EditButton() ruins how the list looks
             .navigationBarTitle("History")
             .navigationBarItems(trailing: EditButton())
         }

@@ -9,6 +9,8 @@ import Foundation
 import WidgetKit
 
 class CheckInManager: ObservableObject {
+    // MARK: Properties
+
     /// Used to check if the user is currently checked in or not
     /// This should check the persisted data (if any) from the `checkIn()` static method
     @Published private(set) var isCheckedIn = false
@@ -29,6 +31,8 @@ class CheckInManager: ObservableObject {
     }
 
     var mostRecentSession: CheckInSession? { checkInSessions.last }
+
+    // MARK: Init
 
     init() {
         checkInSessions = FileUtility.getDataFromJsonFile(
@@ -51,6 +55,8 @@ class CheckInManager: ObservableObject {
             showCheckedInScreen = true
         }
     }
+
+    // MARK: API
 
     /// Used to check the user into a room.
     /// Note that this should persist if the user quits the app while checked in
@@ -90,12 +96,30 @@ class CheckInManager: ObservableObject {
         WidgetCenter.shared.reloadAllTimelines()
     }
 
+    // TODO: Use an enum return instead of the possible invalid reasons
     /// This should use the UUID to figure out which session to change,
-    /// then update that session based on the properties of the passed session
-    func updateCheckInSession(id: UUID, newSession: CheckInSession) {
+    /// then update that session based on the properties of the passed session.
+    /// This will do nothing if the new session dates are not valid.
+    /// If the new session dates are not valid, this will return the error, else nil
+    @discardableResult
+    func updateCheckInSession(id: UUID, newSession: CheckInSession) -> SessionInvalidError? {
+        // Check if new session checks in before he checks out
+        if newSession.checkedOut! < newSession.checkedIn { return .checkedOutBeforeCheckedIn }
+
         let idx = checkInSessions.firstIndex { $0.id == id }
+        var newArr = checkInSessions
         if let idx = idx {
-            checkInSessions[idx] = newSession
+            newArr[idx] = newSession
+        }
+
+        let intersectionCheckResult = IntersectionChecker.checkIntersection(sessions: newArr)
+        if intersectionCheckResult.isEmpty {
+            print("🤔 yay no intersection")
+            checkInSessions = newArr
+            return nil
+        } else {
+            print("🤔 :( there was an intersection: \(intersectionCheckResult)")
+            return .sessionsIntersecting
         }
     }
 
