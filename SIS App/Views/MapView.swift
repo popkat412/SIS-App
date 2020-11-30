@@ -33,6 +33,23 @@ struct MapView: UIViewRepresentable {
                 radius: Constants.schoolRadius
             )
         )
+        
+        // Overlays for blocks
+        let blockOutlines = FileUtility.getDataFromJsonAppbundleFile(filename: "overlay_coords.json", dataType: [BlockOutlineInfo].self)!
+        
+        for outline in blockOutlines {
+            
+            let boundary = outline.boundary.map {
+                CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
+            }
+            print("adding outline: \(outline.block), \(boundary)")
+            mapView.addOverlay(
+                MKPolygon(
+                    coordinates: boundary,
+                    count: outline.boundary.count
+                )
+            )
+        }
 
         return mapView
     }
@@ -54,6 +71,7 @@ struct MapView: UIViewRepresentable {
 
     class Coordinator: NSObject, MKMapViewDelegate {
         func mapView(_: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            print("overlay: \(overlay)")
             if overlay is MKCircle {
                 let circle = MKCircleRenderer(overlay: overlay)
                 circle.strokeColor = UIColor.red
@@ -61,6 +79,13 @@ struct MapView: UIViewRepresentable {
                 circle.lineWidth = 1
                 return circle
             }
+            if overlay is MKPolygon {
+                print("drawing outline")
+                let polygonView = MKPolygonRenderer(overlay: overlay)
+                polygonView.strokeColor = .magenta
+                return polygonView
+            }
+
             return MKOverlayRenderer()
         }
     }
@@ -75,4 +100,9 @@ struct MapView_Previews: PreviewProvider {
         MapView()
             .environmentObject(UserLocationManager())
     }
+}
+
+struct BlockOutlineInfo: Decodable {
+    var block: String
+    var boundary: [Location]
 }
