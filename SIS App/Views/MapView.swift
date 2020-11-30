@@ -18,13 +18,14 @@ struct MapView: UIViewRepresentable {
         // Delegate
         mapView.delegate = context.coordinator
 
-        // Overlays (for debugging geofences)
-        for block in DataProvider.getBlocks() { // Blocks
+        // Overlays for debugging geofences
+        for block in DataProvider.getBlocks() {
             print("adding overlay... \(block.name)")
-            mapView.addOverlay(MKCircle(
-                center: block.location.toCLLocation().coordinate,
-                radius: block.radius
-            )
+            mapView.addOverlay(
+                MKCircle(
+                    center: block.location.toCLLocation().coordinate,
+                    radius: block.radius
+                )
             )
         }
         mapView.addOverlay(
@@ -33,14 +34,13 @@ struct MapView: UIViewRepresentable {
                 radius: Constants.schoolRadius
             )
         )
-        
-        // Overlays for blocks
-        let blockOutlines = FileUtility.getDataFromJsonAppbundleFile(filename: "overlay_coords.json", dataType: [BlockOutlineInfo].self)!
-        
+
+        // Overlays for block outline
+        let blockOutlines = FileUtility.getDataFromJsonAppbundleFile(filename: Constants.blockOutlineFilename, dataType: [BlockOutlineInfo].self)!
+
         for outline in blockOutlines {
-            
             let boundary = outline.boundary.map {
-                CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
+                $0.toCLLocationCoordinate2D()
             }
             print("adding outline: \(outline.block), \(boundary)")
             mapView.addOverlay(
@@ -50,6 +50,10 @@ struct MapView: UIViewRepresentable {
                 )
             )
         }
+
+        // Annotations for block names
+        mapView.addAnnotations(DataProvider.getBlocks().map { BlockNameAnnotation(coordinate: $0.location.toCLLocationCoordinate2D(), name: $0.name)
+        })
 
         return mapView
     }
@@ -69,27 +73,6 @@ struct MapView: UIViewRepresentable {
         mapView.setRegion(region, animated: true)
     }
 
-    class Coordinator: NSObject, MKMapViewDelegate {
-        func mapView(_: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            print("overlay: \(overlay)")
-            if overlay is MKCircle {
-                let circle = MKCircleRenderer(overlay: overlay)
-                circle.strokeColor = UIColor.red
-                circle.fillColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
-                circle.lineWidth = 1
-                return circle
-            }
-            if overlay is MKPolygon {
-                print("drawing outline")
-                let polygonView = MKPolygonRenderer(overlay: overlay)
-                polygonView.strokeColor = .magenta
-                return polygonView
-            }
-
-            return MKOverlayRenderer()
-        }
-    }
-
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
@@ -102,7 +85,76 @@ struct MapView_Previews: PreviewProvider {
     }
 }
 
-struct BlockOutlineInfo: Decodable {
-    var block: String
-    var boundary: [Location]
+extension MapView {
+    class Coordinator: NSObject, MKMapViewDelegate {
+        func mapView(_: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            print("overlay: \(overlay)")
+            if overlay is MKCircle {
+                let circle = MKCircleRenderer(overlay: overlay)
+                circle.strokeColor = UIColor.red
+                circle.fillColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
+                circle.lineWidth = 1
+                return circle
+            } else if overlay is MKPolygon {
+                print("drawing outline")
+                let polygonView = MKPolygonRenderer(overlay: overlay)
+                polygonView.strokeColor = .blue
+                polygonView.lineWidth = 2
+                return polygonView
+            }
+
+            return MKOverlayRenderer()
+        }
+
+        func mapView(_: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            let annotationView = BlockNameAnnotationView(
+                annotation: annotation,
+                reuseIdentifier: "BlockNameANnotation"
+            )
+            annotationView.canShowCallout = true
+            return annotationView
+        }
+    }
+}
+
+extension MapView {
+    private struct BlockOutlineInfo: Decodable {
+        var block: String
+        var boundary: [Location]
+    }
+
+    private class BlockNameAnnotation: NSObject, MKAnnotation {
+        let coordinate: CLLocationCoordinate2D
+        let title: String?
+
+        init(coordinate: CLLocationCoordinate2D, name: String) {
+            self.coordinate = coordinate
+            title = name
+        }
+    }
+
+    private class BlockNameAnnotationView: MKAnnotationView {
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+
+        override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+            super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            guard (self.annotation as? BlockNameAnnotation) != nil else { return }
+
+            let blockImage = UIImage(named: "block")
+            let size = CGSize(
+                width: Constants.mapViewAnnotationImageSize,
+                height: Constants.mapViewAnnotationImageSize
+            )
+            UIGraphicsBeginImageContext(size)
+            blockImage!.draw(in: CGRect(
+                x: 0, y: 0,
+                width: size.width, height: size.height
+            )
+            )
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            image = resizedImage
+        }
+    }
 }
