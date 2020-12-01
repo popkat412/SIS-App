@@ -1085,5 +1085,54 @@
         },
         "radius": 32.42,
         "categories": {}
+    },
+    {
+        "name": "Canteen/Hall Block",
+        "location": {
+            "longitude": 103.845664,
+            "latitude": 1.347767
+        },
+        "radius": 123.99
+        "categories": {
+            "others": [
+                {
+                    "name": "Canteen",
+                    "level": 1,
+                    "id": "-",
+                    "iconName": "canteen"
+                },
+                {
+                    "name": "Hall",
+                    "level": 2,
+                    "id": "-"
+                    "iconName": "hall"
+                }
+            ]
+        }
+    },
+    {
+        "name": "HML/Dining Hall Block",
+        "location": {
+            "longitude": 103.844863,
+            "latitude": 1.346911
+        },
+        "radius": 48.49
+        "categories": {
+            "others": [
+                {
+                    "name": "Hullet Memorial Library",
+                    "level": 1,
+                    "id": "-",
+                    "iconName": "library"
+                },
+                {
+                    "name": "Dining Hall",
+                    "level": 2,
+                    "id": "-"
+                    "iconName": "canteen"
+                }
+            ]
+        }
     }
+    
 ]
