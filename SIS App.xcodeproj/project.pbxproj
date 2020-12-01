@@ -82,6 +82,7 @@
 		62FC0BB9256D4A4D00EACA79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC0BB8256D4A4D00EACA79 /* Constants.swift */; };
 		62FC0BBA256D4A4D00EACA79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC0BB8256D4A4D00EACA79 /* Constants.swift */; };
 		62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF081925564B9A00FD5D65 /* CheckInManager.swift */; };
+		F2D8D4FB257390ED0098B1A6 /* overlay_coords.json in Resources */ = {isa = PBXBuildFile; fileRef = F2D8D4FA257390ED0098B1A6 /* overlay_coords.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,7 @@
 		62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButtonStyle.swift; sourceTree = "<group>"; };
 		62FC0BB8256D4A4D00EACA79 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		62FF081925564B9A00FD5D65 /* CheckInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInManager.swift; sourceTree = "<group>"; };
+		F2D8D4FA257390ED0098B1A6 /* overlay_coords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = overlay_coords.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +279,7 @@
 		62881EB725565C3300787923 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				F2D8D4FA257390ED0098B1A6 /* overlay_coords.json */,
 				62FC0BB8256D4A4D00EACA79 /* Constants.swift */,
 				628D11DD255997DB00BF4D2E /* colors.json */,
 				62EC2D732556377D0040AF5D /* rooms.json */,
@@ -432,6 +435,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2D8D4FB257390ED0098B1A6 /* overlay_coords.json in Resources */,
 				62E119F8253ADEC10037CEC5 /* LaunchScreen.storyboard in Resources */,
 				62E119F5253ADEC10037CEC5 /* Preview Assets.xcassets in Resources */,
 				62E119F2253ADEC10037CEC5 /* Assets.xcassets in Resources */,
