@@ -45,6 +45,7 @@
 		62A53B4B256E41A30092E891 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A53B4A256E41A30092E891 /* IconView.swift */; };
 		62BFA55B256E5C8700CD327D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F1253ADEC10037CEC5 /* Assets.xcassets */; };
 		62BFA561256E8F2900CD327D /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BFA560256E8F2900CD327D /* NavigationState.swift */; };
+		62C2FB0225761DA60024208C /* RealisticWalking.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 62C2FB0125761DA60024208C /* RealisticWalking.gpx */; };
 		62D5D63A255D38D60064D484 /* CheckInTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D639255D38D60064D484 /* CheckInTarget.swift */; };
 		62D5D640255D3E850064D484 /* ChooseRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D63F255D3E850064D484 /* ChooseRoomView.swift */; };
 		62D5D644255D40330064D484 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D643255D40330064D484 /* UserLocationManager.swift */; };
@@ -156,6 +157,7 @@
 		629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "View+ConditionalModifiers.swift"; path = "SIS App/Utilities/View+ConditionalModifiers.swift"; sourceTree = SOURCE_ROOT; };
 		62A53B4A256E41A30092E891 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		62BFA560256E8F2900CD327D /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
+		62C2FB0125761DA60024208C /* RealisticWalking.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = RealisticWalking.gpx; sourceTree = "<group>"; };
 		62D5D639255D38D60064D484 /* CheckInTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTarget.swift; sourceTree = "<group>"; };
 		62D5D63F255D3E850064D484 /* ChooseRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoomView.swift; sourceTree = "<group>"; };
 		62D5D643255D40330064D484 /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLocationManager.swift; path = "SIS App/Models/UserLocationManager.swift"; sourceTree = SOURCE_ROOT; };
@@ -288,12 +290,21 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		62C2FB0025761D930024208C /* GPX FIles */ = {
+			isa = PBXGroup;
+			children = (
+				62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */,
+				62868F3625600F6700F81842 /* MoveInOutSchool.gpx */,
+				62C2FB0125761DA60024208C /* RealisticWalking.gpx */,
+			);
+			path = "GPX FIles";
+			sourceTree = "<group>";
+		};
 		62E119DC253ADEBF0037CEC5 = {
 			isa = PBXGroup;
 			children = (
+				62C2FB0025761D930024208C /* GPX FIles */,
 				62427C55256E2A3B00903491 /* SISAppWidgetExtension.entitlements */,
-				62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */,
-				62868F3625600F6700F81842 /* MoveInOutSchool.gpx */,
 				62E119E7253ADEBF0037CEC5 /* SIS App */,
 				6258F063256771E10021438C /* SISAppWidget */,
 				6258F05E256771E10021438C /* Frameworks */,
@@ -441,6 +452,7 @@
 				62E119F2253ADEC10037CEC5 /* Assets.xcassets in Resources */,
 				628D11DE255997DB00BF4D2E /* colors.json in Resources */,
 				62881EAE2556570A00787923 /* categories.json in Resources */,
+				62C2FB0225761DA60024208C /* RealisticWalking.gpx in Resources */,
 				62EC2D742556377D0040AF5D /* rooms.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
