@@ -54,8 +54,14 @@ struct MapView: UIViewRepresentable {
         }
 
         // Annotations for block names
-        mapView.addAnnotations(DataProvider.getBlocks().map { BlockNameAnnotation(coordinate: $0.location.toCLLocationCoordinate2D(), name: $0.name)
-        })
+        mapView.addAnnotations(
+            DataProvider.getBlocks().map {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = $0.location.toCLLocationCoordinate2D()
+                annotation.title = $0.name
+                return annotation
+            }
+        )
 
         return mapView
     }
@@ -109,11 +115,17 @@ extension MapView {
         }
 
         func mapView(_: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-            let annotationView = BlockNameAnnotationView(
-                annotation: annotation,
-                reuseIdentifier: "BlockNameANnotation"
+            guard !(annotation is MKUserLocation) else { return nil }
+
+            let annotationView = EmptyAnnotationView(
+                annotation: annotation, reuseIdentifier: "blocknameannotation"
             )
-            annotationView.canShowCallout = true
+            let annotationLabel = UILabel(frame: CGRect(x: -100, y: 0, width: 200, height: 30))
+            annotationLabel.numberOfLines = 3
+            annotationLabel.textAlignment = .center
+            annotationLabel.font = UIFont.systemFont(ofSize: 12)
+            annotationLabel.text = annotation.title as? String
+            annotationView.addSubview(annotationLabel)
             return annotationView
         }
     }
@@ -125,39 +137,13 @@ extension MapView {
         var boundary: [Location]
     }
 
-    private class BlockNameAnnotation: NSObject, MKAnnotation {
-        let coordinate: CLLocationCoordinate2D
-        let title: String?
-
-        init(coordinate: CLLocationCoordinate2D, name: String) {
-            self.coordinate = coordinate
-            title = name
-        }
-    }
-
-    private class BlockNameAnnotationView: MKAnnotationView {
+    private class EmptyAnnotationView: MKAnnotationView {
         required init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
         }
 
         override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
             super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-            guard (self.annotation as? BlockNameAnnotation) != nil else { return }
-
-            let blockImage = UIImage(named: "block")
-            let size = CGSize(
-                width: Constants.mapViewAnnotationImageSize,
-                height: Constants.mapViewAnnotationImageSize
-            )
-            UIGraphicsBeginImageContext(size)
-            blockImage!.draw(in:
-                CGRect(
-                    x: 0, y: 0,
-                    width: size.width, height: size.height
-                )
-            )
-            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-            image = resizedImage
         }
     }
 }
