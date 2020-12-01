@@ -100,7 +100,7 @@ extension MapView {
             } else if overlay is MKPolygon {
                 print("drawing outline")
                 let polygonView = MKPolygonRenderer(overlay: overlay)
-                polygonView.strokeColor = .blue
+                polygonView.strokeColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
                 polygonView.lineWidth = 2
                 return polygonView
             }
