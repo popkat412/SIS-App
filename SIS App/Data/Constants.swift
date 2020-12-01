@@ -11,7 +11,7 @@ import SwiftUI
 
 struct Constants {
     // -------- [[ DEEPLINK URLS ]] --------- //
-    static let urlScheme = "com.example.ri-safe-entry"
+    static let urlScheme = "sg.tk.2020.risafeentry.url"
     static let urlHost = "widgetlink"
     static let baseURLString = "\(urlScheme)://\(urlHost)"
     static let baseURL = URL(string: Constants.baseURLString)!
@@ -52,8 +52,12 @@ struct Constants {
     static let roomIdToParentFilename = "roomIdToParent.json"
 
     // ------ [[ IDENTIFIERS ]] ------- //
-    static let appGroupIdentifier = "group.com.example.ri-safe-entry"
+    static let appGroupIdentifier = "group.sg.tk.2020.risafeentry.widget"
 
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"
+
+    // ------ [[ GEOFENCE DELAY ]] ----- //
+    /// Time in seconds inside a building before geofence is triggered
+    static let geofenceDelayTime: Double = 2 * 60
 }
