@@ -19,21 +19,23 @@ struct MapView: UIViewRepresentable {
         mapView.delegate = context.coordinator
 
         // Overlays for debugging geofences
-        for block in DataProvider.getBlocks() {
-            print("adding overlay... \(block.name)")
+        if Constants.shouldDrawDebugGeofences {
+            for block in DataProvider.getBlocks() {
+                print("adding overlay... \(block.name)")
+                mapView.addOverlay(
+                    MKCircle(
+                        center: block.location.toCLLocation().coordinate,
+                        radius: block.radius
+                    )
+                )
+            }
             mapView.addOverlay(
                 MKCircle(
-                    center: block.location.toCLLocation().coordinate,
-                    radius: block.radius
+                    center: Constants.schoolLocation.coordinate,
+                    radius: Constants.schoolRadius
                 )
             )
         }
-        mapView.addOverlay(
-            MKCircle(
-                center: Constants.schoolLocation.coordinate,
-                radius: Constants.schoolRadius
-            )
-        )
 
         // Overlays for block outline
         let blockOutlines = FileUtility.getDataFromJsonAppbundleFile(filename: Constants.blockOutlineFilename, dataType: [BlockOutlineInfo].self)!
@@ -148,10 +150,11 @@ extension MapView {
                 height: Constants.mapViewAnnotationImageSize
             )
             UIGraphicsBeginImageContext(size)
-            blockImage!.draw(in: CGRect(
-                x: 0, y: 0,
-                width: size.width, height: size.height
-            )
+            blockImage!.draw(in:
+                CGRect(
+                    x: 0, y: 0,
+                    width: size.width, height: size.height
+                )
             )
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
             image = resizedImage

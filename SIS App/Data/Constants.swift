@@ -26,7 +26,8 @@ struct Constants {
     static let schoolRegionId = "Y14"
 
     // -------- [[ MAPVIEW STUFF ]] -------- //
-    static let mapViewAnnotationImageSize = 30
+    static let shouldDrawDebugGeofences = false
+    static let mapViewAnnotationImageSize = 20
 
     // -------- [[ COLOR PALETTE ]] -------- //
     static let checkedInGradient = Gradient(colors: [
