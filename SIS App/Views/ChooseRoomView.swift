@@ -37,7 +37,7 @@ struct ChooseRoomView: View {
                 showingSearch = true
             }, label: {
                 HStack {
-                    Image(systemName: "magnifyingglass.circle.fill")
+                    Image(systemName: "magnifyingglass")
                     Text("Search")
                 }
                 .padding(.vertical, 10)

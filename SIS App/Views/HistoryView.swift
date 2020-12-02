@@ -11,31 +11,37 @@ struct HistoryView: View {
     @EnvironmentObject var checkInManager: CheckInManager
 
     @State private var showingEditRoomScreen = false
+    @State private var currentlySelectedSession: CheckInSession? = nil
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(checkInManager.getCheckInSessions(usingPlaceholderData: true)) { day in
+                ForEach(checkInManager.getCheckInSessions()) { day in
                     Section(header: Text("\(day.formattedDate)")) {
                         ForEach(day.sessions) { session in
                             HistoryRow(
                                 session: session,
                                 editable: true,
+                                currentlySelectedSession: $currentlySelectedSession,
                                 onTargetPressed: {
                                     showingEditRoomScreen = true
                                 },
                                 onCheckInDateUpdate: { newCheckInDate in
-                                    print("new check in date: \(newCheckInDate)")
+                                    guard let currentlySelectedSession = currentlySelectedSession else { return }
+
+                                    print("🗂 new check in date: \(newCheckInDate)")
                                     checkInManager.updateCheckInSession(
-                                        id: session.id,
-                                        newSession: session.newSessionWith(checkedIn: newCheckInDate)
+                                        id: currentlySelectedSession.id,
+                                        newSession: currentlySelectedSession.newSessionWith(checkedIn: newCheckInDate)
                                     )
                                 },
                                 onCheckOutDateUpdate: { newCheckOutDate in
-                                    print("new check out date: \(newCheckOutDate)")
+                                    guard let currentlySelectedSession = currentlySelectedSession else { return }
+
+                                    print("🗂 new check out date: \(newCheckOutDate)")
                                     checkInManager.updateCheckInSession(
-                                        id: session.id,
-                                        newSession: session.newSessionWith(checkedOut: newCheckOutDate)
+                                        id: currentlySelectedSession.id,
+                                        newSession: currentlySelectedSession.newSessionWith(checkedOut: newCheckOutDate)
                                     )
                                 }
                             )
@@ -43,9 +49,11 @@ struct HistoryView: View {
                                 ChooseRoomView(onRoomSelection: { room in
                                     showingEditRoomScreen = false
 
+                                    guard let currentlySelectedSession = currentlySelectedSession else { return }
+                                    print("🗂 saving session: \(session)")
                                     checkInManager.updateCheckInSession(
-                                        id: session.id,
-                                        newSession: session.newSessionWith(target: room)
+                                        id: currentlySelectedSession.id,
+                                        newSession: currentlySelectedSession.newSessionWith(target: room)
                                     )
                                 }, onBackButtonPressed: {
                                     showingEditRoomScreen = false
