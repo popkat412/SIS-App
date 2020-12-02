@@ -1092,7 +1092,7 @@
             "longitude": 103.845664,
             "latitude": 1.347767
         },
-        "radius": 123.99,
+        "radius": 65,
         "categories": {
             "others": [
                 {
@@ -1116,7 +1116,7 @@
             "longitude": 103.844863,
             "latitude": 1.346911
         },
-        "radius": 48.49,
+        "radius": 25,
         "categories": {
             "others": [
                 {
