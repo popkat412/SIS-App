@@ -11,7 +11,7 @@ import SwiftUI
 
 struct Constants {
     // -------- [[ DEEPLINK URLS ]] --------- //
-    static let urlScheme = "com.example.ri-safe-entry"
+    static let urlScheme = "sg.tk.2020.risafeentry.url"
     static let urlHost = "widgetlink"
     static let baseURLString = "\(urlScheme)://\(urlHost)"
     static let baseURL = URL(string: Constants.baseURLString)!
@@ -24,6 +24,10 @@ struct Constants {
     static let schoolLocation = CLLocation(latitude: 1.347014, longitude: 103.845148)
     static let schoolRadius = 222.94
     static let schoolRegionId = "Y14"
+
+    // -------- [[ MAPVIEW STUFF ]] -------- //
+    static let shouldDrawDebugGeofences = false
+    static let mapViewAnnotationImageSize = 20
 
     // -------- [[ COLOR PALETTE ]] -------- //
     static let checkedInGradient = Gradient(colors: [
@@ -43,11 +47,12 @@ struct Constants {
     static let roomsFilename = "rooms.json"
     static let levelColorsFilename = "colors.json"
     static let categoryToDisplayNameFilename = "categories.json"
+    static let blockOutlineFilename = "overlay_coords.json"
 
     static let roomIdToParentFilename = "roomIdToParent.json"
 
     // ------ [[ IDENTIFIERS ]] ------- //
-    static let appGroupIdentifier = "group.com.example.ri-safe-entry"
+    static let appGroupIdentifier = "group.sg.tk.2020.risafeentry.widget"
     static let remindUserFillInRoomsNotificationIdentifier = "remind-user-fill-in-rooms"
 
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
@@ -55,4 +60,8 @@ struct Constants {
 
     // ------ [[ OTHER ]] ------ //
     static let remindUserFillInRoomsTime = DateComponents(hour: 18)
+  
+    // ------ [[ GEOFENCE DELAY ]] ----- //
+    /// Time in seconds inside a building before geofence is triggered
+    static let geofenceDelayTime: Double = 2 * 60
 }
