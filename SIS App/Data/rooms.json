@@ -1092,7 +1092,7 @@
             "longitude": 103.845664,
             "latitude": 1.347767
         },
-        "radius": 123.99
+        "radius": 123.99,
         "categories": {
             "others": [
                 {
@@ -1104,7 +1104,7 @@
                 {
                     "name": "Hall",
                     "level": 2,
-                    "id": "-"
+                    "id": "-",
                     "iconName": "hall"
                 }
             ]
@@ -1116,7 +1116,7 @@
             "longitude": 103.844863,
             "latitude": 1.346911
         },
-        "radius": 48.49
+        "radius": 48.49,
         "categories": {
             "others": [
                 {
@@ -1128,11 +1128,10 @@
                 {
                     "name": "Dining Hall",
                     "level": 2,
-                    "id": "-"
+                    "id": "-",
                     "iconName": "canteen"
                 }
             ]
         }
     }
-    
 ]
