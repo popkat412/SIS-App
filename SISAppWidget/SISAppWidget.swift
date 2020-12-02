@@ -118,7 +118,7 @@ struct SISAppWidgetEntryView: View {
                         Button(action: {}) {
                             Text("Check Out")
                         }
-                        .buttonStyle(GradientButtonStyle(gradient: Constants.checkedInGradient))
+                        .buttonStyle(GradientButtonStyle(gradient: Constants.greenGradient))
                         .padding()
                     }
                 }

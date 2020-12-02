@@ -6,6 +6,8 @@
 //
 
 import CoreData
+import Firebase
+import FirebaseDynamicLinks
 import UIKit
 import UserNotifications
 
@@ -15,7 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
 
-        return false
+        print("Configuring firebase..")
+        FirebaseApp.configure()
+
+        return true
+    }
+
+    func application(_: UIApplication, continue userActivity: NSUserActivity, restorationHandler _: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        let handled = DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!) { _, _ in
+        }
+
+        return handled
     }
 
     // MARK: UISceneSession Lifecycle

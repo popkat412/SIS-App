@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var checkInManager = CheckInManager()
     var userLocationManager = UserLocationManager()
     var navigationState = NavigationState()
+    var userAuthManager = UserAuthManager()
 
     func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -29,6 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(checkInManager)
             .environmentObject(userLocationManager)
             .environmentObject(navigationState)
+            .environmentObject(userAuthManager)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

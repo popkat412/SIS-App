@@ -30,14 +30,16 @@ struct Constants {
     static let mapViewAnnotationImageSize = 20
 
     // -------- [[ COLOR PALETTE ]] -------- //
-    static let checkedInGradient = Gradient(colors: [
+    static let greenGradient = Gradient(colors: [
         Color(red: 35 / 225, green: 122 / 225, blue: 87 / 225),
         Color(red: 9 / 225, green: 48 / 225, blue: 40 / 225),
     ])
-    static let checkedOutGradient = Gradient(colors: [
+    static let blueGradient = Gradient(colors: [
         Color(red: 67 / 255, green: 198 / 255, blue: 172 / 255),
         Color(red: 25 / 255, green: 22 / 255, blue: 84 / 255),
     ])
+
+    static let activityIndicatorSize: CGFloat = 60
 
     // ------ [[ FILENAMES ]] --------- //
     static let savedSessionsFilename = "savedSessions.json"
