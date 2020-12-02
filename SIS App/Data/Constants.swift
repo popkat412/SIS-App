@@ -53,10 +53,14 @@ struct Constants {
 
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.sg.tk.2020.risafeentry.widget"
+    static let remindUserFillInRoomsNotificationIdentifier = "remind-user-fill-in-rooms"
 
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"
 
+    // ------ [[ OTHER ]] ------ //
+    static let remindUserFillInRoomsTime = DateComponents(hour: 18)
+  
     // ------ [[ GEOFENCE DELAY ]] ----- //
     /// Time in seconds inside a building before geofence is triggered
     static let geofenceDelayTime: Double = 2 * 60
