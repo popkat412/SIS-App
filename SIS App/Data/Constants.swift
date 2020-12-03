@@ -63,5 +63,5 @@ struct Constants {
   
     // ------ [[ GEOFENCE DELAY ]] ----- //
     /// Time in seconds inside a building before geofence is triggered
-    static let geofenceDelayTime: Double = 2 * 60
+    static let geofenceDelayTime: Double = 10
 }

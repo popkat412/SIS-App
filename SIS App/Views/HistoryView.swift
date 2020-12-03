@@ -5,11 +5,13 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
+import LocalAuthentication
 import SwiftUI
 
 struct HistoryView: View {
     @EnvironmentObject var checkInManager: CheckInManager
 
+    @State private var isUnlocked = false
     @State private var showingEditRoomScreen = false
     @State private var currentlySelectedSession: CheckInSession? = nil
 
@@ -71,6 +73,30 @@ struct HistoryView: View {
             .listStyle(InsetListStyle()) // Must set this, if not addign the EditButton() ruins how the list looks
             .navigationBarTitle("History")
             .navigationBarItems(trailing: EditButton())
+        }
+        .onAppear(perform: authenticate)
+    }
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        // check whether biometric authentication is possible
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // it's possible, so go ahead and use it
+            let reason = "To access your check in history"
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                // authentication has now completed
+                DispatchQueue.main.async {
+                    if success {
+                        self.isUnlocked = true
+                    } else {
+                        // there was a problem
+                    }
+                }
+            }
+        } else {
+            // no biometrics
         }
     }
 }
