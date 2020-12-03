@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct MyErrorInfo: Identifiable {
     var message: String
@@ -21,4 +22,17 @@ struct MyErrorInfo: Identifiable {
         self.error = nil
         message = error
     }
+
+    func toAlertItem(onDismiss: @escaping () -> Void) -> AlertItem {
+        print("🔥 toAlertItem: \(String(describing: error))")
+        return AlertItem(
+            title: "Whoops!",
+            message: message,
+            dismissButton: .default(Text("Got it!"), action: onDismiss)
+        )
+    }
+}
+
+extension String: LocalizedError {
+    public var errorDescription: String? { self }
 }

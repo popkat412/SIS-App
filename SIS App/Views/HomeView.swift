@@ -13,7 +13,7 @@ struct HomeView: View {
     @EnvironmentObject var userLocationManager: UserLocationManager
     @EnvironmentObject var userAuthManager: UserAuthManager
 
-    @State private var error: MyErrorInfo?
+    @State private var alertItem: AlertItem?
     @State private var showingActivityIndicator: Bool = false
 
     var body: some View {
@@ -42,14 +42,16 @@ struct HomeView: View {
                         print("sign out button pressed")
                         showingActivityIndicator = true
                         userAuthManager.signOut { error in
-                            self.error = MyErrorInfo(error)
+                            alertItem = MyErrorInfo(error).toAlertItem {
+                                showingActivityIndicator = false
+                            }
                         }
                     }, label: {
                         Text("Sign out")
                     }
                 )
             )
-            .alert(item: $error, content: { makeErrorAlert($0) { showingActivityIndicator = false } })
+            .alert(item: $alertItem, content: alertItemBuilder)
         }
         .onDisappear {
             showingActivityIndicator = false

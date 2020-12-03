@@ -16,7 +16,7 @@ struct LoginView: View {
 
     @State private var showingActivityIndicator = false
 
-    @State private var error: MyErrorInfo?
+    @State private var alertItem: AlertItem?
 
     var body: some View {
         ZStack {
@@ -71,9 +71,9 @@ struct LoginView: View {
                     .frame(height: 50)
 
                 Button(action: {
-                    print("sign in button pressed")
+                    print("🔥 sign in button pressed")
 //                    guard email.hasSuffix(Constants.riEmailSuffix) else {
-//                        error = MyErrorInfo("Please use your RI email")
+//                        alertItem = MyErrorInfo("Please use your RI email").toAlertItem()
 //                        return
 //                    }
 
@@ -85,13 +85,25 @@ struct LoginView: View {
                 .buttonStyle(GradientButtonStyle(gradient: Constants.greenGradient))
 
                 Button(action: {
-                    print("sign up button pressed")
+                    print("🔥 sign up button pressed")
 //                    guard email.hasSuffix(Constants.riEmailSuffix) else {
-//                        error = MyErrorInfo("Please use your RI email")
+//                        alertItem = MyErrorInfo("Please use your RI email").toAlertItem()
 //                        return
 //                    }
 
-                    userAuthManager.signUp(email: email, password: password, onError: onError)
+                    userAuthManager.signUp(
+                        email: email,
+                        password: password,
+                        onSentEmailVerfication: {
+                            print("🔥 sent email verification!")
+                            showingActivityIndicator = false
+                            alertItem = AlertItem(
+                                title: "Please verify your account",
+                                message: "A message has been sent to \(userAuthManager.userEmail). Click on the link to verify your account"
+                            )
+                        },
+                        onError: onError
+                    )
                     showingActivityIndicator = true
                 }) {
                     Text("Sign up")
@@ -107,14 +119,18 @@ struct LoginView: View {
             }
         }
         .padding()
-        .alert(item: $error, content: { makeErrorAlert($0) { showingActivityIndicator = false }})
+        .alert(item: $alertItem, content: alertItemBuilder)
         .onDisappear {
             showingActivityIndicator = false
         }
+        .onReceive(NotificationCenter.default.publisher(for: .AuthStateDidChange), perform: { _ in
+            print("🔥 auth state did change")
+        })
     }
 
     private func onError(_ error: Error) {
-        self.error = MyErrorInfo(error)
+        print("🔥 error: \(error)")
+        alertItem = MyErrorInfo(error).toAlertItem { showingActivityIndicator = false }
     }
 }
 
