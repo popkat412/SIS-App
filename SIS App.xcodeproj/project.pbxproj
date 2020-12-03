@@ -21,6 +21,7 @@
 		621A877D2551832C00FA810F /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A877C2551832C00FA810F /* Block.swift */; };
 		621A87812551838900FA810F /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A87802551838900FA810F /* Room.swift */; };
 		622CCC6C256F54CA00C9445D /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6255C34C256E49450052B38C /* FileUtility.swift */; };
+		623107922578C4390003DBAC /* MyTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623107912578C4390003DBAC /* MyTextFieldStyle.swift */; };
 		6255C34D256E49450052B38C /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6255C34C256E49450052B38C /* FileUtility.swift */; };
 		6258F060256771E10021438C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6258F05F256771E10021438C /* WidgetKit.framework */; };
 		6258F062256771E10021438C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6258F061256771E10021438C /* SwiftUI.framework */; };
@@ -153,6 +154,7 @@
 		621A77E925566CCE00636B27 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		621A877C2551832C00FA810F /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		621A87802551838900FA810F /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		623107912578C4390003DBAC /* MyTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTextFieldStyle.swift; sourceTree = "<group>"; };
 		62427C55256E2A3B00903491 /* SISAppWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SISAppWidgetExtension.entitlements; sourceTree = "<group>"; };
 		6255C34C256E49450052B38C /* FileUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtility.swift; sourceTree = "<group>"; };
 		6258F05D256771E10021438C /* SISAppWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SISAppWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				62C2FB162576356D0024208C /* LoginView.swift */,
+				623107912578C4390003DBAC /* MyTextFieldStyle.swift */,
 				621573112577D53900C39621 /* ActivityIndicator.swift */,
 				627D553F256E5AF200DF3B32 /* HistoryRow.swift */,
 				6202DDC925581EA70017BC49 /* ContentView.swift */,
@@ -594,6 +597,7 @@
 				62FC0BB4256D48F900EACA79 /* GradientButtonStyle.swift in Sources */,
 				62DB8FDC2556A2E9006AA1D3 /* Level.swift in Sources */,
 				62FD70C725788D3900C785BE /* AlertItem.swift in Sources */,
+				623107922578C4390003DBAC /* MyTextFieldStyle.swift in Sources */,
 				6202DDD0255827DF0017BC49 /* HistoryView.swift in Sources */,
 				629EB68025638E64000FADD9 /* View+ConditionalModifiers.swift in Sources */,
 				6202DDCD255821520017BC49 /* CheckInSession.swift in Sources */,
