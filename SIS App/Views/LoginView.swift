@@ -8,8 +8,6 @@
 import SwiftUI
 import SwiftUIX
 
-typealias OnErrorCallback = (Error) -> Void
-
 struct LoginView: View {
     @EnvironmentObject var userAuthManager: UserAuthManager
 
@@ -80,6 +78,14 @@ struct LoginView_Previews: PreviewProvider {
     }
 }
 
+private func validateInputs(email: String, password: String) -> Error? {
+    guard !email.isEmpty else { return "Email cannot be empty" }
+    guard !password.isEmpty else { return "Password cannot be empty" }
+//    guard email.hasSuffix(Constants.riEmailSuffix) else { return "Please use your RI email" }
+
+    return nil
+}
+
 private struct EmailView: View {
     @Binding var email: String
 
@@ -125,10 +131,6 @@ private struct LoginButton: View {
     var body: some View {
         Button(action: {
             print("🔥 sign in button pressed")
-//            guard email.hasSuffix(Constants.riEmailSuffix) else {
-//                alertItem = MyErrorInfo("Please use your RI email").toAlertItem()
-//                return
-//            }
 
             userAuthManager.signIn(email: email, password: password, onError: onError)
             showingActivityIndicator = true
@@ -143,35 +145,60 @@ private struct SignupButton: View {
     @EnvironmentObject var userAuthManager: UserAuthManager
     @Binding var showingActivityIndicator: Bool
     @Binding var alertItem: AlertItem?
+    @State private var showingConfirmPassword: Bool = false
+    @State private var showingConfirmPasswordFailed: Bool = false
     let email, password: String
     let onError: OnErrorCallback
 
     var body: some View {
         Button(action: {
             print("🔥 sign up button pressed")
-//            guard email.hasSuffix(Constants.riEmailSuffix) else {
-//                alertItem = MyErrorInfo("Please use your RI email").toAlertItem()
-//                return
-//            }
 
-            userAuthManager.signUp(
-                email: email,
-                password: password,
-                onSentEmailVerfication: {
-                    print("🔥 sent email verification!")
-                    showingActivityIndicator = false
-                    alertItem = AlertItem(
-                        title: "Please verify your account",
-                        message: "A message has been sent to \(userAuthManager.userEmail). Click on the link to verify your account"
-                    )
-                },
-                onError: onError
-            )
-            showingActivityIndicator = true
+            if let error = validateInputs(email: email, password: password) {
+                onError(error)
+                return
+            }
+
+            showingConfirmPassword = true
         }) {
             Text("Sign up")
         }
         .buttonStyle(GradientButtonStyle(gradient: Constants.blueGradient))
+        .alert(isPresented: $showingConfirmPasswordFailed) {
+            Alert(
+                title: Text("Whoops!"),
+                message: Text("The two passwords don't match, try again")
+            )
+        }
+        .alert(
+            isPresented: $showingConfirmPassword,
+            TextAlert(
+                title: "Confirm password",
+                placeholder: "Password",
+                isPassword: true,
+                action: { retypedPassword in
+                    if retypedPassword == password {
+                        showingActivityIndicator = true
+                        userAuthManager.signUp(
+                            email: email,
+                            password: password,
+                            onSentEmailVerfication: {
+                                print("🔥 sent email verification!")
+                                showingActivityIndicator = false
+                                alertItem = AlertItem(
+                                    title: "Please verify your account",
+                                    message: "A message has been sent to \(userAuthManager.userEmail). Click on the link to verify your account"
+                                )
+                            },
+                            onError: onError
+                        )
+                    } else {
+                        showingConfirmPasswordFailed = true
+                    }
+                }
+            )
+        )
+        .frame(height: 50) // Again, same hack, see below
     }
 }
 
@@ -219,5 +246,3 @@ private struct ForgetPasswordButton: View {
         // So it expands to fill all avaliable space
     }
 }
-
-extension String: Identifiable { public var id: String { self }}

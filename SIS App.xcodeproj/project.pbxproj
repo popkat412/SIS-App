@@ -101,6 +101,7 @@
 		62EA6FB62578DB610021951A /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EA6FB52578DB610021951A /* TextFieldAlert.swift */; };
 		62EC2D742556377D0040AF5D /* rooms.json in Resources */ = {isa = PBXBuildFile; fileRef = 62EC2D732556377D0040AF5D /* rooms.json */; };
 		62EC2D78255642A90040AF5D /* RawKeyedCodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */; };
+		62F75D7D2578ED600004FF9D /* String+HelperProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F75D7C2578ED600004FF9D /* String+HelperProtocols.swift */; };
 		62FC0BB4256D48F900EACA79 /* GradientButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */; };
 		62FC0BB5256D48F900EACA79 /* GradientButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */; };
 		62FC0BB9256D4A4D00EACA79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC0BB8256D4A4D00EACA79 /* Constants.swift */; };
@@ -206,6 +207,7 @@
 		62EA6FB52578DB610021951A /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
 		62EC2D732556377D0040AF5D /* rooms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rooms.json; sourceTree = "<group>"; };
 		62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawKeyedCodableDictionary.swift; sourceTree = "<group>"; };
+		62F75D7C2578ED600004FF9D /* String+HelperProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HelperProtocols.swift"; sourceTree = "<group>"; };
 		62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = InsideSchool.gpx; sourceTree = "<group>"; };
 		62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButtonStyle.swift; sourceTree = "<group>"; };
 		62FC0BB8256D4A4D00EACA79 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 		62756C2A25598BEE0007C4F3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				62F75D7C2578ED600004FF9D /* String+HelperProtocols.swift */,
 				6255C34C256E49450052B38C /* FileUtility.swift */,
 				629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */,
 				62868F322560009600F81842 /* UserNotificationHelper.swift */,
@@ -573,6 +576,7 @@
 				620B53F0256F600D00565260 /* RoomsView.swift in Sources */,
 				62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */,
 				62BFA561256E8F2900CD327D /* NavigationState.swift in Sources */,
+				62F75D7D2578ED600004FF9D /* String+HelperProtocols.swift in Sources */,
 				62FC0BB9256D4A4D00EACA79 /* Constants.swift in Sources */,
 				62E119E9253ADEBF0037CEC5 /* AppDelegate.swift in Sources */,
 				62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */,

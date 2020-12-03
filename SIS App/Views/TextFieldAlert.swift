@@ -13,7 +13,10 @@ import UIKit
 extension UIAlertController {
     convenience init(alert: TextAlert) {
         self.init(title: alert.title, message: alert.message, preferredStyle: .alert)
-        addTextField { $0.placeholder = alert.placeholder }
+        addTextField {
+            $0.placeholder = alert.placeholder
+            $0.isSecureTextEntry = alert.isPassword
+        }
         addAction(UIAlertAction(title: alert.cancel, style: .cancel) { _ in
             alert.action(nil)
         })
@@ -65,6 +68,7 @@ public struct TextAlert {
     var title: String
     var message: String? = nil
     var placeholder: String = ""
+    var isPassword: Bool = false
     var accept: String = "OK"
     var cancel: String = "Cancel"
     var action: (String?) -> Void
