@@ -39,8 +39,6 @@ struct Constants {
         Color(red: 25 / 255, green: 22 / 255, blue: 84 / 255),
     ])
 
-    static let activityIndicatorSize: CGFloat = 60
-
     // ------ [[ FILENAMES ]] --------- //
     static let savedSessionsFilename = "savedSessions.json"
     static let currentSessionFilename = "currentSession.json"
@@ -62,4 +60,8 @@ struct Constants {
     // ------ [[ GEOFENCE DELAY ]] ----- //
     /// Time in seconds inside a building before geofence is triggered
     static let geofenceDelayTime: Double = 2 * 60
+
+    // ------- [[ OTHERS ]] ------- //
+    static let activityIndicatorSize: CGFloat = 60
+    static let riEmailSuffix = "ri.edu.sg"
 }

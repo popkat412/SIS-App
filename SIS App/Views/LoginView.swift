@@ -72,15 +72,25 @@ struct LoginView: View {
 
                 Button(action: {
                     print("sign in button pressed")
+//                    guard email.hasSuffix(Constants.riEmailSuffix) else {
+//                        error = MyErrorInfo("Please use your RI email")
+//                        return
+//                    }
+
                     userAuthManager.signIn(email: email, password: password, onError: onError)
                     showingActivityIndicator = true
                 }) {
-                    Text("Sign in")
+                    Text("Login")
                 }
                 .buttonStyle(GradientButtonStyle(gradient: Constants.greenGradient))
 
                 Button(action: {
                     print("sign up button pressed")
+//                    guard email.hasSuffix(Constants.riEmailSuffix) else {
+//                        error = MyErrorInfo("Please use your RI email")
+//                        return
+//                    }
+
                     userAuthManager.signUp(email: email, password: password, onError: onError)
                     showingActivityIndicator = true
                 }) {

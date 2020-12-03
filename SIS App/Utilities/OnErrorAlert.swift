@@ -10,8 +10,8 @@ import SwiftUI
 
 func makeErrorAlert(_ error: MyErrorInfo, dismissAction: (() -> Void)? = nil) -> Alert {
     Alert(
-        title: Text("Whoops! An error occured"),
-        message: Text(error.error.localizedDescription),
+        title: Text("Whoops!"),
+        message: Text(error.message),
         dismissButton: .default(Text("Got it!"), action: dismissAction)
     )
 }
