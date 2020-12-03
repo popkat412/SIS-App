@@ -16,63 +16,69 @@ struct HistoryView: View {
     @State private var currentlySelectedSession: CheckInSession? = nil
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(checkInManager.getCheckInSessions()) { day in
-                    Section(header: Text("\(day.formattedDate)")) {
-                        ForEach(day.sessions) { session in
-                            HistoryRow(
-                                session: session,
-                                editable: true,
-                                currentlySelectedSession: $currentlySelectedSession,
-                                onTargetPressed: {
-                                    showingEditRoomScreen = true
-                                },
-                                onCheckInDateUpdate: { newCheckInDate in
-                                    guard let currentlySelectedSession = currentlySelectedSession else { return }
+        VStack {
+            if self.isUnlocked {
+                NavigationView {
+                    List {
+                        ForEach(checkInManager.getCheckInSessions()) { day in
+                            Section(header: Text("\(day.formattedDate)")) {
+                                ForEach(day.sessions) { session in
+                                    HistoryRow(
+                                        session: session,
+                                        editable: true,
+                                        currentlySelectedSession: $currentlySelectedSession,
+                                        onTargetPressed: {
+                                            showingEditRoomScreen = true
+                                        },
+                                        onCheckInDateUpdate: { newCheckInDate in
+                                            guard let currentlySelectedSession = currentlySelectedSession else { return }
 
-                                    print("🗂 new check in date: \(newCheckInDate)")
-                                    checkInManager.updateCheckInSession(
-                                        id: currentlySelectedSession.id,
-                                        newSession: currentlySelectedSession.newSessionWith(checkedIn: newCheckInDate)
-                                    )
-                                },
-                                onCheckOutDateUpdate: { newCheckOutDate in
-                                    guard let currentlySelectedSession = currentlySelectedSession else { return }
+                                            print("🗂 new check in date: \(newCheckInDate)")
+                                            checkInManager.updateCheckInSession(
+                                                id: currentlySelectedSession.id,
+                                                newSession: currentlySelectedSession.newSessionWith(checkedIn: newCheckInDate)
+                                            )
+                                        },
+                                        onCheckOutDateUpdate: { newCheckOutDate in
+                                            guard let currentlySelectedSession = currentlySelectedSession else { return }
 
-                                    print("🗂 new check out date: \(newCheckOutDate)")
-                                    checkInManager.updateCheckInSession(
-                                        id: currentlySelectedSession.id,
-                                        newSession: currentlySelectedSession.newSessionWith(checkedOut: newCheckOutDate)
+                                            print("🗂 new check out date: \(newCheckOutDate)")
+                                            checkInManager.updateCheckInSession(
+                                                id: currentlySelectedSession.id,
+                                                newSession: currentlySelectedSession.newSessionWith(checkedOut: newCheckOutDate)
+                                            )
+                                        }
                                     )
+                                    .popover(isPresented: $showingEditRoomScreen) {
+                                        ChooseRoomView(onRoomSelection: { room in
+                                            showingEditRoomScreen = false
+
+                                            guard let currentlySelectedSession = currentlySelectedSession else { return }
+                                            print("🗂 saving session: \(session)")
+                                            checkInManager.updateCheckInSession(
+                                                id: currentlySelectedSession.id,
+                                                newSession: currentlySelectedSession.newSessionWith(target: room)
+                                            )
+                                        }, onBackButtonPressed: {
+                                            showingEditRoomScreen = false
+                                        })
+                                    }
                                 }
-                            )
-                            .popover(isPresented: $showingEditRoomScreen) {
-                                ChooseRoomView(onRoomSelection: { room in
-                                    showingEditRoomScreen = false
-
-                                    guard let currentlySelectedSession = currentlySelectedSession else { return }
-                                    print("🗂 saving session: \(session)")
-                                    checkInManager.updateCheckInSession(
-                                        id: currentlySelectedSession.id,
-                                        newSession: currentlySelectedSession.newSessionWith(target: room)
-                                    )
-                                }, onBackButtonPressed: {
-                                    showingEditRoomScreen = false
-                                })
-                            }
-                        }
-                        .onDelete { offsets in
-                            for index in offsets {
-                                checkInManager.deleteCheckInSession(id: day.sessions[index].id)
+                                .onDelete { offsets in
+                                    for index in offsets {
+                                        checkInManager.deleteCheckInSession(id: day.sessions[index].id)
+                                    }
+                                }
                             }
                         }
                     }
+                    .listStyle(InsetListStyle()) // Must set this, if not addign the EditButton() ruins how the list looks
+                    .navigationBarTitle("History")
+                    .navigationBarItems(trailing: EditButton())
                 }
+            } else {
+                Text("Not authenticated")
             }
-            .listStyle(InsetListStyle()) // Must set this, if not addign the EditButton() ruins how the list looks
-            .navigationBarTitle("History")
-            .navigationBarItems(trailing: EditButton())
         }
         .onAppear(perform: authenticate)
     }
