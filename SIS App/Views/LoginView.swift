@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUIX
 
-private typealias OnErrorCallback = (Error) -> Void
+typealias OnErrorCallback = (Error) -> Void
 
 struct LoginView: View {
     @EnvironmentObject var userAuthManager: UserAuthManager
@@ -45,6 +45,8 @@ struct LoginView: View {
                     LoginButton(showingActivityIndicator: $showingActivityIndicator, email: email, password: password, onError: onError)
 
                     SignupButton(showingActivityIndicator: $showingActivityIndicator, alertItem: $alertItem, email: email, password: password, onError: onError)
+
+                    ForgetPasswordButton(showingAcitivtyIndicator: $showingActivityIndicator, onError: onError)
                 }
 
                 Spacer()
@@ -172,3 +174,50 @@ private struct SignupButton: View {
         .buttonStyle(GradientButtonStyle(gradient: Constants.blueGradient))
     }
 }
+
+private struct ForgetPasswordButton: View {
+    @EnvironmentObject var userAuthManager: UserAuthManager
+    @Binding var showingAcitivtyIndicator: Bool
+    @State private var showingEmailAlert: Bool = false
+    @State private var resetPasswordEmail: String? = nil
+
+    let onError: OnErrorCallback
+
+    var body: some View {
+        Button {
+            showingEmailAlert = true
+        } label: {
+            Text("Forgot password?")
+        }
+        .alert(item: $resetPasswordEmail) { email in
+            Alert(
+                title: Text("An email has been sent to \(email)"),
+                message: Text("Click on the link in the email to reset your password"),
+                dismissButton: .default(Text("OK")) { showingAcitivtyIndicator = false }
+            )
+        }
+        .alert(
+            isPresented: $showingEmailAlert,
+            TextAlert(title: "Enter the email address of your account",
+                      message: "An email will be sent with a link to reset your password",
+                      placeholder: "Email") { email in
+                showingAcitivtyIndicator = true
+                userAuthManager.resetPassword(email: email ?? "") { error in
+                    if let error = error {
+                        onError(error)
+                        return
+                    }
+
+                    DispatchQueue.main.async {
+                        print("🔥 reset password email sent")
+                        resetPasswordEmail = email
+                    }
+                }
+            }
+        )
+        .frame(height: 40) // Kind of a hack because custom .alert() returns AlertWrapper
+        // So it expands to fill all avaliable space
+    }
+}
+
+extension String: Identifiable { public var id: String { self }}

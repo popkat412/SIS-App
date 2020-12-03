@@ -20,7 +20,7 @@ class UserAuthManager: ObservableObject {
         }
     }
 
-    func signIn(email: String, password: String, onError: @escaping (Error) -> Void) {
+    func signIn(email: String, password: String, onError: @escaping OnErrorCallback) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 onError(error)
@@ -36,7 +36,7 @@ class UserAuthManager: ObservableObject {
         }
     }
 
-    func signUp(email: String, password: String, onSentEmailVerfication: @escaping () -> Void, onError: @escaping (Error) -> Void) {
+    func signUp(email: String, password: String, onSentEmailVerfication: @escaping () -> Void, onError: @escaping OnErrorCallback) {
         Auth.auth().createUser(withEmail: email, password: password) { _, error in
             if let error = error { onError(error) }
             else {
@@ -48,11 +48,15 @@ class UserAuthManager: ObservableObject {
         }
     }
 
-    func signOut(onError: @escaping (Error) -> Void) {
+    func signOut(onError: @escaping OnErrorCallback) {
         do {
             try Auth.auth().signOut()
         } catch {
             onError(error)
         }
+    }
+
+    func resetPassword(email: String, completion: @escaping (Error?) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email, completion: completion)
     }
 }

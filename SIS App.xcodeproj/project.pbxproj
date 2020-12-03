@@ -98,6 +98,7 @@
 		62E119F8253ADEC10037CEC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F6253ADEC10037CEC5 /* LaunchScreen.storyboard */; };
 		62E11A01253AE2440037CEC5 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E11A00253AE2440037CEC5 /* MapView.swift */; };
 		62E857D92577D0C00028C89D /* MyErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E857D82577D0C00028C89D /* MyErrorInfo.swift */; };
+		62EA6FB62578DB610021951A /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EA6FB52578DB610021951A /* TextFieldAlert.swift */; };
 		62EC2D742556377D0040AF5D /* rooms.json in Resources */ = {isa = PBXBuildFile; fileRef = 62EC2D732556377D0040AF5D /* rooms.json */; };
 		62EC2D78255642A90040AF5D /* RawKeyedCodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */; };
 		62FC0BB4256D48F900EACA79 /* GradientButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */; };
@@ -202,6 +203,7 @@
 		62E119F9253ADEC10037CEC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62E11A00253AE2440037CEC5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		62E857D82577D0C00028C89D /* MyErrorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyErrorInfo.swift; sourceTree = "<group>"; };
+		62EA6FB52578DB610021951A /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
 		62EC2D732556377D0040AF5D /* rooms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rooms.json; sourceTree = "<group>"; };
 		62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawKeyedCodableDictionary.swift; sourceTree = "<group>"; };
 		62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = InsideSchool.gpx; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				62C2FB162576356D0024208C /* LoginView.swift */,
+				62EA6FB52578DB610021951A /* TextFieldAlert.swift */,
 				623107912578C4390003DBAC /* MyTextFieldStyle.swift */,
 				621573112577D53900C39621 /* ActivityIndicator.swift */,
 				627D553F256E5AF200DF3B32 /* HistoryRow.swift */,
@@ -589,6 +592,7 @@
 				628D11E8255AB44D00BF4D2E /* LevelIcon.swift in Sources */,
 				6202DDCA25581EA70017BC49 /* ContentView.swift in Sources */,
 				628D11D725598F8D00BF4D2E /* SearchView.swift in Sources */,
+				62EA6FB62578DB610021951A /* TextFieldAlert.swift in Sources */,
 				62D5D644255D40330064D484 /* UserLocationManager.swift in Sources */,
 				6202DDC62558102F0017BC49 /* CheckedInView.swift in Sources */,
 				62E119ED253ADEBF0037CEC5 /* HomeView.swift in Sources */,
