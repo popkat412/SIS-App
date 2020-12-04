@@ -35,8 +35,8 @@ struct Constants {
         Color(red: 9 / 225, green: 48 / 225, blue: 40 / 225),
     ])
     static let blueGradient = Gradient(colors: [
-        Color(red: 67 / 255, green: 198 / 255, blue: 172 / 255),
-        Color(red: 25 / 255, green: 22 / 255, blue: 84 / 255),
+        Color(red: 5 / 255, green: 117 / 255, blue: 230 / 255),
+        Color(red: 2 / 255, green: 27 / 255, blue: 121 / 255),
     ])
 
     // ------ [[ FILENAMES ]] --------- //

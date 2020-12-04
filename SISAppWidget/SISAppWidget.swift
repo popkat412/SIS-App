@@ -18,10 +18,17 @@ struct Provider: TimelineProvider {
         )
     }
 
-    func getSnapshot(in _: Context, completion: @escaping (SimpleEntry) -> Void) {
+    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(
             date: Date(),
-            blocks: DataProvider.placeholderBlocks
+            blocks: context.isPreview
+                ? DataProvider.placeholderBlocks
+                : DataProvider.getBlocks(
+                    userLocation: FileUtility.getDataFromJsonFile(
+                        filename: Constants.userLocationFilename,
+                        dataType: Location.self
+                    )?.toCLLocation()
+                )
         )
         completion(entry)
     }
@@ -94,7 +101,13 @@ struct SISAppWidgetEntryView: View {
                                     .foregroundColor(.white)
                                     .padding(5)
                                     .frame(width: 70, height: 70)
-                                    .background(Color.blue)
+                                    .background(
+                                        LinearGradient(
+                                            gradient: Constants.blueGradient,
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
                                     .cornerRadius(13)
                             }
                         }
@@ -192,19 +205,24 @@ struct SISAppWidget: Widget {
 
 struct SISAppWidget_Previews: PreviewProvider {
     static var previews: some View {
-        SISAppWidgetEntryView(
-            entry: SimpleEntry(
-                date: Date(),
-                blocks: DataProvider.placeholderBlocks
+        Group {
+            SISAppWidgetEntryView(
+                entry: SimpleEntry(
+                    date: Date(),
+                    blocks: DataProvider.placeholderBlocks
+                )
             )
-//            entry: SimpleEntry(
-//                date: Date(),
-//                checkInSession: CheckInSession(
-//                    checkedIn: Date(),
-//                    target: Block(name: "Test Block")
-//                )
-//            )
-        )
-        .previewContext(WidgetPreviewContext(family: .systemLarge))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+            SISAppWidgetEntryView(
+                entry: SimpleEntry(
+                    date: Date(),
+                    checkInSession: CheckInSession(
+                        checkedIn: Date(),
+                        target: Block("Test Block")
+                    )
+                )
+            )
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+        }
     }
 }
