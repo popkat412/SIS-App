@@ -81,111 +81,129 @@ struct SISAppWidgetEntryView: View {
 
     var body: some View {
         VStack {
-            if !entry.isCheckedIn {
-                VStack(alignment: .leading) {
-                    Text("Click to check in:")
-                        .padding([.top, .leading])
+            if !entry.isCheckedIn { BlocksView(entry: entry) }
+            else { WidgetCheckedInView(entry: entry) }
 
-                    HStack {
-                        ForEach(0 ..< 4) { i in
-                            Link(destination: getDeeplinkURL(forIdx: i)) {
-                                Text("\(entry.blocks![i].shortName)")
-                                    .minimumScaleFactor(0.01)
-                                    .lineLimit(
-                                        entry
-                                            .blocks![i]
-                                            .shortName
-                                            .components(separatedBy: " ")
-                                            .count
-                                    )
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                    .frame(width: 70, height: 70)
-                                    .background(
-                                        LinearGradient(
-                                            gradient: Constants.blueGradient,
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                                    .cornerRadius(13)
-                            }
-                        }
-                    }
-                    .padding()
-                }
-            } else {
-                VStack {
-                    let formattedText = Text("Checked in to: ")
-                        + Text("\(entry.checkInSession!.target.name)")
-                        .fontWeight(.bold)
-                        + Text(" at ")
-                        + Text("\(entry.checkInSession!.checkedIn.formattedTime)")
-                        .fontWeight(.bold)
-
-                    formattedText
-                        .padding()
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Link(destination: getCheckoutDeeplinkURL()) {
-                        Button(action: {}) {
-                            Text("Check Out")
-                        }
-                        .buttonStyle(GradientButtonStyle(gradient: Constants.greenGradient))
-                        .padding()
-                    }
-                }
-            }
-            if widgetFamily == .systemLarge {
-                Link(destination: getHistoryDeeplinkURL()) {
-                    VStack(alignment: .leading) {
-                        Spacer()
-
-                        let history = FileUtility.getDataFromJsonFile(filename: Constants.savedSessionsFilename, dataType: [CheckInSession].self)?.sorted { $0.checkedIn > $1.checkedIn }
-
-                        if let history = history {
-                            Divider()
-                            ForEach(0 ..< 2) { i in
-                                if i < history.count {
-                                    HistoryRow(session: history[i])
-                                } else {
-                                    Spacer()
-                                        .frame(height: 50)
-                                }
-                                Divider()
-                            }
-                            .padding(.horizontal)
-                        } else {
-                            Text("History Unavaliable ☹️")
-                        }
-
-                        Spacer()
-                    }
-                }
-            }
+            if widgetFamily == .systemLarge { WidgetHistoryView() }
         }
     }
 
-    // MARK: Helper functions
+    // MARK: Subviews
 
-    private func getDeeplinkURL(forIdx index: Int) -> URL {
-        var urlComponents = URLComponents(string: Constants.baseURLString)!
-        urlComponents.queryItems = [
-            URLQueryItem(name: Constants.blockURLParameterName, value: entry.blocks![index].name),
-        ]
-        return urlComponents.url!
+    private struct BlocksView: View {
+        let entry: SimpleEntry
+
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text("Click to check in:")
+                    .padding([.top, .leading])
+
+                HStack {
+                    ForEach(0 ..< 4) { i in
+                        Link(destination: getDeeplinkURL(forIdx: i)) {
+                            Text("\(entry.blocks![i].shortName)")
+                                .minimumScaleFactor(0.01)
+                                .lineLimit(
+                                    entry
+                                        .blocks![i]
+                                        .shortName
+                                        .components(separatedBy: " ")
+                                        .count
+                                )
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .frame(width: 70, height: 70)
+                                .background(
+                                    LinearGradient(
+                                        gradient: Constants.blueGradient,
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .cornerRadius(13)
+                        }
+                    }
+                }
+                .padding()
+            }
+        }
+
+        private func getDeeplinkURL(forIdx index: Int) -> URL {
+            var urlComponents = URLComponents(string: Constants.baseURLString)!
+            urlComponents.queryItems = [
+                URLQueryItem(name: Constants.blockURLParameterName, value: entry.blocks![index].name),
+            ]
+            return urlComponents.url!
+        }
     }
 
-    private func getCheckoutDeeplinkURL() -> URL {
-        let url = URL(string: Constants.checkoutURLName, relativeTo: Constants.baseURL)!
-        print("check out deeplink: \(url)")
-        return url
+    private struct WidgetCheckedInView: View {
+        let entry: SimpleEntry
+
+        var body: some View {
+            VStack {
+                let formattedText = Text("Checked in to: ")
+                    + Text("\(entry.checkInSession!.target.name)")
+                    .fontWeight(.bold)
+                    + Text(" at ")
+                    + Text("\(entry.checkInSession!.checkedIn.formattedTime)")
+                    .fontWeight(.bold)
+
+                formattedText
+                    .padding()
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Link(destination: getCheckoutDeeplinkURL()) {
+                    Button(action: {}) {
+                        Text("Check Out")
+                    }
+                    .buttonStyle(GradientButtonStyle(gradient: Constants.greenGradient))
+                    .padding()
+                }
+            }
+        }
+
+        private func getCheckoutDeeplinkURL() -> URL {
+            let url = URL(string: Constants.checkoutURLName, relativeTo: Constants.baseURL)!
+            print("check out deeplink: \(url)")
+            return url
+        }
     }
 
-    private func getHistoryDeeplinkURL() -> URL {
-        let url = URL(string: Constants.historyURLName, relativeTo: Constants.baseURL)!
-        print("history deeplink: \(url)")
-        return url
+    private struct WidgetHistoryView: View {
+        var body: some View {
+            Link(destination: getHistoryDeeplinkURL()) {
+                VStack(alignment: .leading) {
+                    Spacer()
+
+                    let history = FileUtility.getDataFromJsonFile(filename: Constants.savedSessionsFilename, dataType: [CheckInSession].self)?.sorted { $0.checkedIn > $1.checkedIn }
+
+                    if let history = history {
+                        Divider()
+                        ForEach(0 ..< 2) { i in
+                            if i < history.count {
+                                HistoryRow(session: history[i])
+                            } else {
+                                Spacer()
+                                    .frame(height: 50)
+                            }
+                            Divider()
+                        }
+                        .padding(.horizontal)
+                    } else {
+                        Text("History Unavaliable ☹️")
+                    }
+
+                    Spacer()
+                }
+            }
+        }
+
+        private func getHistoryDeeplinkURL() -> URL {
+            let url = URL(string: Constants.historyURLName, relativeTo: Constants.baseURL)!
+            print("history deeplink: \(url)")
+            return url
+        }
     }
 }
 

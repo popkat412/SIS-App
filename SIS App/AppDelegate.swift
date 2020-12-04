@@ -7,7 +7,6 @@
 
 import CoreData
 import Firebase
-import FirebaseDynamicLinks
 import UIKit
 import UserNotifications
 
@@ -21,13 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
 
         return true
-    }
-
-    func application(_: UIApplication, continue userActivity: NSUserActivity, restorationHandler _: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        let handled = DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!) { _, _ in
-        }
-
-        return handled
     }
 
     // MARK: UISceneSession Lifecycle
