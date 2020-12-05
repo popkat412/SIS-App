@@ -31,6 +31,7 @@
 		6258F06B256771E30021438C /* SISAppWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 6258F066256771E10021438C /* SISAppWidget.intentdefinition */; };
 		6258F06E256771E30021438C /* SISAppWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6258F05D256771E10021438C /* SISAppWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */; };
+		626A1883257A6BE70013F67A /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626A1882257A6BE70013F67A /* EmailHelper.swift */; };
 		6270F81E25776567002C156A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62C2FB0B25762D560024208C /* GoogleService-Info.plist */; };
 		6270F82F25777C09002C156A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6270F82E25777C09002C156A /* FirebaseAuth */; };
 		62756C2825597B8E0007C4F3 /* Date+FormattedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */; };
@@ -53,6 +54,7 @@
 		62C2FB0C25762D560024208C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62C2FB0B25762D560024208C /* GoogleService-Info.plist */; };
 		62C2FB172576356D0024208C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2FB162576356D0024208C /* LoginView.swift */; };
 		62C2FB1B25763D7B0024208C /* UserAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2FB1A25763D7B0024208C /* UserAuthManager.swift */; };
+		62CAEB04257A8C5900DB199D /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 62CAEB03257A8C5900DB199D /* FirebaseFunctions */; };
 		62D5D63A255D38D60064D484 /* CheckInTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D639255D38D60064D484 /* CheckInTarget.swift */; };
 		62D5D640255D3E850064D484 /* ChooseRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D63F255D3E850064D484 /* ChooseRoomView.swift */; };
 		62D5D644255D40330064D484 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D643255D40330064D484 /* UserLocationManager.swift */; };
@@ -155,6 +157,7 @@
 		6258F067256771E30021438C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6258F069256771E30021438C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnRoomSelection.swift; path = "SIS App/Models/OnRoomSelection.swift"; sourceTree = SOURCE_ROOT; };
+		626A1882257A6BE70013F67A /* EmailHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
 		62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+FormattedTime.swift"; path = "SIS App/Utilities/Date+FormattedTime.swift"; sourceTree = SOURCE_ROOT; };
 		6278A18D256D04A2009A100F /* SIS App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SIS App.entitlements"; sourceTree = "<group>"; };
 		627D553F256E5AF200DF3B32 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
@@ -219,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62CAEB04257A8C5900DB199D /* FirebaseFunctions in Frameworks */,
 				628D11DB2559970300BF4D2E /* SwiftUIX in Frameworks */,
 				6270F82F25777C09002C156A /* FirebaseAuth in Frameworks */,
 			);
@@ -271,6 +275,7 @@
 		62756C2A25598BEE0007C4F3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				626A1882257A6BE70013F67A /* EmailHelper.swift */,
 				62F75D7C2578ED600004FF9D /* String+HelperProtocols.swift */,
 				6255C34C256E49450052B38C /* FileUtility.swift */,
 				629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */,
@@ -423,6 +428,7 @@
 			packageProductDependencies = (
 				628D11DA2559970300BF4D2E /* SwiftUIX */,
 				6270F82E25777C09002C156A /* FirebaseAuth */,
+				62CAEB03257A8C5900DB199D /* FirebaseFunctions */,
 			);
 			productName = "SIS App";
 			productReference = 62E119E5253ADEBF0037CEC5 /* SIS App.app */;
@@ -556,6 +562,7 @@
 				628D11E1255997FC00BF4D2E /* LevelColors.swift in Sources */,
 				6202DDD325583CC90017BC49 /* RoomParentInfo.swift in Sources */,
 				621A77EA25566CCE00636B27 /* Location.swift in Sources */,
+				626A1883257A6BE70013F67A /* EmailHelper.swift in Sources */,
 				621573122577D53900C39621 /* ActivityIndicator.swift in Sources */,
 				6258F06B256771E30021438C /* SISAppWidget.intentdefinition in Sources */,
 				628D11E8255AB44D00BF4D2E /* LevelIcon.swift in Sources */,
@@ -877,6 +884,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 628D11D92559970300BF4D2E /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
+		};
+		62CAEB03257A8C5900DB199D /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6270F82325777C09002C156A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
 		};
 		62FFE9BC2579FDBE00CD22F0 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

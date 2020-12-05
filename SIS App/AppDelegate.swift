@@ -7,6 +7,7 @@
 
 import CoreData
 import Firebase
+import FirebaseFunctions
 import UIKit
 import UserNotifications
 
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         print("Configuring firebase..")
         FirebaseApp.configure()
+//        Functions.functions().useEmulator(withHost: "localhost", port: 5001)
 
         return true
     }

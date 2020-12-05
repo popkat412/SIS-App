@@ -57,11 +57,19 @@ struct Constants {
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"
 
-    // ------ [[ GEOFENCE DELAY ]] ----- //
+    // ------ [[ DELAYS ]] ----- //
     /// Time in seconds inside a building before geofence is triggered
     static let geofenceDelayTime: Double = 2 * 60
+    /// Time in seconds between when a user is able to upload data again
+    static let sendConfirmationEmailDelayTime: Double = 24 * 60 * 60
 
     // ------- [[ OTHERS ]] ------- //
     static let activityIndicatorSize: CGFloat = 60
     static let riEmailSuffix = "ri.edu.sg"
+
+    // ------- [[ FIREBASE ]] ------ //
+    static let sendEmailCloudFunction = "sendEmail"
+
+    // ------- [[ USER DEFAULTS ]] ------ //
+    static let kLastSentConfirmationEmail = "kLastSentConfirmationEmail"
 }
