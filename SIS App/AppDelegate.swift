@@ -85,11 +85,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_: UNUserNotificationCenter, didReceive _: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        completionHandler()
+    func userNotificationCenter(_: UNUserNotificationCenter, willPresent _: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("📣 app delegate: will present user notification")
+        completionHandler(UNNotificationPresentationOptions.banner)
     }
 
-    func userNotificationCenter(_: UNUserNotificationCenter, willPresent _: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler(UNNotificationPresentationOptions.banner)
+    func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("📣 app delegate: did receive user notification")
+        if response.notification.request.identifier == Constants.remindUserFillInRoomsNotificationIdentifier {
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.navigationState.tabbarSelection = .history
+        }
+        completionHandler()
     }
 }

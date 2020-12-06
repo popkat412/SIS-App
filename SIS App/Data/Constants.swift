@@ -26,7 +26,7 @@ struct Constants {
     static let schoolRegionId = "Y14"
 
     // -------- [[ MAPVIEW STUFF ]] -------- //
-    static let shouldDrawDebugGeofences = false
+    static let shouldDrawDebugGeofences = true
     static let mapViewAnnotationImageSize = 20
 
     // -------- [[ COLOR PALETTE ]] -------- //
@@ -53,6 +53,7 @@ struct Constants {
 
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.sg.tk.2020.risafeentry.widget"
+    static let remindUserFillInRoomsNotificationIdentifier = "remind-user-fill-in-rooms"
 
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"
@@ -72,4 +73,7 @@ struct Constants {
 
     // ------- [[ USER DEFAULTS ]] ------ //
     static let kLastSentConfirmationEmail = "kLastSentConfirmationEmail"
+
+    // ------ [[ OTHER ]] ------ //
+    static let remindUserFillInRoomsTime = DateComponents(hour: 18)
 }

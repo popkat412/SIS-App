@@ -9,7 +9,9 @@ import Foundation
 import UserNotifications
 
 struct UserNotificationHelper {
-    static func sendNotification(title: String, subtitle: String) {
+    static let notificationCenter = UNUserNotificationCenter.current()
+
+    static func sendNotification(title: String, subtitle: String, withIdentifier identifier: String? = nil, trigger: UNNotificationTrigger? = nil) {
         print("sending notification: \(title)")
 
         let content = UNMutableNotificationContent()
@@ -17,13 +19,35 @@ struct UserNotificationHelper {
         content.subtitle = subtitle
         content.sound = UNNotificationSound.default
 
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        let request = UNNotificationRequest(
+            identifier: identifier ?? UUID().uuidString,
+            content: content,
+            trigger: trigger
+        )
 
-        UNUserNotificationCenter.current().add(request)
+        notificationCenter.add(request)
+    }
+
+    static func hasScheduledNotification(withIdentifier identifier: String, completion: @escaping (Bool) -> Void) {
+        notificationCenter.getPendingNotificationRequests { notificationRequests in
+            var hasNotification = false
+            for request in notificationRequests {
+                if request.identifier == identifier {
+                    hasNotification = true
+                }
+            }
+            completion(hasNotification)
+        }
+    }
+
+    static func cancelScheduledNotification(withIdentifier identifier: String) {
+        notificationCenter.getPendingNotificationRequests { _ in
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+        }
     }
 
     static func requestAuth() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
                 print("request user notification auth success")
             } else if let error = error {
