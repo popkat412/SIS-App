@@ -78,6 +78,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillResignActive(_: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        UserDefaults(suiteName: Constants.appGroupIdentifier)?.set(false, forKey: "didAuthHistoryView")
     }
 
     func sceneWillEnterForeground(_: UIScene) {

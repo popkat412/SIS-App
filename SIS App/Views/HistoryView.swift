@@ -11,13 +11,12 @@ import SwiftUI
 struct HistoryView: View {
     @EnvironmentObject var checkInManager: CheckInManager
 
-    @State private var isUnlocked = false
     @State private var showingEditRoomScreen = false
     @State private var currentlySelectedSession: CheckInSession? = nil
 
     var body: some View {
         VStack {
-            if self.isUnlocked {
+            if UserDefaults(suiteName:Constants.appGroupIdentifier)?.bool(forKey: "didAuthHistoryView") ?? false {
                 NavigationView {
                     List {
                         ForEach(checkInManager.getCheckInSessions()) { day in
@@ -80,7 +79,12 @@ struct HistoryView: View {
                 Text("Not authenticated")
             }
         }
-        .onAppear(perform: authenticate)
+        .onAppear {
+            if !(UserDefaults(suiteName: Constants.appGroupIdentifier)?.bool(forKey: "didAuthHistoryView") ?? false) {
+                authenticate()
+                print("aaa")
+            }
+        }
     }
     func authenticate() {
         let context = LAContext()
@@ -95,14 +99,15 @@ struct HistoryView: View {
                 // authentication has now completed
                 DispatchQueue.main.async {
                     if success {
-                        self.isUnlocked = true
+                        UserDefaults(suiteName: Constants.appGroupIdentifier)?.set(true, forKey: "didAuthHistoryView")
                     } else {
-                        // there was a problem
+                        print("bbb")
+                        UserDefaults(suiteName: Constants.appGroupIdentifier)?.set(false, forKey: "didAuthHistoryView")
                     }
                 }
             }
         } else {
-            // no biometrics
+            print("ccc")
         }
     }
 }
