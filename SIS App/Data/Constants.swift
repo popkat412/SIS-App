@@ -60,7 +60,7 @@ struct Constants {
 
     // ------ [[ OTHER ]] ------ //
     static let remindUserFillInRoomsTime = DateComponents(hour: 18)
-  
+
     // ------ [[ GEOFENCE DELAY ]] ----- //
     /// Time in seconds inside a building before geofence is triggered
     static let geofenceDelayTime: Double = 2 * 60

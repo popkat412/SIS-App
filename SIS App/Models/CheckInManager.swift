@@ -35,6 +35,8 @@ class CheckInManager: ObservableObject {
 
     var mostRecentSession: CheckInSession? { checkInSessions.last }
 
+    // MARK: Init
+
     init() {
         checkInSessions = FileUtility.getDataFromJsonFile(
             filename: Constants.savedSessionsFilename,
@@ -97,12 +99,30 @@ class CheckInManager: ObservableObject {
         WidgetCenter.shared.reloadAllTimelines()
     }
 
+    // TODO: Use an enum return instead of the possible invalid reasons
     /// This should use the UUID to figure out which session to change,
-    /// then update that session based on the properties of the passed session
-    func updateCheckInSession(id: UUID, newSession: CheckInSession) {
+    /// then update that session based on the properties of the passed session.
+    /// This will do nothing if the new session dates are not valid.
+    /// If the new session dates are not valid, this will return the error, else nil
+    @discardableResult
+    func updateCheckInSession(id: UUID, newSession: CheckInSession) -> SessionInvalidError? {
+        // Check if new session checks in before he checks out
+        if newSession.checkedOut! < newSession.checkedIn { return .checkedOutBeforeCheckedIn }
+
         let idx = checkInSessions.firstIndex { $0.id == id }
+        var newArr = checkInSessions
         if let idx = idx {
-            checkInSessions[idx] = newSession
+            newArr[idx] = newSession
+        }
+
+        let intersectionCheckResult = IntersectionChecker.checkIntersection(sessions: newArr)
+        if intersectionCheckResult.isEmpty {
+            print("🤔 yay no intersection")
+            checkInSessions = newArr
+            return nil
+        } else {
+            print("🤔 :( there was an intersection: \(intersectionCheckResult)")
+            return .sessionsIntersecting
         }
     }
 
