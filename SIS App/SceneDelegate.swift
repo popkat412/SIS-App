@@ -51,14 +51,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("🌐 opening url: \(URLContexts)")
         if let url = URLContexts.first?.url {
             if let blockName = URLComponents(string: url.absoluteString)?.queryItems?.first(where: { $0.name == Constants.blockURLParameterName })?.value {
+                // Checking into block
                 print("block name: \(blockName)")
                 checkInManager.checkIn(to: DataProvider.getBlock(name: blockName)!)
                 navigationState.tabbarSelection = .home
+
             } else if url.pathComponents.contains(Constants.checkoutURLName) {
+                // Checking out
                 print("checking out from widget")
                 checkInManager.checkOut(shouldUpdateUI: false)
                 navigationState.tabbarSelection = .home
+
             } else if url.pathComponents.contains(Constants.historyURLName) {
+                // Going to history
                 print("going to history from widget")
                 navigationState.tabbarSelection = .history
             }
