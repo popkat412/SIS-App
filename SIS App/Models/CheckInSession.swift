@@ -77,12 +77,14 @@ extension CheckInSession: Codable {
         checkedIn = try container.decode(Date.self, forKey: .checkedIn)
         checkedOut = try container.decodeIfPresent(Date.self, forKey: .checkedOut)
         id = try container.decode(UUID.self, forKey: .id)
-        if let roomTarget = try? container.decode(Room.self, forKey: .target) {
-            target = roomTarget
-        } else if let blockTarget = try? container.decode(Block.self, forKey: .target) {
+
+        let targetId = try container.decode(String.self, forKey: .target)
+        if let blockTarget = DataProvider.getBlock(id: targetId) {
             target = blockTarget
+        } else if let roomTarget = DataProvider.getRoom(id: targetId) {
+            target = roomTarget
         } else {
-            target = Room("Unknown Target :(")
+            target = UnknownCheckInTarget()
         }
     }
 
@@ -91,15 +93,13 @@ extension CheckInSession: Codable {
 
         try container.encode(checkedIn, forKey: .checkedIn)
         try container.encode(id, forKey: .id)
+
         if checkedOut != nil {
             try container.encode(checkedOut, forKey: .checkedOut)
         } else {
             try container.encodeNil(forKey: .checkedOut)
         }
-        if let roomTarget = target as? Room {
-            try container.encode(roomTarget, forKey: .target)
-        } else if let blockTarget = target as? Block {
-            try container.encode(blockTarget, forKey: .target)
-        }
+
+        try container.encode(target.id, forKey: .target)
     }
 }

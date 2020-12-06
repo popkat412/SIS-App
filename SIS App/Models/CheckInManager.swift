@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UserNotifications
 import WidgetKit
 
 class CheckInManager: ObservableObject {
@@ -26,6 +27,8 @@ class CheckInManager: ObservableObject {
     @Published var checkInSessions: [CheckInSession] {
         didSet {
             FileUtility.saveDataToJsonFile(filename: Constants.savedSessionsFilename, data: checkInSessions)
+            updateReminderNotification()
+
             objectWillChange.send()
         }
     }
@@ -201,5 +204,33 @@ class CheckInManager: ObservableObject {
         if !isCheckedIn { return }
         print("automatically checking out")
         checkOut()
+    }
+
+    // MARK: Private methods
+
+    private func updateReminderNotification() {
+        let hasSpecificRooms = checkInSessions
+            .filter { Calendar.current.isDateInToday($0.checkedIn) }
+            .reduce(false) { $1.target is Room }
+        print("hasSpecificRooms: \(hasSpecificRooms)")
+
+        UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier) { result in
+
+            print("has scheduled \(Constants.remindUserFillInRoomsNotificationIdentifier): \(result)")
+
+            if result, hasSpecificRooms {
+                print("cancelling \(Constants.remindUserFillInRoomsNotificationIdentifier)")
+                UserNotificationHelper.cancelScheduledNotification(withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier)
+
+            } else if !hasSpecificRooms, !result {
+                print("scheduling \(Constants.remindUserFillInRoomsNotificationIdentifier)")
+                UserNotificationHelper.sendNotification(
+                    title: "Please fill in your check in history",
+                    subtitle: "Filling in specific rooms helps aid contact tracing",
+                    withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier,
+                    trigger: UNCalendarNotificationTrigger(dateMatching: Constants.remindUserFillInRoomsTime, repeats: false)
+                )
+            }
+        }
     }
 }

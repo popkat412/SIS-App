@@ -1,0 +1,89 @@
+[
+  {
+    "block": "Marshall Block",
+    "boundary": [
+      {"latitude": 1.345779, "longitude": 103.845434},
+      {"latitude": 1.345731, "longitude": 103.845642},
+      {"latitude": 1.345442, "longitude": 103.845576},
+      {"latitude": 1.345490, "longitude": 103.845365}
+    ]
+  },
+  
+  {
+      "block": "Science Block",
+      "boundary": [
+        {"latitude": 1.345861, "longitude": 103.845824},
+        {"latitude": 1.345815, "longitude": 103.846061},
+        {"latitude": 1.345544, "longitude": 103.846009},
+        {"latitude": 1.345592, "longitude": 103.845770}
+      ]
+  },
+  
+  {
+    "block": "Yusof Ishak Block",
+    "boundary": [
+      {"latitude": 1.346753, "longitude": 103.845552},
+      {"latitude": 1.346709, "longitude": 103.845762},
+      {"latitude": 1.346628, "longitude": 103.845745},
+      {"latitude": 1.346490, "longitude": 103.846395},
+      {"latitude": 1.345835, "longitude": 103.846255},
+      {"latitude": 1.345974, "longitude": 103.845600},
+      {"latitude": 1.345867, "longitude": 103.845577},
+      {"latitude": 1.345909, "longitude": 103.845369}
+    ]
+  },
+
+  {
+    "block": "Sheares Block",
+    "boundary": [
+      {"latitude": 1.346529, "longitude": 103.845056},
+      {"latitude": 1.346210, "longitude": 103.845044},
+      {"latitude": 1.346227, "longitude": 103.844618},
+      {"latitude": 1.346544, "longitude": 103.844629}
+    ]
+  },
+
+  {
+    "block": "Raja Block",
+    "boundary": [
+      {"latitude": 1.346430, "longitude": 103.843736},
+      {"latitude": 1.346430, "longitude": 103.843846},
+      {"latitude": 1.346345, "longitude": 103.843847},
+      {"latitude": 1.346349, "longitude": 103.844581},
+      {"latitude": 1.346181, "longitude": 103.844583},
+      {"latitude": 1.346177, "longitude": 103.843736}
+    ]
+  },
+
+  {
+    "block": "Canteen Hall",
+    "boundary": [
+      {"latitude": 1.348180, "longitude": 103.845634},
+      {"latitude": 1.348118, "longitude": 103.845897},
+      {"latitude": 1.347626, "longitude": 103.845779},
+      {"latitude": 1.347151, "longitude": 103.845698},
+      {"latitude": 1.347217, "longitude": 103.845415},
+      {"latitude": 1.347681, "longitude": 103.845517}
+    ]
+  },
+
+  {
+    "block": "Artspace",
+    "boundary": [
+      {"latitude": 1.347693, "longitude": 103.844503},
+      {"latitude": 1.347683, "longitude": 103.844773},
+      {"latitude": 1.347260, "longitude": 103.844757},
+      {"latitude": 1.347269, "longitude": 103.844488}
+    ]
+  },
+
+  {
+    "block": "HML Dining Hall",
+    "boundary": [
+      {"latitude": 1.347045, "longitude": 103.844689},
+      {"latitude": 1.347022, "longitude": 103.845054},
+      {"latitude": 1.346761, "longitude": 103.845037},
+      {"latitude": 1.346784, "longitude": 103.844672}
+    ]
+  }
+]

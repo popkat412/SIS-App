@@ -25,6 +25,10 @@ struct Constants {
     static let schoolRadius = 222.94
     static let schoolRegionId = "Y14"
 
+    // -------- [[ MAPVIEW STUFF ]] -------- //
+    static let shouldDrawDebugGeofences = true
+    static let mapViewAnnotationImageSize = 20
+
     // -------- [[ COLOR PALETTE ]] -------- //
     static let checkedInGradient = Gradient(colors: [
         Color(red: 35 / 225, green: 122 / 225, blue: 87 / 225),
@@ -43,12 +47,21 @@ struct Constants {
     static let roomsFilename = "rooms.json"
     static let levelColorsFilename = "colors.json"
     static let categoryToDisplayNameFilename = "categories.json"
+    static let blockOutlineFilename = "overlay_coords.json"
 
     static let roomIdToParentFilename = "roomIdToParent.json"
 
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.sg.tk.2020.risafeentry.widget"
+    static let remindUserFillInRoomsNotificationIdentifier = "remind-user-fill-in-rooms"
 
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"
+
+    // ------ [[ OTHER ]] ------ //
+    static let remindUserFillInRoomsTime = DateComponents(hour: 18)
+
+    // ------ [[ GEOFENCE DELAY ]] ----- //
+    /// Time in seconds inside a building before geofence is triggered
+    static let geofenceDelayTime: Double = 2 * 60
 }

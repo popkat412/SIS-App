@@ -11,6 +11,7 @@ struct HistoryView: View {
     @EnvironmentObject var checkInManager: CheckInManager
 
     @State private var showingEditRoomScreen = false
+    @State private var currentlySelectedSession: CheckInSession? = nil
 
     @State private var showingErrorAlert = false
     @State private var currentError: SessionInvalidError?
@@ -24,21 +25,26 @@ struct HistoryView: View {
                             HistoryRow(
                                 session: session,
                                 editable: true,
+                                currentlySelectedSession: $currentlySelectedSession,
                                 onTargetPressed: {
                                     showingEditRoomScreen = true
                                 },
                                 onCheckInDateUpdate: { newCheckInDate, _ in
-                                    print("new check in date: \(newCheckInDate)")
+                                    guard let currentlySelectedSession = currentlySelectedSession else { return nil }
+
+                                    print("🗂 new check in date: \(newCheckInDate)")
                                     return checkInManager.updateCheckInSession(
-                                        id: session.id,
-                                        newSession: session.newSessionWith(checkedIn: newCheckInDate)
+                                        id: currentlySelectedSession.id,
+                                        newSession: currentlySelectedSession.newSessionWith(checkedIn: newCheckInDate)
                                     )
                                 },
                                 onCheckOutDateUpdate: { newCheckOutDate, _ in
-                                    print("new check out date: \(newCheckOutDate)")
+                                    guard let currentlySelectedSession = currentlySelectedSession else { return nil }
+
+                                    print("🗂 new check out date: \(newCheckOutDate)")
                                     return checkInManager.updateCheckInSession(
-                                        id: session.id,
-                                        newSession: session.newSessionWith(checkedOut: newCheckOutDate)
+                                        id: currentlySelectedSession.id,
+                                        newSession: currentlySelectedSession.newSessionWith(checkedOut: newCheckOutDate)
                                     )
                                 }
                             )
@@ -46,9 +52,11 @@ struct HistoryView: View {
                                 ChooseRoomView(onRoomSelection: { room in
                                     showingEditRoomScreen = false
 
+                                    guard let currentlySelectedSession = currentlySelectedSession else { return }
+                                    print("🗂 saving session: \(session)")
                                     checkInManager.updateCheckInSession(
-                                        id: session.id,
-                                        newSession: session.newSessionWith(target: room)
+                                        id: currentlySelectedSession.id,
+                                        newSession: currentlySelectedSession.newSessionWith(target: room)
                                     )
                                 }, onBackButtonPressed: {
                                     showingEditRoomScreen = false

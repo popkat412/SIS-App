@@ -19,6 +19,8 @@ struct HistoryRow: View {
     var showTiming = true
     var showTarget = true
 
+    @Binding var currentlySelectedSession: CheckInSession?
+
     var editable = false
     var onTargetPressed: (() -> Void)?
     var onCheckInDateUpdate: DateUpdateCallback?
@@ -46,6 +48,8 @@ struct HistoryRow: View {
         _showingErrorAlert = .init(initialValue: false)
         _currentError = .init(initialValue: nil)
 
+        _currentlySelectedSession = .constant(nil)
+
         editable = false
         onTargetPressed = nil
         onCheckInDateUpdate = nil
@@ -55,6 +59,7 @@ struct HistoryRow: View {
     init(
         session: CheckInSession, showTiming: Bool = true, showTarget: Bool = true,
         editable: Bool,
+        currentlySelectedSession: Binding<CheckInSession?>? = nil,
         onTargetPressed: @escaping (() -> Void),
         onCheckInDateUpdate: @escaping DateUpdateCallback,
         onCheckOutDateUpdate: @escaping DateUpdateCallback
@@ -63,6 +68,7 @@ struct HistoryRow: View {
 
         if editable {
             self.editable = true
+            _currentlySelectedSession = currentlySelectedSession ?? .constant(nil)
             self.onTargetPressed = onTargetPressed
             self.onCheckInDateUpdate = onCheckInDateUpdate
             self.onCheckOutDateUpdate = onCheckOutDateUpdate
@@ -85,6 +91,7 @@ struct HistoryRow: View {
                         )
                         .labelsHidden()
                         .onChange(of: checkInDate) { [checkInDate] newValue in
+                            currentlySelectedSession = session
                             if let error = onCheckInDateUpdate?(newValue, checkInDate) {
                                 self.checkInDate = checkInDate
                                 // FIXME: Alert not showing up
@@ -101,6 +108,7 @@ struct HistoryRow: View {
                         )
                         .labelsHidden()
                         .onChange(of: checkOutDate) { [checkOutDate] newValue in
+                            currentlySelectedSession = session
                             if let error = onCheckOutDateUpdate?(newValue, checkOutDate) {
                                 self.checkOutDate = checkOutDate
                                 // FIXME: Alert not showing up
@@ -143,6 +151,7 @@ struct HistoryRow: View {
                     }
                 }
                 .onTapGesture {
+                    currentlySelectedSession = session
                     onTargetPressed?()
                 }
                 .conditionalModifier(editable) {
