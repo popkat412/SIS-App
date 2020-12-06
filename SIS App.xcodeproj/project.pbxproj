@@ -87,6 +87,7 @@
 		62FC0BB9256D4A4D00EACA79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC0BB8256D4A4D00EACA79 /* Constants.swift */; };
 		62FC0BBA256D4A4D00EACA79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC0BB8256D4A4D00EACA79 /* Constants.swift */; };
 		62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF081925564B9A00FD5D65 /* CheckInManager.swift */; };
+		F2298882257D08C500C5B1D9 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2298881257D08C500C5B1D9 /* PlaySound.swift */; };
 		F2D8D4FB257390ED0098B1A6 /* overlay_coords.json in Resources */ = {isa = PBXBuildFile; fileRef = F2D8D4FA257390ED0098B1A6 /* overlay_coords.json */; };
 /* End PBXBuildFile section */
 
@@ -185,6 +186,8 @@
 		62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButtonStyle.swift; sourceTree = "<group>"; };
 		62FC0BB8256D4A4D00EACA79 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		62FF081925564B9A00FD5D65 /* CheckInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInManager.swift; sourceTree = "<group>"; };
+		F2298881257D08C500C5B1D9 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
+		F229888B257D0F2400C5B1D9 /* checkInOut.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = checkInOut.mp3; sourceTree = "<group>"; };
 		F2D8D4FA257390ED0098B1A6 /* overlay_coords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = overlay_coords.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -261,6 +264,7 @@
 				6202DDD525595A230017BC49 /* DataProvider.swift */,
 				62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */,
 				62881EB0255657EE00787923 /* CategoryDisplayNames.swift */,
+				F2298881257D08C500C5B1D9 /* PlaySound.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -343,6 +347,7 @@
 				62E119F6253ADEC10037CEC5 /* LaunchScreen.storyboard */,
 				62E119F9253ADEC10037CEC5 /* Info.plist */,
 				62E119EE253ADEBF0037CEC5 /* SIS_App.xcdatamodeld */,
+				F229888A257D0F2400C5B1D9 /* Sounds */,
 				62E119F3253ADEC10037CEC5 /* Preview Content */,
 			);
 			path = "SIS App";
@@ -354,6 +359,14 @@
 				62E119F4253ADEC10037CEC5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F229888A257D0F2400C5B1D9 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				F229888B257D0F2400C5B1D9 /* checkInOut.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -507,6 +520,7 @@
 				620B5407256F616F00565260 /* HistoryRow.swift in Sources */,
 				628FAAD2257484AB0010F040 /* SessionInvalidError.swift in Sources */,
 				620B53EF256F600D00565260 /* CategoriesView.swift in Sources */,
+				F2298882257D08C500C5B1D9 /* PlaySound.swift in Sources */,
 				620B53F0256F600D00565260 /* RoomsView.swift in Sources */,
 				62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */,
 				62BFA561256E8F2900CD327D /* NavigationState.swift in Sources */,
