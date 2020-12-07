@@ -5,6 +5,7 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
+import DictionaryCoding
 import SwiftUI
 
 struct HistoryView: View {
@@ -101,7 +102,7 @@ struct HistoryView: View {
                                 primaryButton: .cancel(),
                                 secondaryButton: .destructive(Text("Yes")) {
                                     showingActivityIndicator = true
-                                    EmailHelper.sendEmail(data: checkInManager.checkInSessions.toFirebaseData()) { error in
+                                    EmailHelper.sendConfirmationEmail(data: checkInManager.checkInSessions) { error in
                                         if let error = error {
                                             alertItem = MyErrorInfo(error).toAlertItem {
                                                 showingActivityIndicator = false
@@ -145,18 +146,5 @@ struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
         HistoryView()
             .environmentObject(CheckInManager())
-    }
-}
-
-extension Array where Element: Encodable {
-    func toFirebaseData() -> NSArray {
-        map { $0.dictionary! } as NSArray
-    }
-}
-
-extension Encodable {
-    var dictionary: [String: Any]? {
-        guard let data = try? JSONEncoder().encode(self) else { return nil }
-        return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }
     }
 }

@@ -62,17 +62,21 @@ struct Constants {
     /// Time in seconds inside a building before geofence is triggered
     static let geofenceDelayTime: Double = 2 * 60
     /// Time in seconds between when a user is able to upload data again
-    static let sendConfirmationEmailDelayTime: Double = 24 * 60 * 60
+    static let sendConfirmationEmailDelayTime: Double = 10 // 24 * 60 * 60
 
     // ------- [[ OTHERS ]] ------- //
     static let activityIndicatorSize: CGFloat = 60
     static let riEmailSuffix = "ri.edu.sg"
 
     // ------- [[ FIREBASE ]] ------ //
-    static let sendEmailCloudFunction = "sendEmail"
+    static let sendConfirmationEmailCloudFunction = "sendConfirmationEmail"
+    static let uploadedHistoryCollection = "history"
+    static let historyCollectionForEachDocument = "history"
+    static let sendWarningEmailCloudFucntion = "sendWarningEmail"
 
     // ------- [[ USER DEFAULTS ]] ------ //
     static let kLastSentConfirmationEmail = "kLastSentConfirmationEmail"
+    static let kProcessedDocumentIds = "kProcessedDocumentIds"
 
     // ------ [[ OTHER ]] ------ //
     static let remindUserFillInRoomsTime = DateComponents(hour: 18)
