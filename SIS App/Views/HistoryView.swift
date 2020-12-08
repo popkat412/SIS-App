@@ -5,7 +5,6 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
-import DictionaryCoding
 import SwiftUI
 
 struct HistoryView: View {

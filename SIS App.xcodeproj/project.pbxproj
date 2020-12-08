@@ -64,10 +64,8 @@
 		62D8CF50257CCB4A00651C28 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 62D8CF4F257CCB4A00651C28 /* FirebaseFirestore */; };
 		62D8CF55257CCB9800651C28 /* IntersectionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628FAAC72573D7A40010F040 /* IntersectionChecker.swift */; };
 		62D8CF59257CCBA200651C28 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 62D8CF58257CCBA200651C28 /* FirebaseFirestore */; };
-		62D8CF5E257CD08E00651C28 /* DictionaryCoding in Frameworks */ = {isa = PBXBuildFile; productRef = 62D8CF5D257CD08E00651C28 /* DictionaryCoding */; };
 		62D8CF62257CD15500651C28 /* UserUploadedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D8CF61257CD15500651C28 /* UserUploadedData.swift */; };
 		62D8CF65257CDF9A00651C28 /* UserUploadedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D8CF61257CD15500651C28 /* UserUploadedData.swift */; };
-		62D8CF69257CDFB600651C28 /* DictionaryCoding in Frameworks */ = {isa = PBXBuildFile; productRef = 62D8CF68257CDFB600651C28 /* DictionaryCoding */; };
 		62D8CF6C257E67DD00651C28 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626A1882257A6BE70013F67A /* EmailHelper.swift */; };
 		62D8CF70257E67F400651C28 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 62D8CF6F257E67F400651C28 /* FirebaseFunctions */; };
 		62D90EB4256A8E8500DB4D4E /* UserNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62868F322560009600F81842 /* UserNotificationHelper.swift */; };
@@ -231,7 +229,6 @@
 				62D8CF59257CCBA200651C28 /* FirebaseFirestore in Frameworks */,
 				62FFE9BD2579FDBE00CD22F0 /* FirebaseAuth in Frameworks */,
 				62D8CF70257E67F400651C28 /* FirebaseFunctions in Frameworks */,
-				62D8CF69257CDFB600651C28 /* DictionaryCoding in Frameworks */,
 				6258F060256771E10021438C /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,7 +240,6 @@
 				62CAEB04257A8C5900DB199D /* FirebaseFunctions in Frameworks */,
 				62D8CF50257CCB4A00651C28 /* FirebaseFirestore in Frameworks */,
 				628D11DB2559970300BF4D2E /* SwiftUIX in Frameworks */,
-				62D8CF5E257CD08E00651C28 /* DictionaryCoding in Frameworks */,
 				6270F82F25777C09002C156A /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,7 +424,6 @@
 			packageProductDependencies = (
 				62FFE9BC2579FDBE00CD22F0 /* FirebaseAuth */,
 				62D8CF58257CCBA200651C28 /* FirebaseFirestore */,
-				62D8CF68257CDFB600651C28 /* DictionaryCoding */,
 				62D8CF6F257E67F400651C28 /* FirebaseFunctions */,
 			);
 			productName = SISAppWidgetExtension;
@@ -456,7 +451,6 @@
 				6270F82E25777C09002C156A /* FirebaseAuth */,
 				62CAEB03257A8C5900DB199D /* FirebaseFunctions */,
 				62D8CF4F257CCB4A00651C28 /* FirebaseFirestore */,
-				62D8CF5D257CD08E00651C28 /* DictionaryCoding */,
 			);
 			productName = "SIS App";
 			productReference = 62E119E5253ADEBF0037CEC5 /* SIS App.app */;
@@ -491,7 +485,6 @@
 			packageReferences = (
 				628D11D92559970300BF4D2E /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				6270F82325777C09002C156A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				62D8CF5C257CD08D00651C28 /* XCRemoteSwiftPackageReference "DictionaryCoding" */,
 			);
 			productRefGroup = 62E119E6253ADEBF0037CEC5 /* Products */;
 			projectDirPath = "";
@@ -908,14 +901,6 @@
 				minimumVersion = 0.0.3;
 			};
 		};
-		62D8CF5C257CD08D00651C28 /* XCRemoteSwiftPackageReference "DictionaryCoding" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/DictionaryCoding";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.9;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -943,16 +928,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6270F82325777C09002C156A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
-		};
-		62D8CF5D257CD08E00651C28 /* DictionaryCoding */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 62D8CF5C257CD08D00651C28 /* XCRemoteSwiftPackageReference "DictionaryCoding" */;
-			productName = DictionaryCoding;
-		};
-		62D8CF68257CDFB600651C28 /* DictionaryCoding */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 62D8CF5C257CD08D00651C28 /* XCRemoteSwiftPackageReference "DictionaryCoding" */;
-			productName = DictionaryCoding;
 		};
 		62D8CF6F257E67F400651C28 /* FirebaseFunctions */ = {
 			isa = XCSwiftPackageProductDependency;

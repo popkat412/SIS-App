@@ -5,7 +5,6 @@
 //  Created by Wang Yunze on 29/11/20.
 //
 
-import DictionaryCoding
 import FirebaseAuth
 import FirebaseFirestore
 import Foundation
