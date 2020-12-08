@@ -63,7 +63,7 @@ struct Constants {
 
     // ------ [[ OTHER ]] ------ //
     static let remindUserFillInRoomsTime = DateComponents(hour: 18)
-    static let riSafeEntryURL = URL(string: "https://temperaturepass.ndi-api.gov.sg/login/PROD-TO7GS3009E-390941-RAFFLESINSTITUTIONQR-SE")!
+    static let riSafeEntryURL = URL(string: "https://www.safeentry-qr.gov.sg/tenant/PROD-T07GS3009E-390941-RAFFLESINSTITUTIONQR-SE")!
 
     // ------ [[ GEOFENCE DELAY ]] ----- //
     /// Time in seconds inside a building before geofence is triggered
