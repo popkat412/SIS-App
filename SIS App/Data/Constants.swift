@@ -65,6 +65,9 @@ struct Constants {
     static let remindUserFillInRoomsTime = DateComponents(hour: 18)
     static let riSafeEntryURL = URL(string: "https://www.safeentry-qr.gov.sg/tenant/PROD-T07GS3009E-390941-RAFFLESINSTITUTIONQR-SE")!
 
+    // ------ [[ USER DEFAULTS ]] ----- //
+    static let kDidAuthHistoryView = "kDidAuthHistoryView"
+
     // ------ [[ DELAYS ]] ----- //
     /// Time in seconds inside a building before geofence is triggered
     static let geofenceDelayTime: Double = 2 * 60
