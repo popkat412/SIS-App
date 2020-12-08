@@ -6,6 +6,7 @@
 //
 
 import DictionaryCoding
+import FirebaseAuth
 import FirebaseFirestore
 import Foundation
 import UIKit
@@ -150,6 +151,8 @@ struct IntersectionChecker {
     private static func dealWithFirestoreData(_ data: UserUploadedData) {
         print("🔥 dealing with firestore data: \(data)")
 
+        guard data.userId != Auth.auth().currentUser?.uid else { return }
+
         let intersection = checkIntersection(
             a: FileUtility.getDataFromJsonFile(filename: Constants.savedSessionsFilename, dataType: [CheckInSession].self) ?? [],
             b: data.history
@@ -158,11 +161,12 @@ struct IntersectionChecker {
 
         if !intersection.isEmpty {
             // Ono came into contact with infected person
-//            let fakeIntersections = [
-//                Intersection(dateInterval: DateInterval(start: Date(), duration: 60), target: "Test Target 1"),
-//                Intersection(dateInterval: DateInterval(start: Date()+61, end: Date()+61+60), target: "Test Target 2"
-//                )
-//            ]
+            /*
+             let fakeIntersections = [
+                 Intersection(dateInterval: DateInterval(start: Date(), duration: 60), target: "Test Target 1"),
+                 Intersection(dateInterval: DateInterval(start: Date()+61, end: Date()+61+60), target: "Test Target 2"
+                 )
+             ]*/
             EmailHelper.sendWarningEmail(data: intersection) { error in
                 if let error = error {
                     print("🔥 error sending warning email: \(error)")
