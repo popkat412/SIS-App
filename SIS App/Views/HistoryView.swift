@@ -6,17 +6,19 @@
 //
 
 import LocalAuthentication
+import NotificationCenter
 import SwiftUI
 
 struct HistoryView: View {
     @EnvironmentObject var checkInManager: CheckInManager
 
     @State private var showingEditRoomScreen = false
+    @State private var isAuthenticated = false
     @State private var currentlySelectedSession: CheckInSession? = nil
 
     var body: some View {
         VStack {
-            if UserDefaults(suiteName:Constants.appGroupIdentifier)?.bool(forKey: "didAuthHistoryView") ?? false {
+            if isAuthenticated {
                 NavigationView {
                     List {
                         ForEach(checkInManager.getCheckInSessions()) { day in
@@ -77,37 +79,52 @@ struct HistoryView: View {
                 }
             } else {
                 Text("Not authenticated")
+                Button("Try again", action: {
+                    authenticate()
+                })
             }
         }
         .onAppear {
-            if !(UserDefaults(suiteName: Constants.appGroupIdentifier)?.bool(forKey: "didAuthHistoryView") ?? false) {
+            isAuthenticated = UserDefaults(suiteName: Constants.appGroupIdentifier)?.bool(forKey: Constants.kDidAuthHistoryView) ?? false
+            print("🧑‍💻 history view appeared, isAuthenticated: \(isAuthenticated)")
+            if !isAuthenticated {
+                print("🧑‍💻 not authenticed, authenticating")
                 authenticate()
-                print("aaa")
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+            print("🧑‍💻 moving to background")
+            isAuthenticated = false
+            UserDefaults(suiteName: Constants.appGroupIdentifier)?.setValue(false, forKey: Constants.kDidAuthHistoryView)
+        }
     }
-    func authenticate() {
+
+    private func authenticate() {
+        print("🧑‍💻 authenticate() called")
         let context = LAContext()
         var error: NSError?
 
         // check whether biometric authentication is possible
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             // it's possible, so go ahead and use it
             let reason = "To access your check in history"
 
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, _ in
                 // authentication has now completed
                 DispatchQueue.main.async {
                     if success {
-                        UserDefaults(suiteName: Constants.appGroupIdentifier)?.set(true, forKey: "didAuthHistoryView")
+                        print("🧑‍💻 auth successful successful")
+                        UserDefaults(suiteName: Constants.appGroupIdentifier)?.set(true, forKey: Constants.kDidAuthHistoryView)
+                        isAuthenticated = true
                     } else {
-                        print("bbb")
-                        UserDefaults(suiteName: Constants.appGroupIdentifier)?.set(false, forKey: "didAuthHistoryView")
+                        print("🧑‍💻 auth not successful")
+                        UserDefaults(suiteName: Constants.appGroupIdentifier)?.set(false, forKey: Constants.kDidAuthHistoryView)
+                        isAuthenticated = false
                     }
                 }
             }
         } else {
-            print("ccc")
+            print("🧑‍💻 error device cannot auth")
         }
     }
 }
