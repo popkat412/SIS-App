@@ -192,18 +192,22 @@ class CheckInManager: ObservableObject {
     /// This is the method that will be called when user enters a block
     /// This is supposed to automatically check the user into a block for them to edit later
     @objc func didEnterBlock(_ notification: Notification) {
-        if isCheckedIn { return }
-        let block = notification.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block
-        print("automatically checking in to \(block.name)")
-        checkIn(to: block)
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.autoCheckInOutDelayTime) { [self] in
+            if isCheckedIn { return }
+            let block = notification.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block
+            print("automatically checking in to \(block.name)")
+            checkIn(to: block)
+        }
     }
 
     /// This is the method that will be called when user exits a block
     /// This is supposed to automatically check the user out of a block for them to edit later
     @objc func didExitBlock(_: Notification) {
-        if !isCheckedIn { return }
-        print("automatically checking out")
-        checkOut()
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.autoCheckInOutDelayTime) { [self] in
+            if !isCheckedIn { return }
+            print("automatically checking out")
+            checkOut()
+        }
     }
 
     // MARK: Private methods
