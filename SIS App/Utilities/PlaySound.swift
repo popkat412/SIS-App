@@ -5,13 +5,14 @@
 //  Created by Zizhou Hang on 6/12/20.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 
 var audioPlayer: AVAudioPlayer?
 
-func playSound(sound: String, type: String) {
-    if let path = Bundle.main.path(forResource: sound, ofType: type) {
+func playSound(_ sound: String) {
+    print("🔊 playing sound")
+    if let path = Bundle.main.path(forResource: sound, ofType: nil) {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
             audioPlayer?.play()
