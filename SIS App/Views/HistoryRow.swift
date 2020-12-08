@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct HistoryRow: View {
+    /// This will be called whenever the date is updated
+    /// The first argument is the new date, and the second argument is the old date
+    /// The return value will determine if the date is actually updated or not
+    /// If the return is true, the date will be updated to the new date
+    /// If not, it will remain at the old date
+    typealias DateUpdateCallback = (Date, Date) -> SessionInvalidError?
+
     var session: CheckInSession
     var showTiming = true
     var showTarget = true
@@ -16,11 +23,16 @@ struct HistoryRow: View {
 
     var editable = false
     var onTargetPressed: (() -> Void)?
-    var onCheckInDateUpdate: ((Date) -> Void)?
-    var onCheckOutDateUpdate: ((Date) -> Void)?
+    var onCheckInDateUpdate: DateUpdateCallback?
+    var onCheckOutDateUpdate: DateUpdateCallback?
 
     @State private var checkInDate: Date
     @State private var checkOutDate: Date
+    @State private var previousCheckInDate: Date?
+    @State private var previousCheckOutDate: Date?
+
+    @State private var showingErrorAlert: Bool
+    @State private var currentError: SessionInvalidError?
 
     init(session: CheckInSession, showTiming: Bool = true, showTarget: Bool = true) {
         self.session = session
@@ -28,7 +40,14 @@ struct HistoryRow: View {
         self.showTarget = showTarget
 
         _checkInDate = .init(initialValue: self.session.checkedIn)
-        _checkOutDate = .init(initialValue: self.session.checkedOut!) // Force unwrapping because if this is to appear in history, they must have already checked out
+        _checkOutDate = .init(initialValue: self.session.checkedOut!)
+        // Force unwrapping because if this is to appear in history, they must have already checked out
+        _previousCheckInDate = .init(initialValue: nil)
+        _previousCheckOutDate = .init(initialValue: nil)
+
+        _showingErrorAlert = .init(initialValue: false)
+        _currentError = .init(initialValue: nil)
+
         _currentlySelectedSession = .constant(nil)
 
         editable = false
@@ -42,8 +61,8 @@ struct HistoryRow: View {
         editable: Bool,
         currentlySelectedSession: Binding<CheckInSession?>? = nil,
         onTargetPressed: @escaping (() -> Void),
-        onCheckInDateUpdate: @escaping ((Date) -> Void),
-        onCheckOutDateUpdate: @escaping ((Date) -> Void)
+        onCheckInDateUpdate: @escaping DateUpdateCallback,
+        onCheckOutDateUpdate: @escaping DateUpdateCallback
     ) {
         self.init(session: session, showTiming: showTiming, showTarget: showTarget)
 
@@ -68,24 +87,43 @@ struct HistoryRow: View {
                         DatePicker(
                             "Check In Time",
                             selection: $checkInDate,
-                            in: PartialRangeThrough(checkOutDate),
                             displayedComponents: [.hourAndMinute]
                         )
                         .labelsHidden()
-                        .onChange(of: checkInDate) { newValue in
+                        .onChange(of: checkInDate) { [checkInDate] newValue in
                             currentlySelectedSession = session
-                            onCheckInDateUpdate?(newValue)
+                            if let error = onCheckInDateUpdate?(newValue, checkInDate) {
+                                self.checkInDate = checkInDate
+                                // FIXME: Alert not showing up
+                                self.currentError = error
+                                self.showingErrorAlert = true
+                                print("🤔 showingErrorAlert: \(self.showingErrorAlert), currentError: \(String(describing: currentError))")
+                                print("🤔 error: \(error.rawValue)")
+                            }
                         }
                         DatePicker(
                             "Check Out Time",
                             selection: $checkOutDate,
-                            in: PartialRangeFrom(checkInDate),
                             displayedComponents: [.hourAndMinute]
                         )
                         .labelsHidden()
-                        .onChange(of: checkOutDate) { newValue in
+                        .onChange(of: checkOutDate) { [checkOutDate] newValue in
                             currentlySelectedSession = session
-                            onCheckOutDateUpdate?(newValue)
+                            if let error = onCheckOutDateUpdate?(newValue, checkOutDate) {
+                                self.checkOutDate = checkOutDate
+                                // FIXME: Alert not showing up
+                                self.currentError = error
+                                self.showingErrorAlert = true
+                                print("🤔 showingErrorAlert: \(self.showingErrorAlert), currentError: \(String(describing: currentError))")
+                                print("🤔 error: \(error.rawValue)")
+                            }
+                        }
+                        .alert(isPresented: $showingErrorAlert) {
+                            Alert(
+                                title: Text("No U"),
+                                message: Text(currentError?.rawValue ?? "Unknown error"),
+                                dismissButton: .default(Text("Yessir!"))
+                            )
                         }
                     }
                 } else {

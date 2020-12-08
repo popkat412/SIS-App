@@ -42,6 +42,10 @@
 		628D11E1255997FC00BF4D2E /* LevelColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E0255997FC00BF4D2E /* LevelColors.swift */; };
 		628D11E5255AB42100BF4D2E /* RoomRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E4255AB42100BF4D2E /* RoomRow.swift */; };
 		628D11E8255AB44D00BF4D2E /* LevelIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628D11E7255AB44D00BF4D2E /* LevelIcon.swift */; };
+		628FAACD2573DE140010F040 /* IntersectionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628FAAC72573D7A40010F040 /* IntersectionChecker.swift */; };
+		628FAACE2573DE160010F040 /* IntersectionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628FAAC72573D7A40010F040 /* IntersectionChecker.swift */; };
+		628FAAD2257484AB0010F040 /* SessionInvalidError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628FAAD1257484AB0010F040 /* SessionInvalidError.swift */; };
+		628FAAD5257486100010F040 /* SessionInvalidError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628FAAD1257484AB0010F040 /* SessionInvalidError.swift */; };
 		629EB68025638E64000FADD9 /* View+ConditionalModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */; };
 		62A53B4B256E41A30092E891 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A53B4A256E41A30092E891 /* IconView.swift */; };
 		62BFA55B256E5C8700CD327D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F1253ADEC10037CEC5 /* Assets.xcassets */; };
@@ -154,6 +158,8 @@
 		628D11E0255997FC00BF4D2E /* LevelColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelColors.swift; path = "SIS App/Utilities/LevelColors.swift"; sourceTree = SOURCE_ROOT; };
 		628D11E4255AB42100BF4D2E /* RoomRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRow.swift; sourceTree = "<group>"; };
 		628D11E7255AB44D00BF4D2E /* LevelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelIcon.swift; sourceTree = "<group>"; };
+		628FAAC72573D7A40010F040 /* IntersectionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionChecker.swift; sourceTree = "<group>"; };
+		628FAAD1257484AB0010F040 /* SessionInvalidError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInvalidError.swift; sourceTree = "<group>"; };
 		6292DCBD25564F4000352527 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "View+ConditionalModifiers.swift"; path = "SIS App/Utilities/View+ConditionalModifiers.swift"; sourceTree = SOURCE_ROOT; };
 		62A53B4A256E41A30092E891 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -218,6 +224,7 @@
 				62D5D643255D40330064D484 /* UserLocationManager.swift */,
 				62E05E58255EC32100BAE4FF /* NotificationCenter+CustomNames.swift */,
 				62FF081925564B9A00FD5D65 /* CheckInManager.swift */,
+				628FAAD1257484AB0010F040 /* SessionInvalidError.swift */,
 				6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */,
 			);
 			path = Models;
@@ -246,6 +253,7 @@
 		62756C2A25598BEE0007C4F3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				628FAAC72573D7A40010F040 /* IntersectionChecker.swift */,
 				6255C34C256E49450052B38C /* FileUtility.swift */,
 				629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */,
 				62868F322560009600F81842 /* UserNotificationHelper.swift */,
@@ -468,6 +476,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				628FAACE2573DE160010F040 /* IntersectionChecker.swift in Sources */,
 				622CCC6C256F54CA00C9445D /* FileUtility.swift in Sources */,
 				627D5541256E5AF200DF3B32 /* HistoryRow.swift in Sources */,
 				62D90EB7256A8E8500DB4D4E /* UserLocationManager.swift in Sources */,
@@ -483,6 +492,7 @@
 				62D90EBE256A8E8500DB4D4E /* DataProvider.swift in Sources */,
 				62D90EC1256A8E8500DB4D4E /* Level.swift in Sources */,
 				62D90EC4256A8E8500DB4D4E /* RawKeyedCodableDictionary.swift in Sources */,
+				628FAAD5257486100010F040 /* SessionInvalidError.swift in Sources */,
 				62D90EB8256A8E8500DB4D4E /* CheckInManager.swift in Sources */,
 				62D90EBC256A8E8500DB4D4E /* CheckInSession.swift in Sources */,
 				6258F06A256771E30021438C /* SISAppWidget.intentdefinition in Sources */,
@@ -499,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				620B5407256F616F00565260 /* HistoryRow.swift in Sources */,
+				628FAAD2257484AB0010F040 /* SessionInvalidError.swift in Sources */,
 				620B53EF256F600D00565260 /* CategoriesView.swift in Sources */,
 				620B53F0256F600D00565260 /* RoomsView.swift in Sources */,
 				62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */,
@@ -507,6 +518,7 @@
 				62E119E9253ADEBF0037CEC5 /* AppDelegate.swift in Sources */,
 				62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */,
 				6202DDD625595A230017BC49 /* DataProvider.swift in Sources */,
+				628FAACD2573DE140010F040 /* IntersectionChecker.swift in Sources */,
 				62E05E59255EC32100BAE4FF /* NotificationCenter+CustomNames.swift in Sources */,
 				621A87812551838900FA810F /* Room.swift in Sources */,
 				628D11E5255AB42100BF4D2E /* RoomRow.swift in Sources */,
