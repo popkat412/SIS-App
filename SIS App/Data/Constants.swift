@@ -60,9 +60,13 @@ struct Constants {
 
     // ------ [[ DELAYS ]] ----- //
     /// Time in seconds inside a building before geofence is triggered
-    static let geofenceDelayTime: Double = 2 * 60
+    static let geofenceDelayTime: TimeInterval = 2 * 60
     /// Time in seconds between when a user is able to upload data again
-    static let sendConfirmationEmailDelayTime: Double = 10 // 24 * 60 * 60
+    static let sendConfirmationEmailDelayTime: TimeInterval = 24 * 60 * 60
+
+    // ------ [[ TIME INTERVALS TO KEEP ]] ---- //
+    static let timeIntervalToUpload: TimeInterval = 14 * 24 * 60 * 60
+    static let timeIntervalToKeepOnDevice: TimeInterval = 30 * 24 * 60 * 60
 
     // ------- [[ OTHERS ]] ------- //
     static let activityIndicatorSize: CGFloat = 60

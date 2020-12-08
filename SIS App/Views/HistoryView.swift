@@ -100,25 +100,7 @@ struct HistoryView: View {
                                 title: "Holup!",
                                 message: "Are you sure you want to upload data? An email will be sent to the school to confirm that you are not trolling.",
                                 primaryButton: .cancel(),
-                                secondaryButton: .destructive(Text("Yes")) {
-                                    showingActivityIndicator = true
-                                    EmailHelper.sendConfirmationEmail(data: checkInManager.checkInSessions) { error in
-                                        if let error = error {
-                                            alertItem = MyErrorInfo(error).toAlertItem {
-                                                showingActivityIndicator = false
-                                            }
-                                        } else {
-                                            alertItem = AlertItem(
-                                                title: "Success!",
-                                                message: "Email has been sent successfully",
-                                                dismissButton: .default(Text("Yay")) {
-                                                    showingActivityIndicator = false
-                                                }
-                                            )
-                                            UserDefaults(suiteName: Constants.appGroupIdentifier)?.setValue(Date().timeIntervalSince1970, forKey: Constants.kLastSentConfirmationEmail)
-                                        }
-                                    }
-                                }
+                                secondaryButton: .destructive(Text("Yes"), action: sendConfirmationEmail)
                             )
                         } else {
                             let dateFormatter = DateFormatter()
@@ -138,6 +120,31 @@ struct HistoryView: View {
                 }
             }
             .alert(item: $alertItem, content: alertItemBuilder)
+        }
+    }
+
+    // MARK: Helper functions
+
+    private func sendConfirmationEmail() {
+        showingActivityIndicator = true
+        EmailHelper.sendConfirmationEmail(data: checkInManager.checkInSessions.filter {
+            let dateToKeep = Date() - Constants.timeIntervalToUpload
+            return $0.checkedIn > dateToKeep || $0.checkedOut! > dateToKeep
+        }) { error in
+            if let error = error {
+                alertItem = MyErrorInfo(error).toAlertItem {
+                    showingActivityIndicator = false
+                }
+            } else {
+                alertItem = AlertItem(
+                    title: "Success!",
+                    message: "Email has been sent successfully",
+                    dismissButton: .default(Text("Yay")) {
+                        showingActivityIndicator = false
+                    }
+                )
+                UserDefaults(suiteName: Constants.appGroupIdentifier)?.setValue(Date().timeIntervalSince1970, forKey: Constants.kLastSentConfirmationEmail)
+            }
         }
     }
 }

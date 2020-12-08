@@ -94,6 +94,10 @@ class CheckInManager: ObservableObject {
         // ------- [[ CLEANUP ]] -------- //
         currentSession = nil
         FileUtility.deleteFile(filename: Constants.currentSessionFilename)
+        checkInSessions = checkInSessions.filter {
+            let dateToKeep = Date() - Constants.timeIntervalToKeepOnDevice
+            return $0.checkedIn > dateToKeep || $0.checkedOut! > dateToKeep
+        }
 
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()
