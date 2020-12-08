@@ -53,13 +53,17 @@ struct Constants {
 
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.sg.tk.2020.risafeentry.widget"
+
     static let remindUserFillInRoomsNotificationIdentifier = "remind-user-fill-in-rooms"
+    static let didEnterSchoolNotificationIdentifier = "did-enter-school"
+    static let didExitSchoolNotificationIdentifier = "did-exit-school"
 
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"
 
     // ------ [[ OTHER ]] ------ //
     static let remindUserFillInRoomsTime = DateComponents(hour: 18)
+    static let riSafeEntryURL = URL(string: "https://www.safeentry-qr.gov.sg/tenant/PROD-T07GS3009E-390941-RAFFLESINSTITUTIONQR-SE")!
 
     // ------ [[ DELAYS ]] ----- //
     /// Time in seconds inside a building before geofence is triggered

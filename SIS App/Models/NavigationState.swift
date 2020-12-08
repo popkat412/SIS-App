@@ -9,6 +9,7 @@ import Foundation
 
 class NavigationState: ObservableObject {
     @Published var tabbarSelection: Tab = .home
+    @Published var shouldShowSafariView: Bool = false
 }
 
 enum Tab: Hashable {
