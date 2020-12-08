@@ -105,7 +105,7 @@ class CheckInManager: ObservableObject {
         // ------- [[ SET STATE ]] -------- //
         isCheckedIn = false
         if shouldUpdateUI { showCheckedInScreen = false }
-        currentSession?.checkedOut = Date()
+        currentSession!.checkedOut = Date()
 
         // -------- [[ ADD TO SAVED SESSIONS ]] ------- //
         checkInSessions.append(currentSession!)
