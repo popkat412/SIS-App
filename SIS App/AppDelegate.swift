@@ -91,11 +91,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         if identifier == Constants.remindUserFillInRoomsNotificationIdentifier {
             sceneDelegate?.navigationState.tabbarSelection = .history
+
         } else if identifier == Constants.didEnterSchoolNotificationIdentifier ||
             identifier == Constants.didExitSchoolNotificationIdentifier
         {
             sceneDelegate?.navigationState.shouldShowSafariView = true
+
+        } else if identifier == Constants.remindUserCheckOutNotificationIdentifier {
+            sceneDelegate?.navigationState.tabbarSelection = .home
         }
+
         completionHandler()
     }
 }

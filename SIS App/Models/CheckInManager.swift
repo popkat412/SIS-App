@@ -75,6 +75,25 @@ class CheckInManager: ObservableObject {
         // ------- [[ SAVE CURRENT SESSION TO FILE ]] ------ //
         FileUtility.saveDataToJsonFile(filename: Constants.currentSessionFilename, data: currentSession)
 
+        // ------- [[ REMIND NOTIFICATION ]] ------ //
+        UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier) { result in
+            guard result == false else { return }
+
+            UserNotificationHelper.sendNotification(
+                title: "Remember to check out!",
+                subtitle: "You aren't in school until that late right?",
+                withIdentifier: Constants.remindUserCheckOutNotificationIdentifier,
+                trigger: UNCalendarNotificationTrigger(
+                    dateMatching: Constants.remindUserCheckOutTime,
+                    repeats: false
+                )
+//                trigger: UNTimeIntervalNotificationTrigger(
+//                    timeInterval: 10,
+//                    repeats: false
+//                )
+            )
+        }
+
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()
     }
@@ -94,6 +113,13 @@ class CheckInManager: ObservableObject {
         // ------- [[ CLEANUP ]] -------- //
         currentSession = nil
         FileUtility.deleteFile(filename: Constants.currentSessionFilename)
+
+        // ------- [[ REMINDER NOTIFICATION ------- //
+        UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier) { result in
+            guard result else { return }
+
+            UserNotificationHelper.cancelScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier)
+        }
 
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()

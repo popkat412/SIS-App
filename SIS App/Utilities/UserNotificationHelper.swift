@@ -28,6 +28,7 @@ struct UserNotificationHelper {
         notificationCenter.add(request)
     }
 
+    /// Check if a notification with a idnetifier has already been scheduled
     static func hasScheduledNotification(withIdentifier identifier: String, completion: @escaping (Bool) -> Void) {
         notificationCenter.getPendingNotificationRequests { notificationRequests in
             var hasNotification = false
