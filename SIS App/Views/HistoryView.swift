@@ -16,6 +16,9 @@ struct HistoryView: View {
     @State private var isAuthenticated = false
     @State private var currentlySelectedSession: CheckInSession? = nil
 
+    @State private var showingErrorAlert = false
+    @State private var currentError: SessionInvalidError?
+
     var body: some View {
         VStack {
             if isAuthenticated {
@@ -31,20 +34,20 @@ struct HistoryView: View {
                                         onTargetPressed: {
                                             showingEditRoomScreen = true
                                         },
-                                        onCheckInDateUpdate: { newCheckInDate in
-                                            guard let currentlySelectedSession = currentlySelectedSession else { return }
+                                        onCheckInDateUpdate: { newCheckInDate, _ in
+                                            guard let currentlySelectedSession = currentlySelectedSession else { return nil }
 
                                             print("🗂 new check in date: \(newCheckInDate)")
-                                            checkInManager.updateCheckInSession(
+                                            return checkInManager.updateCheckInSession(
                                                 id: currentlySelectedSession.id,
                                                 newSession: currentlySelectedSession.newSessionWith(checkedIn: newCheckInDate)
                                             )
                                         },
-                                        onCheckOutDateUpdate: { newCheckOutDate in
-                                            guard let currentlySelectedSession = currentlySelectedSession else { return }
+                                        onCheckOutDateUpdate: { newCheckOutDate, _ in
+                                            guard let currentlySelectedSession = currentlySelectedSession else { return nil }
 
                                             print("🗂 new check out date: \(newCheckOutDate)")
-                                            checkInManager.updateCheckInSession(
+                                            return checkInManager.updateCheckInSession(
                                                 id: currentlySelectedSession.id,
                                                 newSession: currentlySelectedSession.newSessionWith(checkedOut: newCheckOutDate)
                                             )
