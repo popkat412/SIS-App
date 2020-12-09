@@ -8,6 +8,7 @@
 import Foundation
 import UserNotifications
 import WidgetKit
+import UIKit
 
 class CheckInManager: ObservableObject {
     // MARK: Properties
@@ -34,7 +35,7 @@ class CheckInManager: ObservableObject {
     }
 
     var mostRecentSession: CheckInSession? { checkInSessions.last }
-
+    
     // MARK: Init
 
     init() {
@@ -78,6 +79,11 @@ class CheckInManager: ObservableObject {
         // ------ [[ PLAY SOUND ]] ----- //
         playCheckInOutSound()
 
+        
+        // ------ [[ HAPTICS ]] ------ //
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+        
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()
     }
@@ -100,6 +106,10 @@ class CheckInManager: ObservableObject {
 
         // ------ [[ PLAY SOUND ]] ----- //
         playCheckInOutSound()
+        
+        // ------ [[ HAPTICS ]] ------ //
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
 
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()

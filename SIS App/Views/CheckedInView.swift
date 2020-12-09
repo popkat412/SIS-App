@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CheckedInView: View {
     @EnvironmentObject var checkInManager: CheckInManager
-
+    
     var body: some View {
         VStack {
             Spacer()
