@@ -6,7 +6,7 @@
 //
 
 import CoreData
-import SafariServices
+import Firebase
 import UIKit
 import UserNotifications
 
@@ -16,7 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
 
-        return false
+        print("🔥 Configuring firebase..")
+        FirebaseApp.configure()
+        // Functions.functions().useEmulator(withHost: "localhost", port: 5001)
+        IntersectionChecker.`init`()
+
+        return true
     }
 
     // MARK: UISceneSession Lifecycle

@@ -7,6 +7,8 @@
 
 import Foundation
 
+// TODO: Refactor this to return a Block
+// TODO: Add this as computed property to room
 struct RoomParentInfo {
     private static var roomIdToParent: [String: String]?
 

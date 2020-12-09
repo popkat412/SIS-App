@@ -57,6 +57,7 @@ struct ChooseRoomView: View {
                     Text(block.name)
                 }
             }
+            .listStyle(InsetListStyle())
             .navigationBarTitle("Blocks", displayMode: .inline)
         }
         .environment(\.onRoomSelection) { room in

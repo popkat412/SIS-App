@@ -59,6 +59,12 @@ struct DataProvider {
         return rooms!.first { $0.id == id }
     }
 
+    static func getTarget(id: String) -> CheckInTarget? {
+        if let blockTarget = getBlock(id: id) { return blockTarget }
+        if let roomTarget = getRoom(id: id) { return roomTarget }
+        return nil
+    }
+
     static func getRoomsFromSearch(_ searchStr: String) -> [Room] {
         if rooms == nil {
             rooms = initRooms()
