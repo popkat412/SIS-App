@@ -23,7 +23,6 @@ struct RoomsView: View {
                     })) { room in
                         Button(
                             action: {
-                                playCheckInOutSound()
                                 onRoomSelection(room)
                             }, label: {
                                 RoomRow(

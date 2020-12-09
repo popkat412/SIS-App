@@ -75,6 +75,9 @@ class CheckInManager: ObservableObject {
         // ------- [[ SAVE CURRENT SESSION TO FILE ]] ------ //
         FileUtility.saveDataToJsonFile(filename: Constants.currentSessionFilename, data: currentSession)
 
+        // ------ [[ PLAY SOUND ]] ----- //
+        playCheckInOutSound()
+
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()
     }
@@ -94,6 +97,9 @@ class CheckInManager: ObservableObject {
         // ------- [[ CLEANUP ]] -------- //
         currentSession = nil
         FileUtility.deleteFile(filename: Constants.currentSessionFilename)
+
+        // ------ [[ PLAY SOUND ]] ----- //
+        playCheckInOutSound()
 
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()

@@ -30,6 +30,7 @@
 		6258F06E256771E30021438C /* SISAppWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6258F05D256771E10021438C /* SISAppWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6268CB0A25807A3D00B175E8 /* checkInOut.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F229888B257D0F2400C5B1D9 /* checkInOut.mp3 */; };
 		6268CB0D25807A4000B175E8 /* checkInOut.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F229888B257D0F2400C5B1D9 /* checkInOut.mp3 */; };
+		6268CB1025807C7F00B175E8 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2298881257D08C500C5B1D9 /* PlaySound.swift */; };
 		6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */; };
 		62756C2825597B8E0007C4F3 /* Date+FormattedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */; };
 		627D553C256E5AC000DF3B32 /* View+ConditionalModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */; };
@@ -500,6 +501,7 @@
 				627D553C256E5AC000DF3B32 /* View+ConditionalModifiers.swift in Sources */,
 				62D90EBA256A8E8500DB4D4E /* Room.swift in Sources */,
 				62D90EB4256A8E8500DB4D4E /* UserNotificationHelper.swift in Sources */,
+				6268CB1025807C7F00B175E8 /* PlaySound.swift in Sources */,
 				62D90EC3256A8E8500DB4D4E /* LevelColors.swift in Sources */,
 				62D90EBF256A8E8500DB4D4E /* Location.swift in Sources */,
 				62D90EBE256A8E8500DB4D4E /* DataProvider.swift in Sources */,
