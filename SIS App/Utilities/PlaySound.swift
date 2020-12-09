@@ -7,8 +7,10 @@
 
 import AVFoundation
 import Foundation
+import UIKit
 
-var audioPlayer: AVAudioPlayer?
+private var audioPlayer: AVAudioPlayer?
+private var generator: UINotificationFeedbackGenerator?
 
 func playSound(filename: String, fileType: String) {
     print("🔊 playing sound \(filename)")
@@ -25,6 +27,20 @@ func playSound(filename: String, fileType: String) {
     }
 }
 
+func prepareHaptics() {
+    if generator == nil { generator = UINotificationFeedbackGenerator() }
+    DispatchQueue.global(qos: .userInitiated).async {
+        generator?.prepare()
+    }
+}
+
+/// Yea this also does haptics too but shrug i couldn't think of any better name
 func playCheckInOutSound() {
+    // sound
     playSound(filename: Constants.checkInOutSoundFilename, fileType: Constants.checkInOutSoundFileExtnesion)
+
+    // haptics
+    if generator == nil { generator = UINotificationFeedbackGenerator() }
+    generator?.notificationOccurred(.success)
+    generator = nil
 }

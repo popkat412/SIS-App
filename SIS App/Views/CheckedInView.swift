@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CheckedInView: View {
     @EnvironmentObject var checkInManager: CheckInManager
-    
+
     var body: some View {
         VStack {
             Spacer()
@@ -51,6 +51,9 @@ struct CheckedInView: View {
                 )
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40)
+        }
+        .onAppear {
+            prepareHaptics()
         }
     }
 }
