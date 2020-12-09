@@ -81,7 +81,7 @@ struct LoginView_Previews: PreviewProvider {
 private func validateInputs(email: String, password: String) -> Error? {
     guard !email.isEmpty else { return "Email cannot be empty" }
     guard !password.isEmpty else { return "Password cannot be empty" }
-//    guard email.hasSuffix(Constants.riEmailSuffix) else { return "Please use your RI email" }
+    guard email.hasSuffix(Constants.riEmailSuffix) else { return "Please use your RI email" }
 
     return nil
 }
