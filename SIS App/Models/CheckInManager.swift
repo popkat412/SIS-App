@@ -67,6 +67,8 @@ class CheckInManager: ObservableObject {
     func checkIn(to room: CheckInTarget, shouldUpdateUI: Bool = true) {
         if isCheckedIn == true { return }
 
+        prepareHaptics()
+
         // ------- [[ UPDATE STATE ]] -------- //
         isCheckedIn = true
         if shouldUpdateUI { showCheckedInScreen = true }
@@ -74,6 +76,9 @@ class CheckInManager: ObservableObject {
 
         // ------- [[ SAVE CURRENT SESSION TO FILE ]] ------ //
         FileUtility.saveDataToJsonFile(filename: Constants.currentSessionFilename, data: currentSession)
+
+        // ------ [[ PLAY SOUND + HAPTICS ]] ----- //
+        playCheckInOutSound()
 
         // ------- [[ REMIND NOTIFICATION ]] ------ //
         UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier) { result in
@@ -93,7 +98,7 @@ class CheckInManager: ObservableObject {
 //                )
             )
         }
-
+ 
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()
     }
@@ -113,6 +118,9 @@ class CheckInManager: ObservableObject {
         // ------- [[ CLEANUP ]] -------- //
         currentSession = nil
         FileUtility.deleteFile(filename: Constants.currentSessionFilename)
+
+        // ------ [[ PLAY SOUND ]] ----- //
+        playCheckInOutSound()
 
         // ------- [[ REMINDER NOTIFICATION ------- //
         UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier) { result in
