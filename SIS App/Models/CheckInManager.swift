@@ -125,7 +125,6 @@ class CheckInManager: ObservableObject {
         WidgetCenter.shared.reloadAllTimelines()
     }
 
-    // TODO: Use an enum return instead of the possible invalid reasons
     /// This should use the UUID to figure out which session to change,
     /// then update that session based on the properties of the passed session.
     /// This will do nothing if the new session dates are not valid.
