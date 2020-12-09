@@ -18,9 +18,7 @@ struct RoomsView: View {
         List {
             ForEach(roomSections()) { level in
                 Section(header: Text("Level \(level.level)")) {
-                    ForEach(level.rooms.sorted(by: { room1, room2 in
-                        room1.name < room2.name
-                    })) { room in
+                    ForEach(level.rooms.sorted { $0.name < $1.name }) { room in
                         Button(
                             action: {
                                 onRoomSelection(room)
@@ -45,23 +43,22 @@ struct RoomsView: View {
 
     private func roomSections() -> [Level] {
         var levels = [Int: Level]()
+        let uniqueRooms = rooms.uniqueRooms()
 
         var uniqueLevelNums: Set<Int> = []
-        for room in rooms {
+        for room in uniqueRooms {
             uniqueLevelNums.insert(room.level)
         }
 
-        for i in uniqueLevelNums {
-            levels[i] = Level(rooms: [], level: i)
+        for level in uniqueLevelNums {
+            levels[level] = Level(rooms: [], level: level)
         }
 
-        for room in rooms {
+        for room in uniqueRooms {
             levels[room.level]?.rooms.append(room)
         }
 
-        let toReturn = Array(levels.values).sorted { level1, level2 in
-            level1.level < level2.level
-        }
+        let toReturn = Array(levels.values).sorted { $0.level < $1.level }
 
         return toReturn
     }

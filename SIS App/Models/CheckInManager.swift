@@ -80,6 +80,25 @@ class CheckInManager: ObservableObject {
         // ------ [[ PLAY SOUND + HAPTICS ]] ----- //
         playCheckInOutSound()
 
+        // ------- [[ REMIND NOTIFICATION ]] ------ //
+        UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier) { result in
+            guard result == false else { return }
+
+            UserNotificationHelper.sendNotification(
+                title: "Remember to check out!",
+                subtitle: "You aren't in school until that late right?",
+                withIdentifier: Constants.remindUserCheckOutNotificationIdentifier,
+                trigger: UNCalendarNotificationTrigger(
+                    dateMatching: Constants.remindUserCheckOutTime,
+                    repeats: false
+                )
+//                trigger: UNTimeIntervalNotificationTrigger(
+//                    timeInterval: 10,
+//                    repeats: false
+//                )
+            )
+        }
+ 
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()
     }
@@ -91,7 +110,7 @@ class CheckInManager: ObservableObject {
         // ------- [[ SET STATE ]] -------- //
         isCheckedIn = false
         if shouldUpdateUI { showCheckedInScreen = false }
-        currentSession?.checkedOut = Date()
+        currentSession!.checkedOut = Date()
 
         // -------- [[ ADD TO SAVED SESSIONS ]] ------- //
         checkInSessions.append(currentSession!)
@@ -103,11 +122,17 @@ class CheckInManager: ObservableObject {
         // ------ [[ PLAY SOUND ]] ----- //
         playCheckInOutSound()
 
+        // ------- [[ REMINDER NOTIFICATION ------- //
+        UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier) { result in
+            guard result else { return }
+
+            UserNotificationHelper.cancelScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier)
+        }
+
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()
     }
 
-    // TODO: Use an enum return instead of the possible invalid reasons
     /// This should use the UUID to figure out which session to change,
     /// then update that session based on the properties of the passed session.
     /// This will do nothing if the new session dates are not valid.
@@ -200,18 +225,22 @@ class CheckInManager: ObservableObject {
     /// This is the method that will be called when user enters a block
     /// This is supposed to automatically check the user into a block for them to edit later
     @objc func didEnterBlock(_ notification: Notification) {
-        if isCheckedIn { return }
-        let block = notification.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block
-        print("automatically checking in to \(block.name)")
-        checkIn(to: block)
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.autoCheckInOutDelayTime) { [self] in
+            if isCheckedIn { return }
+            let block = notification.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block
+            print("automatically checking in to \(block.name)")
+            checkIn(to: block)
+        }
     }
 
     /// This is the method that will be called when user exits a block
     /// This is supposed to automatically check the user out of a block for them to edit later
     @objc func didExitBlock(_: Notification) {
-        if !isCheckedIn { return }
-        print("automatically checking out")
-        checkOut()
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.autoCheckInOutDelayTime) { [self] in
+            if !isCheckedIn { return }
+            print("automatically checking out")
+            checkOut()
+        }
     }
 
     // MARK: Private methods

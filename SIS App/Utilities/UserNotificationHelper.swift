@@ -12,7 +12,7 @@ struct UserNotificationHelper {
     static let notificationCenter = UNUserNotificationCenter.current()
 
     static func sendNotification(title: String, subtitle: String, withIdentifier identifier: String? = nil, trigger: UNNotificationTrigger? = nil) {
-        print("sending notification: \(title)")
+        print("📣 sending notification: \(title)")
 
         let content = UNMutableNotificationContent()
         content.title = title
@@ -28,6 +28,7 @@ struct UserNotificationHelper {
         notificationCenter.add(request)
     }
 
+    /// Check if a notification with a idnetifier has already been scheduled
     static func hasScheduledNotification(withIdentifier identifier: String, completion: @escaping (Bool) -> Void) {
         notificationCenter.getPendingNotificationRequests { notificationRequests in
             var hasNotification = false

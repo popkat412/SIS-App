@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import SafariServices
 import UIKit
 import UserNotifications
 
@@ -85,10 +86,27 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("📣 app delegate: did receive user notification")
-        if response.notification.request.identifier == Constants.remindUserFillInRoomsNotificationIdentifier {
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.navigationState.tabbarSelection = .history
+        let identifier = response.notification.request.identifier
+        print("📣 app delegate: did receive user notification: \(identifier)")
+
+        if identifier == Constants.remindUserFillInRoomsNotificationIdentifier {
+            sceneDelegate?.navigationState.tabbarSelection = .history
+
+        } else if identifier == Constants.didEnterSchoolNotificationIdentifier ||
+            identifier == Constants.didExitSchoolNotificationIdentifier
+        {
+            sceneDelegate?.navigationState.shouldShowSafariView = true
+
+        } else if identifier == Constants.remindUserCheckOutNotificationIdentifier {
+            sceneDelegate?.navigationState.tabbarSelection = .home
         }
+
         completionHandler()
+    }
+}
+
+extension AppDelegate {
+    var sceneDelegate: SceneDelegate? {
+        UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
     }
 }
