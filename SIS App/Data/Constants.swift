@@ -48,12 +48,18 @@ struct Constants {
     static let levelColorsFilename = "colors.json"
     static let categoryToDisplayNameFilename = "categories.json"
     static let blockOutlineFilename = "overlay_coords.json"
+    static let checkInOutSoundFilename = "checkInOut"
+    static let checkInOutSoundFileExtnesion = "mp3"
 
     static let roomIdToParentFilename = "roomIdToParent.json"
 
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.sg.tk.2020.risafeentry.widget"
+
     static let remindUserFillInRoomsNotificationIdentifier = "remind-user-fill-in-rooms"
+    static let remindUserCheckOutNotificationIdentifier = "remind-user-check-out"
+    static let didEnterSchoolNotificationIdentifier = "did-enter-school"
+    static let didExitSchoolNotificationIdentifier = "did-exit-school"
 
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"
@@ -63,6 +69,7 @@ struct Constants {
     static let geofenceDelayTime: TimeInterval = 2 * 60
     /// Time in seconds between when a user is able to upload data again
     static let sendConfirmationEmailDelayTime: TimeInterval = 24 * 60 * 60
+    static let autoCheckInOutDelayTime: Double = 60
 
     // ------ [[ TIME INTERVALS TO KEEP ]] ---- //
     static let timeIntervalToUpload: TimeInterval = 14 * 24 * 60 * 60
@@ -83,5 +90,10 @@ struct Constants {
     static let kProcessedDocumentIds = "kProcessedDocumentIds"
 
     // ------ [[ OTHER ]] ------ //
-    static let remindUserFillInRoomsTime = DateComponents(hour: 18)
+    static let remindUserFillInRoomsTime = DateComponents(hour: 18) // 6pm
+    static let remindUserCheckOutTime = DateComponents(hour: 20) // 8pm
+    static let riSafeEntryURL = URL(string: "https://www.safeentry-qr.gov.sg/tenant/PROD-T07GS3009E-390941-RAFFLESINSTITUTIONQR-SE")!
+
+    // ------ [[ USER DEFAULTS ]] ----- //
+    static let kDidAuthHistoryView = "kDidAuthHistoryView"
 }
