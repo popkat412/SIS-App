@@ -28,6 +28,8 @@
 		6258F06A256771E30021438C /* SISAppWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 6258F066256771E10021438C /* SISAppWidget.intentdefinition */; };
 		6258F06B256771E30021438C /* SISAppWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 6258F066256771E10021438C /* SISAppWidget.intentdefinition */; };
 		6258F06E256771E30021438C /* SISAppWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6258F05D256771E10021438C /* SISAppWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6268CB0A25807A3D00B175E8 /* checkInOut.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F229888B257D0F2400C5B1D9 /* checkInOut.mp3 */; };
+		6268CB0D25807A4000B175E8 /* checkInOut.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F229888B257D0F2400C5B1D9 /* checkInOut.mp3 */; };
 		6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */; };
 		62756C2825597B8E0007C4F3 /* Date+FormattedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */; };
 		627D553C256E5AC000DF3B32 /* View+ConditionalModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */; };
@@ -460,6 +462,7 @@
 				62D90EC0256A8E8500DB4D4E /* colors.json in Resources */,
 				62D90EB6256A8E8500DB4D4E /* categories.json in Resources */,
 				62BFA55B256E5C8700CD327D /* Assets.xcassets in Resources */,
+				6268CB0D25807A4000B175E8 /* checkInOut.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +476,7 @@
 				62E119F2253ADEC10037CEC5 /* Assets.xcassets in Resources */,
 				628D11DE255997DB00BF4D2E /* colors.json in Resources */,
 				62881EAE2556570A00787923 /* categories.json in Resources */,
+				6268CB0A25807A3D00B175E8 /* checkInOut.mp3 in Resources */,
 				62C2FB0225761DA60024208C /* RealisticWalking.gpx in Resources */,
 				62EC2D742556377D0040AF5D /* rooms.json in Resources */,
 			);

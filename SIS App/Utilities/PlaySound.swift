@@ -10,14 +10,21 @@ import Foundation
 
 var audioPlayer: AVAudioPlayer?
 
-func playSound(_ sound: String) {
-    print("🔊 playing sound")
-    if let path = Bundle.main.path(forResource: sound, ofType: nil) {
+func playSound(filename: String, fileType: String) {
+    print("🔊 playing sound \(filename)")
+    if let path = Bundle.main.path(forResource: filename, ofType: fileType) {
+        print("🔊 file exisits")
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
             audioPlayer?.play()
         } catch {
-            print("Could not find and play sound file")
+            print("🔊 Could not find and play sound file")
         }
+    } else {
+        print("🔊 sound doesn't exist :(")
     }
+}
+
+func playCheckInOutSound() {
+    playSound(filename: Constants.checkInOutSoundFilename, fileType: Constants.checkInOutSoundFileExtnesion)
 }

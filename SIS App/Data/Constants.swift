@@ -48,7 +48,8 @@ struct Constants {
     static let levelColorsFilename = "colors.json"
     static let categoryToDisplayNameFilename = "categories.json"
     static let blockOutlineFilename = "overlay_coords.json"
-    static let checkInOutSoundFilename = "checkInOut.mp3"
+    static let checkInOutSoundFilename = "checkInOut"
+    static let checkInOutSoundFileExtnesion = "mp3"
 
     static let roomIdToParentFilename = "roomIdToParent.json"
 

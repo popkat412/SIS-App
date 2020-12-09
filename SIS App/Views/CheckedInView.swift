@@ -36,7 +36,7 @@ struct CheckedInView: View {
                 if !checkInManager.isCheckedIn {
                     checkInManager.showCheckedInScreen = false
                 } else {
-                    playSound(Constants.checkInOutSoundFilename)
+                    playCheckInOutSound()
                     checkInManager.checkOut(shouldUpdateUI: false)
                 }
             }, label: {
