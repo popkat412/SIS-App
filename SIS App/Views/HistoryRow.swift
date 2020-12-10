@@ -15,6 +15,8 @@ struct HistoryRow: View {
     /// If not, it will remain at the old date
     typealias DateUpdateCallback = (Date, Date) -> SessionInvalidError?
 
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
     var session: CheckInSession
     var showTiming = true
     var showTarget = true
@@ -158,7 +160,7 @@ struct HistoryRow: View {
                     $0
                         .foregroundColor(.blue)
                         .padding(7)
-                        .background(Color(white: 0.95))
+                        .background(colorScheme == .light ? Color(white: 0.95) : Color(white: 0.1))
                         .cornerRadius(7)
                 }
             }

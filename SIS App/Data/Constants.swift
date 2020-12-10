@@ -53,6 +53,8 @@ struct Constants {
 
     static let roomIdToParentFilename = "roomIdToParent.json"
 
+    static let overlayOutlineColorName = "Overlay Outline"
+
     // ------ [[ IDENTIFIERS ]] ------- //
     static let appGroupIdentifier = "group.sg.tk.2020.risafeentry.widget"
 
