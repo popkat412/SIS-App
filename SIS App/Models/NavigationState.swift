@@ -8,7 +8,14 @@
 import Foundation
 
 class NavigationState: ObservableObject {
-    @Published var tabbarSelection: Tab = .home
+    @Published var tabbarSelection: Tab = .home {
+        didSet {
+            if tabbarSelection == .history {
+                NotificationCenter.default.post(name: .didSwitchToHistoryView, object: nil)
+            }
+        }
+    }
+
     @Published var shouldShowSafariView: Bool = false
 }
 

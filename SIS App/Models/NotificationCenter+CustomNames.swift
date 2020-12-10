@@ -12,4 +12,5 @@ extension Notification.Name {
     static let didExitBlock = Notification.Name("didExitBlock")
     static let didEnterSchool = Notification.Name("didEnterSchool")
     static let didExitSchool = Notification.Name("didExitSchool")
+    static let didSwitchToHistoryView = Notification.Name("didSwitchToHistoryView")
 }
