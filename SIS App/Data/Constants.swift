@@ -91,12 +91,10 @@ struct Constants {
     // ------- [[ USER DEFAULTS ]] ------ //
     static let kLastSentConfirmationEmail = "kLastSentConfirmationEmail"
     static let kProcessedDocumentIds = "kProcessedDocumentIds"
+    static let kDidAuthHistoryView = "kDidAuthHistoryView"
 
     // ------ [[ OTHER ]] ------ //
     static let remindUserFillInRoomsTime = DateComponents(hour: 18) // 6pm
     static let remindUserCheckOutTime = DateComponents(hour: 20) // 8pm
     static let riSafeEntryURL = URL(string: "https://www.safeentry-qr.gov.sg/tenant/PROD-T07GS3009E-390941-RAFFLESINSTITUTIONQR-SE")!
-
-    // ------ [[ USER DEFAULTS ]] ----- //
-    static let kDidAuthHistoryView = "kDidAuthHistoryView"
 }
