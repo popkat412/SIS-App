@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Room: Identifiable, CheckInTarget {
+struct Room: Decodable, Identifiable, CheckInTarget {
     var name: String
     var level: Int
     var id: String
@@ -20,10 +20,10 @@ struct Room: Identifiable, CheckInTarget {
         self.iconName = iconName ?? ""
     }
 
-    init(_ name: String, id: String? = nil) {
+    init(_ name: String) {
         self.name = name
         level = 1
-        self.id = id ?? "0000"
+        id = "0000"
         iconName = ""
     }
 }

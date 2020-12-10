@@ -11,50 +11,20 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var checkInManager: CheckInManager
     @EnvironmentObject var userLocationManager: UserLocationManager
-    @EnvironmentObject var userAuthManager: UserAuthManager
-
-    @State private var alertItem: AlertItem?
-    @State private var showingActivityIndicator: Bool = false
 
     var body: some View {
-        NavigationView {
-            ZStack {
-                VStack(alignment: .center, spacing: 0) {
-                    MapView()
-                        .edgesIgnoringSafeArea(.all)
-                    if checkInManager.showCheckedInScreen {
-                        CheckedInView()
-                    } else {
-                        ChooseRoomView { room in
-                            print("normal checking into room: \(room)")
-                            checkInManager.checkIn(to: room)
-                        }
-                    }
-                }
-                if showingActivityIndicator {
-                    MyActivityIndicator()
-                        .frame(width: Constants.activityIndicatorSize, height: Constants.activityIndicatorSize)
+        print("rebuilding home: \(checkInManager.isCheckedIn), \(checkInManager.showCheckedInScreen)")
+        return VStack(alignment: .center, spacing: 0) {
+            MapView()
+                .edgesIgnoringSafeArea(.all)
+            if checkInManager.showCheckedInScreen {
+                CheckedInView()
+            } else {
+                ChooseRoomView { room in
+                    print("normal checking into room: \(room)")
+                    checkInManager.checkIn(to: room)
                 }
             }
-            .navigationBarItems(
-                leading: Button(
-                    action: {
-                        print("sign out button pressed")
-                        showingActivityIndicator = true
-                        userAuthManager.signOut { error in
-                            alertItem = MyErrorInfo(error).toAlertItem {
-                                showingActivityIndicator = false
-                            }
-                        }
-                    }, label: {
-                        Text("Sign out")
-                    }
-                )
-            )
-            .alert(item: $alertItem, content: alertItemBuilder)
-        }
-        .onDisappear {
-            showingActivityIndicator = false
         }
     }
 }

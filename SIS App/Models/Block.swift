@@ -8,8 +8,8 @@
 import CoreLocation
 import Foundation
 
-struct Block: CheckInTarget {
-    let name: String
+struct Block: Codable, CheckInTarget {
+    var name: String
     var id: String { name }
     var shortName: String {
         let suffix = " Block"

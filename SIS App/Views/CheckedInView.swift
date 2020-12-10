@@ -45,8 +45,8 @@ struct CheckedInView: View {
                 .buttonStyle(
                     GradientButtonStyle(
                         gradient: checkInManager.isCheckedIn
-                            ? Constants.greenGradient
-                            : Constants.blueGradient
+                            ? Constants.checkedInGradient
+                            : Constants.checkedOutGradient
                     )
                 )
                 .padding(.horizontal, 20)

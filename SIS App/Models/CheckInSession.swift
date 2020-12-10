@@ -5,7 +5,6 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
-import FirebaseFirestore
 import Foundation
 
 struct Day: Identifiable {
@@ -47,13 +46,6 @@ struct CheckInSession: Identifiable {
     var dateInterval: DateInterval? {
         guard let checkedOut = checkedOut else { return nil }
         return DateInterval(start: checkedIn, end: checkedOut)
-    }
-
-    init(checkedIn: Date, checkedOut: Date? = nil, target: CheckInTarget, id: UUID = UUID()) {
-        self.checkedIn = checkedIn
-        self.checkedOut = checkedOut
-        self.target = target
-        self.id = id
     }
 
     func newSessionWith(checkedIn: Date? = nil, checkedOut: Date? = nil, target: CheckInTarget? = nil, id: UUID? = nil) -> CheckInSession {

@@ -6,9 +6,5 @@
 	<array>
 		<string>group.sg.tk.2020.risafeentry.widget</string>
 	</array>
-	<key>keychain-access-groups</key>
-	<array>
-		<string>$(AppIdentifierPrefix)sg.tk.2020.risafeentry</string>
-	</array>
 </dict>
 </plist>
