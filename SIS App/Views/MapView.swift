@@ -11,6 +11,7 @@ import SwiftUI
 
 struct MapView: UIViewRepresentable {
     @EnvironmentObject var userLocationManager: UserLocationManager
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
@@ -106,7 +107,7 @@ extension MapView {
             } else if overlay is MKPolygon {
                 print("drawing outline")
                 let polygonView = MKPolygonRenderer(overlay: overlay)
-                polygonView.strokeColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+                polygonView.strokeColor = UIColor(named: Constants.overlayOutlineColorName)
                 polygonView.lineWidth = 2
                 return polygonView
             }

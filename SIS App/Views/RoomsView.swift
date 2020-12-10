@@ -36,6 +36,9 @@ struct RoomsView: View {
             }
         }
         .navigationBarTitle(categoryName, displayMode: .inline)
+        .onAppear {
+            prepareHaptics()
+        }
     }
 
     private func roomSections() -> [Level] {

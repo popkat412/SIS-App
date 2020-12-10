@@ -67,6 +67,8 @@ class CheckInManager: ObservableObject {
     func checkIn(to room: CheckInTarget, shouldUpdateUI: Bool = true) {
         if isCheckedIn == true { return }
 
+        prepareHaptics()
+
         // ------- [[ UPDATE STATE ]] -------- //
         isCheckedIn = true
         if shouldUpdateUI { showCheckedInScreen = true }
@@ -74,6 +76,9 @@ class CheckInManager: ObservableObject {
 
         // ------- [[ SAVE CURRENT SESSION TO FILE ]] ------ //
         FileUtility.saveDataToJsonFile(filename: Constants.currentSessionFilename, data: currentSession)
+
+        // ------ [[ PLAY SOUND + HAPTICS ]] ----- //
+        playCheckInOutSound()
 
         // ------- [[ REMIND NOTIFICATION ]] ------ //
         UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier) { result in
@@ -113,6 +118,13 @@ class CheckInManager: ObservableObject {
         // ------- [[ CLEANUP ]] -------- //
         currentSession = nil
         FileUtility.deleteFile(filename: Constants.currentSessionFilename)
+        checkInSessions = checkInSessions.filter {
+            let dateToKeep = Date() - Constants.timeIntervalToKeepOnDevice
+            return $0.checkedIn > dateToKeep || $0.checkedOut! > dateToKeep
+        }
+
+        // ------ [[ PLAY SOUND ]] ----- //
+        playCheckInOutSound()
 
         // ------- [[ REMINDER NOTIFICATION ------- //
         UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier) { result in
@@ -125,7 +137,6 @@ class CheckInManager: ObservableObject {
         WidgetCenter.shared.reloadAllTimelines()
     }
 
-    // TODO: Use an enum return instead of the possible invalid reasons
     /// This should use the UUID to figure out which session to change,
     /// then update that session based on the properties of the passed session.
     /// This will do nothing if the new session dates are not valid.

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ChooseRoomView: View {
     @EnvironmentObject var userLocationManager: UserLocationManager
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var showingSearch = false
 
     var onBackButtonPressed: (() -> Void)?
@@ -40,7 +41,7 @@ struct ChooseRoomView: View {
                 }
                 .padding(.vertical, 10)
                 .frame(minWidth: 0, maxWidth: .infinity)
-                .background(Color(white: 0.8))
+                .background(colorScheme == .light ? Color(white: 0.8) : Color(white: 0.2))
                 .cornerRadius(15)
                 .padding()
             })
@@ -57,6 +58,7 @@ struct ChooseRoomView: View {
                     Text(block.name)
                 }
             }
+            .listStyle(InsetListStyle())
             .navigationBarTitle("Blocks", displayMode: .inline)
         }
         .environment(\.onRoomSelection) { room in
