@@ -14,33 +14,26 @@ const config = functions.config();
  */
 async function sendEmail(to, subject, html, attachments) {
   let transporter = nodemailer.createTransport({
-    host: 'smtp.office365.com',
-    port: 587,
-    secure: false,
+    service: "gmail",
     auth: {
       user: config.user_info.user,
       pass: config.user_info.password,
     },
-    tls: {
-      ciphers: 'SSLv3'
-    },
-    requireTLS: true,
   });
 
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: `"Raffles Tracing" <${config.user_info.user}>`, // sender address
+    from: `"RI Tracing" <${config.user_info.user}>`, // sender address
     to: to, // list of receivers
     subject: subject, // Subject line
     html: html,
     attachments: attachments
   });
 
-  console.log("Message sent: %s", info.messageId);
+  console.log(`Message sent: ${info.messageId}`);
 
   return info;
-
 }
 
 /**
