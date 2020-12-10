@@ -1,1137 +1,1137 @@
 [
-    {
-        "name": "Raja Block",
-        "location": {
-            "longitude": 103.844166,
-            "latitude": 1.346308
-        },
-        "radius": 43.92,
-        "categories": {
-            "classroom": [
-                {
-                    "name": "Class 4C",
-                    "level": 2,
-                    "id": "G2-04",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4B",
-                    "level": 2,
-                    "id": "G2-03",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4A",
-                    "level": 2,
-                    "id": "G2-02",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4D",
-                    "level": 3,
-                    "id": "G3-01",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4E",
-                    "level": 3,
-                    "id": "G3-02",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4F",
-                    "level": 3,
-                    "id": "G3-03",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4G",
-                    "level": 3,
-                    "id": "G3-04",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4H",
-                    "level": 3,
-                    "id": "G3-05",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4I",
-                    "level": 3,
-                    "id": "G3-06",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4J",
-                    "level": 4,
-                    "id": "G4-01",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4K",
-                    "level": 4,
-                    "id": "G4-02",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4L",
-                    "level": 4,
-                    "id": "G4-03",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 4M",
-                    "level": 4,
-                    "id": "G4-04",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3G",
-                    "level": 4,
-                    "id": "G4-06",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3H",
-                    "level": 5,
-                    "id": "G5-01",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3I",
-                    "level": 5,
-                    "id": "G5-02",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3J",
-                    "level": 5,
-                    "id": "G5-03",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3K",
-                    "level": 5,
-                    "id": "G5-04",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3L",
-                    "level": 5,
-                    "id": "G5-05",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3M",
-                    "level": 5,
-                    "id": "G5-06",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3A",
-                    "level": 6,
-                    "id": "G6-01",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3B",
-                    "level": 6,
-                    "id": "G6-02",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3C",
-                    "level": 6,
-                    "id": "G6-03",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3D",
-                    "level": 6,
-                    "id": "G6-04",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3E",
-                    "level": 6,
-                    "id": "G6-05",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 3F",
-                    "level": 6,
-                    "id": "G6-06",
-                    "iconName": "classroom"
-                }
-            ],
-            "combinedRoom": [
-                {
-                    "name": "Comb Rm 4.1",
-                    "level": 3,
-                    "id": "G3-07",
-                    "iconName": "combinedRoom"
-                },
-                {
-                    "name": "Comb Rm 4.2",
-                    "level": 4,
-                    "id": "G4-05",
-                    "iconName": "combinedRoom"
-                }
-            ],
-            "others": [
-                {
-                    "name": "MT Rm 3 (ML)",
-                    "level": 2,
-                    "id": "G2-07",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "DT Rm 2",
-                    "level": 2,
-                    "id": "G2-06",
-                    "iconName": "designThinking"
-                },
-                {
-                    "name": "DT Rm 1",
-                    "level": 2,
-                    "id": "G2-05",
-                    "iconName": "designThinking"
-                },
-                {
-                    "name": "MT Rm 2",
-                    "level": 2,
-                    "id": "G2-01",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "RDS Lite (R)",
-                    "level": 4,
-                    "id": "G4-07",
-                    "iconName": "discovery"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 5,
-                    "id": "G5-07",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 5,
-                    "id": "G5-08",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 6,
-                    "id": "G6-07",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 6,
-                    "id": "G6-08",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 7,
-                    "id": "G7-01",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 7,
-                    "id": "G7-02",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 7,
-                    "id": "G7-03",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 7,
-                    "id": "G7-04",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 7,
-                    "id": "G7-05",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 7,
-                    "id": "G7-06",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 7,
-                    "id": "G7-07",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Y5-6",
-                    "level": 7,
-                    "id": "G7-08",
-                    "iconName": "classroom"
-                }
-            ]
-        }
+  {
+    "name": "Raja Block",
+    "location": {
+      "longitude": 103.844166,
+      "latitude": 1.346308
     },
-    {
-        "name": "Science Block",
-        "location": {
-            "longitude": 103.845913,
-            "latitude": 1.345748
+    "radius": 43.92,
+    "categories": {
+      "classroom": [
+        {
+          "name": "Class 4C",
+          "level": 2,
+          "id": "G2-04",
+          "iconName": "classroom"
         },
-        "radius": 22.22,
-        "categories": {
-            "scienceLab": [
-                {
-                    "name": "Chemistry Lab 1",
-                    "level": 1,
-                    "id": "S1-07",
-                    "iconName": "chemistryLab"
-                },
-                {
-                    "name": "Chemistry Lab 2",
-                    "level": 1,
-                    "id": "S1-04",
-                    "iconName": "chemistryLab"
-                },
-                {
-                    "name": "Chemistry Lab 3",
-                    "level": 1,
-                    "id": "S1-01",
-                    "iconName": "chemistryLab"
-                },
-                {
-                    "name": "Chemistry Lab 4",
-                    "level": 1,
-                    "id": "S1-03",
-                    "iconName": "chemistryLab"
-                },
-                {
-                    "name": "Physics Lab 1",
-                    "level": 2,
-                    "id": "S2-07",
-                    "iconName": "physicsLab"
-                },
-                {
-                    "name": "Physics Lab 2",
-                    "level": 2,
-                    "id": "S2-04",
-                    "iconName": "physicsLab"
-                },
-                {
-                    "name": "Physics Lab 3",
-                    "level": 2,
-                    "id": "S2-01",
-                    "iconName": "physicsLab"
-                },
-                {
-                    "name": "Physics Lab 4",
-                    "level": 2,
-                    "id": "S2-03",
-                    "iconName": "physicsLab"
-                },
-                {
-                    "name": "Biology Lab 1",
-                    "level": 3,
-                    "id": "S3-07",
-                    "iconName": "biologyLab"
-                },
-                {
-                    "name": "Biology Lab 2",
-                    "level": 3,
-                    "id": "S3-05",
-                    "iconName": "biologyLab"
-                },
-                {
-                    "name": "Biology Lab 3",
-                    "level": 3,
-                    "id": "S3-04",
-                    "iconName": "biologyLab"
-                },
-                {
-                    "name": "Microbiology Lab",
-                    "level": 3,
-                    "id": "S3-02",
-                    "iconName": "biologyLab"
-                },
-                {
-                    "name": "Molecular Genetics Lab / Plant Tissue Culture Lab",
-                    "level": 3,
-                    "id": "S3-01",
-                    "iconName": "biologyLab"
-                }
-            ],
-            "staffRoom": [
-                {
-                    "name": "Preparation Room",
-                    "level": 1,
-                    "id": "S1-02",
-                    "iconName": "scienceLab"
-                },
-                {
-                    "name": "Lab Staff Room",
-                    "level": 1,
-                    "id": "S1-06",
-                    "iconName": "scienceLab"
-                },
-                {
-                    "name": "Preparation Room",
-                    "level": 2,
-                    "id": "S2-02",
-                    "iconName": "scienceLab"
-                },
-                {
-                    "name": "Preparation Room",
-                    "level": 3,
-                    "id": "S3-06",
-                    "iconName": "scienceLab"
-                }
-            ],
-            "projectRoom": [
-                {
-                    "name": "Project Room",
-                    "level": 2,
-                    "id": "S2-05",
-                    "iconName": "projectRoom"
-                }
-            ]
+        {
+          "name": "Class 4B",
+          "level": 2,
+          "id": "G2-03",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4A",
+          "level": 2,
+          "id": "G2-02",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4D",
+          "level": 3,
+          "id": "G3-01",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4E",
+          "level": 3,
+          "id": "G3-02",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4F",
+          "level": 3,
+          "id": "G3-03",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4G",
+          "level": 3,
+          "id": "G3-04",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4H",
+          "level": 3,
+          "id": "G3-05",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4I",
+          "level": 3,
+          "id": "G3-06",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4J",
+          "level": 4,
+          "id": "G4-01",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4K",
+          "level": 4,
+          "id": "G4-02",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4L",
+          "level": 4,
+          "id": "G4-03",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 4M",
+          "level": 4,
+          "id": "G4-04",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3G",
+          "level": 4,
+          "id": "G4-06",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3H",
+          "level": 5,
+          "id": "G5-01",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3I",
+          "level": 5,
+          "id": "G5-02",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3J",
+          "level": 5,
+          "id": "G5-03",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3K",
+          "level": 5,
+          "id": "G5-04",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3L",
+          "level": 5,
+          "id": "G5-05",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3M",
+          "level": 5,
+          "id": "G5-06",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3A",
+          "level": 6,
+          "id": "G6-01",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3B",
+          "level": 6,
+          "id": "G6-02",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3C",
+          "level": 6,
+          "id": "G6-03",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3D",
+          "level": 6,
+          "id": "G6-04",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3E",
+          "level": 6,
+          "id": "G6-05",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 3F",
+          "level": 6,
+          "id": "G6-06",
+          "iconName": "classroom"
         }
-    },
-    {
-        "name": "Sheares Block",
-        "location": {
-            "longitude": 103.844805,
-            "latitude": 1.346454
+      ],
+      "combinedRoom": [
+        {
+          "name": "Comb Rm 4.1",
+          "level": 3,
+          "id": "G3-07",
+          "iconName": "combinedRoom"
         },
-        "radius": 25.09,
-        "categories": {
-            "classroom": [
-                {
-                    "name": "Class 2I",
-                    "level": 3,
-                    "id": "J3-1",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2J",
-                    "level": 3,
-                    "id": "J3-2",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2K",
-                    "level": 3,
-                    "id": "J3-3",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2L",
-                    "level": 3,
-                    "id": "J3-4",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2A",
-                    "level": 3,
-                    "id": "J4-1",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2B",
-                    "level": 3,
-                    "id": "J4-2",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2C",
-                    "level": 3,
-                    "id": "J4-3",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2D",
-                    "level": 3,
-                    "id": "J4-4",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2E",
-                    "level": 3,
-                    "id": "J4-5",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2F",
-                    "level": 3,
-                    "id": "J4-6",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2H",
-                    "level": 3,
-                    "id": "J4-7",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 2G",
-                    "level": 3,
-                    "id": "J4-8",
-                    "iconName": "classroom"
-                }
-            ],
-            "computerLab": [
-                {
-                    "name": "Computer Lab 3",
-                    "level": 2,
-                    "id": "J2-6",
-                    "iconName": "computerLab"
-                },
-                {
-                    "name": "Computer Lab 4",
-                    "level": 2,
-                    "id": "J2-5",
-                    "iconName": "computerLab"
-                }
-            ],
-            "combinedRoom": [
-                {
-                    "name": "Combined Room 3.1",
-                    "level": 2,
-                    "id": "J2-1",
-                    "iconName": "combinedRoom"
-                },
-                {
-                    "name": "Combined Room 3.2",
-                    "level": 2,
-                    "id": "J2-2",
-                    "iconName": "combinedRoom"
-                },
-                {
-                    "name": "Combined Room 3.3",
-                    "level": 2,
-                    "id": "J2-3",
-                    "iconName": "combinedRoom"
-                },
-                {
-                    "name": "Combined Room 4.3",
-                    "level": 2,
-                    "id": "J2-4",
-                    "iconName": "combinedRoom"
-                },
-                {
-                    "name": "Combined Room 2.1",
-                    "level": 3,
-                    "id": "J3-5",
-                    "iconName": "combinedRoom"
-                }
-            ],
-            "others": [
-                {
-                    "name": "RDS 1",
-                    "level": 1,
-                    "id": "J1-7",
-                    "iconName": "discovery"
-                },
-                {
-                    "name": "RDS 1",
-                    "level": 1,
-                    "id": "J1-8",
-                    "iconName": "discovery"
-                },
-                {
-                    "name": "RDS 2",
-                    "level": 1,
-                    "id": "J1-5",
-                    "iconName": "discovery"
-                },
-                {
-                    "name": "RDS 2",
-                    "level": 1,
-                    "id": "J1-6",
-                    "iconName": "discovery"
-                },
-                {
-                    "name": "RDS 3",
-                    "level": 1,
-                    "id": "J1-1",
-                    "iconName": "discovery"
-                },
-                {
-                    "name": "RDS 3",
-                    "level": 1,
-                    "id": "J1-2",
-                    "iconName": "discovery"
-                },
-                {
-                    "name": "RDS X",
-                    "level": 1,
-                    "id": "J1-3",
-                    "iconName": "discovery"
-                },
-                {
-                    "name": "RDS X",
-                    "level": 1,
-                    "id": "J1-4",
-                    "iconName": "discovery"
-                },
-                {
-                    "name": "English Studio Room",
-                    "level": 3,
-                    "id": "J3-7",
-                    "iconName": "litRoom"
-                },
-                {
-                    "name": "MT RM 1 (ML)",
-                    "level": 3,
-                    "id": "J3-6",
-                    "iconName": "classroom"
-                }
-            ]
+        {
+          "name": "Comb Rm 4.2",
+          "level": 4,
+          "id": "G4-05",
+          "iconName": "combinedRoom"
         }
-    },
-    {
-        "name": "Yusof Ishak Block",
-        "location": {
-            "longitude": 103.845992,
-            "latitude": 1.346271
+      ],
+      "others": [
+        {
+          "name": "MT Rm 3 (ML)",
+          "level": 2,
+          "id": "G2-07",
+          "iconName": "classroom"
         },
-        "radius": 73.84,
-        "categories": {
-            "humanities": [
-                {
-                    "name": "Geography Room",
-                    "level": 1,
-                    "id": "C01-13",
-                    "iconName": "geogRoom"
-                },
-                {
-                    "name": "History room",
-                    "level": 1,
-                    "id": "C01-13A",
-                    "iconName": "histRoom"
-                },
-                {
-                    "name": "English literature room",
-                    "level": 1,
-                    "id": "C01-14",
-                    "iconName": "litRoom"
-                },
-                {
-                    "name": "literature circular room",
-                    "level": 1,
-                    "id": "C01-15A",
-                    "iconName": "litRoom"
-                },
-                {
-                    "name": "RSP Room",
-                    "level": 1,
-                    "id": "C01-29",
-                    "iconName": "litRoom"
-                },
-                {
-                    "name": "humanities circular room",
-                    "level": 1,
-                    "id": "C01-18A",
-                    "iconName": "humanities"
-                }
-            ],
-            "lectureTheatre": [
-                {
-                    "name": "LT2",
-                    "level": 1,
-                    "id": "C01-26",
-                    "iconName": "lectureTheatre"
-                },
-                {
-                    "name": "LT1",
-                    "level": 1,
-                    "id": "C01-22",
-                    "iconName": "lectureTheatre"
-                },
-                {
-                    "name": "LT1",
-                    "level": 2,
-                    "id": "C02-17",
-                    "iconName": "lectureTheatre"
-                },
-                {
-                    "name": "LT3",
-                    "level": 2,
-                    "id": "C02-24",
-                    "iconName": "lectureTheatre"
-                },
-                {
-                    "name": "LT3",
-                    "level": 2,
-                    "id": "C02-25",
-                    "iconName": "lectureTheatre"
-                },
-                {
-                    "name": "Projection room",
-                    "level": 2,
-                    "id": "C02-18",
-                    "iconName": "unknown"
-                }
-            ],
-            "store": [
-                {
-                    "name": "Store",
-                    "level": 1,
-                    "id": "C01-24",
-                    "iconName": "store"
-                },
-                {
-                    "name": "Store",
-                    "level": 1,
-                    "id": "C01-28",
-                    "iconName": "store"
-                },
-                {
-                    "name": "Store",
-                    "level": 1,
-                    "id": "C01-25",
-                    "iconName": "store"
-                },
-                {
-                    "name": "Store",
-                    "level": 2,
-                    "id": "C02-19",
-                    "iconName": "store"
-                },
-                {
-                    "name": "Store",
-                    "level": 2,
-                    "id": "C02-22",
-                    "iconName": "store"
-                },
-                {
-                    "name": "Store",
-                    "level": 3,
-                    "id": "C03-01",
-                    "iconName": "store"
-                },
-                {
-                    "name": "Store",
-                    "level": 3,
-                    "id": "C03-16",
-                    "iconName": "store"
-                },
-                {
-                    "name": "Store",
-                    "level": 3,
-                    "id": "C03-17",
-                    "iconName": "store"
-                },
-                {
-                    "name": "Estate store 2",
-                    "level": 2,
-                    "id": "estate-store-2",
-                    "iconName": "estate"
-                },
-                {
-                    "name": "Estate store 3",
-                    "level": 2,
-                    "id": "estate-store-3",
-                    "iconName": "estate"
-                },
-                {
-                    "name": "Estate store 1",
-                    "level": 1,
-                    "id": "C01-34A",
-                    "iconName": "estate"
-                }
-            ],
-            "scienceLab": [
-                {
-                    "name": "Research Lab",
-                    "level": 1,
-                    "id": "C01-20",
-                    "iconName": "scienceLab"
-                },
-                {
-                    "name": "Material Science Lab",
-                    "level": 1,
-                    "id": "C01-19",
-                    "iconName": "scienceLab"
-                },
-                {
-                    "name": "Analytical Chemistry lab",
-                    "level": 1,
-                    "id": "C01-16",
-                    "iconName": "scienceLab"
-                },
-                {
-                    "name": "Discovery lab 1",
-                    "level": 2,
-                    "id": "C2-15",
-                    "iconName": "scienceLab"
-                },
-                {
-                    "name": "Discovery lab 2",
-                    "level": 2,
-                    "id": "C2-16",
-                    "iconName": "scienceLab"
-                },
-                {
-                    "name": "Photoics lab",
-                    "level": 3,
-                    "id": "C03-09",
-                    "iconName": "scienceLab"
-                }
-            ],
-            "staffRoom": [
-                {
-                    "name": "Staffroom 1",
-                    "level": 2,
-                    "id": "C02-01",
-                    "iconName": "staffRoom"
-                },
-                {
-                    "name": "HOD room",
-                    "level": 2,
-                    "id": "C02-32",
-                    "iconName": "staffRoom"
-                },
-                {
-                    "name": "Staffroom 3",
-                    "level": 2,
-                    "id": "C02-30A",
-                    "iconName": "staffRoom"
-                },
-                {
-                    "name": "Staff lounge",
-                    "level": 1,
-                    "id": "C01-12",
-                    "iconName": "staffRoom"
-                },
-                {
-                    "name": "Staffroom 2",
-                    "level": 2,
-                    "id": "C02-02",
-                    "iconName": "staffRoom"
-                },
-                {
-                    "name": "IT department",
-                    "level": 1,
-                    "id": "it-department",
-                    "iconName": "staffRoom"
-                },
-                {
-                    "name": "Meeting room",
-                    "level": 2,
-                    "id": "C2-30",
-                    "iconName": "meetingRoom"
-                }
-            ],
-            "administration": [
-                {
-                    "name": "Estate Office",
-                    "level": 1,
-                    "id": "C01-34",
-                    "iconName": "estate"
-                },
-                {
-                    "name": "General Office",
-                    "level": 1,
-                    "id": "general-office-y14",
-                    "iconName": "staffRoom"
-                }
-            ],
-            "computerLab": [
-                {
-                    "name": "Robotics lab",
-                    "level": 3,
-                    "id": "C03-05",
-                    "iconName": "computerLab"
-                },
-                {
-                    "name": "Computer lab 5",
-                    "level": 3,
-                    "id": "C03-06",
-                    "iconName": "computerLab"
-                },
-                {
-                    "name": "Computer lab 6",
-                    "level": 3,
-                    "id": "C03-07",
-                    "iconName": "computerLab"
-                },
-                {
-                    "name": "Computer lab 2",
-                    "level": 3,
-                    "id": "C03-12",
-                    "iconName": "computerLab"
-                },
-                {
-                    "name": "Key frame studio",
-                    "level": 3,
-                    "id": "C03-11",
-                    "iconName": "computerLab"
-                },
-                {
-                    "name": "laser animation library",
-                    "level": 3,
-                    "id": "C03-0",
-                    "iconName": "computerLab"
-                }
-            ],
-            "music": [
-                {
-                    "name": "Military band",
-                    "level": 3,
-                    "id": "C03-18A",
-                    "iconName": "music"
-                },
-                {
-                    "name": "Instruments room",
-                    "level": 1,
-                    "id": "C01-17",
-                    "iconName": "music"
-                },
-                {
-                    "name": "Music ensemble studio",
-                    "level": 2,
-                    "id": "C02-29",
-                    "iconName": "music"
-                },
-                {
-                    "name": "Music ensemble studio 2",
-                    "level": 2,
-                    "id": "C02-21",
-                    "iconName": "music"
-                }
-            ],
-            "others": [
-                {
-                    "name": "Raffles Guidance Centre",
-                    "level": 1,
-                    "id": "C01-11",
-                    "iconName": "rafflesGuidanceCentre"
-                },
-                {
-                    "name": "Raffles Archive Museum",
-                    "level": 1,
-                    "id": "ram",
-                    "iconName": "ram"
-                },
-                {
-                    "name": "RA home room",
-                    "level": 2,
-                    "id": "C02-11",
-                    "iconName": "discovery"
-                },
-                {
-                    "name": "AHU room 2",
-                    "level": 2,
-                    "id": "C02-26",
-                    "iconName": "others"
-                },
-                {
-                    "name": "Math room 1",
-                    "level": 3,
-                    "id": "C03-03",
-                    "iconName": "mathRoom"
-                },
-                {
-                    "name": "Math room 1",
-                    "level": 3,
-                    "id": "C03-03A",
-                    "iconName": "mathRoom"
-                },
-                {
-                    "name": "Math room 2",
-                    "level": 3,
-                    "id": "C03-04",
-                    "iconName": "mathRoom"
-                },
-                {
-                    "name": "Math room 2",
-                    "level": 3,
-                    "id": "C03-04A",
-                    "iconName": "mathRoom"
-                }
-            ]
+        {
+          "name": "DT Rm 2",
+          "level": 2,
+          "id": "G2-06",
+          "iconName": "designThinking"
+        },
+        {
+          "name": "DT Rm 1",
+          "level": 2,
+          "id": "G2-05",
+          "iconName": "designThinking"
+        },
+        {
+          "name": "MT Rm 2",
+          "level": 2,
+          "id": "G2-01",
+          "iconName": "classroom"
+        },
+        {
+          "name": "RDS Lite (R)",
+          "level": 4,
+          "id": "G4-07",
+          "iconName": "discovery"
+        },
+        {
+          "name": "Y5-6",
+          "level": 5,
+          "id": "G5-07",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 5,
+          "id": "G5-08",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 6,
+          "id": "G6-07",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 6,
+          "id": "G6-08",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 7,
+          "id": "G7-01",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 7,
+          "id": "G7-02",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 7,
+          "id": "G7-03",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 7,
+          "id": "G7-04",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 7,
+          "id": "G7-05",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 7,
+          "id": "G7-06",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 7,
+          "id": "G7-07",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Y5-6",
+          "level": 7,
+          "id": "G7-08",
+          "iconName": "classroom"
         }
-    },
-    {
-        "name": "Marshall Block",
-        "location": {
-            "longitude": 103.845492,
-            "latitude": 1.345649
-        },
-        "radius": 21.62,
-        "categories": {
-            "classroom": [
-                {
-                    "name": "Class 1A",
-                    "level": 1,
-                    "id": "C1-17",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1B",
-                    "level": 1,
-                    "id": "C1-18",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1C",
-                    "level": 1,
-                    "id": "C1-19",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1D",
-                    "level": 1,
-                    "id": "C1-20",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1E",
-                    "level": 1,
-                    "id": "C1-21",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1F",
-                    "level": 2,
-                    "id": "C2-17",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1G",
-                    "level": 2,
-                    "id": "C2-18",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1H",
-                    "level": 2,
-                    "id": "C2-19",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1I",
-                    "level": 2,
-                    "id": "C2-20",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1J",
-                    "level": 2,
-                    "id": "C2-21",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1K",
-                    "level": 3,
-                    "id": "C3-18",
-                    "iconName": "classroom"
-                },
-                {
-                    "name": "Class 1L",
-                    "level": 3,
-                    "id": "C3-19",
-                    "iconName": "classroom"
-                }
-            ],
-            "combinedRoom": [
-                {
-                    "name": "Combined Room 1.1",
-                    "level": 3,
-                    "id": "C3-20",
-                    "iconName": "combinedRoom"
-                },
-                {
-                    "name": "Combined Room 1.2",
-                    "level": 3,
-                    "id": "C3-21",
-                    "iconName": "combinedRoom"
-                },
-                {
-                    "name": "Combined Room 1.3",
-                    "level": 3,
-                    "id": "C3-17",
-                    "iconName": "combinedRoom"
-                }
-            ],
-            "others": [
-                {
-                    "name": "RDS Lite (M)",
-                    "level": 3,
-                    "id": "C3-22",
-                    "iconName": "discovery"
-                }
-            ]
-        }
-    },
-    {
-        "name": "ARTSpace",
-        "location": {
-            "longitude": 103.844596,
-            "latitude": 1.347543
-        },
-        "radius": 32.42,
-        "categories": {}
-    },
-    {
-        "name": "Canteen/Hall Block",
-        "location": {
-            "longitude": 103.845664,
-            "latitude": 1.347767
-        },
-        "radius": 65,
-        "categories": {
-            "others": [
-                {
-                    "name": "Canteen",
-                    "level": 1,
-                    "id": "-",
-                    "iconName": "canteen"
-                },
-                {
-                    "name": "Hall",
-                    "level": 2,
-                    "id": "-",
-                    "iconName": "hall"
-                }
-            ]
-        }
-    },
-    {
-        "name": "HML/Dining Hall Block",
-        "location": {
-            "longitude": 103.844863,
-            "latitude": 1.346911
-        },
-        "radius": 25,
-        "categories": {
-            "others": [
-                {
-                    "name": "Hullet Memorial Library",
-                    "level": 1,
-                    "id": "-",
-                    "iconName": "library"
-                },
-                {
-                    "name": "Dining Hall",
-                    "level": 2,
-                    "id": "-",
-                    "iconName": "canteen"
-                }
-            ]
-        }
+      ]
     }
+  },
+  {
+    "name": "Science Block",
+    "location": {
+      "longitude": 103.845913,
+      "latitude": 1.345748
+    },
+    "radius": 22.22,
+    "categories": {
+      "scienceLab": [
+        {
+          "name": "Chemistry Lab 1",
+          "level": 1,
+          "id": "S1-07",
+          "iconName": "chemistryLab"
+        },
+        {
+          "name": "Chemistry Lab 2",
+          "level": 1,
+          "id": "S1-04",
+          "iconName": "chemistryLab"
+        },
+        {
+          "name": "Chemistry Lab 3",
+          "level": 1,
+          "id": "S1-01",
+          "iconName": "chemistryLab"
+        },
+        {
+          "name": "Chemistry Lab 4",
+          "level": 1,
+          "id": "S1-03",
+          "iconName": "chemistryLab"
+        },
+        {
+          "name": "Physics Lab 1",
+          "level": 2,
+          "id": "S2-07",
+          "iconName": "physicsLab"
+        },
+        {
+          "name": "Physics Lab 2",
+          "level": 2,
+          "id": "S2-04",
+          "iconName": "physicsLab"
+        },
+        {
+          "name": "Physics Lab 3",
+          "level": 2,
+          "id": "S2-01",
+          "iconName": "physicsLab"
+        },
+        {
+          "name": "Physics Lab 4",
+          "level": 2,
+          "id": "S2-03",
+          "iconName": "physicsLab"
+        },
+        {
+          "name": "Biology Lab 1",
+          "level": 3,
+          "id": "S3-07",
+          "iconName": "biologyLab"
+        },
+        {
+          "name": "Biology Lab 2",
+          "level": 3,
+          "id": "S3-05",
+          "iconName": "biologyLab"
+        },
+        {
+          "name": "Biology Lab 3",
+          "level": 3,
+          "id": "S3-04",
+          "iconName": "biologyLab"
+        },
+        {
+          "name": "Microbiology Lab",
+          "level": 3,
+          "id": "S3-02",
+          "iconName": "biologyLab"
+        },
+        {
+          "name": "Molecular Genetics Lab / Plant Tissue Culture Lab",
+          "level": 3,
+          "id": "S3-01",
+          "iconName": "biologyLab"
+        }
+      ],
+      "staffRoom": [
+        {
+          "name": "Preparation Room",
+          "level": 1,
+          "id": "S1-02",
+          "iconName": "scienceLab"
+        },
+        {
+          "name": "Lab Staff Room",
+          "level": 1,
+          "id": "S1-06",
+          "iconName": "scienceLab"
+        },
+        {
+          "name": "Preparation Room",
+          "level": 2,
+          "id": "S2-02",
+          "iconName": "scienceLab"
+        },
+        {
+          "name": "Preparation Room",
+          "level": 3,
+          "id": "S3-06",
+          "iconName": "scienceLab"
+        }
+      ],
+      "projectRoom": [
+        {
+          "name": "Project Room",
+          "level": 2,
+          "id": "S2-05",
+          "iconName": "projectRoom"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Sheares Block",
+    "location": {
+      "longitude": 103.844805,
+      "latitude": 1.346454
+    },
+    "radius": 25.09,
+    "categories": {
+      "classroom": [
+        {
+          "name": "Class 2I",
+          "level": 3,
+          "id": "J3-1",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2J",
+          "level": 3,
+          "id": "J3-2",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2K",
+          "level": 3,
+          "id": "J3-3",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2L",
+          "level": 3,
+          "id": "J3-4",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2A",
+          "level": 3,
+          "id": "J4-1",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2B",
+          "level": 3,
+          "id": "J4-2",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2C",
+          "level": 3,
+          "id": "J4-3",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2D",
+          "level": 3,
+          "id": "J4-4",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2E",
+          "level": 3,
+          "id": "J4-5",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2F",
+          "level": 3,
+          "id": "J4-6",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2H",
+          "level": 3,
+          "id": "J4-7",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 2G",
+          "level": 3,
+          "id": "J4-8",
+          "iconName": "classroom"
+        }
+      ],
+      "computerLab": [
+        {
+          "name": "Computer Lab 3",
+          "level": 2,
+          "id": "J2-6",
+          "iconName": "computerLab"
+        },
+        {
+          "name": "Computer Lab 4",
+          "level": 2,
+          "id": "J2-5",
+          "iconName": "computerLab"
+        }
+      ],
+      "combinedRoom": [
+        {
+          "name": "Combined Room 3.1",
+          "level": 2,
+          "id": "J2-1",
+          "iconName": "combinedRoom"
+        },
+        {
+          "name": "Combined Room 3.2",
+          "level": 2,
+          "id": "J2-2",
+          "iconName": "combinedRoom"
+        },
+        {
+          "name": "Combined Room 3.3",
+          "level": 2,
+          "id": "J2-3",
+          "iconName": "combinedRoom"
+        },
+        {
+          "name": "Combined Room 4.3",
+          "level": 2,
+          "id": "J2-4",
+          "iconName": "combinedRoom"
+        },
+        {
+          "name": "Combined Room 2.1",
+          "level": 3,
+          "id": "J3-5",
+          "iconName": "combinedRoom"
+        }
+      ],
+      "others": [
+        {
+          "name": "RDS 1",
+          "level": 1,
+          "id": "J1-7",
+          "iconName": "discovery"
+        },
+        {
+          "name": "RDS 1",
+          "level": 1,
+          "id": "J1-8",
+          "iconName": "discovery"
+        },
+        {
+          "name": "RDS 2",
+          "level": 1,
+          "id": "J1-5",
+          "iconName": "discovery"
+        },
+        {
+          "name": "RDS 2",
+          "level": 1,
+          "id": "J1-6",
+          "iconName": "discovery"
+        },
+        {
+          "name": "RDS 3",
+          "level": 1,
+          "id": "J1-1",
+          "iconName": "discovery"
+        },
+        {
+          "name": "RDS 3",
+          "level": 1,
+          "id": "J1-2",
+          "iconName": "discovery"
+        },
+        {
+          "name": "RDS X",
+          "level": 1,
+          "id": "J1-3",
+          "iconName": "discovery"
+        },
+        {
+          "name": "RDS X",
+          "level": 1,
+          "id": "J1-4",
+          "iconName": "discovery"
+        },
+        {
+          "name": "English Studio Room",
+          "level": 3,
+          "id": "J3-7",
+          "iconName": "litRoom"
+        },
+        {
+          "name": "MT RM 1 (ML)",
+          "level": 3,
+          "id": "J3-6",
+          "iconName": "classroom"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Yusof Ishak Block",
+    "location": {
+      "longitude": 103.845992,
+      "latitude": 1.346271
+    },
+    "radius": 73.84,
+    "categories": {
+      "humanities": [
+        {
+          "name": "Geography Room",
+          "level": 1,
+          "id": "C01-13",
+          "iconName": "geogRoom"
+        },
+        {
+          "name": "History room",
+          "level": 1,
+          "id": "C01-13A",
+          "iconName": "histRoom"
+        },
+        {
+          "name": "English literature room",
+          "level": 1,
+          "id": "C01-14",
+          "iconName": "litRoom"
+        },
+        {
+          "name": "literature circular room",
+          "level": 1,
+          "id": "C01-15A",
+          "iconName": "litRoom"
+        },
+        {
+          "name": "RSP Room",
+          "level": 1,
+          "id": "C01-29",
+          "iconName": "litRoom"
+        },
+        {
+          "name": "humanities circular room",
+          "level": 1,
+          "id": "C01-18A",
+          "iconName": "humanities"
+        }
+      ],
+      "lectureTheatre": [
+        {
+          "name": "LT2",
+          "level": 1,
+          "id": "C01-26",
+          "iconName": "lectureTheatre"
+        },
+        {
+          "name": "LT1",
+          "level": 1,
+          "id": "C01-22",
+          "iconName": "lectureTheatre"
+        },
+        {
+          "name": "LT1",
+          "level": 2,
+          "id": "C02-17",
+          "iconName": "lectureTheatre"
+        },
+        {
+          "name": "LT3",
+          "level": 2,
+          "id": "C02-24",
+          "iconName": "lectureTheatre"
+        },
+        {
+          "name": "LT3",
+          "level": 2,
+          "id": "C02-25",
+          "iconName": "lectureTheatre"
+        },
+        {
+          "name": "Projection room",
+          "level": 2,
+          "id": "C02-18",
+          "iconName": "unknown"
+        }
+      ],
+      "store": [
+        {
+          "name": "Store",
+          "level": 1,
+          "id": "C01-24",
+          "iconName": "store"
+        },
+        {
+          "name": "Store",
+          "level": 1,
+          "id": "C01-28",
+          "iconName": "store"
+        },
+        {
+          "name": "Store",
+          "level": 1,
+          "id": "C01-25",
+          "iconName": "store"
+        },
+        {
+          "name": "Store",
+          "level": 2,
+          "id": "C02-19",
+          "iconName": "store"
+        },
+        {
+          "name": "Store",
+          "level": 2,
+          "id": "C02-22",
+          "iconName": "store"
+        },
+        {
+          "name": "Store",
+          "level": 3,
+          "id": "C03-01",
+          "iconName": "store"
+        },
+        {
+          "name": "Store",
+          "level": 3,
+          "id": "C03-16",
+          "iconName": "store"
+        },
+        {
+          "name": "Store",
+          "level": 3,
+          "id": "C03-17",
+          "iconName": "store"
+        },
+        {
+          "name": "Estate store 2",
+          "level": 2,
+          "id": "estate-store-2",
+          "iconName": "estate"
+        },
+        {
+          "name": "Estate store 3",
+          "level": 2,
+          "id": "estate-store-3",
+          "iconName": "estate"
+        },
+        {
+          "name": "Estate store 1",
+          "level": 1,
+          "id": "C01-34A",
+          "iconName": "estate"
+        }
+      ],
+      "scienceLab": [
+        {
+          "name": "Research Lab",
+          "level": 1,
+          "id": "C01-20",
+          "iconName": "scienceLab"
+        },
+        {
+          "name": "Material Science Lab",
+          "level": 1,
+          "id": "C01-19",
+          "iconName": "scienceLab"
+        },
+        {
+          "name": "Analytical Chemistry lab",
+          "level": 1,
+          "id": "C01-16",
+          "iconName": "scienceLab"
+        },
+        {
+          "name": "Discovery lab 1",
+          "level": 2,
+          "id": "C2-15",
+          "iconName": "scienceLab"
+        },
+        {
+          "name": "Discovery lab 2",
+          "level": 2,
+          "id": "C2-16",
+          "iconName": "scienceLab"
+        },
+        {
+          "name": "Photoics lab",
+          "level": 3,
+          "id": "C03-09",
+          "iconName": "scienceLab"
+        }
+      ],
+      "staffRoom": [
+        {
+          "name": "Staffroom 1",
+          "level": 2,
+          "id": "C02-01",
+          "iconName": "staffRoom"
+        },
+        {
+          "name": "HOD room",
+          "level": 2,
+          "id": "C02-32",
+          "iconName": "staffRoom"
+        },
+        {
+          "name": "Staffroom 3",
+          "level": 2,
+          "id": "C02-30A",
+          "iconName": "staffRoom"
+        },
+        {
+          "name": "Staff lounge",
+          "level": 1,
+          "id": "C01-12",
+          "iconName": "staffRoom"
+        },
+        {
+          "name": "Staffroom 2",
+          "level": 2,
+          "id": "C02-02",
+          "iconName": "staffRoom"
+        },
+        {
+          "name": "IT department",
+          "level": 1,
+          "id": "it-department",
+          "iconName": "staffRoom"
+        },
+        {
+          "name": "Meeting room",
+          "level": 2,
+          "id": "C2-30",
+          "iconName": "meetingRoom"
+        }
+      ],
+      "administration": [
+        {
+          "name": "Estate Office",
+          "level": 1,
+          "id": "C01-34",
+          "iconName": "estate"
+        },
+        {
+          "name": "General Office",
+          "level": 1,
+          "id": "general-office-y14",
+          "iconName": "staffRoom"
+        }
+      ],
+      "computerLab": [
+        {
+          "name": "Robotics lab",
+          "level": 3,
+          "id": "C03-05",
+          "iconName": "computerLab"
+        },
+        {
+          "name": "Computer lab 5",
+          "level": 3,
+          "id": "C03-06",
+          "iconName": "computerLab"
+        },
+        {
+          "name": "Computer lab 6",
+          "level": 3,
+          "id": "C03-07",
+          "iconName": "computerLab"
+        },
+        {
+          "name": "Computer lab 2",
+          "level": 3,
+          "id": "C03-12",
+          "iconName": "computerLab"
+        },
+        {
+          "name": "Key frame studio",
+          "level": 3,
+          "id": "C03-11",
+          "iconName": "computerLab"
+        },
+        {
+          "name": "laser animation library",
+          "level": 3,
+          "id": "C03-0",
+          "iconName": "computerLab"
+        }
+      ],
+      "music": [
+        {
+          "name": "Military band",
+          "level": 3,
+          "id": "C03-18A",
+          "iconName": "music"
+        },
+        {
+          "name": "Instruments room",
+          "level": 1,
+          "id": "C01-17",
+          "iconName": "music"
+        },
+        {
+          "name": "Music ensemble studio",
+          "level": 2,
+          "id": "C02-29",
+          "iconName": "music"
+        },
+        {
+          "name": "Music ensemble studio 2",
+          "level": 2,
+          "id": "C02-21",
+          "iconName": "music"
+        }
+      ],
+      "others": [
+        {
+          "name": "Raffles Guidance Centre",
+          "level": 1,
+          "id": "C01-11",
+          "iconName": "rafflesGuidanceCentre"
+        },
+        {
+          "name": "Raffles Archive Museum",
+          "level": 1,
+          "id": "ram",
+          "iconName": "ram"
+        },
+        {
+          "name": "RA home room",
+          "level": 2,
+          "id": "C02-11",
+          "iconName": "discovery"
+        },
+        {
+          "name": "AHU room 2",
+          "level": 2,
+          "id": "C02-26",
+          "iconName": "others"
+        },
+        {
+          "name": "Math room 1",
+          "level": 3,
+          "id": "C03-03",
+          "iconName": "mathRoom"
+        },
+        {
+          "name": "Math room 1",
+          "level": 3,
+          "id": "C03-03A",
+          "iconName": "mathRoom"
+        },
+        {
+          "name": "Math room 2",
+          "level": 3,
+          "id": "C03-04",
+          "iconName": "mathRoom"
+        },
+        {
+          "name": "Math room 2",
+          "level": 3,
+          "id": "C03-04A",
+          "iconName": "mathRoom"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Marshall Block",
+    "location": {
+      "longitude": 103.845492,
+      "latitude": 1.345649
+    },
+    "radius": 21.62,
+    "categories": {
+      "classroom": [
+        {
+          "name": "Class 1A",
+          "level": 1,
+          "id": "C1-17",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1B",
+          "level": 1,
+          "id": "C1-18",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1C",
+          "level": 1,
+          "id": "C1-19",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1D",
+          "level": 1,
+          "id": "C1-20",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1E",
+          "level": 1,
+          "id": "C1-21",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1F",
+          "level": 2,
+          "id": "C2-17",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1G",
+          "level": 2,
+          "id": "C2-18",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1H",
+          "level": 2,
+          "id": "C2-19",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1I",
+          "level": 2,
+          "id": "C2-20",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1J",
+          "level": 2,
+          "id": "C2-21",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1K",
+          "level": 3,
+          "id": "C3-18",
+          "iconName": "classroom"
+        },
+        {
+          "name": "Class 1L",
+          "level": 3,
+          "id": "C3-19",
+          "iconName": "classroom"
+        }
+      ],
+      "combinedRoom": [
+        {
+          "name": "Combined Room 1.1",
+          "level": 3,
+          "id": "C3-20",
+          "iconName": "combinedRoom"
+        },
+        {
+          "name": "Combined Room 1.2",
+          "level": 3,
+          "id": "C3-21",
+          "iconName": "combinedRoom"
+        },
+        {
+          "name": "Combined Room 1.3",
+          "level": 3,
+          "id": "C3-17",
+          "iconName": "combinedRoom"
+        }
+      ],
+      "others": [
+        {
+          "name": "RDS Lite (M)",
+          "level": 3,
+          "id": "C3-22",
+          "iconName": "discovery"
+        }
+      ]
+    }
+  },
+  {
+    "name": "ARTSpace",
+    "location": {
+      "longitude": 103.844596,
+      "latitude": 1.347543
+    },
+    "radius": 32.42,
+    "categories": {}
+  },
+  {
+    "name": "Canteen/Hall Block",
+    "location": {
+      "longitude": 103.845664,
+      "latitude": 1.347767
+    },
+    "radius": 65,
+    "categories": {
+      "others": [
+        {
+          "name": "Canteen",
+          "level": 1,
+          "id": "canteen",
+          "iconName": "food"
+        },
+        {
+          "name": "Hall",
+          "level": 2,
+          "id": "hall",
+          "iconName": "hall"
+        }
+      ]
+    }
+  },
+  {
+    "name": "HML/Dining Hall Block",
+    "location": {
+      "longitude": 103.844863,
+      "latitude": 1.346911
+    },
+    "radius": 25,
+    "categories": {
+      "others": [
+        {
+          "name": "Hullet Memorial Library",
+          "level": 1,
+          "id": "hml",
+          "iconName": "litRoom"
+        },
+        {
+          "name": "Dining Hall",
+          "level": 2,
+          "id": "dining-hall",
+          "iconName": "food"
+        }
+      ]
+    }
+  }
 ]

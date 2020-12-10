@@ -94,7 +94,7 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
                 print("📍 exited the schoool ")
                 DispatchQueue.main.asyncAfter(deadline: .now() + Constants.geofenceDelayTime) {
                     print("📍 exited school, \(Constants.geofenceDelayTime) seconds later")
-                    if self.isInsideSchool {
+                    if !self.isInsideSchool {
                         print("📍 still outside school after \(Constants.geofenceDelayTime)s")
                         NotificationCenter.default.post(name: .didExitSchool, object: nil)
                     }

@@ -5,6 +5,7 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
+import BetterSafariView
 import NotificationCenter
 import SwiftUI
 
@@ -44,6 +45,13 @@ struct ContentView: View {
                 let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
 
                 print("received did exit geofence \(block.name)")
+            }
+            .safariView(isPresented: $navigationState.shouldShowSafariView) {
+                SafariView(url: Constants.riSafeEntryURL)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .didEnterBlock)) { event in
+                let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
+                print("received did enter geofence: \(block.name)")
 
                 if checkInManager.isCheckedIn {
                     UserNotificationHelper.sendNotification(
