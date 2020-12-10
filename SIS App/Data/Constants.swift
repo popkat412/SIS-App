@@ -30,13 +30,13 @@ struct Constants {
     static let mapViewAnnotationImageSize = 20
 
     // -------- [[ COLOR PALETTE ]] -------- //
-    static let checkedInGradient = Gradient(colors: [
+    static let greenGradient = Gradient(colors: [
         Color(red: 35 / 225, green: 122 / 225, blue: 87 / 225),
         Color(red: 9 / 225, green: 48 / 225, blue: 40 / 225),
     ])
-    static let checkedOutGradient = Gradient(colors: [
-        Color(red: 67 / 255, green: 198 / 255, blue: 172 / 255),
-        Color(red: 25 / 255, green: 22 / 255, blue: 84 / 255),
+    static let blueGradient = Gradient(colors: [
+        Color(red: 5 / 255, green: 117 / 255, blue: 230 / 255),
+        Color(red: 2 / 255, green: 27 / 255, blue: 121 / 255),
     ])
 
     // ------ [[ FILENAMES ]] --------- //
@@ -64,6 +64,32 @@ struct Constants {
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"
 
+    // ------ [[ DELAYS ]] ----- //
+    /// Time in seconds inside a building before geofence is triggered
+    static let geofenceDelayTime: TimeInterval = 2 * 60
+    /// Time in seconds between when a user is able to upload data again
+    static let sendConfirmationEmailDelayTime: TimeInterval = 24 * 60 * 60
+    /// Time in seconds before automatically checking in / out to give user some time to do it manually (if they want)
+    static let autoCheckInOutDelayTime: TimeInterval = 60
+
+    // ------ [[ TIME INTERVALS TO KEEP ]] ---- //
+    static let timeIntervalToUpload: TimeInterval = 14 * 24 * 60 * 60
+    static let timeIntervalToKeepOnDevice: TimeInterval = 30 * 24 * 60 * 60
+
+    // ------- [[ OTHERS ]] ------- //
+    static let activityIndicatorSize: CGFloat = 60
+    static let riEmailSuffix = "ri.edu.sg"
+
+    // ------- [[ FIREBASE ]] ------ //
+    static let sendConfirmationEmailCloudFunction = "sendConfirmationEmail"
+    static let uploadedHistoryCollection = "history"
+    static let historyCollectionForEachDocument = "history"
+    static let sendWarningEmailCloudFucntion = "sendWarningEmail"
+
+    // ------- [[ USER DEFAULTS ]] ------ //
+    static let kLastSentConfirmationEmail = "kLastSentConfirmationEmail"
+    static let kProcessedDocumentIds = "kProcessedDocumentIds"
+
     // ------ [[ OTHER ]] ------ //
     static let remindUserFillInRoomsTime = DateComponents(hour: 18) // 6pm
     static let remindUserCheckOutTime = DateComponents(hour: 20) // 8pm
@@ -71,9 +97,4 @@ struct Constants {
 
     // ------ [[ USER DEFAULTS ]] ----- //
     static let kDidAuthHistoryView = "kDidAuthHistoryView"
-
-    // ------ [[ DELAYS ]] ----- //
-    /// Time in seconds inside a building before geofence is triggered
-    static let geofenceDelayTime: Double = 2 * 60
-    static let autoCheckInOutDelayTime: Double = 60
 }
