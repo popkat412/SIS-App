@@ -54,6 +54,7 @@
 		628FAACD2573DE140010F040 /* IntersectionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628FAAC72573D7A40010F040 /* IntersectionChecker.swift */; };
 		628FAAD2257484AB0010F040 /* SessionInvalidError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628FAAD1257484AB0010F040 /* SessionInvalidError.swift */; };
 		628FAAD5257486100010F040 /* SessionInvalidError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628FAAD1257484AB0010F040 /* SessionInvalidError.swift */; };
+		62906BC025821E6900964F49 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62906BBF25821E6900964F49 /* String+Regex.swift */; };
 		629EB68025638E64000FADD9 /* View+ConditionalModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */; };
 		62A53B4B256E41A30092E891 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A53B4A256E41A30092E891 /* IconView.swift */; };
 		62BFA55B256E5C8700CD327D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E119F1253ADEC10037CEC5 /* Assets.xcassets */; };
@@ -190,6 +191,7 @@
 		628D11E7255AB44D00BF4D2E /* LevelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelIcon.swift; sourceTree = "<group>"; };
 		628FAAC72573D7A40010F040 /* IntersectionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionChecker.swift; sourceTree = "<group>"; };
 		628FAAD1257484AB0010F040 /* SessionInvalidError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInvalidError.swift; sourceTree = "<group>"; };
+		62906BBF25821E6900964F49 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
 		6292DCBD25564F4000352527 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "View+ConditionalModifiers.swift"; path = "SIS App/Utilities/View+ConditionalModifiers.swift"; sourceTree = SOURCE_ROOT; };
 		62A53B4A256E41A30092E891 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 		62756C2A25598BEE0007C4F3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				62906BBF25821E6900964F49 /* String+Regex.swift */,
 				626A1882257A6BE70013F67A /* EmailHelper.swift */,
 				62F75D7C2578ED600004FF9D /* String+HelperProtocols.swift */,
 				628BF885257F641E00CFA807 /* Array+UniqueRooms.swift */,
@@ -602,6 +605,7 @@
 				62FF081A25564B9A00FD5D65 /* CheckInManager.swift in Sources */,
 				62BFA561256E8F2900CD327D /* NavigationState.swift in Sources */,
 				62F75D7D2578ED600004FF9D /* String+HelperProtocols.swift in Sources */,
+				62906BC025821E6900964F49 /* String+Regex.swift in Sources */,
 				62FC0BB9256D4A4D00EACA79 /* Constants.swift in Sources */,
 				62E119E9253ADEBF0037CEC5 /* AppDelegate.swift in Sources */,
 				62E119EB253ADEBF0037CEC5 /* SceneDelegate.swift in Sources */,

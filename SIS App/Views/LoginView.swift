@@ -80,8 +80,13 @@ struct LoginView_Previews: PreviewProvider {
 
 private func validateInputs(email: String, password: String) -> Error? {
     guard !email.isEmpty else { return "Email cannot be empty" }
-    guard !password.isEmpty else { return "Password cannot be empty" }
     guard email.hasSuffix(Constants.riEmailSuffix) else { return "Please use your RI email" }
+
+    guard password.count >= 8 else { return "Password must be more than 8 characters" }
+    guard password.matches(regex: "[A-Z]") else { return "Password must have at least 1 upper case letter" }
+    guard password.matches(regex: "[a-z]") else { return "Password must have at least 1 lower case letter" }
+    guard password.matches(regex: "[0-9]") else { return "Password must have at least 1 number" }
+    guard password.matches(regex: "[!@#$%^&*()]") else { return "Password must have at least one symbol: !@#$%^&*()" }
 
     return nil
 }
