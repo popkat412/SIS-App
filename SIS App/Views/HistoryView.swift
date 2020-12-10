@@ -81,12 +81,12 @@ struct HistoryView: View {
             .navigationBarItems(trailing: EditButton())
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
-                    Button(action: {}) {
-                        HStack {
-                            Text("Add")
-                            Image(systemName: "plus")
-                        }
-                    }
+//                    Button(action: {}) {
+//                        HStack {
+//                            Text("Add")
+//                            Image(systemName: "plus")
+//                        }
+//                    }
                     Button(action: {
                         let lastSentConfirmationEmail = UserDefaults(suiteName: Constants.appGroupIdentifier)?.double(forKey: Constants.kLastSentConfirmationEmail)
 
