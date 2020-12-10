@@ -120,9 +120,9 @@ struct HistoryRow: View {
                         }
                         .alert(isPresented: $showingErrorAlert) {
                             Alert(
-                                title: Text("No U"),
-                                message: Text(currentError?.rawValue ?? "Unknown error"),
-                                dismissButton: .default(Text("Yessir!"))
+                                title: Text("Whoops!"),
+                                message: Text(currentError?.rawValue ?? "An unknown error occurred"),
+                                dismissButton: .default(Text("Ok"))
                             )
                         }
                     }

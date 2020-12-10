@@ -26,7 +26,7 @@ struct Constants {
     static let schoolRegionId = "Y14"
 
     // -------- [[ MAPVIEW STUFF ]] -------- //
-    static let shouldDrawDebugGeofences = true
+    static let shouldDrawDebugGeofences = false
     static let mapViewAnnotationImageSize = 20
 
     // -------- [[ COLOR PALETTE ]] -------- //

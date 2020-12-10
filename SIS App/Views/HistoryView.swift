@@ -96,8 +96,8 @@ struct HistoryView: View {
                         }
                         if lastSentConfirmationEmail == nil || (difference != nil && difference! >= Constants.sendConfirmationEmailDelayTime) {
                             alertItem = AlertItem(
-                                title: "Holup!",
-                                message: "Are you sure you want to upload data? An email will be sent to the school to confirm that you are not trolling.",
+                                title: "Are you sure you want to upload data?",
+                                message: "An email will be sent to the school to confirm that you are not trolling.",
                                 primaryButton: .cancel(),
                                 secondaryButton: .destructive(Text("Yes"), action: sendConfirmationEmail)
                             )
@@ -106,8 +106,7 @@ struct HistoryView: View {
                             dateFormatter.dateFormat = "h:mm a, MMM d"
                             let formatted = dateFormatter.string(from: Date(timeIntervalSince1970: lastSentConfirmationEmail!).addingTimeInterval(Constants.sendConfirmationEmailDelayTime))
                             alertItem = AlertItem(
-                                title: "Woah chill bro",
-                                message: "You're uploading too fast. You can't upload until \(formatted)"
+                                title: "You're uploading too fast. You can't upload until \(formatted)"
                             )
                         }
                     }) {
@@ -138,7 +137,7 @@ struct HistoryView: View {
                 alertItem = AlertItem(
                     title: "Success!",
                     message: "Email has been sent successfully",
-                    dismissButton: .default(Text("Yay")) {
+                    dismissButton: .default(Text("Ok")) {
                         showingActivityIndicator = false
                     }
                 )
