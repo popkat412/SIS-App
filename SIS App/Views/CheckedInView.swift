@@ -45,12 +45,15 @@ struct CheckedInView: View {
                 .buttonStyle(
                     GradientButtonStyle(
                         gradient: checkInManager.isCheckedIn
-                            ? Constants.checkedInGradient
-                            : Constants.checkedOutGradient
+                            ? Constants.greenGradient
+                            : Constants.blueGradient
                     )
                 )
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40)
+        }
+        .onAppear {
+            prepareHaptics()
         }
     }
 }

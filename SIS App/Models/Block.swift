@@ -8,8 +8,9 @@
 import CoreLocation
 import Foundation
 
-struct Block: Codable, CheckInTarget {
-    var name: String
+struct Block: CheckInTarget {
+    let name: String
+    var id: String { name }
     var shortName: String {
         let suffix = " Block"
         guard name.hasSuffix(suffix) else { return name } // E.g. ARTSpace

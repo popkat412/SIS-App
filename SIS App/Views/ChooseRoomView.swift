@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ChooseRoomView: View {
     @EnvironmentObject var userLocationManager: UserLocationManager
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var showingSearch = false
 
     var onBackButtonPressed: (() -> Void)?
@@ -23,8 +24,6 @@ struct ChooseRoomView: View {
         self.onRoomSelection = onRoomSelection
     }
 
-    let blocks = DataProvider.getBlocks()
-
     var body: some View {
         HStack {
             if onBackButtonPressed != nil {
@@ -37,29 +36,19 @@ struct ChooseRoomView: View {
                 showingSearch = true
             }, label: {
                 HStack {
-                    Image(systemName: "magnifyingglass.circle.fill")
+                    Image(systemName: "magnifyingglass")
                     Text("Search")
                 }
                 .padding(.vertical, 10)
                 .frame(minWidth: 0, maxWidth: .infinity)
-                .background(Color(white: 0.8))
+                .background(colorScheme == .light ? Color(white: 0.8) : Color(white: 0.2))
                 .cornerRadius(15)
                 .padding()
             })
                 .buttonStyle(PlainButtonStyle())
         }
         NavigationView {
-            List(blocks.sorted(by: { (block1, block2) -> Bool in
-                // If location avaliable, sort by distance to nearest block
-                if let dist1 = userLocationManager.userLocation?.distance(from: block1.location.toCLLocation()),
-                   let dist2 = userLocationManager.userLocation?.distance(from: block2.location.toCLLocation())
-                {
-                    return dist1 - block1.radius < dist2 - block2.radius
-                }
-
-                // Else sort by name
-                return block1.name < block2.name
-            }), id: \.name) { block in
+            List(DataProvider.getBlocks(userLocation: userLocationManager.userLocation), id: \.name) { block in
                 NavigationLink(
                     destination: CategoriesView(
                         categories: block.categories,
@@ -69,6 +58,7 @@ struct ChooseRoomView: View {
                     Text(block.name)
                 }
             }
+            .listStyle(InsetListStyle())
             .navigationBarTitle("Blocks", displayMode: .inline)
         }
         .environment(\.onRoomSelection) { room in

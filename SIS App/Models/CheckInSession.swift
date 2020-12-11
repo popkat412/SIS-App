@@ -5,6 +5,7 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
+import FirebaseFirestore
 import Foundation
 
 struct Day: Identifiable {
@@ -43,6 +44,18 @@ struct CheckInSession: Identifiable {
         }
     }
 
+    var dateInterval: DateInterval? {
+        guard let checkedOut = checkedOut else { return nil }
+        return DateInterval(start: checkedIn, end: checkedOut)
+    }
+
+    init(checkedIn: Date, checkedOut: Date? = nil, target: CheckInTarget, id: UUID = UUID()) {
+        self.checkedIn = checkedIn
+        self.checkedOut = checkedOut
+        self.target = target
+        self.id = id
+    }
+
     func newSessionWith(checkedIn: Date? = nil, checkedOut: Date? = nil, target: CheckInTarget? = nil, id: UUID? = nil) -> CheckInSession {
         CheckInSession(
             checkedIn: checkedIn ?? self.checkedIn,
@@ -50,6 +63,11 @@ struct CheckInSession: Identifiable {
             target: target ?? self.target,
             id: id ?? self.id
         )
+    }
+
+    func checkIntersection(with other: CheckInSession) -> DateInterval? {
+        guard let a = dateInterval, let b = other.dateInterval else { return nil }
+        return a.intersection(with: b)
     }
 }
 
@@ -67,12 +85,14 @@ extension CheckInSession: Codable {
         checkedIn = try container.decode(Date.self, forKey: .checkedIn)
         checkedOut = try container.decodeIfPresent(Date.self, forKey: .checkedOut)
         id = try container.decode(UUID.self, forKey: .id)
-        if let roomTarget = try? container.decode(Room.self, forKey: .target) {
-            target = roomTarget
-        } else if let blockTarget = try? container.decode(Block.self, forKey: .target) {
+
+        let targetId = try container.decode(String.self, forKey: .target)
+        if let blockTarget = DataProvider.getBlock(id: targetId) {
             target = blockTarget
+        } else if let roomTarget = DataProvider.getRoom(id: targetId) {
+            target = roomTarget
         } else {
-            target = Room("Unknown Target :(")
+            target = UnknownCheckInTarget()
         }
     }
 
@@ -81,15 +101,13 @@ extension CheckInSession: Codable {
 
         try container.encode(checkedIn, forKey: .checkedIn)
         try container.encode(id, forKey: .id)
+
         if checkedOut != nil {
             try container.encode(checkedOut, forKey: .checkedOut)
         } else {
             try container.encodeNil(forKey: .checkedOut)
         }
-        if let roomTarget = target as? Room {
-            try container.encode(roomTarget, forKey: .target)
-        } else if let blockTarget = target as? Block {
-            try container.encode(blockTarget, forKey: .target)
-        }
+
+        try container.encode(target.id, forKey: .target)
     }
 }

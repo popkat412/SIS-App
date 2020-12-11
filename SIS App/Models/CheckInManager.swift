@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import UserNotifications
 import WidgetKit
 
 class CheckInManager: ObservableObject {
+    // MARK: Properties
+
     /// Used to check if the user is currently checked in or not
     /// This should check the persisted data (if any) from the `checkIn()` static method
     @Published private(set) var isCheckedIn = false
@@ -24,11 +27,15 @@ class CheckInManager: ObservableObject {
     @Published var checkInSessions: [CheckInSession] {
         didSet {
             FileUtility.saveDataToJsonFile(filename: Constants.savedSessionsFilename, data: checkInSessions)
+            updateReminderNotification()
+
             objectWillChange.send()
         }
     }
 
     var mostRecentSession: CheckInSession? { checkInSessions.last }
+
+    // MARK: Init
 
     init() {
         checkInSessions = FileUtility.getDataFromJsonFile(
@@ -52,11 +59,15 @@ class CheckInManager: ObservableObject {
         }
     }
 
+    // MARK: API
+
     /// Used to check the user into a room.
     /// Note that this should persist if the user quits the app while checked in
     /// This should never be called when `isCheckedIn` is true
     func checkIn(to room: CheckInTarget, shouldUpdateUI: Bool = true) {
         if isCheckedIn == true { return }
+
+        prepareHaptics()
 
         // ------- [[ UPDATE STATE ]] -------- //
         isCheckedIn = true
@@ -65,6 +76,28 @@ class CheckInManager: ObservableObject {
 
         // ------- [[ SAVE CURRENT SESSION TO FILE ]] ------ //
         FileUtility.saveDataToJsonFile(filename: Constants.currentSessionFilename, data: currentSession)
+
+        // ------ [[ PLAY SOUND + HAPTICS ]] ----- //
+        playCheckInOutSound()
+
+        // ------- [[ REMIND NOTIFICATION ]] ------ //
+        UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier) { result in
+            guard result == false else { return }
+
+            UserNotificationHelper.sendNotification(
+                title: "Remember to check out!",
+                subtitle: "You aren't in school until that late right?",
+                identifier: Constants.remindUserCheckOutNotificationIdentifier,
+                trigger: UNCalendarNotificationTrigger(
+                    dateMatching: Constants.remindUserCheckOutTime,
+                    repeats: false
+                )
+//                trigger: UNTimeIntervalNotificationTrigger(
+//                    timeInterval: 10,
+//                    repeats: false
+//                )
+            )
+        }
 
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()
@@ -77,7 +110,7 @@ class CheckInManager: ObservableObject {
         // ------- [[ SET STATE ]] -------- //
         isCheckedIn = false
         if shouldUpdateUI { showCheckedInScreen = false }
-        currentSession?.checkedOut = Date()
+        currentSession!.checkedOut = Date()
 
         // -------- [[ ADD TO SAVED SESSIONS ]] ------- //
         checkInSessions.append(currentSession!)
@@ -85,17 +118,48 @@ class CheckInManager: ObservableObject {
         // ------- [[ CLEANUP ]] -------- //
         currentSession = nil
         FileUtility.deleteFile(filename: Constants.currentSessionFilename)
+        checkInSessions = checkInSessions.filter {
+            let dateToKeep = Date() - Constants.timeIntervalToKeepOnDevice
+            return $0.checkedIn > dateToKeep || $0.checkedOut! > dateToKeep
+        }
+
+        // ------ [[ PLAY SOUND ]] ----- //
+        playCheckInOutSound()
+
+        // ------- [[ REMINDER NOTIFICATION ------- //
+        UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier) { result in
+            guard result else { return }
+
+            UserNotificationHelper.cancelScheduledNotification(withIdentifier: Constants.remindUserCheckOutNotificationIdentifier)
+        }
 
         // ------- [[ UPDATE WIDGET ]] -------- //
         WidgetCenter.shared.reloadAllTimelines()
     }
 
     /// This should use the UUID to figure out which session to change,
-    /// then update that session based on the properties of the passed session
-    func updateCheckInSession(id: UUID, newSession: CheckInSession) {
+    /// then update that session based on the properties of the passed session.
+    /// This will do nothing if the new session dates are not valid.
+    /// If the new session dates are not valid, this will return the error, else nil
+    @discardableResult
+    func updateCheckInSession(id: UUID, newSession: CheckInSession) -> SessionInvalidError? {
+        // Check if new session checks in before he checks out
+        if newSession.checkedOut! < newSession.checkedIn { return .checkedOutBeforeCheckedIn }
+
         let idx = checkInSessions.firstIndex { $0.id == id }
+        var newArr = checkInSessions
         if let idx = idx {
-            checkInSessions[idx] = newSession
+            newArr[idx] = newSession
+        }
+
+        let intersectionCheckResult = IntersectionChecker.checkIntersection(sessions: newArr)
+        if intersectionCheckResult.isEmpty {
+            print("🤔 yay no intersection")
+            checkInSessions = newArr
+            return nil
+        } else {
+            print("🤔 :( there was an intersection: \(intersectionCheckResult)")
+            return .sessionsIntersecting
         }
     }
 
@@ -165,17 +229,49 @@ class CheckInManager: ObservableObject {
     /// This is the method that will be called when user enters a block
     /// This is supposed to automatically check the user into a block for them to edit later
     @objc func didEnterBlock(_ notification: Notification) {
-        if isCheckedIn { return }
-        let block = notification.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block
-        print("automatically checking in to \(block.name)")
-        checkIn(to: block)
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.autoCheckInOutDelayTime) { [self] in
+            if isCheckedIn { return }
+            let block = notification.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block
+            print("automatically checking in to \(block.name)")
+            checkIn(to: block)
+        }
     }
 
     /// This is the method that will be called when user exits a block
     /// This is supposed to automatically check the user out of a block for them to edit later
     @objc func didExitBlock(_: Notification) {
-        if !isCheckedIn { return }
-        print("automatically checking out")
-        checkOut()
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.autoCheckInOutDelayTime) { [self] in
+            if !isCheckedIn { return }
+            print("automatically checking out")
+            checkOut()
+        }
+    }
+
+    // MARK: Private methods
+
+    private func updateReminderNotification() {
+        let hasSpecificRooms = checkInSessions
+            .filter { Calendar.current.isDateInToday($0.checkedIn) }
+            .reduce(false) { $1.target is Room }
+        print("hasSpecificRooms: \(hasSpecificRooms)")
+
+        UserNotificationHelper.hasScheduledNotification(withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier) { result in
+
+            print("has scheduled \(Constants.remindUserFillInRoomsNotificationIdentifier): \(result)")
+
+            if result, hasSpecificRooms {
+                print("cancelling \(Constants.remindUserFillInRoomsNotificationIdentifier)")
+                UserNotificationHelper.cancelScheduledNotification(withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier)
+
+            } else if !hasSpecificRooms, !result {
+                print("scheduling \(Constants.remindUserFillInRoomsNotificationIdentifier)")
+                UserNotificationHelper.sendNotification(
+                    title: "Please fill in your check in history",
+                    subtitle: "Filling in specific rooms helps aid contact tracing",
+                    identifier: Constants.remindUserFillInRoomsNotificationIdentifier,
+                    trigger: UNCalendarNotificationTrigger(dateMatching: Constants.remindUserFillInRoomsTime, repeats: false)
+                )
+            }
+        }
     }
 }

@@ -16,6 +16,10 @@ struct Location: Codable {
         CLLocation(latitude: latitude, longitude: longitude)
     }
 
+    func toCLLocationCoordinate2D() -> CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+
     init(longitude: Double, latitude: Double) {
         self.longitude = longitude
         self.latitude = latitude

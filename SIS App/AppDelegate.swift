@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import Firebase
 import UIKit
 import UserNotifications
 
@@ -15,7 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
 
-        return false
+        print("🔥 Configuring firebase..")
+        FirebaseApp.configure()
+        // Functions.functions().useEmulator(withHost: "localhost", port: 5001)
+        IntersectionChecker.`init`()
+
+        return true
     }
 
     // MARK: UISceneSession Lifecycle
@@ -81,19 +87,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: User Notification Delegate
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("📣 received notification response: \(response.notification.request.identifier)")
-        if response.notification.request.identifier == Constants.userEnteredSchoolNotificationIdentifier {
+    func userNotificationCenter(_: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let identifier = notification.request.identifier
+        print("📣 app delegate: will present user notification: \(identifier)")
+
+        switch identifier {
+        case Constants.didEnterSchoolNotificationIdentifier:
+            print("📣 start updating location...")
             sceneDelegate?.userLocationManager.locationManager.startUpdatingLocation()
-        } else if response.notification.request.identifier == Constants.userExitedSchoolNotificationIdentifier {
+        case Constants.didExitSchoolNotificationIdentifier:
+            print("📣 stop updating location...")
             sceneDelegate?.userLocationManager.locationManager.stopUpdatingLocation()
+        default:
+            break
         }
-        completionHandler()
+
+        completionHandler(UNNotificationPresentationOptions.banner)
     }
 
-    func userNotificationCenter(_: UNUserNotificationCenter, willPresent _: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("📣 will present notification")
-        completionHandler(.banner)
+    func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let identifier = response.notification.request.identifier
+        print("📣 app delegate: did receive user notification: \(identifier)")
+
+        switch identifier {
+        case Constants.didExitSchoolNotificationIdentifier:
+            fallthrough
+        case Constants.didEnterSchoolNotificationIdentifier:
+            sceneDelegate?.navigationState.shouldShowSafariView = true
+        case Constants.remindUserCheckOutNotificationIdentifier:
+            sceneDelegate?.navigationState.tabbarSelection = .home
+        case Constants.remindUserFillInRoomsNotificationIdentifier:
+            sceneDelegate?.navigationState.tabbarSelection = .history
+        default:
+            break
+        }
+
+        completionHandler()
     }
 }
 

@@ -8,17 +8,33 @@
 import SwiftUI
 
 struct HistoryRow: View {
+    /// This will be called whenever the date is updated
+    /// The first argument is the new date, and the second argument is the old date
+    /// The return value will determine if the date is actually updated or not
+    /// If the return is true, the date will be updated to the new date
+    /// If not, it will remain at the old date
+    typealias DateUpdateCallback = (Date, Date) -> SessionInvalidError?
+
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
     var session: CheckInSession
     var showTiming = true
     var showTarget = true
 
+    @Binding var currentlySelectedSession: CheckInSession?
+
     var editable = false
     var onTargetPressed: (() -> Void)?
-    var onCheckInDateUpdate: ((Date) -> Void)?
-    var onCheckOutDateUpdate: ((Date) -> Void)?
+    var onCheckInDateUpdate: DateUpdateCallback?
+    var onCheckOutDateUpdate: DateUpdateCallback?
 
     @State private var checkInDate: Date
     @State private var checkOutDate: Date
+    @State private var previousCheckInDate: Date?
+    @State private var previousCheckOutDate: Date?
+
+    @State private var showingErrorAlert: Bool
+    @State private var currentError: SessionInvalidError?
 
     init(session: CheckInSession, showTiming: Bool = true, showTarget: Bool = true) {
         self.session = session
@@ -28,6 +44,13 @@ struct HistoryRow: View {
         _checkInDate = .init(initialValue: self.session.checkedIn)
         _checkOutDate = .init(initialValue: self.session.checkedOut!)
         // Force unwrapping because if this is to appear in history, they must have already checked out
+        _previousCheckInDate = .init(initialValue: nil)
+        _previousCheckOutDate = .init(initialValue: nil)
+
+        _showingErrorAlert = .init(initialValue: false)
+        _currentError = .init(initialValue: nil)
+
+        _currentlySelectedSession = .constant(nil)
 
         editable = false
         onTargetPressed = nil
@@ -38,14 +61,16 @@ struct HistoryRow: View {
     init(
         session: CheckInSession, showTiming: Bool = true, showTarget: Bool = true,
         editable: Bool,
+        currentlySelectedSession: Binding<CheckInSession?>? = nil,
         onTargetPressed: @escaping (() -> Void),
-        onCheckInDateUpdate: @escaping ((Date) -> Void),
-        onCheckOutDateUpdate: @escaping ((Date) -> Void)
+        onCheckInDateUpdate: @escaping DateUpdateCallback,
+        onCheckOutDateUpdate: @escaping DateUpdateCallback
     ) {
         self.init(session: session, showTiming: showTiming, showTarget: showTarget)
 
         if editable {
             self.editable = true
+            _currentlySelectedSession = currentlySelectedSession ?? .constant(nil)
             self.onTargetPressed = onTargetPressed
             self.onCheckInDateUpdate = onCheckInDateUpdate
             self.onCheckOutDateUpdate = onCheckOutDateUpdate
@@ -64,22 +89,43 @@ struct HistoryRow: View {
                         DatePicker(
                             "Check In Time",
                             selection: $checkInDate,
-                            in: PartialRangeThrough(checkOutDate),
                             displayedComponents: [.hourAndMinute]
                         )
                         .labelsHidden()
-                        .onChange(of: checkInDate) { newValue in
-                            onCheckInDateUpdate?(newValue)
+                        .onChange(of: checkInDate) { [checkInDate] newValue in
+                            currentlySelectedSession = session
+                            if let error = onCheckInDateUpdate?(newValue, checkInDate) {
+                                self.checkInDate = checkInDate
+                                // FIXME: Alert not showing up
+                                self.currentError = error
+                                self.showingErrorAlert = true
+                                print("🤔 showingErrorAlert: \(self.showingErrorAlert), currentError: \(String(describing: currentError))")
+                                print("🤔 error: \(error.rawValue)")
+                            }
                         }
                         DatePicker(
                             "Check Out Time",
                             selection: $checkOutDate,
-                            in: PartialRangeFrom(checkInDate),
                             displayedComponents: [.hourAndMinute]
                         )
                         .labelsHidden()
-                        .onChange(of: checkOutDate) { newValue in
-                            onCheckOutDateUpdate?(newValue)
+                        .onChange(of: checkOutDate) { [checkOutDate] newValue in
+                            currentlySelectedSession = session
+                            if let error = onCheckOutDateUpdate?(newValue, checkOutDate) {
+                                self.checkOutDate = checkOutDate
+                                // FIXME: Alert not showing up
+                                self.currentError = error
+                                self.showingErrorAlert = true
+                                print("🤔 showingErrorAlert: \(self.showingErrorAlert), currentError: \(String(describing: currentError))")
+                                print("🤔 error: \(error.rawValue)")
+                            }
+                        }
+                        .alert(isPresented: $showingErrorAlert) {
+                            Alert(
+                                title: Text("Whoops!"),
+                                message: Text(currentError?.rawValue ?? "An unknown error occurred"),
+                                dismissButton: .default(Text("Ok"))
+                            )
                         }
                     }
                 } else {
@@ -107,13 +153,14 @@ struct HistoryRow: View {
                     }
                 }
                 .onTapGesture {
+                    currentlySelectedSession = session
                     onTargetPressed?()
                 }
                 .conditionalModifier(editable) {
                     $0
                         .foregroundColor(.blue)
                         .padding(7)
-                        .background(Color(white: 0.95))
+                        .background(colorScheme == .light ? Color(white: 0.95) : Color(white: 0.1))
                         .cornerRadius(7)
                 }
             }

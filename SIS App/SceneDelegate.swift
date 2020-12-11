@@ -14,6 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var checkInManager = CheckInManager()
     var userLocationManager = UserLocationManager()
     var navigationState = NavigationState()
+    var userAuthManager = UserAuthManager()
 
     func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -30,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(checkInManager)
             .environmentObject(userLocationManager)
             .environmentObject(navigationState)
+            .environmentObject(userAuthManager)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -52,8 +54,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         ? "Remember to open the app in the backgorund"
                         : "Remember to check out of the school through safe-entry",
                     identifier: enteringSchool
-                        ? Constants.userEnteredSchoolNotificationIdentifier
-                        : Constants.userExitedSchoolNotificationIdentifier,
+                        ? Constants.didEnterSchoolNotificationIdentifier
+                        : Constants.didExitSchoolNotificationIdentifier,
                     trigger: {
                         let region = CLCircularRegion(
                             center: Constants.schoolLocation.coordinate,
@@ -75,12 +77,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("🌐 opening url: \(URLContexts)")
         if let url = URLContexts.first?.url {
             if let blockName = URLComponents(string: url.absoluteString)?.queryItems?.first(where: { $0.name == Constants.blockURLParameterName })?.value {
+                // Checking into block
                 print("block name: \(blockName)")
                 checkInManager.checkIn(to: DataProvider.getBlock(name: blockName)!)
+                navigationState.tabbarSelection = .home
+
             } else if url.pathComponents.contains(Constants.checkoutURLName) {
+                // Checking out
                 print("checking out from widget")
                 checkInManager.checkOut(shouldUpdateUI: false)
+                navigationState.tabbarSelection = .home
+
             } else if url.pathComponents.contains(Constants.historyURLName) {
+                // Going to history
                 print("going to history from widget")
                 navigationState.tabbarSelection = .history
             }
