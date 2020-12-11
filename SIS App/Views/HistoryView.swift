@@ -35,15 +35,7 @@ struct HistoryView: View {
                                             onTargetPressed: {
                                                 showingEditRoomScreen = true
                                             },
-                                            onCheckInDateUpdate: { newCheckInDate, _ in
-                                                guard let currentlySelectedSession = currentlySelectedSession else { return nil }
-
-                                                print("🗂 new check in date: \(newCheckInDate)")
-                                                return checkInManager.updateCheckInSession(
-                                                    id: currentlySelectedSession.id,
-                                                    newSession: currentlySelectedSession.newSessionWith(checkedIn: newCheckInDate)
-                                                )
-                                            },
+                                            onCheckInDateUpdate: onCheckInDateUpdate,
                                             onCheckOutDateUpdate: { newCheckOutDate, _ in
                                                 guard let currentlySelectedSession = currentlySelectedSession else { return nil }
 
@@ -141,6 +133,16 @@ struct HistoryView: View {
     }
 
     // MARK: Helper functions
+
+    private func onCheckInDateUpdate(_ newCheckInDate: Date, _: Date) -> SessionInvalidError? {
+        guard let currentlySelectedSession = currentlySelectedSession else { return nil }
+
+        print("🗂 new check in date: \(newCheckInDate)")
+        return checkInManager.updateCheckInSession(
+            id: currentlySelectedSession.id,
+            newSession: currentlySelectedSession.newSessionWith(checkedIn: newCheckInDate)
+        )
+    }
 
     private func sendConfirmationEmail() {
         showingActivityIndicator = true

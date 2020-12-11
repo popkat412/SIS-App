@@ -133,7 +133,7 @@ struct IntersectionChecker {
                                     return CheckInSession(
                                         checkedIn: (data["checkedIn"] as! Timestamp).dateValue(),
                                         checkedOut: (data["checkedOut"] as! Timestamp).dateValue(),
-                                        target: DataProvider.getTarget(id: data["target"] as! String)!,
+                                        target: DataProvider.getTarget(id: data["target"] as! String) ?? UnknownCheckInTarget(),
                                         id: UUID(uuidString: $0.documentID) ?? UUID()
                                     )
                                 } ?? []

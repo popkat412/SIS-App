@@ -38,8 +38,8 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.startUpdatingLocation()
         locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.startUpdatingLocation()
     }
 
     // MARK: Delegate Methods

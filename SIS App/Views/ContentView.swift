@@ -30,6 +30,9 @@ struct ContentView: View {
                     }
                     .tag(Tab.history)
             }
+            .safariView(isPresented: $navigationState.shouldShowSafariView) {
+                SafariView(url: Constants.riSafeEntryURL)
+            }
             .onReceive(NotificationCenter.default.publisher(for: .didEnterBlock)) { event in
                 let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
                 print("received did enter geofence: \(block.name)")
@@ -45,13 +48,6 @@ struct ContentView: View {
                 let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
 
                 print("received did exit geofence \(block.name)")
-            }
-            .safariView(isPresented: $navigationState.shouldShowSafariView) {
-                SafariView(url: Constants.riSafeEntryURL)
-            }
-            .onReceive(NotificationCenter.default.publisher(for: .didEnterBlock)) { event in
-                let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)
-                print("received did enter geofence: \(block.name)")
 
                 if checkInManager.isCheckedIn {
                     UserNotificationHelper.sendNotification(
@@ -60,18 +56,18 @@ struct ContentView: View {
                     )
                 }
             }
-            .onReceive(NotificationCenter.default.publisher(for: .didEnterSchool)) { _ in
-                UserNotificationHelper.sendNotification(
-                    title: "Remember to check in!",
-                    subtitle: "Please check into the school via safe entry"
-                )
-            }
-            .onReceive(NotificationCenter.default.publisher(for: .didExitSchool)) { _ in
-                UserNotificationHelper.sendNotification(
-                    title: "Remember to check out!",
-                    subtitle: "Please check out of the school via safe entry"
-                )
-            }
+//            .onReceive(NotificationCenter.default.publisher(for: .didEnterSchool)) { _ in
+//                UserNotificationHelper.sendNotification(
+//                    title: "Remember to check in!",
+//                    subtitle: "Please check into the school via safe entry"
+//                )
+//            }
+//            .onReceive(NotificationCenter.default.publisher(for: .didExitSchool)) { _ in
+//                UserNotificationHelper.sendNotification(
+//                    title: "Remember to check out!",
+//                    subtitle: "Please check out of the school via safe entry"
+//                )
+//            }
         } else {
             LoginView()
         }

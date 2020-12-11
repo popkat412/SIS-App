@@ -11,7 +11,7 @@ import UserNotifications
 struct UserNotificationHelper {
     static let notificationCenter = UNUserNotificationCenter.current()
 
-    static func sendNotification(title: String, subtitle: String, withIdentifier identifier: String? = nil, trigger: UNNotificationTrigger? = nil) {
+    static func sendNotification(title: String, subtitle: String, identifier: String? = nil, trigger: UNNotificationTrigger? = nil) {
         print("📣 sending notification: \(title)")
 
         let content = UNMutableNotificationContent()

@@ -87,7 +87,7 @@ class CheckInManager: ObservableObject {
             UserNotificationHelper.sendNotification(
                 title: "Remember to check out!",
                 subtitle: "You aren't in school until that late right?",
-                withIdentifier: Constants.remindUserCheckOutNotificationIdentifier,
+                identifier: Constants.remindUserCheckOutNotificationIdentifier,
                 trigger: UNCalendarNotificationTrigger(
                     dateMatching: Constants.remindUserCheckOutTime,
                     repeats: false
@@ -268,7 +268,7 @@ class CheckInManager: ObservableObject {
                 UserNotificationHelper.sendNotification(
                     title: "Please fill in your check in history",
                     subtitle: "Filling in specific rooms helps aid contact tracing",
-                    withIdentifier: Constants.remindUserFillInRoomsNotificationIdentifier,
+                    identifier: Constants.remindUserFillInRoomsNotificationIdentifier,
                     trigger: UNCalendarNotificationTrigger(dateMatching: Constants.remindUserFillInRoomsTime, repeats: false)
                 )
             }

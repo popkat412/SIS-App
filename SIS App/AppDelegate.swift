@@ -84,9 +84,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+// MARK: User Notification Delegate
+
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_: UNUserNotificationCenter, willPresent _: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("📣 app delegate: will present user notification")
+    func userNotificationCenter(_: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let identifier = notification.request.identifier
+        print("📣 app delegate: will present user notification: \(identifier)")
+
+        switch identifier {
+        case Constants.didEnterSchoolNotificationIdentifier:
+            print("📣 start updating location...")
+            sceneDelegate?.userLocationManager.locationManager.startUpdatingLocation()
+        case Constants.didExitSchoolNotificationIdentifier:
+            print("📣 stop updating location...")
+            sceneDelegate?.userLocationManager.locationManager.stopUpdatingLocation()
+        default:
+            break
+        }
+
         completionHandler(UNNotificationPresentationOptions.banner)
     }
 
@@ -94,16 +109,17 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let identifier = response.notification.request.identifier
         print("📣 app delegate: did receive user notification: \(identifier)")
 
-        if identifier == Constants.remindUserFillInRoomsNotificationIdentifier {
-            sceneDelegate?.navigationState.tabbarSelection = .history
-
-        } else if identifier == Constants.didEnterSchoolNotificationIdentifier ||
-            identifier == Constants.didExitSchoolNotificationIdentifier
-        {
+        switch identifier {
+        case Constants.didExitSchoolNotificationIdentifier:
+            fallthrough
+        case Constants.didEnterSchoolNotificationIdentifier:
             sceneDelegate?.navigationState.shouldShowSafariView = true
-
-        } else if identifier == Constants.remindUserCheckOutNotificationIdentifier {
+        case Constants.remindUserCheckOutNotificationIdentifier:
             sceneDelegate?.navigationState.tabbarSelection = .home
+        case Constants.remindUserFillInRoomsNotificationIdentifier:
+            sceneDelegate?.navigationState.tabbarSelection = .history
+        default:
+            break
         }
 
         completionHandler()
@@ -111,7 +127,5 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 }
 
 extension AppDelegate {
-    var sceneDelegate: SceneDelegate? {
-        UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-    }
+    var sceneDelegate: SceneDelegate? { UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate }
 }

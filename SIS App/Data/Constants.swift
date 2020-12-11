@@ -26,7 +26,7 @@ struct Constants {
     static let schoolRegionId = "Y14"
 
     // -------- [[ MAPVIEW STUFF ]] -------- //
-    static let shouldDrawDebugGeofences = false
+    static let shouldDrawDebugGeofences = true
     static let mapViewAnnotationImageSize = 20
 
     // -------- [[ COLOR PALETTE ]] -------- //
@@ -56,8 +56,7 @@ struct Constants {
     static let overlayOutlineColorName = "Overlay Outline"
 
     // ------ [[ IDENTIFIERS ]] ------- //
-    static let appGroupIdentifier = "group.sg.tk.2020.risafeentry.widget"
-
+    static let appGroupIdentifier = "group.com.example.ri-safe-entry"
     static let remindUserFillInRoomsNotificationIdentifier = "remind-user-fill-in-rooms"
     static let remindUserCheckOutNotificationIdentifier = "remind-user-check-out"
     static let didEnterSchoolNotificationIdentifier = "did-enter-school"
