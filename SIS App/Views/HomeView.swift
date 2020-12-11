@@ -51,7 +51,7 @@ struct HomeView: View {
                         }
                     }
                 )
-                .navigationBarTitle("RI Tracing")
+                .navigationBarTitle("RI Tracing", displayMode: .inline)
                 .alert(item: $alertItem, content: alertItemBuilder)
             }
             .navigationViewStyle(StackNavigationViewStyle())
