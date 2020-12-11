@@ -17,42 +17,47 @@ struct HomeView: View {
     @State private var showingActivityIndicator: Bool = false
 
     var body: some View {
-        NavigationView {
-            ZStack {
-                VStack(alignment: .center, spacing: 0) {
-                    MapView()
-                        .edgesIgnoringSafeArea(.all)
-                    if checkInManager.showCheckedInScreen {
-                        CheckedInView()
-                    } else {
-                        ChooseRoomView { room in
-                            print("normal checking into room: \(room)")
-                            checkInManager.checkIn(to: room)
+        GeometryReader { proxy in
+            NavigationView {
+                ZStack {
+                    VStack(alignment: .center, spacing: 0) {
+                        MapView()
+                            .edgesIgnoringSafeArea(.all)
+                        Group {
+                            if checkInManager.showCheckedInScreen {
+                                CheckedInView()
+                            } else {
+                                ChooseRoomView { room in
+                                    print("normal checking into room: \(room)")
+                                    checkInManager.checkIn(to: room)
+                                }
+                            }
                         }
+                        .frame(height: proxy.size.height * (3 / 5))
+                    }
+                    if showingActivityIndicator {
+                        MyActivityIndicator()
+                            .frame(width: Constants.activityIndicatorSize, height: Constants.activityIndicatorSize)
                     }
                 }
-                if showingActivityIndicator {
-                    MyActivityIndicator()
-                        .frame(width: Constants.activityIndicatorSize, height: Constants.activityIndicatorSize)
-                }
+                .navigationBarItems(
+                    leading: Button("Sign out") {
+                        print("sign out button pressed")
+                        showingActivityIndicator = true
+                        userAuthManager.signOut { error in
+                            alertItem = MyErrorInfo(error).toAlertItem {
+                                showingActivityIndicator = false
+                            }
+                        }
+                    }
+                )
+                .navigationBarTitle("RI Tracing")
+                .alert(item: $alertItem, content: alertItemBuilder)
             }
-            .navigationBarItems(
-                leading: Button("Sign out") {
-                    print("sign out button pressed")
-                    showingActivityIndicator = true
-                    userAuthManager.signOut { error in
-                        alertItem = MyErrorInfo(error).toAlertItem {
-                            showingActivityIndicator = false
-                        }
-                    }
-                }
-            )
-            .navigationBarTitle("RI Tracing")
-            .alert(item: $alertItem, content: alertItemBuilder)
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .onDisappear {
-            showingActivityIndicator = false
+            .navigationViewStyle(StackNavigationViewStyle())
+            .onDisappear {
+                showingActivityIndicator = false
+            }
         }
     }
 }
