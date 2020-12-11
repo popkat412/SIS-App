@@ -46,7 +46,7 @@ struct HistoryView: View {
                                                 )
                                             }
                                         )
-                                        .popover(isPresented: $showingEditRoomScreen) {
+                                        .sheet(isPresented: $showingEditRoomScreen) {
                                             ChooseRoomView(onRoomSelection: { room in
                                                 showingEditRoomScreen = false
                                                 guard let currentlySelectedSession = currentlySelectedSession else { return }
@@ -116,6 +116,7 @@ struct HistoryView: View {
                     }
                     .alert(item: $alertItem, content: alertItemBuilder)
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
             } else {
                 Text("Not authenticated")
                 Button("Try again", action: authenticate)

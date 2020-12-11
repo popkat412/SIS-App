@@ -1084,7 +1084,11 @@
       "latitude": 1.347543
     },
     "radius": 32.42,
-    "categories": {}
+    "categories": {
+      "others": [
+        { "name": "ARTSpace", "level": 1, "id": "ARTSpace", "iconName": "art" }
+      ]
+    }
   },
   {
     "name": "Canteen/Hall Block",

@@ -11,6 +11,8 @@ import SwiftUI
 struct ChooseRoomView: View {
     @EnvironmentObject var userLocationManager: UserLocationManager
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+
     @State var showingSearch = false
 
     var onBackButtonPressed: (() -> Void)?
@@ -25,41 +27,44 @@ struct ChooseRoomView: View {
     }
 
     var body: some View {
-        HStack {
-            if onBackButtonPressed != nil {
-                Button("Back") {
-                    onBackButtonPressed!()
+        VStack {
+            HStack {
+                if onBackButtonPressed != nil {
+                    Button("Back") {
+                        onBackButtonPressed!()
+                    }
+                    .padding(.leading)
                 }
-                .padding(.leading)
+                Button(action: {
+                    showingSearch = true
+                }, label: {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                        Text("Search")
+                    }
+                    .padding(.vertical, 10)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .background(colorScheme == .light ? Color(white: 0.8) : Color(white: 0.2))
+                    .cornerRadius(15)
+                    .padding()
+                })
+                    .buttonStyle(PlainButtonStyle())
             }
-            Button(action: {
-                showingSearch = true
-            }, label: {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    Text("Search")
+            NavigationView {
+                List(DataProvider.getBlocks(userLocation: userLocationManager.userLocation), id: \.name) { block in
+                    NavigationLink(
+                        destination: CategoriesView(
+                            categories: block.categories,
+                            blockName: block.name
+                        )
+                    ) {
+                        Text(block.name)
+                    }
                 }
-                .padding(.vertical, 10)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .background(colorScheme == .light ? Color(white: 0.8) : Color(white: 0.2))
-                .cornerRadius(15)
-                .padding()
-            })
-                .buttonStyle(PlainButtonStyle())
-        }
-        NavigationView {
-            List(DataProvider.getBlocks(userLocation: userLocationManager.userLocation), id: \.name) { block in
-                NavigationLink(
-                    destination: CategoriesView(
-                        categories: block.categories,
-                        blockName: block.name
-                    )
-                ) {
-                    Text(block.name)
-                }
+                .listStyle(InsetListStyle())
+                .navigationBarTitle("Blocks", displayMode: .inline)
             }
-            .listStyle(InsetListStyle())
-            .navigationBarTitle("Blocks", displayMode: .inline)
+//            .navigationViewStyle(StackNavigationViewStyle())
         }
         .environment(\.onRoomSelection) { room in
             onRoomSelection(room)

@@ -37,22 +37,20 @@ struct HomeView: View {
                 }
             }
             .navigationBarItems(
-                leading: Button(
-                    action: {
-                        print("sign out button pressed")
-                        showingActivityIndicator = true
-                        userAuthManager.signOut { error in
-                            alertItem = MyErrorInfo(error).toAlertItem {
-                                showingActivityIndicator = false
-                            }
+                leading: Button("Sign out") {
+                    print("sign out button pressed")
+                    showingActivityIndicator = true
+                    userAuthManager.signOut { error in
+                        alertItem = MyErrorInfo(error).toAlertItem {
+                            showingActivityIndicator = false
                         }
-                    }, label: {
-                        Text("Sign out")
                     }
-                )
+                }
             )
+            .navigationBarTitle("RI Tracing")
             .alert(item: $alertItem, content: alertItemBuilder)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .onDisappear {
             showingActivityIndicator = false
         }

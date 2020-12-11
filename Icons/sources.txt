@@ -34,3 +34,4 @@ Discovery	    : https://www.flaticon.com/free-icon/loupe_882988?term=magnifying%
 Design Thinking	: https://www.flaticon.com/free-icon/lightbulb_702797?term=light%20bulb&page=1&position=4&related_item_id=702797
 Dining Hall/Canteen: https://www.flaticon.com/free-icon/dish_857718?term=food&page=2&position=89&related_item_id=857718
 Hall            : https://www.flaticon.com/free-icon/city-hall_2830346?term=hall&page=1&position=31&related_item_id=2830346
+ARTSpace        : https://www.flaticon.com/free-icon/artist_2972213?term=art&page=1&position=10&related_item_id=2972213
