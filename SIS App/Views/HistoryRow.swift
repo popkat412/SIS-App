@@ -103,6 +103,19 @@ struct HistoryRow: View {
                                 print("🤔 error: \(error.rawValue)")
                             }
                         }
+                        HStack(spacing: 0) {
+                            Circle()
+                                .fill(Constants.blueGradient.stops[0].color)
+                                .frame(width: 10, height: 10)
+                                .offset(x: 1)
+                            Rectangle()
+                                .fill(LinearGradient(gradient: Constants.blueGradient, startPoint: .topLeading, endPoint: .bottomTrailing))
+                                .frame(width: 50, height: 5)
+                            Circle()
+                                .stroke(Constants.blueGradient.stops[0].color)
+                                .frame(width: 10, height: 10)
+                                .offset(x: -1)
+                        }
                         DatePicker(
                             "Check Out Time",
                             selection: $checkOutDate,
