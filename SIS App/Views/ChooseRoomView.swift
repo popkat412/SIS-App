@@ -16,14 +16,14 @@ struct ChooseRoomView: View {
     @State var showingSearch = false
 
     var onBackButtonPressed: (() -> Void)?
-    var onRoomSelection: (Room) -> Void
+    var onTargetSelection: OnTargetSelection
 
     init(
-        onRoomSelection: @escaping ((Room) -> Void),
+        onRoomSelection: @escaping OnTargetSelection,
         onBackButtonPressed: (() -> Void)? = nil
     ) {
         self.onBackButtonPressed = onBackButtonPressed
-        self.onRoomSelection = onRoomSelection
+        onTargetSelection = onRoomSelection
     }
 
     var body: some View {
@@ -52,25 +52,49 @@ struct ChooseRoomView: View {
             }
             NavigationView {
                 List(DataProvider.getBlocks(userLocation: userLocationManager.userLocation), id: \.name) { block in
-                    NavigationLink(
-                        destination: CategoriesView(
-                            categories: block.categories,
-                            blockName: block.name
-                        )
-                    ) {
-                        Text(block.name)
-                    }
+                    BlockListItem(block)
                 }
                 .listStyle(InsetListStyle())
                 .navigationBarTitle("Blocks", displayMode: .inline)
             }
 //            .navigationViewStyle(StackNavigationViewStyle())
         }
-        .environment(\.onRoomSelection) { room in
-            onRoomSelection(room)
+        .environment(\.onTargetSelection) { target in
+            onTargetSelection(target)
         }
         .sheet(isPresented: $showingSearch) {
             SearchView(showingSearch: $showingSearch)
+        }
+    }
+
+    private struct BlockListItem: View {
+        var block: Block
+        @Environment(\.onTargetSelection) var onTargetSelection: OnTargetSelection
+
+        init(_ block: Block) { self.block = block }
+
+        var body: some View {
+            if block.categories.isEmpty { // directly check in
+                Button(block.name) {
+                    onTargetSelection(block)
+                }
+            } else if block.categories.count == 1 { // link directly to rooms view
+                NavigationLink(
+                    block.name,
+                    destination: RoomsView(
+                        rooms: block.categories.first!.value,
+                        categoryName: block.name
+                    )
+                )
+            } else { // normally link to categories view
+                NavigationLink(
+                    block.name,
+                    destination: CategoriesView(
+                        categories: block.categories,
+                        blockName: block.name
+                    )
+                )
+            }
         }
     }
 }

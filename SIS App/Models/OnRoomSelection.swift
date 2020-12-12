@@ -8,15 +8,15 @@
 import Foundation
 import SwiftUI
 
-struct OnRoomSelectionKey: EnvironmentKey {
-    static var defaultValue: (Room) -> Void = { room in
-        print("default check into \(room)")
+struct OnTargetSelectionKey: EnvironmentKey {
+    static var defaultValue: OnTargetSelection = { target in
+        print("default check into \(target)")
     }
 }
 
 extension EnvironmentValues {
-    var onRoomSelection: (Room) -> Void {
-        get { self[OnRoomSelectionKey.self] }
-        set { self[OnRoomSelectionKey.self] = newValue }
+    var onTargetSelection: OnTargetSelection {
+        get { self[OnTargetSelectionKey.self] }
+        set { self[OnTargetSelectionKey.self] = newValue }
     }
 }

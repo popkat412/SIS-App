@@ -27,9 +27,9 @@ struct HomeView: View {
                             if checkInManager.showCheckedInScreen {
                                 CheckedInView()
                             } else {
-                                ChooseRoomView { room in
-                                    print("normal checking into room: \(room)")
-                                    checkInManager.checkIn(to: room)
+                                ChooseRoomView { target in
+                                    print("normal checking into target: \(target)")
+                                    checkInManager.checkIn(to: target)
                                 }
                             }
                         }

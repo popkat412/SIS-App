@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RoomsView: View {
     @EnvironmentObject var checkInManager: CheckInManager
-    @Environment(\.onRoomSelection) var onRoomSelection
+    @Environment(\.onTargetSelection) var onRoomSelection
 
     var rooms: [Room]
     var categoryName: String
