@@ -1084,35 +1084,25 @@
       "latitude": 1.347543
     },
     "radius": 32.42,
-    "categories": {
-      "others": [
-        { "name": "ARTSpace", "level": 1, "id": "ARTSpace", "iconName": "art" }
-      ]
-    }
+    "categories": {}
   },
   {
-    "name": "Canteen/Hall Block",
+    "name": "Canteen",
     "location": {
-      "longitude": 103.845664,
-      "latitude": 1.347767
+      "longitude": 103.845597,
+      "latitude": 1.34742
     },
-    "radius": 65,
-    "categories": {
-      "others": [
-        {
-          "name": "Canteen",
-          "level": 1,
-          "id": "canteen",
-          "iconName": "food"
-        },
-        {
-          "name": "Hall",
-          "level": 2,
-          "id": "hall",
-          "iconName": "hall"
-        }
-      ]
-    }
+    "radius": 30,
+    "categories": {}
+  },
+  {
+    "name": "Hall",
+    "location": {
+      "longitude": 103.845693,
+      "latitude": 1.347899
+    },
+    "radius": 30,
+    "categories": {}
   },
   {
     "name": "HML/Dining Hall Block",
