@@ -47,13 +47,13 @@ struct HistoryView: View {
                                             }
                                         )
                                         .sheet(isPresented: $showingEditRoomScreen) {
-                                            ChooseRoomView(onRoomSelection: { room in
+                                            ChooseRoomView(onRoomSelection: { target in
                                                 showingEditRoomScreen = false
                                                 guard let currentlySelectedSession = currentlySelectedSession else { return }
                                                 print("🗂 saving session: \(session)")
                                                 checkInManager.updateCheckInSession(
                                                     id: currentlySelectedSession.id,
-                                                    newSession: currentlySelectedSession.newSessionWith(target: room)
+                                                    newSession: currentlySelectedSession.newSessionWith(target: target)
                                                 )
                                             }, onBackButtonPressed: {
                                                 showingEditRoomScreen = false

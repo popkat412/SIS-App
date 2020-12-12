@@ -10,7 +10,7 @@ import SwiftUIX
 
 struct SearchView: View {
     @EnvironmentObject var checkInManager: CheckInManager
-    @Environment(\.onRoomSelection) var onRoomSelection
+    @Environment(\.onTargetSelection) var onRoomSelection
     @State private var searchStr = ""
     @Binding var showingSearch: Bool
 

@@ -8,8 +8,6 @@
 import Firebase
 import Foundation
 
-typealias OnErrorCallback = (Error) -> Void
-
 class UserAuthManager: ObservableObject {
     @Published var user: User?
     var isLoggedIn: Bool { user?.isEmailVerified ?? false }
