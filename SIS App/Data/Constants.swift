@@ -56,7 +56,7 @@ struct Constants {
     static let overlayOutlineColorName = "Overlay Outline"
 
     // ------ [[ IDENTIFIERS ]] ------- //
-    static let appGroupIdentifier = "group.com.example.ri-safe-entry"
+    static let appGroupIdentifier = "group.sg.tk.2020.risafeentry.widget"
     static let remindUserFillInRoomsNotificationIdentifier = "remind-user-fill-in-rooms"
     static let remindUserCheckOutNotificationIdentifier = "remind-user-check-out"
     static let didEnterSchoolNotificationIdentifier = "did-enter-school"
