@@ -10,8 +10,7 @@ import SwiftUI
 
 struct ChooseRoomView: View {
     @EnvironmentObject var userLocationManager: UserLocationManager
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
 
     @State var showingSearch = false
 
@@ -27,11 +26,41 @@ struct ChooseRoomView: View {
     }
 
     var body: some View {
-        VStack {
+        let navigationView = NavigationView {
+            List(DataProvider.getBlocks(userLocation: userLocationManager.userLocation), id: \.name) { block in
+                BlockListItem(block)
+            }
+            .listStyle(InsetListStyle())
+            .navigationBarTitle("Blocks", displayMode: .inline)
+        }
+
+        return VStack {
+            TopBar(onBackButtonPressed: onBackButtonPressed, showingSearch: $showingSearch)
+            if (verticalSizeClass ?? .regular) == .compact {
+                navigationView.navigationViewStyle(StackNavigationViewStyle())
+            } else {
+                navigationView
+            }
+        }
+        .environment(\.onTargetSelection) { target in
+            onTargetSelection(target)
+        }
+        .sheet(isPresented: $showingSearch) {
+            SearchView(showingSearch: $showingSearch)
+        }
+    }
+
+    private struct TopBar: View {
+        @Environment(\.colorScheme) var colorScheme: ColorScheme
+
+        var onBackButtonPressed: (() -> Void)?
+        @Binding var showingSearch: Bool
+
+        var body: some View {
             HStack {
-                if onBackButtonPressed != nil {
+                if let onBackButtonPressed = onBackButtonPressed {
                     Button("Back") {
-                        onBackButtonPressed!()
+                        onBackButtonPressed()
                     }
                     .padding(.leading)
                 }
@@ -50,20 +79,6 @@ struct ChooseRoomView: View {
                 })
                     .buttonStyle(PlainButtonStyle())
             }
-            NavigationView {
-                List(DataProvider.getBlocks(userLocation: userLocationManager.userLocation), id: \.name) { block in
-                    BlockListItem(block)
-                }
-                .listStyle(InsetListStyle())
-                .navigationBarTitle("Blocks", displayMode: .inline)
-            }
-//            .navigationViewStyle(StackNavigationViewStyle())
-        }
-        .environment(\.onTargetSelection) { target in
-            onTargetSelection(target)
-        }
-        .sheet(isPresented: $showingSearch) {
-            SearchView(showingSearch: $showingSearch)
         }
     }
 
