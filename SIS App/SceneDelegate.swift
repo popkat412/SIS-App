@@ -15,7 +15,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var userLocationManager = UserLocationManager()
     var navigationState = NavigationState()
     var userAuthManager = UserAuthManager()
-    var deviceOrientationInfo = DeviceOrientationInfo()
 
     func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -33,16 +32,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(userLocationManager)
             .environmentObject(navigationState)
             .environmentObject(userAuthManager)
-            .environmentObject(deviceOrientationInfo)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
-
-            // ------- Custom Code (before scene has been drawn) --------- //
-            deviceOrientationInfo.isLandscapeOrientation = (windowScene.interfaceOrientation.isLandscape == true)
 
             window.makeKeyAndVisible()
 
@@ -128,19 +123,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-    }
-
-    func windowScene(_: UIWindowScene, didUpdate previousCoordinateSpace: UICoordinateSpace, interfaceOrientation previousInterfaceOrientation: UIInterfaceOrientation, traitCollection previousTraitCollection: UITraitCollection) {
-        print(">> previous tratis  \(previousTraitCollection)")
-        print(">> previous coordinateSpace \(previousCoordinateSpace)")
-        print(">> previous orientation \(previousInterfaceOrientation)")
-
-        deviceOrientationInfo.isLandscapeOrientation = true
-
-        if previousInterfaceOrientation == .portrait || previousInterfaceOrientation == .portraitUpsideDown {
-            deviceOrientationInfo.isLandscapeOrientation = true
-        } else {
-            deviceOrientationInfo.isLandscapeOrientation = false
-        }
     }
 }

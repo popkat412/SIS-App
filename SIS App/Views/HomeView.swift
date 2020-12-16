@@ -13,6 +13,8 @@ struct HomeView: View {
     @EnvironmentObject var userLocationManager: UserLocationManager
     @EnvironmentObject var userAuthManager: UserAuthManager
 
+    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
+
     @State private var alertItem: AlertItem?
     @State private var showingActivityIndicator: Bool = false
 
@@ -20,20 +22,10 @@ struct HomeView: View {
         GeometryReader { proxy in
             NavigationView {
                 ZStack {
-                    VStack(alignment: .center, spacing: 0) {
-                        MapView()
-                            .edgesIgnoringSafeArea(.all)
-                        Group {
-                            if checkInManager.showCheckedInScreen {
-                                CheckedInView()
-                            } else {
-                                ChooseRoomView { target in
-                                    print("normal checking into target: \(target)")
-                                    checkInManager.checkIn(to: target)
-                                }
-                            }
-                        }
-                        .frame(height: proxy.size.height * (3 / 5))
+                    if (verticalSizeClass ?? .regular) == .compact {
+                        HStack(alignment: .center, spacing: 0) { makeContent(proxy, shouldUseFrame: false) }
+                    } else {
+                        VStack(alignment: .center, spacing: 0) { makeContent(proxy) }
                     }
                     if showingActivityIndicator {
                         MyActivityIndicator()
@@ -60,13 +52,33 @@ struct HomeView: View {
             }
         }
     }
+
+    private func makeContent(_ proxy: GeometryProxy, shouldUseFrame: Bool = true) -> some View {
+        Group {
+            MapView()
+                .edgesIgnoringSafeArea(.all)
+            Group {
+                if checkInManager.showCheckedInScreen {
+                    CheckedInView()
+                } else {
+                    ChooseRoomView { target in
+                        print("normal checking into target: \(target)")
+                        checkInManager.checkIn(to: target)
+                    }
+                }
+            }
+            .conditionalModifier(shouldUseFrame) {
+                $0.frame(height: proxy.size.height * (3 / 5))
+            }
+        }
+    }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let checkInManager = CheckInManager()
-        return HomeView()
-            .environmentObject(checkInManager)
+        HomeView()
+            .environmentObject(CheckInManager())
             .environmentObject(UserLocationManager())
+            .environmentObject(UserAuthManager())
     }
 }
