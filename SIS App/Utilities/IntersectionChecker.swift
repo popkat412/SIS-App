@@ -26,9 +26,6 @@ struct IntersectionChecker {
         db.collection(Constants.uploadedHistoryCollection).addSnapshotListener(snapshotListener)
 
         // testIntersection() // For testing only
-        EmailHelper.sendWarningEmail(data: [Intersection(start: Date(), end: Date() + 60, target: "Testing 123")]) { error in
-            print("🤷🏻‍♂️ testing: \(error)")
-        }
     }
 
     static func checkIntersection(a: [CheckInSession], b: [CheckInSession]) -> [Intersection] {
