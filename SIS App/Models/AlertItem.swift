@@ -36,17 +36,20 @@ struct AlertItem: Identifiable {
 }
 
 func alertItemBuilder(_ alertItem: AlertItem) -> Alert {
-    guard let primaryButton = alertItem.primaryButton, let secondaryButton = alertItem.secondaryButton else {
+    if let primaryButton = alertItem.primaryButton, let secondaryButton = alertItem.secondaryButton {
         return Alert(
             title: alertItem.title,
             message: alertItem.message,
-            dismissButton: alertItem.dismissButton
+            primaryButton: primaryButton,
+            secondaryButton: secondaryButton
         )
     }
-    return Alert(
-        title: alertItem.title,
-        message: alertItem.message,
-        primaryButton: primaryButton,
-        secondaryButton: secondaryButton
-    )
+    if let dismissButton = alertItem.dismissButton {
+        return Alert(
+            title: alertItem.title,
+            message: alertItem.message,
+            dismissButton: dismissButton
+        )
+    }
+    return Alert(title: alertItem.title, message: alertItem.message)
 }

@@ -1,6 +1,47 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 const config = functions.config();
+admin.initializeApp(config.firebase);
+const db = admin.firestore();
+
+/**
+ * Firebase Collection Structure
+ *
+ * history
+ * |---- random document id
+ *   |---- dateAdded: Timestamp
+ *   |---- userId: String
+ *   |---- history (subcollection)
+ *     |---- CheckInSession ID
+ *       |---- checkedIn: Timestamp
+ *       |---- checkedOut: Timestamp
+ *       |---- target: String
+ *     |---- CheckInSession ID
+ *       |---- ...
+ *     |---- CheckInSession ID
+ *       |---- ...
+ * |---- random document id
+ *   |---- dateAdded: Timestamp
+ *     |---- userId: String
+ *     |---- history (subcollection)
+ *       |---- CheckInSession ID
+ *         |---- ...
+ *       |---- CheckInSession ID
+ *         |---- ...
+ *       |---- CheckInSession ID
+ *         |---- ...
+ * 
+ * otp
+ * |---- random document id
+ *   |---- dateUsed: Timestamp/nil
+ *   |---- isUsed: Bool
+ *   |---- otp: String
+ * |---- random document id
+ *   |---- dateUsed: Timestamp/nil
+ *   |---- isUsed: Bool
+ *   |---- otp: String
+ */
 
 
 /**
@@ -48,36 +89,6 @@ function formatDate(dateInSeconds) {
 }
 
 /**
- * data for this cloud function should be a array
- * which contains CheckInSessions of where the user has been to
- */
-exports.sendConfirmationEmail = functions.https.onCall(async (data, context) => {
-  console.log(`data: ${data}`);
-  if (!context.auth) {
-    throw new functions.https.HttpsError("failed-precondition", "The function must be called while authenticated");
-  }
-
-
-  await sendEmail(
-    "wangyunze412@gmail.com",
-    "Somebody got Covid :O",
-    `<p>Please confirm that ${context.auth.token.email} should be able to upload their data.<p>`,
-    [
-      {
-        filename: "user_data.json",
-        content: JSON.stringify({
-          user: context.auth.token.email,
-          history: data,
-        }),
-        contentType: "text/plain",
-      }
-    ]
-  );
-
-  return { "test": "ok" };
-})
-
-/**
  * data for this cloud function should be a array of Intersections:
  * 
  * Intersection:
@@ -106,6 +117,30 @@ exports.sendWarningEmail = functions.https.onCall(async (data, context) => {
     []
   )
 })
+
+/**
+ * data for this cloud function should be a string,
+ * which is the OTP the user types in
+ * 
+ * this function should return a bool, which is true if the OTP is valid and false otherwise
+ */
+/*
+exports.checkOTP = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError("failed-precondition", "The function must be called while authenticated");
+  }
+
+  const snapshot = await db.collection("otp").where("isUsed", "==", false).where("otp", "==", data).get();
+
+  if (snapshot.empty) {
+    return false;
+  } else if (snapshot.size === 1) {
+    return true;
+  } else {
+    throw new functions.https.HttpsError("internal", "Duplicate OTPs found in database, this is a bug, please contact developers");
+  }
+})
+*/
 
 exports.testFunction = functions.https.onCall((data, context) => {
   console.log("test function");

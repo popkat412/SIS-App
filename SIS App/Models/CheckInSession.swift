@@ -111,3 +111,20 @@ extension CheckInSession: Codable {
         try container.encode(target.id, forKey: .target)
     }
 }
+
+extension CheckInSession {
+    func toFirebaseDictionary() -> [String: Any] {
+        var temp = [String: Any]()
+
+        temp["checkedIn"] = Timestamp(date: checkedIn)
+
+        if let checkedOut = self.checkedOut { temp["checkedOut"] = Timestamp(date: checkedOut) }
+        else { temp["checkedOut"] = nil }
+
+        temp["target"] = target.id
+
+        temp["id"] = id.uuidString
+
+        return temp
+    }
+}

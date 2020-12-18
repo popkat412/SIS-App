@@ -10,34 +10,6 @@ import FirebaseFirestore
 import Foundation
 import UIKit
 
-/**
- * Firebase Collection Structure
- *
- * history
- * |---- random document id
- *   |---- dateAdded: Timestamp
- *   |---- userId: String
- *   |---- history (subcollection)
- *     |---- CheckInSession ID
- *       |---- checkedIn: Timestamp
- *       |---- checkedOut: Timestamp
- *       |---- target: String
- *     |---- CheckInSession ID
- *       |---- ...
- *     |---- CheckInSession ID
- *       |---- ...
- * |---- random document id
- *   |---- dateAdded: Timestamp
- *     |---- userId: String
- *     |---- history (subcollection)
- *       |---- CheckInSession ID
- *         |---- ...
- *       |---- CheckInSession ID
- *         |---- ...
- *       |---- CheckInSession ID
- *         |---- ...
- */
-
 struct IntersectionChecker {
     private static var db: Firestore!
     private static var processedDocumentIds: [String] {

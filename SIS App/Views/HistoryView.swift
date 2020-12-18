@@ -5,11 +5,13 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
+import FirebaseFirestore
 import LocalAuthentication
 import SwiftUI
 
 struct HistoryView: View {
     @EnvironmentObject var checkInManager: CheckInManager
+    @EnvironmentObject var userAuthManager: UserAuthManager
 
     @AppStorage(Constants.kDidAuthHistoryView, store: UserDefaults(suiteName: Constants.appGroupIdentifier)) var isAuthenticated: Bool = false
 
@@ -17,6 +19,7 @@ struct HistoryView: View {
     @State private var currentlySelectedSession: CheckInSession? = nil
 
     @State private var alertItem: AlertItem?
+    @State private var showingEnterPasswordAlert: Bool = false
     @State private var showingActivityIndicator: Bool = false
 
     var body: some View {
@@ -85,27 +88,7 @@ struct HistoryView: View {
 //                                }
 //                            }
                             Button(action: {
-                                let lastSentConfirmationEmail = UserDefaults(suiteName: Constants.appGroupIdentifier)?.double(forKey: Constants.kLastSentConfirmationEmail)
-
-                                var difference: Double?
-                                if let lastSentConfirmationEmail = lastSentConfirmationEmail {
-                                    difference = Date().timeIntervalSince1970 - lastSentConfirmationEmail
-                                }
-                                if lastSentConfirmationEmail == nil || (difference != nil && difference! >= Constants.sendConfirmationEmailDelayTime) {
-                                    alertItem = AlertItem(
-                                        title: "Are you sure you want to upload data?",
-                                        message: "An email will be sent to the school to confirm that you are not trolling.",
-                                        primaryButton: .cancel(),
-                                        secondaryButton: .destructive(Text("Yes"), action: sendConfirmationEmail)
-                                    )
-                                } else {
-                                    let dateFormatter = DateFormatter()
-                                    dateFormatter.dateFormat = "h:mm a, MMM d"
-                                    let formatted = dateFormatter.string(from: Date(timeIntervalSince1970: lastSentConfirmationEmail!).addingTimeInterval(Constants.sendConfirmationEmailDelayTime))
-                                    alertItem = AlertItem(
-                                        title: "You're uploading too fast. You can't upload until \(formatted)"
-                                    )
-                                }
+                                showingEnterPasswordAlert = true
                             }) {
                                 HStack {
                                     Text("Upload")
@@ -122,6 +105,45 @@ struct HistoryView: View {
                 Button("Try again", action: authenticate)
             }
         }
+        .alert(
+            isPresented: $showingEnterPasswordAlert,
+            TextAlert(
+                title: "Please enter the password",
+                message: "You will have been given a one time password by the school",
+                placeholder: "",
+                isPassword: true, accept: "Ok", cancel: "Cancel"
+            ) { result in
+                showingActivityIndicator = true
+                checkOTP(password: result ?? "") { succeded, error in
+                    if let error = error {
+                        showingActivityIndicator = false
+                        alertItem = MyErrorInfo(error).toAlertItem()
+                        return
+                    }
+
+                    if succeded {
+                        uploadData { error in
+                            showingActivityIndicator = false
+                            if let error = error {
+                                alertItem = MyErrorInfo(error).toAlertItem()
+                                return
+                            }
+
+                            alertItem = AlertItem(
+                                title: "Success!",
+                                message: "Your data has been successfully uploaded"
+                            )
+                        }
+                    } else {
+                        showingActivityIndicator = false
+                        alertItem = AlertItem(
+                            title: "Oops",
+                            message: "The password you entered is incorrect."
+                        )
+                    }
+                }
+            }
+        )
         .onReceive(NotificationCenter.default.publisher(for: .didSwitchToHistoryView)) { _ in
             print("🧑‍💻 switched to history view")
             if !isAuthenticated {
@@ -135,6 +157,66 @@ struct HistoryView: View {
 
     // MARK: Helper functions
 
+    /// Completion takes 2 arguments, `result` and `error`.
+    /// `result` will be true if the password if correct, and all else false.
+    /// `error` will only not be nil if there was a problem verifying the password.
+    /// Note that `result` can be false even though error is `nil`, because the user might have entered the wrong password
+    private func checkOTP(password: String, completion: @escaping (Bool, Error?) -> Void) {
+        Firestore.firestore().collection(Constants.OTPCollection).whereField(Constants.isUsedDocumentField, isEqualTo: false).whereField(Constants.OTPDocumentField, isEqualTo: password).getDocuments { snapshot, error in
+
+            if let error = error {
+                completion(false, error)
+                return
+            }
+
+            if let snapshot = snapshot {
+                if snapshot.isEmpty { // OTP doesn't exisist
+                    completion(false, nil)
+                } else if snapshot.count > 1 { // multiple of the same OTPs exist, is a bug
+                    completion(false, "Multiple of the same OTPs exists, this is a bug, please contact the deveolpers")
+                } else { // everything good
+                    // Mark OTP as completed
+                    Firestore.firestore()
+                        .collection(Constants.OTPCollection)
+                        .document(snapshot.documents.first!.documentID)
+                        .updateData(
+                            [
+                                Constants.isUsedDocumentField: true,
+                                Constants.OTPDateUsedDocumentField: Timestamp(),
+                            ]
+                        ) { error in
+                            if let error = error {
+                                completion(false, error)
+                            } else {
+                                completion(true, nil)
+                            }
+                        }
+                }
+            }
+        }
+    }
+
+    private func uploadData(completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        let batch = db.batch()
+
+        let reference = db.collection(Constants.uploadedHistoryCollection).addDocument(data: [
+            "dateAdded": Timestamp(),
+            "userId": userAuthManager.user?.uid as Any,
+        ])
+
+        for checkInSession in checkInManager.checkInSessions {
+            batch.setData(
+                checkInSession.toFirebaseDictionary(),
+                forDocument: reference
+                    .collection(Constants.historyCollectionForEachDocument)
+                    .document()
+            )
+        }
+
+        batch.commit(completion: completion)
+    }
+
     private func onCheckInDateUpdate(_ newCheckInDate: Date, _: Date) -> SessionInvalidError? {
         guard let currentlySelectedSession = currentlySelectedSession else { return nil }
 
@@ -143,29 +225,6 @@ struct HistoryView: View {
             id: currentlySelectedSession.id,
             newSession: currentlySelectedSession.newSessionWith(checkedIn: newCheckInDate)
         )
-    }
-
-    private func sendConfirmationEmail() {
-        showingActivityIndicator = true
-        EmailHelper.sendConfirmationEmail(data: checkInManager.checkInSessions.filter {
-            let dateToKeep = Date() - Constants.timeIntervalToUpload
-            return $0.checkedIn > dateToKeep || $0.checkedOut! > dateToKeep
-        }) { error in
-            if let error = error {
-                alertItem = MyErrorInfo(error).toAlertItem {
-                    showingActivityIndicator = false
-                }
-            } else {
-                alertItem = AlertItem(
-                    title: "Success!",
-                    message: "Email has been sent successfully",
-                    dismissButton: .default(Text("Ok")) {
-                        showingActivityIndicator = false
-                    }
-                )
-                UserDefaults(suiteName: Constants.appGroupIdentifier)?.setValue(Date().timeIntervalSince1970, forKey: Constants.kLastSentConfirmationEmail)
-            }
-        }
     }
 
     private func authenticate() {
