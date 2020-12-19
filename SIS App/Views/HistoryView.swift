@@ -99,46 +99,6 @@ struct HistoryView: View {
                         }
                     }
                 }
-                //                .alert(
-                //                    isPresented: $showingEnterPasswordAlert,
-                //                    TextAlert(
-                //                        title: "Please enter the password",
-                //                        message: "You will have been given a one time password by the school",
-                //                        placeholder: "",
-                //                        isPassword: true, accept: "Ok", cancel: "Cancel"
-                //                    ) { result in
-                //                        showingActivityIndicator = true
-                //                        guard let result = result else { return }
-                //                        checkOTP(password: result) { succeded, error in
-                //                            if let error = error {
-                //                                showingActivityIndicator = false
-                //                                alertItem = MyErrorInfo(error).toAlertItem()
-                //                                return
-                //                            }
-                //
-                //                            if succeded {
-                //                                uploadData { error in
-                //                                    showingActivityIndicator = false
-                //                                    if let error = error {
-                //                                        alertItem = MyErrorInfo(error).toAlertItem()
-                //                                        return
-                //                                    }
-                //
-                //                                    alertItem = AlertItem(
-                //                                        title: "Success!",
-                //                                        message: "Your data has been successfully uploaded"
-                //                                    )
-                //                                }
-                //                            } else {
-                //                                showingActivityIndicator = false
-                //                                alertItem = AlertItem(
-                //                                    title: "Oops",
-                //                                    message: "The password you entered is incorrect."
-                //                                )
-                //                            }
-                //                        }
-                //                    }
-                //                )
                 .navigationViewStyle(StackNavigationViewStyle())
             } else {
                 Text("Not authenticated")
@@ -240,8 +200,9 @@ struct HistoryView: View {
     }
 
     private func userEnteredOTP(_ result: String?) {
-        showingActivityIndicator = true
         guard let result = result else { return }
+
+        showingActivityIndicator = true
         checkOTP(password: result) { succeded, error in
             if let error = error {
                 showingActivityIndicator = false
