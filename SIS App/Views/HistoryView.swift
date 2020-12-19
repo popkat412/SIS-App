@@ -79,6 +79,7 @@ struct HistoryView: View {
                     .listStyle(InsetListStyle()) // Must set this, if not adding the EditButton() ruins how the list looks
                     .navigationBarTitle("History")
                     .navigationBarItems(trailing: EditButton())
+                    .alert(item: $alertItem, content: alertItemBuilder)
                     .toolbar {
                         ToolbarItemGroup(placement: .bottomBar) {
 //                            Button(action: {}) {
@@ -88,7 +89,15 @@ struct HistoryView: View {
 //                                }
 //                            }
                             Button(action: {
-                                showingEnterPasswordAlert = true
+                                showTextFieldAlert(
+                                    TextAlert(
+                                        title: "Please enter the password",
+                                        message: "You will have been given a one time password by the school",
+                                        placeholder: "",
+                                        isPassword: true, accept: "Ok", cancel: "Cancel",
+                                        action: userEnteredOTP
+                                    )
+                                )
                             }) {
                                 HStack {
                                     Text("Upload")
@@ -97,53 +106,53 @@ struct HistoryView: View {
                             }
                         }
                     }
-                    .alert(item: $alertItem, content: alertItemBuilder)
                 }
+                //                .alert(
+                //                    isPresented: $showingEnterPasswordAlert,
+                //                    TextAlert(
+                //                        title: "Please enter the password",
+                //                        message: "You will have been given a one time password by the school",
+                //                        placeholder: "",
+                //                        isPassword: true, accept: "Ok", cancel: "Cancel"
+                //                    ) { result in
+                //                        showingActivityIndicator = true
+                //                        guard let result = result else { return }
+                //                        checkOTP(password: result) { succeded, error in
+                //                            if let error = error {
+                //                                showingActivityIndicator = false
+                //                                alertItem = MyErrorInfo(error).toAlertItem()
+                //                                return
+                //                            }
+                //
+                //                            if succeded {
+                //                                uploadData { error in
+                //                                    showingActivityIndicator = false
+                //                                    if let error = error {
+                //                                        alertItem = MyErrorInfo(error).toAlertItem()
+                //                                        return
+                //                                    }
+                //
+                //                                    alertItem = AlertItem(
+                //                                        title: "Success!",
+                //                                        message: "Your data has been successfully uploaded"
+                //                                    )
+                //                                }
+                //                            } else {
+                //                                showingActivityIndicator = false
+                //                                alertItem = AlertItem(
+                //                                    title: "Oops",
+                //                                    message: "The password you entered is incorrect."
+                //                                )
+                //                            }
+                //                        }
+                //                    }
+                //                )
                 .navigationViewStyle(StackNavigationViewStyle())
             } else {
                 Text("Not authenticated")
                 Button("Try again", action: authenticate)
             }
         }
-        .alert(
-            isPresented: $showingEnterPasswordAlert,
-            TextAlert(
-                title: "Please enter the password",
-                message: "You will have been given a one time password by the school",
-                placeholder: "",
-                isPassword: true, accept: "Ok", cancel: "Cancel"
-            ) { result in
-                showingActivityIndicator = true
-                checkOTP(password: result ?? "") { succeded, error in
-                    if let error = error {
-                        showingActivityIndicator = false
-                        alertItem = MyErrorInfo(error).toAlertItem()
-                        return
-                    }
-
-                    if succeded {
-                        uploadData { error in
-                            showingActivityIndicator = false
-                            if let error = error {
-                                alertItem = MyErrorInfo(error).toAlertItem()
-                                return
-                            }
-
-                            alertItem = AlertItem(
-                                title: "Success!",
-                                message: "Your data has been successfully uploaded"
-                            )
-                        }
-                    } else {
-                        showingActivityIndicator = false
-                        alertItem = AlertItem(
-                            title: "Oops",
-                            message: "The password you entered is incorrect."
-                        )
-                    }
-                }
-            }
-        )
         .onReceive(NotificationCenter.default.publisher(for: .didSwitchToHistoryView)) { _ in
             print("🧑‍💻 switched to history view")
             if !isAuthenticated {
@@ -196,6 +205,7 @@ struct HistoryView: View {
         }
     }
 
+    /// Uploads data to firebase
     private func uploadData(completion: @escaping (Error?) -> Void) {
         let db = Firestore.firestore()
         let batch = db.batch()
@@ -225,6 +235,39 @@ struct HistoryView: View {
             id: currentlySelectedSession.id,
             newSession: currentlySelectedSession.newSessionWith(checkedIn: newCheckInDate)
         )
+    }
+
+    private func userEnteredOTP(_ result: String?) {
+        showingActivityIndicator = true
+        guard let result = result else { return }
+        checkOTP(password: result) { succeded, error in
+            if let error = error {
+                showingActivityIndicator = false
+                alertItem = MyErrorInfo(error).toAlertItem()
+                return
+            }
+
+            if succeded {
+                uploadData { error in
+                    showingActivityIndicator = false
+                    if let error = error {
+                        alertItem = MyErrorInfo(error).toAlertItem()
+                        return
+                    }
+
+                    alertItem = AlertItem(
+                        title: "Success!",
+                        message: "Your data has been successfully uploaded"
+                    )
+                }
+            } else {
+                showingActivityIndicator = false
+                alertItem = AlertItem(
+                    title: "Oops",
+                    message: "The password you entered is incorrect."
+                )
+            }
+        }
     }
 
     private func authenticate() {

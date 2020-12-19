@@ -4,7 +4,8 @@
 //
 //  Created by Wang Yunze on 3/12/20.
 //
-//  Stolen from https://gist.github.com/chriseidhof/cb662d2161a59a0cd5babf78e3562272
+//  UIAlertController and TextAlert stolen from https://gist.github.com/chriseidhof/cb662d2161a59a0cd5babf78e3562272
+// Rest stolen from https://stackoverflow.com/a/57877120/13181476
 
 import Foundation
 import SwiftUI
@@ -27,43 +28,6 @@ extension UIAlertController {
     }
 }
 
-struct AlertWrapper<Content: View>: UIViewControllerRepresentable {
-    @Binding var isPresented: Bool
-    let alert: TextAlert
-    let content: Content
-
-    func makeUIViewController(context _: UIViewControllerRepresentableContext<AlertWrapper>) -> UIHostingController<Content> {
-        UIHostingController(rootView: content)
-    }
-
-    final class Coordinator {
-        var alertController: UIAlertController?
-        init(_ controller: UIAlertController? = nil) {
-            alertController = controller
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
-    }
-
-    func updateUIViewController(_ uiViewController: UIHostingController<Content>, context: UIViewControllerRepresentableContext<AlertWrapper>) {
-        uiViewController.rootView = content
-        if isPresented, uiViewController.presentedViewController == nil {
-            var alert = self.alert
-            alert.action = {
-                self.isPresented = false
-                self.alert.action($0)
-            }
-            context.coordinator.alertController = UIAlertController(alert: alert)
-            uiViewController.present(context.coordinator.alertController!, animated: true)
-        }
-        if !isPresented, uiViewController.presentedViewController == context.coordinator.alertController {
-            uiViewController.dismiss(animated: true)
-        }
-    }
-}
-
 public struct TextAlert {
     var title: String
     var message: String? = nil
@@ -71,11 +35,45 @@ public struct TextAlert {
     var isPassword: Bool = false
     var accept: String = "OK"
     var cancel: String = "Cancel"
+
+    /// Called when either of the buttons are pressed,
+    /// If cancel is pressed then the result is null
     var action: (String?) -> Void
 }
 
-public extension View {
-    func alert(isPresented: Binding<Bool>, _ alert: TextAlert) -> some View {
-        AlertWrapper(isPresented: isPresented, alert: alert, content: self)
+func showTextFieldAlert(_ alert: TextAlert) {
+    if let controller = topMostViewController() {
+        controller.present(UIAlertController(alert: alert), animated: true)
     }
+}
+
+private func keyWindow() -> UIWindow? {
+    UIApplication.shared.connectedScenes
+        .filter { $0.activationState == .foregroundActive }
+        .compactMap { $0 as? UIWindowScene }
+        .first?.windows.filter { $0.isKeyWindow }.first
+}
+
+private func topMostViewController() -> UIViewController? {
+    guard let rootController = keyWindow()?.rootViewController else {
+        return nil
+    }
+    return topMostViewController(for: rootController)
+}
+
+private func topMostViewController(for controller: UIViewController) -> UIViewController {
+    if let presentedController = controller.presentedViewController {
+        return topMostViewController(for: presentedController)
+    } else if let navigationController = controller as? UINavigationController {
+        guard let topController = navigationController.topViewController else {
+            return navigationController
+        }
+        return topMostViewController(for: topController)
+    } else if let tabController = controller as? UITabBarController {
+        guard let topController = tabController.selectedViewController else {
+            return tabController
+        }
+        return topMostViewController(for: topController)
+    }
+    return controller
 }
