@@ -9,6 +9,6 @@ import Foundation
 
 extension String: Identifiable { public var id: String { self }}
 
-extension String: LocalizedError {
+extension String: LocalizedError, Error {
     public var errorDescription: String? { self }
 }

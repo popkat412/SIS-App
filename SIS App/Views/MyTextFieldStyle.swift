@@ -12,13 +12,7 @@ import SwiftUIX
 struct MyTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<_Label>) -> some View {
         configuration
-            .myTextFieldStyle()
-    }
-}
-
-extension View {
-    @ViewBuilder func myTextFieldStyle() -> some View {
-        padding(.horizontal)
+            .padding(.horizontal)
             .padding(.vertical, 10)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
