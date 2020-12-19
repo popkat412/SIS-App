@@ -31,10 +31,16 @@ Note: anything that's an array is a subcollection, not an array type
             dateAdded: Timestamp,
             userId: String,
             history: [
-                checkedIn: Timestamp,
-                checkedOut: Timestamp,
-                id: String,
-                target: String
+                {
+                    checkedIn: Timestamp,
+                    checkedOut: Timestamp,
+                    id: String,
+                    target: String
+                }, 
+                {
+                    ...
+                    ...
+                }
             ]
         }, 
         {
