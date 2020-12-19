@@ -8,4 +8,6 @@
 import Foundation
 
 typealias OnTargetSelection = (CheckInTarget) -> Void
+
+/// This is primairily used for Firebase helpers
 typealias OnErrorCallback = (Error) -> Void

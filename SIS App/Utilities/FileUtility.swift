@@ -10,6 +10,7 @@ import Foundation
 struct FileUtility {
     // MARK: API
 
+    /// Get data from a JSON file saved to the documents directory
     static func getDataFromJsonFile<T: Decodable>(filename: String, dataType _: T.Type) -> T? {
         if FileManager.default.fileExists(atPath: getPathFromFilename(filename)) {
             print("📂✅ \(filename) exisists :)")
@@ -35,6 +36,7 @@ struct FileUtility {
         }
     }
 
+    /// Get data from JSON file in the appbundle
     static func getDataFromJsonAppbundleFile<T: Decodable>(filename: String, dataType _: T.Type) -> T? {
         if let filepath = Bundle.main.path(forResource: filename, ofType: nil) {
             do {
@@ -54,6 +56,7 @@ struct FileUtility {
         return nil
     }
 
+    /// Save data to a JSON file in the documents directory
     static func saveDataToJsonFile<T: Encodable>(filename: String, data: T) {
         var toWrite: Data!
         do {
@@ -73,6 +76,7 @@ struct FileUtility {
         }
     }
 
+    /// Delete a file in the documents directory
     static func deleteFile(filename: String) {
         do {
             try FileManager.default.removeItem(at: getURLFromFilename(filename))
@@ -83,12 +87,14 @@ struct FileUtility {
 
     // MARK: Helper Methods
 
+    /// Get the URL for a filename, using app groups
     static func getURLFromFilename(_ filename: String) -> URL {
         let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupIdentifier)!
         print("📂 App Group container path: \(url)")
         return url.appendingPathComponent(filename)
     }
 
+    /// Get the path as string for a filename, using app groups
     static func getPathFromFilename(_ filename: String) -> String {
         getURLFromFilename(filename).path
     }

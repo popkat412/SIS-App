@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Contains all the rooms in a level
 struct Level: Identifiable {
     var rooms: [Room]
     var level: Int

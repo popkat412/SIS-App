@@ -12,6 +12,8 @@ import Foundation
 struct RoomParentInfo {
     private static var roomIdToParent: [String: String]?
 
+    /// Get the parent of a room as string.
+    /// By parent, I mean the block it is part of
     static func getParent(of room: Room) -> String {
         if room.id == "0000" { return "Test Block" }
 

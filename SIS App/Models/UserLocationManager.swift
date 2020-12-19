@@ -10,9 +10,11 @@ import Foundation
 import NotificationCenter
 import WidgetKit
 
+/// This is the class responsible for getting location information
 class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocation: CLLocation? {
         didSet {
+            // This is for the widget to be able to access location
             FileUtility.saveDataToJsonFile(filename: Constants.userLocationFilename, data: Location(fromCLLocation: userLocation!))
             WidgetCenter.shared.reloadAllTimelines()
         }

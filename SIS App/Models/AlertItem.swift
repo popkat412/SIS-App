@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// Contains an info about an alert
 struct AlertItem: Identifiable {
     var id = UUID()
     var title: Text
@@ -35,6 +36,7 @@ struct AlertItem: Identifiable {
     }
 }
 
+/// Builds an `Alert` from an `AlertItem`
 func alertItemBuilder(_ alertItem: AlertItem) -> Alert {
     if let primaryButton = alertItem.primaryButton, let secondaryButton = alertItem.secondaryButton {
         return Alert(

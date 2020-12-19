@@ -12,6 +12,7 @@ import UIKit
 private var audioPlayer: AVAudioPlayer?
 private var generator: UINotificationFeedbackGenerator?
 
+/// Plays a sound using a file inside the appubndle
 func playSound(filename: String, fileType: String) {
     print("🔊 playing sound \(filename)")
     if let path = Bundle.main.path(forResource: filename, ofType: fileType) {
@@ -27,6 +28,8 @@ func playSound(filename: String, fileType: String) {
     }
 }
 
+/// Call this before doing anything that requires haptics
+/// This avoids a delay when generating haptics
 func prepareHaptics() {
     if generator == nil { generator = UINotificationFeedbackGenerator() }
     DispatchQueue.global(qos: .userInitiated).async {
@@ -34,6 +37,7 @@ func prepareHaptics() {
     }
 }
 
+/// Plays the check in sound
 /// Yea this also does haptics too but shrug i couldn't think of any better name
 func playCheckInOutSound() {
     // sound

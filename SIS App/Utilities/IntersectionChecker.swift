@@ -12,6 +12,8 @@ import UIKit
 
 struct IntersectionChecker {
     private static var db: Firestore!
+
+    /// This is to avoid duplicate checking
     private static var processedDocumentIds: [String] {
         get {
             UserDefaults(suiteName: Constants.appGroupIdentifier)?.array(forKey: Constants.kProcessedDocumentIds) as? [String] ?? []
@@ -21,6 +23,7 @@ struct IntersectionChecker {
         }
     }
 
+    /// Call this as soon as possible when the app starts to listen for updates
     static func `init`() {
         db = Firestore.firestore()
         db.collection(Constants.uploadedHistoryCollection).addSnapshotListener(snapshotListener)
@@ -28,6 +31,11 @@ struct IntersectionChecker {
         // testIntersection() // For testing only
     }
 
+    /// Checks if two histories have intersected (i.e. same place, same time).
+    /// The algorighm runs in O(n^2) time.
+    /// Basically checks every session in B for ever session in A,
+    /// and if they are same place with intersection,
+    /// append that to the result
     static func checkIntersection(a: [CheckInSession], b: [CheckInSession]) -> [Intersection] {
         var intersections = [Intersection]()
         for sessionA in a {
@@ -43,6 +51,8 @@ struct IntersectionChecker {
         return intersections
     }
 
+    /// Checkes for intersections within a single array of CheckInSessions.
+    /// This is to prevent user from editing history such that they check into 2 different places at the same time
     static func checkIntersection(sessions: [CheckInSession]) -> [DateInterval] {
         // 1. sort sessions by start date
         let sortedSessions = sessions.sorted { $0.checkedIn < $1.checkedIn }
@@ -69,6 +79,7 @@ struct IntersectionChecker {
         return results
     }
 
+    /// This is called whenever there is a change in Firestore
     private static func snapshotListener(snapshot: QuerySnapshot?, error: Error?) {
         print("🔥 snapshot listener")
 
@@ -119,6 +130,8 @@ struct IntersectionChecker {
 
     // MARK: Helper functions
 
+    /// This deals with the firestore data by checking if there is an intersection
+    /// And if there is, send a email warning the user that they have come into contact
     private static func dealWithFirestoreData(_ data: UserUploadedData) {
         print("🔥 dealing with firestore data: \(data)")
 
@@ -150,6 +163,8 @@ struct IntersectionChecker {
     }
 
     // TODO: Add this as function/operator on CheckInTarget
+    /// Checks if the two CheckInTargets are essentially the same place.
+    /// This is because some targets, like Rooms, are more specific than Blocks
     private static func isEssentiallySamePlace(a: CheckInTarget, b: CheckInTarget) -> Bool {
         if type(of: a) == type(of: b) {
             return a.id == b.id
@@ -219,6 +234,7 @@ struct IntersectionChecker {
     }
 }
 
+/// This should be the same intersection as the cloud function accepts
 struct Intersection: Codable {
     var start: Date
     var end: Date

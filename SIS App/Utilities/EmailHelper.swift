@@ -36,6 +36,7 @@ extension Array where Element: Encodable {
 }
 
 extension Encodable {
+    /// The [String: Any] version of the Encodable struct
     var dictionary: [String: Any]? {
         guard let data = try? JSONEncoder().encode(self) else { return nil }
         return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }

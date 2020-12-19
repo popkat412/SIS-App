@@ -39,15 +39,7 @@ struct HistoryView: View {
                                                 showingEditRoomScreen = true
                                             },
                                             onCheckInDateUpdate: onCheckInDateUpdate,
-                                            onCheckOutDateUpdate: { newCheckOutDate, _ in
-                                                guard let currentlySelectedSession = currentlySelectedSession else { return nil }
-
-                                                print("🗂 new check out date: \(newCheckOutDate)")
-                                                return checkInManager.updateCheckInSession(
-                                                    id: currentlySelectedSession.id,
-                                                    newSession: currentlySelectedSession.newSessionWith(checkedOut: newCheckOutDate)
-                                                )
-                                            }
+                                            onCheckOutDateUpdate: onCheckOutDateUpdate
                                         )
                                         .sheet(isPresented: $showingEditRoomScreen) {
                                             ChooseRoomView(onRoomSelection: { target in
@@ -234,6 +226,16 @@ struct HistoryView: View {
         return checkInManager.updateCheckInSession(
             id: currentlySelectedSession.id,
             newSession: currentlySelectedSession.newSessionWith(checkedIn: newCheckInDate)
+        )
+    }
+
+    private func onCheckOutDateUpdate(_ newCheckOutDate: Date, _: Date) -> SessionInvalidError? {
+        guard let currentlySelectedSession = currentlySelectedSession else { return nil }
+
+        print("🗂 new check out date: \(newCheckOutDate)")
+        return checkInManager.updateCheckInSession(
+            id: currentlySelectedSession.id,
+            newSession: currentlySelectedSession.newSessionWith(checkedOut: newCheckOutDate)
         )
     }
 

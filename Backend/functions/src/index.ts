@@ -8,56 +8,6 @@ const config = functions.config();
 admin.initializeApp();
 const db = admin.firestore();
 
-/**
- * Firebase Collection Structure
- *
- * history
- * |---- random document id
- *   |---- dateAdded: Timestamp
- *   |---- userId: String
- *   |---- history (subcollection)
- *     |---- CheckInSession ID
- *       |---- checkedIn: Timestamp
- *       |---- checkedOut: Timestamp
- *       |---- target: String
- *     |---- CheckInSession ID
- *       |---- ...
- *     |---- CheckInSession ID
- *       |---- ...
- * |---- random document id
- *   |---- dateAdded: Timestamp
- *     |---- userId: String
- *     |---- history (subcollection)
- *       |---- CheckInSession ID
- *         |---- ...
- *       |---- CheckInSession ID
- *         |---- ...
- *       |---- CheckInSession ID
- *         |---- ...
- * 
- * otp
- * |---- random document id
- *   |---- dateUsed: Timestamp/nil
- *   |---- isUsed: Bool
- *   |---- otp: String
- * |---- random document id
- *   |---- dateUsed: Timestamp/nil
- *   |---- isUsed: Bool
- *   |---- otp: String
- * 
- * 
- * Firebase environment config
- * {
- *   user_info: {
- *     user: String
- *     password: String
- *   },
- *   person_in_charge: {
- *     email: String
- *   }
- * }
- */
-
 interface SendEmailConfig {
   to: string,
   subject: string,

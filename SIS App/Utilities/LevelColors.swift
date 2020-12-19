@@ -13,6 +13,8 @@ struct LevelColors {
 
     private static var levelToColor: LevelToColor?
 
+    /// Get the color for a level
+    /// This info is inside a file called "colors.json" inside the appbundle
     static func getColor(for level: Int) -> LevelColor {
         if levelToColor == nil {
             initColors()

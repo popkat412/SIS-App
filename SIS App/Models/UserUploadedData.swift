@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// This corresponds to a document in Firestore inside the "history" collection
 struct UserUploadedData {
     var userId: String
     var dateAdded: Date
