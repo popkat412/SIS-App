@@ -33,6 +33,7 @@ class CheckInManager: ObservableObject {
         }
     }
 
+    /// Convenience for getting the most recent check in session
     var mostRecentSession: CheckInSession? { checkInSessions.last }
 
     // MARK: Init
@@ -62,10 +63,10 @@ class CheckInManager: ObservableObject {
     // MARK: API
 
     /// Used to check the user into a room.
-    /// Note that this should persist if the user quits the app while checked in
-    /// This should never be called when `isCheckedIn` is true
+    /// Note that this should persist if the user quits the app while checked in.
+    /// This does nothing if `isCheckedIn` is already true
     func checkIn(to room: CheckInTarget, shouldUpdateUI: Bool = true) {
-        if isCheckedIn == true { return }
+        guard !isCheckedIn else { return }
 
         prepareHaptics()
 
@@ -105,8 +106,10 @@ class CheckInManager: ObservableObject {
 
     /// Used to check the user out from the room they are currently checked into
     /// This should use the persisted data (if any) from the `checkIn()` static method
-    /// This should never be called when `isCheckedIn` is false
+    /// This does nothing when `isCheckedIn` is false
     func checkOut(shouldUpdateUI: Bool = true) {
+        guard isCheckedIn else { return }
+
         // ------- [[ SET STATE ]] -------- //
         isCheckedIn = false
         if shouldUpdateUI { showCheckedInScreen = false }
@@ -249,6 +252,9 @@ class CheckInManager: ObservableObject {
 
     // MARK: Private methods
 
+    /// This schedules a notification if the user did not specifiy specific room
+    /// for any of the places they checked into today, to remind them to do so.
+    /// If the user does specify all the rooms, then the notification will be canceled if needed.
     private func updateReminderNotification() {
         let hasSpecificRooms = checkInSessions
             .filter { Calendar.current.isDateInToday($0.checkedIn) }

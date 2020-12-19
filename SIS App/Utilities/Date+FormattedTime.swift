@@ -8,6 +8,7 @@
 import Foundation
 
 extension Date {
+    /// The date, formatted as a time
     var formattedTime: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"

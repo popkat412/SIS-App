@@ -11,6 +11,9 @@ import UserNotifications
 struct UserNotificationHelper {
     static let notificationCenter = UNUserNotificationCenter.current()
 
+    /// Send / Schedule a notification.
+    /// If `trigger != nil`, then a notification is scheduled,
+    /// else it is sent immediately
     static func sendNotification(title: String, subtitle: String, identifier: String? = nil, trigger: UNNotificationTrigger? = nil) {
         print("📣 sending notification: \(title)")
 
@@ -41,12 +44,14 @@ struct UserNotificationHelper {
         }
     }
 
+    /// Cancel an already schedules notification with a identifier
     static func cancelScheduledNotification(withIdentifier identifier: String) {
         notificationCenter.getPendingNotificationRequests { _ in
             notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
         }
     }
 
+    /// Request for permission to send notifications
     static func requestAuth() {
         notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {

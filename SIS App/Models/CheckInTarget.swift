@@ -17,6 +17,7 @@ protocol CheckInTarget: Codable {
     var id: String { get }
 }
 
+/// This is in case something fails, for example when converting an id to a `CheckInTarget` fails.
 struct UnknownCheckInTarget: CheckInTarget {
     var name = "Unknown check in target :("
     var id: String { name }

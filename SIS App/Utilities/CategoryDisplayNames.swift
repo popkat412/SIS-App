@@ -7,9 +7,12 @@
 
 import Foundation
 
+/// Data on how to display the names of categories.
+/// Gets it data from categories.json file in appubndle
 struct CategoryDisplayNames {
     private static var categoryToDisplayName: RawKeyedCodableDictionary<RoomCategory, String>?
 
+    /// Gets the display name of a category
     static func getName(of category: RoomCategory) -> String {
         if categoryToDisplayName == nil {
             initCategoryToDisplayName()

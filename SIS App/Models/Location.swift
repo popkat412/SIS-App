@@ -8,6 +8,8 @@
 import CoreLocation
 import Foundation
 
+/// This is a custom codable location with only a latitude and longitude.
+/// This also provides helper functions for converting to CoreLocation structs and classes
 struct Location: Codable {
     var longitude: Double
     var latitude: Double
