@@ -66,7 +66,7 @@ Note: anything that's an array is a subcollection, not an array type
 ```js
 {
   user_info: { // the info used to send email
-    user: String
+    user: String,
     password: String
   },
   person_in_charge: { // the info about the person to send OTPs to
@@ -77,10 +77,10 @@ Note: anything that's an array is a subcollection, not an array type
 
 ### Cloud functions
 
-| Name             | Trigger                              | Description                                                                                                                                                                                                                                                                             | Receives                               | Returns                              |
-| ---------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | ------------------------------------ |
-| sendWarningEmail | HTTPS Callable                       | Sends a warning email to the currently logged in user with a list of where and when the user has been in contact with an infected person                                                                                                                                                | An array of intersections (see models) | Nodemailer info about the sent email |
-| generateOTPs     | On Firestore "otp" collection update | Generates 20 new OTPs, sends them to person in charge in school, and stores them in Firestore when generating the OTPs, it doesn't take into account if the OTP has been used before, because the chances of collisions are really low given the small number of OTPs we are generating | N.A.                                   | N.A.                                 |
+| Name             | Trigger                              | Description                                                                                                                                                                                                                                                                              | Receives                               | Returns                              |
+| ---------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | ------------------------------------ |
+| sendWarningEmail | HTTPS Callable                       | Sends a warning email to the currently logged in user with a list of where and when the user has been in contact with an infected person                                                                                                                                                 | An array of intersections (see models) | Nodemailer info about the sent email |
+| generateOTPs     | On Firestore "otp" collection update | Generates 20 new OTPs, sends them to person in charge in school, and stores them in Firestore. When generating the OTPs, it doesn't take into account if the OTP has been used before, because the chances of collisions are really low given the small number of OTPs we are generating | N.A.                                   | N.A.                                 |
 
 ### Data models
 Note: Those that are Swift will not show up here because they (should) already have inline documentation.
