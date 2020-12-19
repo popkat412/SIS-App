@@ -15,7 +15,6 @@ struct LoginView: View {
     @State private var password: String = ""
 
     @State private var showingActivityIndicator = false
-    @State private var showingConfirmPassword = false
 
     @State private var alertItem: AlertItem?
 
@@ -67,7 +66,8 @@ struct LoginView: View {
 
     private func onError(_ error: Error) {
         print("🔥 error: \(error)")
-        alertItem = MyErrorInfo(error).toAlertItem { showingActivityIndicator = false }
+        showingActivityIndicator = false
+        alertItem = MyErrorInfo(error).toAlertItem()
     }
 
     private static func validateInputs(email: String, password: String) -> Error? {
@@ -93,11 +93,11 @@ struct LoginView: View {
                     Spacer()
                 }
 
-                CocoaTextField("Email", text: $email)
-                    .isFirstResponder(true)
+                TextField("Email", text: $email)
+                    .textFieldStyle(MyTextFieldStyle())
+                    .disableAutocorrection(true)
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
-                    .myTextFieldStyle()
             }
         }
     }
@@ -142,8 +142,7 @@ struct LoginView: View {
         @EnvironmentObject var userAuthManager: UserAuthManager
         @Binding var showingActivityIndicator: Bool
         @Binding var alertItem: AlertItem?
-        @State private var showingConfirmPassword: Bool = false
-        @State private var showingConfirmPasswordFailed: Bool = false
+
         let email, password: String
         let onError: OnErrorCallback
 
@@ -156,24 +155,13 @@ struct LoginView: View {
                     return
                 }
 
-                showingConfirmPassword = true
-            }) {
-                Text("Sign up")
-            }
-            .buttonStyle(GradientButtonStyle(gradient: Constants.blueGradient))
-            .alert(isPresented: $showingConfirmPasswordFailed) {
-                Alert(
-                    title: Text("Whoops!"),
-                    message: Text("The two passwords don't match, try again")
-                )
-            }
-            .alert(
-                isPresented: $showingConfirmPassword,
-                TextAlert(
-                    title: "Confirm password",
-                    placeholder: "Password",
-                    isPassword: true,
-                    action: { retypedPassword in
+                showTextFieldAlert(
+                    TextAlert(
+                        title: "Confirm password",
+                        placeholder: "Password",
+                        isPassword: true
+                    ) { retypedPassword in
+                        guard let retypedPassword = retypedPassword else { return }
                         if retypedPassword == password {
                             showingActivityIndicator = true
                             userAuthManager.signUp(
@@ -190,26 +178,48 @@ struct LoginView: View {
                                 onError: onError
                             )
                         } else {
-                            showingConfirmPasswordFailed = true
+                            alertItem = MyErrorInfo("The two passwords given do not match, try again.").toAlertItem()
                         }
                     }
                 )
-            )
-            .frame(height: 50) // Again, same hack, see below
+            }) {
+                Text("Sign up")
+            }
+            .buttonStyle(GradientButtonStyle(gradient: Constants.blueGradient))
         }
     }
 
     private struct ForgetPasswordButton: View {
         @EnvironmentObject var userAuthManager: UserAuthManager
         @Binding var showingAcitivtyIndicator: Bool
-        @State private var showingEmailAlert: Bool = false
         @State private var resetPasswordEmail: String? = nil
 
         let onError: OnErrorCallback
 
         var body: some View {
             Button {
-                showingEmailAlert = true
+                showTextFieldAlert(
+                    TextAlert(
+                        title: "Enter the email address of your account",
+                        message: "An email will be sent with a link to reset your password",
+                        placeholder: "Email"
+                    ) { email in
+                        guard let email = email else { return }
+
+                        showingAcitivtyIndicator = true
+                        userAuthManager.resetPassword(email: email) { error in
+                            if let error = error {
+                                onError(error)
+                                return
+                            }
+
+                            DispatchQueue.main.async {
+                                print("🔥 reset password email sent")
+                                showingAcitivtyIndicator = false
+                                resetPasswordEmail = email
+                            }
+                        }
+                    })
             } label: {
                 Text("Forgot password?")
             }
@@ -217,30 +227,9 @@ struct LoginView: View {
                 Alert(
                     title: Text("An email has been sent to \(email)"),
                     message: Text("Click on the link in the email to reset your password"),
-                    dismissButton: .default(Text("OK")) { showingAcitivtyIndicator = false }
+                    dismissButton: .default(Text("OK"))
                 )
             }
-            .alert(
-                isPresented: $showingEmailAlert,
-                TextAlert(title: "Enter the email address of your account",
-                          message: "An email will be sent with a link to reset your password",
-                          placeholder: "Email") { email in
-                    showingAcitivtyIndicator = true
-                    userAuthManager.resetPassword(email: email ?? "") { error in
-                        if let error = error {
-                            onError(error)
-                            return
-                        }
-
-                        DispatchQueue.main.async {
-                            print("🔥 reset password email sent")
-                            resetPasswordEmail = email
-                        }
-                    }
-                }
-            )
-            .frame(height: 40) // Kind of a hack because custom .alert() returns AlertWrapper
-            // So it expands to fill all avaliable space
         }
     }
 }
