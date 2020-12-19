@@ -65,6 +65,7 @@
 			<string>UIInterfaceOrientationUpsideDown</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		</array>
 		<key>UISupportedInterfaceOrientations~ipad</key>
 		<array>
@@ -72,6 +73,11 @@
 			<string>UIInterfaceOrientationUpsideDown</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		</array>
+		<key>UIRequiresFullScreen</key>
+		<true/>
+		<key>UIRequiresFullScreen~ipad</key>
+		<false/>
 	</dict>
 </plist>

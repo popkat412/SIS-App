@@ -23,12 +23,12 @@ struct MyErrorInfo: Identifiable {
         message = error
     }
 
-    func toAlertItem(onDismiss: @escaping () -> Void) -> AlertItem {
+    func toAlertItem(onDismiss: (() -> Void)? = nil) -> AlertItem {
         print("🔥 toAlertItem: \(String(describing: error))")
         return AlertItem(
             title: "Whoops!",
             message: message,
-            dismissButton: .default(Text("Got it!"), action: onDismiss)
+            dismissButton: .default(Text("Got it!"), action: onDismiss ?? {})
         )
     }
 }

@@ -82,10 +82,15 @@ struct Constants {
     static let riEmailSuffix = "ri.edu.sg"
 
     // ------- [[ FIREBASE ]] ------ //
-    static let sendConfirmationEmailCloudFunction = "sendConfirmationEmail"
+    static let sendWarningEmailCloudFucntion = "sendWarningEmail"
+
     static let uploadedHistoryCollection = "history"
     static let historyCollectionForEachDocument = "history"
-    static let sendWarningEmailCloudFucntion = "sendWarningEmail"
+
+    static let OTPCollection = "otp"
+    static let isUsedDocumentField = "isUsed"
+    static let OTPDocumentField = "otp"
+    static let OTPDateUsedDocumentField = "dateUsed"
 
     // ------- [[ USER DEFAULTS ]] ------ //
     static let kLastSentConfirmationEmail = "kLastSentConfirmationEmail"
