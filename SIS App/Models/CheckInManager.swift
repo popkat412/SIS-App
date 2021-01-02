@@ -36,6 +36,25 @@ class CheckInManager: ObservableObject {
     /// Convenience for getting the most recent check in session
     var mostRecentSession: CheckInSession? { checkInSessions.last }
 
+    /// Convenience for total number of check in sessions
+    var totalCheckIns: Int { checkInSessions.count }
+
+    /// Number of unique check in sessions, aka unique places visited
+    var uniquePlaces: Int {
+        var unique: Set<String> = []
+
+        for session in checkInSessions {
+            unique.insert(session.target.id)
+        }
+
+        return unique.count
+    }
+
+    /// Total hours spent checked in
+    var totalHours: Double {
+        checkInSessions.reduce(0) { $0 + ($1.dateInterval?.duration ?? 0) } / 3600
+    }
+
     // MARK: Init
 
     init() {

@@ -9,6 +9,28 @@ import FirebaseFirestore
 import LocalAuthentication
 import SwiftUI
 
+private struct StatsView: View {
+    var num: String
+    var text: String
+
+    var body: some View {
+        VStack {
+            Text(num)
+                .font(.system(size: 25))
+            Text(text)
+                .font(.system(size: 15, weight: .ultraLight, design: .default))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding()
+        .frame(width: 95, height: 100)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color.black.opacity(0.3), radius: 10)
+        .padding()
+    }
+}
+
 struct HistoryView: View {
     @EnvironmentObject var checkInManager: CheckInManager
     @EnvironmentObject var userAuthManager: UserAuthManager
@@ -26,77 +48,88 @@ struct HistoryView: View {
         VStack {
             if isAuthenticated {
                 NavigationView {
-                    ZStack {
-                        List {
-                            ForEach(checkInManager.getCheckInSessions()) { day in
-                                Section(header: Text("\(day.formattedDate)")) {
-                                    ForEach(day.sessions) { session in
-                                        HistoryRow(
-                                            session: session,
-                                            editable: true,
-                                            currentlySelectedSession: $currentlySelectedSession,
-                                            onTargetPressed: {
-                                                showingEditRoomScreen = true
-                                            },
-                                            onCheckInDateUpdate: onCheckInDateUpdate,
-                                            onCheckOutDateUpdate: onCheckOutDateUpdate
-                                        )
-                                        .sheet(isPresented: $showingEditRoomScreen) {
-                                            ChooseRoomView(onRoomSelection: { target in
-                                                showingEditRoomScreen = false
-                                                guard let currentlySelectedSession = currentlySelectedSession else { return }
-                                                print("🗂 saving session: \(session)")
-                                                checkInManager.updateCheckInSession(
-                                                    id: currentlySelectedSession.id,
-                                                    newSession: currentlySelectedSession.newSessionWith(target: target)
-                                                )
-                                            }, onBackButtonPressed: {
-                                                showingEditRoomScreen = false
-                                            })
+                    VStack {
+                        ScrollView(.horizontal) {
+                            HStack {
+                                StatsView(num: "\(checkInManager.totalCheckIns)", text: "Total checkins")
+                                StatsView(num: "\(checkInManager.uniquePlaces)", text: "Unique places")
+                                StatsView(num: String(format: "%.1f", checkInManager.totalHours), text: "Total hours")
+                            }
+                        }
+                        .padding(.horizontal)
+                        ZStack {
+                            List {
+                                ForEach(checkInManager.getCheckInSessions()) { day in
+                                    Section(header: Text("\(day.formattedDate)")) {
+                                        ForEach(day.sessions) { session in
+                                            HistoryRow(
+                                                session: session,
+                                                editable: true,
+                                                currentlySelectedSession: $currentlySelectedSession,
+                                                onTargetPressed: {
+                                                    showingEditRoomScreen = true
+                                                },
+                                                onCheckInDateUpdate: onCheckInDateUpdate,
+                                                onCheckOutDateUpdate: onCheckOutDateUpdate
+                                            )
+                                            .sheet(isPresented: $showingEditRoomScreen) {
+                                                ChooseRoomView(onRoomSelection: { target in
+                                                    showingEditRoomScreen = false
+                                                    guard let currentlySelectedSession = currentlySelectedSession else { return }
+                                                    print("🗂 saving session: \(session)")
+                                                    checkInManager.updateCheckInSession(
+                                                        id: currentlySelectedSession.id,
+                                                        newSession: currentlySelectedSession.newSessionWith(target: target)
+                                                    )
+                                                }, onBackButtonPressed: {
+                                                    showingEditRoomScreen = false
+                                                })
+                                            }
                                         }
-                                    }
-                                    .onDelete { offsets in
-                                        for index in offsets {
-                                            checkInManager.deleteCheckInSession(id: day.sessions[index].id)
+                                        .onDelete { offsets in
+                                            for index in offsets {
+                                                checkInManager.deleteCheckInSession(id: day.sessions[index].id)
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
-                        if showingActivityIndicator {
-                            MyActivityIndicator()
-                                .frame(width: Constants.activityIndicatorSize, height: Constants.activityIndicatorSize)
-                        }
-                    }
-                    .listStyle(InsetListStyle()) // Must set this, if not adding the EditButton() ruins how the list looks
-                    .navigationBarTitle("History")
-                    .navigationBarItems(trailing: EditButton())
-                    .alert(item: $alertItem, content: alertItemBuilder)
-                    .toolbar {
-                        ToolbarItemGroup(placement: .bottomBar) {
-//                            Button(action: {}) {
-//                                HStack {
-//                                    Text("Add")
-//                                    Image(systemName: "plus")
-//                                }
-//                            }
-                            Button(action: {
-                                showTextFieldAlert(
-                                    TextAlert(
-                                        title: "Please enter the password",
-                                        message: "You will have been given a one time password by the school",
-                                        placeholder: "",
-                                        isPassword: true, accept: "Ok", cancel: "Cancel",
-                                        action: userEnteredOTP
-                                    )
-                                )
-                            }) {
-                                HStack {
-                                    Text("Upload")
-                                    Image(systemName: "square.and.arrow.up.on.square")
-                                }
+                            if showingActivityIndicator {
+                                MyActivityIndicator()
+                                    .frame(width: Constants.activityIndicatorSize, height: Constants.activityIndicatorSize)
                             }
                         }
+                        .listStyle(InsetListStyle()) // Must set this, if not adding the EditButton() ruins how the list looks
+                        .navigationBarTitle("History")
+                        .navigationBarItems(trailing: EditButton())
+                        .alert(item: $alertItem, content: alertItemBuilder)
+                        .layoutPriority(1)
+                        //                    .toolbar {
+                        //                        ToolbarItemGroup(placement: .bottomBar) {
+                        //                            Button(action: {}) {
+                        //                                HStack {
+                        //                                    Text("Add")
+                        //                                    Image(systemName: "plus")
+                        //                                }
+                        //                            }
+                        //                            Button(action: {
+                        //                                showTextFieldAlert(
+                        //                                    TextAlert(
+                        //                                        title: "Please enter the password",
+                        //                                        message: "You will have been given a one time password by the school",
+                        //                                        placeholder: "",
+                        //                                        isPassword: true, accept: "Ok", cancel: "Cancel",
+                        //                                        action: userEnteredOTP
+                        //                                    )
+                        //                                )
+                        //                            }) {
+                        //                                HStack {
+                        //                                    Text("Upload")
+                        //                                    Image(systemName: "square.and.arrow.up.on.square")
+                        //                                }
+                        //                            }
+                        //                        }
+                        //                    }
                     }
                 }
                 .navigationViewStyle(StackNavigationViewStyle())
