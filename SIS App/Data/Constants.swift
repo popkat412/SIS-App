@@ -62,6 +62,9 @@ struct Constants {
     static let didEnterSchoolNotificationIdentifier = "did-enter-school"
     static let didExitSchoolNotificationIdentifier = "did-exit-school"
 
+    // ------ [[ WIDGETS ]] ------- //
+    static let appName = "RI Footprint"
+
     // ------ [[ NOTIFICATION CENTER USERINFO ]] ----- //
     static let notificationCenterBlockUserInfo = "block"
 

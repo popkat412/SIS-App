@@ -215,7 +215,7 @@ struct SISAppWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             SISAppWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("RI Safe Entry")
+        .configurationDisplayName(Constants.appName)
         .description("Check in / out easily with this widget")
         .supportedFamilies([.systemMedium, .systemLarge])
     }
