@@ -5,7 +5,6 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
-import BetterSafariView
 import NotificationCenter
 import SwiftUI
 
@@ -29,9 +28,6 @@ struct ContentView: View {
                         Text("History")
                     }
                     .tag(Tab.history)
-            }
-            .safariView(isPresented: $navigationState.shouldShowSafariView) {
-                SafariView(url: Constants.riSafeEntryURL)
             }
             .onReceive(NotificationCenter.default.publisher(for: .didEnterBlock)) { event in
                 let block = (event.userInfo?[Constants.notificationCenterBlockUserInfo] as! Block)

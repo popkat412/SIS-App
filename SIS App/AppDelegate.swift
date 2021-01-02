@@ -110,10 +110,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print("📣 app delegate: did receive user notification: \(identifier)")
 
         switch identifier {
-        case Constants.didExitSchoolNotificationIdentifier:
-            fallthrough
-        case Constants.didEnterSchoolNotificationIdentifier:
-            sceneDelegate?.navigationState.shouldShowSafariView = true
         case Constants.remindUserCheckOutNotificationIdentifier:
             sceneDelegate?.navigationState.tabbarSelection = .home
         case Constants.remindUserFillInRoomsNotificationIdentifier:

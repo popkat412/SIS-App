@@ -20,9 +20,6 @@ class NavigationState: ObservableObject {
             }
         }
     }
-
-    /// This controls whether the safari view (aka safe entry) is shown
-    @Published var shouldShowSafariView: Bool = false
 }
 
 /// The tabbar tabs. In TabView, we need to remember to set the tag to this.

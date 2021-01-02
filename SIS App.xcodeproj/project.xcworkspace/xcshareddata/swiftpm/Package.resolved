@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "BetterSafariView",
-        "repositoryURL": "https://github.com/stleamist/BetterSafariView.git",
-        "state": {
-          "branch": null,
-          "revision": "a4a8590a24f088ddb077815f49b62c71342c5869",
-          "version": "2.2.2"
-        }
-      },
-      {
         "package": "BoringSSL-GRPC",
         "repositoryURL": "https://github.com/firebase/boringssl-SwiftPM.git",
         "state": {
