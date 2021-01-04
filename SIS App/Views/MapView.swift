@@ -13,6 +13,10 @@ struct MapView: UIViewRepresentable {
     @EnvironmentObject var userLocationManager: UserLocationManager
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
+    var shouldRemainFixedAtSchool: Bool = false
+    var shouldShowTextLabels: Bool = true
+    var pinsToShow: [Location] = []
+
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
 
@@ -54,32 +58,55 @@ struct MapView: UIViewRepresentable {
             )
         }
 
-        // Annotations for block names
-        mapView.addAnnotations(
-            DataProvider.getBlocks().map {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = $0.location.toCLLocationCoordinate2D()
-                annotation.title = $0.name
-                return annotation
-            }
-        )
+        if shouldShowTextLabels {
+            // Annotations for block names
+            mapView.addAnnotations(
+                DataProvider.getBlocks().map {
+                    TextPointAnnotation(
+                        coordinate: $0.location.toCLLocationCoordinate2D(),
+                        text: $0.name
+                    )
+                }
+            )
+        }
+
+        print("pins to show: \(pinsToShow)")
+        mapView.addAnnotations(pinsToShow.map {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = $0.toCLLocationCoordinate2D()
+            return annotation
+        })
 
         return mapView
     }
 
     func updateUIView(_ mapView: MKMapView, context _: Context) {
         // Follow User Location
-        let coordinate = userLocationManager.userLocation?.coordinate ?? CLLocationCoordinate2D()
-        let span = MKCoordinateSpan(
-            latitudeDelta: 0.001,
-            longitudeDelta: 0.001
-        )
-        let region = MKCoordinateRegion(
-            center: coordinate,
-            span: span
-        )
-        mapView.showsUserLocation = true
-        mapView.setRegion(region, animated: true)
+        if shouldRemainFixedAtSchool {
+            mapView.showsUserLocation = false
+            mapView.setRegion(
+                MKCoordinateRegion(
+                    center: Constants.schoolLocation.coordinate,
+                    span: MKCoordinateSpan(
+                        latitudeDelta: 0.002,
+                        longitudeDelta: 0.002
+                    )
+                ),
+                animated: true
+            )
+        } else {
+            let coordinate = userLocationManager.userLocation?.coordinate ?? Constants.schoolLocation.coordinate
+            let span = MKCoordinateSpan(
+                latitudeDelta: 0.001,
+                longitudeDelta: 0.001
+            )
+            let region = MKCoordinateRegion(
+                center: coordinate,
+                span: span
+            )
+            mapView.showsUserLocation = true
+            mapView.setRegion(region, animated: true)
+        }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -118,16 +145,20 @@ extension MapView {
         func mapView(_: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             guard !(annotation is MKUserLocation) else { return nil }
 
-            let annotationView = EmptyAnnotationView(
-                annotation: annotation, reuseIdentifier: "blocknameannotation"
-            )
-            let annotationLabel = UILabel(frame: CGRect(x: -100, y: 0, width: 200, height: 30))
-            annotationLabel.numberOfLines = 3
-            annotationLabel.textAlignment = .center
-            annotationLabel.font = UIFont.systemFont(ofSize: 12)
-            annotationLabel.text = annotation.title as? String
-            annotationView.addSubview(annotationLabel)
-            return annotationView
+            if annotation is TextPointAnnotation {
+                let annotationView = EmptyAnnotationView(
+                    annotation: annotation, reuseIdentifier: "blocknameannotation"
+                )
+                let annotationLabel = UILabel(frame: CGRect(x: -100, y: 0, width: 200, height: 30))
+                annotationLabel.numberOfLines = 3
+                annotationLabel.textAlignment = .center
+                annotationLabel.font = UIFont.systemFont(ofSize: 12)
+                annotationLabel.text = annotation.title as? String
+                annotationView.addSubview(annotationLabel)
+                return annotationView
+            }
+
+            return MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin annotation")
         }
     }
 }
@@ -146,5 +177,15 @@ extension MapView {
         override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
             super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         }
+    }
+}
+
+private class TextPointAnnotation: NSObject, MKAnnotation {
+    var coordinate: CLLocationCoordinate2D
+    var text: String
+
+    init(coordinate: CLLocationCoordinate2D, text: String) {
+        self.coordinate = coordinate
+        self.text = text
     }
 }
