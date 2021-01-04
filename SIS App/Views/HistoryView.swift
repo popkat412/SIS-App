@@ -44,6 +44,31 @@ struct HistoryView: View {
     @State private var showingEnterPasswordAlert: Bool = false
     @State private var showingActivityIndicator: Bool = false
 
+    @State private var secretTapSequence: [Int] = [] {
+        didSet {
+            if !secretTapSequence.isEmpty {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    secretTapSequence = []
+                }
+            }
+
+            guard secretTapSequence.count >= Constants.secretUploadSequence.count else { return }
+
+            if Array(secretTapSequence[secretTapSequence.count - Constants.secretUploadSequence.count ..< secretTapSequence.count]) == Constants.secretUploadSequence {
+                // The pattern does match, upload!
+                showTextFieldAlert(
+                    TextAlert(
+                        title: "Please enter the password",
+                        message: "You will have been given a one time password by the school",
+                        placeholder: "",
+                        isPassword: true, accept: "Ok", cancel: "Cancel",
+                        action: userEnteredOTP
+                    )
+                )
+            }
+        }
+    }
+
     var body: some View {
         VStack {
             if isAuthenticated {
@@ -52,11 +77,17 @@ struct HistoryView: View {
                         ScrollView(.horizontal) {
                             HStack {
                                 StatsView(num: "\(checkInManager.totalCheckIns)", text: "Total checkins")
+                                    .onTapGesture { secretTapSequence.append(1) }
                                 StatsView(num: "\(checkInManager.uniquePlaces)", text: "Unique places")
+                                    .onTapGesture { secretTapSequence.append(2) }
                                 StatsView(num: String(format: "%.1f", checkInManager.totalHours), text: "Total hours")
+                                    .onTapGesture { secretTapSequence.append(3) }
                             }
                         }
                         .padding(.horizontal)
+//                        Text("DEBUG: \(secretTapSequence as NSArray)")
+//                            .frame(minWidth: 0, maxWidth: .infinity)
+//                            .fixedSize(horizontal: false, vertical: true)
                         ZStack {
                             List {
                                 ForEach(checkInManager.getCheckInSessions()) { day in
