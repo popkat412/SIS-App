@@ -5,7 +5,6 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
-import FirebaseFirestore
 import LocalAuthentication
 import SwiftUI
 
@@ -33,7 +32,6 @@ private struct StatsView: View {
 
 struct HistoryView: View {
     @EnvironmentObject var checkInManager: CheckInManager
-    @EnvironmentObject var userAuthManager: UserAuthManager
 
     @AppStorage(Constants.kDidAuthHistoryView, store: UserDefaults(suiteName: Constants.appGroupIdentifier)) var isAuthenticated: Bool = false
 
@@ -44,31 +42,6 @@ struct HistoryView: View {
     @State private var showingEnterPasswordAlert: Bool = false
     @State private var showingActivityIndicator: Bool = false
 
-    @State private var secretTapSequence: [Int] = [] {
-        didSet {
-            if !secretTapSequence.isEmpty {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    secretTapSequence = []
-                }
-            }
-
-            guard secretTapSequence.count >= Constants.secretUploadSequence.count else { return }
-
-            if Array(secretTapSequence[secretTapSequence.count - Constants.secretUploadSequence.count ..< secretTapSequence.count]) == Constants.secretUploadSequence {
-                // The pattern does match, upload!
-                showTextFieldAlert(
-                    TextAlert(
-                        title: "Please enter the password",
-                        message: "You will have been given a one time password by the school",
-                        placeholder: "",
-                        isPassword: true, accept: "Ok", cancel: "Cancel",
-                        action: userEnteredOTP
-                    )
-                )
-            }
-        }
-    }
-
     var body: some View {
         GeometryReader { proxy in
             VStack {
@@ -78,22 +51,16 @@ struct HistoryView: View {
                             ScrollView(.horizontal) {
                                 HStack {
                                     StatsView(num: "\(checkInManager.totalCheckIns)", text: "Total checkins")
-                                        .onTapGesture { secretTapSequence.append(1) }
                                     StatsView(num: "\(checkInManager.uniquePlaces)", text: "Unique places")
-                                        .onTapGesture { secretTapSequence.append(2) }
                                     StatsView(num: String(format: "%.1f", checkInManager.totalHours), text: "Total hours")
-                                        .onTapGesture { secretTapSequence.append(3) }
                                 }
                             }
                             .padding(.horizontal)
-//                            Text("DEBUG: \(secretTapSequence as NSArray)")
-//                                .frame(minWidth: 0, maxWidth: .infinity)
-//                                .fixedSize(horizontal: false, vertical: true)
                             Spacer()
                                 .frame(height: 10)
                             MapView(
                                 shouldRemainFixedAtSchool: true,
-                                shouldShowTextLabels: false,
+                                shouldShowTextLabels: true,
                                 pinsToShow: { () -> [Location] in
                                     var s = Set<Location>()
                                     for session in checkInManager.checkInSessions {
@@ -155,32 +122,6 @@ struct HistoryView: View {
                             .navigationBarItems(trailing: EditButton())
                             .alert(item: $alertItem, content: alertItemBuilder)
                             .layoutPriority(1)
-                            //                    .toolbar {
-                            //                        ToolbarItemGroup(placement: .bottomBar) {
-                            //                            Button(action: {}) {
-                            //                                HStack {
-                            //                                    Text("Add")
-                            //                                    Image(systemName: "plus")
-                            //                                }
-                            //                            }
-                            //                            Button(action: {
-                            //                                showTextFieldAlert(
-                            //                                    TextAlert(
-                            //                                        title: "Please enter the password",
-                            //                                        message: "You will have been given a one time password by the school",
-                            //                                        placeholder: "",
-                            //                                        isPassword: true, accept: "Ok", cancel: "Cancel",
-                            //                                        action: userEnteredOTP
-                            //                                    )
-                            //                                )
-                            //                            }) {
-                            //                                HStack {
-                            //                                    Text("Upload")
-                            //                                    Image(systemName: "square.and.arrow.up.on.square")
-                            //                                }
-                            //                            }
-                            //                        }
-                            //                    }
                         }
                     }
                     .navigationViewStyle(StackNavigationViewStyle())
@@ -203,67 +144,6 @@ struct HistoryView: View {
 
     // MARK: Helper functions
 
-    /// Completion takes 2 arguments, `result` and `error`.
-    /// `result` will be true if the password if correct, and all else false.
-    /// `error` will only not be nil if there was a problem verifying the password.
-    /// Note that `result` can be false even though error is `nil`, because the user might have entered the wrong password
-    private func checkOTP(password: String, completion: @escaping (Bool, Error?) -> Void) {
-        Firestore.firestore().collection(Constants.OTPCollection).whereField(Constants.isUsedDocumentField, isEqualTo: false).whereField(Constants.OTPDocumentField, isEqualTo: password).getDocuments { snapshot, error in
-
-            if let error = error {
-                completion(false, error)
-                return
-            }
-
-            if let snapshot = snapshot {
-                if snapshot.isEmpty { // OTP doesn't exisist
-                    completion(false, nil)
-                } else if snapshot.count > 1 { // multiple of the same OTPs exist, is a bug
-                    completion(false, "Multiple of the same OTPs exists, this is a bug, please contact the deveolpers")
-                } else { // everything good
-                    // Mark OTP as completed
-                    Firestore.firestore()
-                        .collection(Constants.OTPCollection)
-                        .document(snapshot.documents.first!.documentID)
-                        .updateData(
-                            [
-                                Constants.isUsedDocumentField: true,
-                                Constants.OTPDateUsedDocumentField: Timestamp(),
-                            ]
-                        ) { error in
-                            if let error = error {
-                                completion(false, error)
-                            } else {
-                                completion(true, nil)
-                            }
-                        }
-                }
-            }
-        }
-    }
-
-    /// Uploads data to firebase
-    private func uploadData(completion: @escaping (Error?) -> Void) {
-        let db = Firestore.firestore()
-        let batch = db.batch()
-
-        let reference = db.collection(Constants.uploadedHistoryCollection).addDocument(data: [
-            "dateAdded": Timestamp(),
-            "userId": userAuthManager.user?.uid as Any,
-        ])
-
-        for checkInSession in checkInManager.checkInSessions {
-            batch.setData(
-                checkInSession.toFirebaseDictionary(),
-                forDocument: reference
-                    .collection(Constants.historyCollectionForEachDocument)
-                    .document()
-            )
-        }
-
-        batch.commit(completion: completion)
-    }
-
     private func onCheckInDateUpdate(_ newCheckInDate: Date, _: Date) -> SessionInvalidError? {
         guard let currentlySelectedSession = currentlySelectedSession else { return nil }
 
@@ -282,40 +162,6 @@ struct HistoryView: View {
             id: currentlySelectedSession.id,
             newSession: currentlySelectedSession.newSessionWith(checkedOut: newCheckOutDate)
         )
-    }
-
-    private func userEnteredOTP(_ result: String?) {
-        guard let result = result else { return }
-
-        showingActivityIndicator = true
-        checkOTP(password: result) { succeded, error in
-            if let error = error {
-                showingActivityIndicator = false
-                alertItem = MyErrorInfo(error).toAlertItem()
-                return
-            }
-
-            if succeded {
-                uploadData { error in
-                    showingActivityIndicator = false
-                    if let error = error {
-                        alertItem = MyErrorInfo(error).toAlertItem()
-                        return
-                    }
-
-                    alertItem = AlertItem(
-                        title: "Success!",
-                        message: "Your data has been successfully uploaded"
-                    )
-                }
-            } else {
-                showingActivityIndicator = false
-                alertItem = AlertItem(
-                    title: "Oops",
-                    message: "The password you entered is incorrect."
-                )
-            }
-        }
     }
 
     private func authenticate() {

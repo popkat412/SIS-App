@@ -6,7 +6,6 @@
 //
 
 import CoreData
-import Firebase
 import UIKit
 import UserNotifications
 
@@ -15,11 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
-
-        print("🔥 Configuring firebase..")
-        FirebaseApp.configure()
-        // Functions.functions().useEmulator(withHost: "localhost", port: 5001)
-        IntersectionChecker.`init`()
 
         return true
     }

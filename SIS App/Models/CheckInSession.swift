@@ -5,7 +5,6 @@
 //  Created by Wang Yunze on 8/11/20.
 //
 
-import FirebaseFirestore
 import Foundation
 
 /// This is a convenience struct containing all the check in sessions of a day
@@ -126,24 +125,5 @@ extension CheckInSession: Codable {
         }
 
         try container.encode(target.id, forKey: .target)
-    }
-}
-
-extension CheckInSession {
-    /// This is to quickly convert this to a firebase dictionary for use in Firestore
-    /// The shape of the returned dictionary should be the same as the one in Firestore (see readme)
-    func toFirebaseDictionary() -> [String: Any] {
-        var temp = [String: Any]()
-
-        temp["checkedIn"] = Timestamp(date: checkedIn)
-
-        if let checkedOut = self.checkedOut { temp["checkedOut"] = Timestamp(date: checkedOut) }
-        else { temp["checkedOut"] = nil }
-
-        temp["target"] = target.id
-
-        temp["id"] = id.uuidString
-
-        return temp
     }
 }

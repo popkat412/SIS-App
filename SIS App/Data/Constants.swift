@@ -103,5 +103,4 @@ struct Constants {
     // ------ [[ OTHER ]] ------ //
     static let remindUserFillInRoomsTime = DateComponents(hour: 18) // 6pm
     static let remindUserCheckOutTime = DateComponents(hour: 20) // 8pm
-    static let secretUploadSequence = [1, 3, 1, 2, 3, 1]
 }

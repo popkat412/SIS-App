@@ -11,7 +11,6 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var checkInManager: CheckInManager
     @EnvironmentObject var userLocationManager: UserLocationManager
-    @EnvironmentObject var userAuthManager: UserAuthManager
 
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
 
@@ -32,17 +31,6 @@ struct HomeView: View {
                             .frame(width: Constants.activityIndicatorSize, height: Constants.activityIndicatorSize)
                     }
                 }
-                .navigationBarItems(
-                    leading: Button("Sign out") {
-                        print("sign out button pressed")
-                        showingActivityIndicator = true
-                        userAuthManager.signOut { error in
-                            alertItem = MyErrorInfo(error).toAlertItem {
-                                showingActivityIndicator = false
-                            }
-                        }
-                    }
-                )
                 .navigationBarTitle(Constants.appName, displayMode: .inline)
                 .alert(item: $alertItem, content: alertItemBuilder)
             }
@@ -79,6 +67,5 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
             .environmentObject(CheckInManager())
             .environmentObject(UserLocationManager())
-            .environmentObject(UserAuthManager())
     }
 }
