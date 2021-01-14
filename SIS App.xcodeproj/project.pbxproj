@@ -36,7 +36,7 @@
 		6268CB0D25807A4000B175E8 /* checkInOut.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F229888B257D0F2400C5B1D9 /* checkInOut.mp3 */; };
 		6268CB1025807C7F00B175E8 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2298881257D08C500C5B1D9 /* PlaySound.swift */; };
 		6268CF09255D4AC200617FE1 /* OnRoomSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */; };
-		626A80DD25B039560039480D /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 626A80DC25B039560039480D /* SwiftUIX */; };
+		626A80DD25B039560039480D /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 626A80DC25B039560039480D /* SwiftPackageProductDependency */; };
 		6270F81E25776567002C156A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62C2FB0B25762D560024208C /* GoogleService-Info.plist */; };
 		62756C2825597B8E0007C4F3 /* Date+FormattedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */; };
 		627D553C256E5AC000DF3B32 /* View+ConditionalModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */; };
@@ -145,9 +145,9 @@
 /* Begin PBXFileReference section */
 		6202DDC52558102F0017BC49 /* CheckedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedInView.swift; sourceTree = "<group>"; };
 		6202DDC925581EA70017BC49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		6202DDCC255821520017BC49 /* CheckInSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckInSession.swift; path = "SIS App/Models/CheckInSession.swift"; sourceTree = SOURCE_ROOT; };
-		6202DDCF255827DF0017BC49 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryView.swift; path = "SIS App/Views/HistoryView.swift"; sourceTree = SOURCE_ROOT; };
-		6202DDD225583CC90017BC49 /* RoomParentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomParentInfo.swift; path = "SIS App/Utilities/RoomParentInfo.swift"; sourceTree = SOURCE_ROOT; };
+		6202DDCC255821520017BC49 /* CheckInSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckInSession.swift; path = CheckInSession.swift; sourceTree = "<group>"; };
+		6202DDCF255827DF0017BC49 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryView.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		6202DDD225583CC90017BC49 /* RoomParentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomParentInfo.swift; path = RoomParentInfo.swift; sourceTree = "<group>"; };
 		6202DDD525595A230017BC49 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		621573112577D53900C39621 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		621A77E925566CCE00636B27 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -164,34 +164,34 @@
 		6258F066256771E10021438C /* SISAppWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = SISAppWidget.intentdefinition; sourceTree = "<group>"; };
 		6258F067256771E30021438C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6258F069256771E30021438C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnRoomSelection.swift; path = "SIS App/Models/OnRoomSelection.swift"; sourceTree = SOURCE_ROOT; };
-		62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+FormattedTime.swift"; path = "SIS App/Utilities/Date+FormattedTime.swift"; sourceTree = SOURCE_ROOT; };
+		6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnRoomSelection.swift; path = OnRoomSelection.swift; sourceTree = "<group>"; };
+		62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+FormattedTime.swift"; path = "Date+FormattedTime.swift"; sourceTree = "<group>"; };
 		6278A18D256D04A2009A100F /* SIS App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SIS App.entitlements"; sourceTree = "<group>"; };
 		627D553F256E5AF200DF3B32 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
-		62868F322560009600F81842 /* UserNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserNotificationHelper.swift; path = "SIS App/Utilities/UserNotificationHelper.swift"; sourceTree = SOURCE_ROOT; };
+		62868F322560009600F81842 /* UserNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserNotificationHelper.swift; path = UserNotificationHelper.swift; sourceTree = "<group>"; };
 		62868F3625600F6700F81842 /* AppStoreVideoLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AppStoreVideoLocation.gpx; sourceTree = "<group>"; };
 		62881EAD2556570A00787923 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		62881EB0255657EE00787923 /* CategoryDisplayNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDisplayNames.swift; sourceTree = "<group>"; };
 		62881EB325565C2200787923 /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
 		628BF885257F641E00CFA807 /* Array+UniqueRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+UniqueRooms.swift"; sourceTree = "<group>"; };
-		628D11D625598F8D00BF4D2E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchView.swift; path = "SIS App/Views/SearchView.swift"; sourceTree = SOURCE_ROOT; };
-		628D11DD255997DB00BF4D2E /* colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = colors.json; path = "SIS App/Data/colors.json"; sourceTree = SOURCE_ROOT; };
-		628D11E0255997FC00BF4D2E /* LevelColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelColors.swift; path = "SIS App/Utilities/LevelColors.swift"; sourceTree = SOURCE_ROOT; };
+		628D11D625598F8D00BF4D2E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchView.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		628D11DD255997DB00BF4D2E /* colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = colors.json; path = colors.json; sourceTree = "<group>"; };
+		628D11E0255997FC00BF4D2E /* LevelColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelColors.swift; path = LevelColors.swift; sourceTree = "<group>"; };
 		628D11E4255AB42100BF4D2E /* RoomRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRow.swift; sourceTree = "<group>"; };
 		628D11E7255AB44D00BF4D2E /* LevelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelIcon.swift; sourceTree = "<group>"; };
 		628FAAC72573D7A40010F040 /* IntersectionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionChecker.swift; sourceTree = "<group>"; };
 		628FAAD1257484AB0010F040 /* SessionInvalidError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInvalidError.swift; sourceTree = "<group>"; };
 		6292DCBD25564F4000352527 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
-		629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "View+ConditionalModifiers.swift"; path = "SIS App/Utilities/View+ConditionalModifiers.swift"; sourceTree = SOURCE_ROOT; };
+		629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "View+ConditionalModifiers.swift"; path = "View+ConditionalModifiers.swift"; sourceTree = "<group>"; };
 		62A53B4A256E41A30092E891 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		62BFA560256E8F2900CD327D /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
 		62C2FB0125761DA60024208C /* RealisticWalking.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = RealisticWalking.gpx; sourceTree = "<group>"; };
 		62C2FB0B25762D560024208C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		62D5D639255D38D60064D484 /* CheckInTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTarget.swift; sourceTree = "<group>"; };
 		62D5D63F255D3E850064D484 /* ChooseRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoomView.swift; sourceTree = "<group>"; };
-		62D5D643255D40330064D484 /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLocationManager.swift; path = "SIS App/Models/UserLocationManager.swift"; sourceTree = SOURCE_ROOT; };
+		62D5D643255D40330064D484 /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLocationManager.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
 		62D8CF61257CD15500651C28 /* UserUploadedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUploadedData.swift; sourceTree = "<group>"; };
-		62DB8FDB2556A2E9006AA1D3 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Level.swift; path = "SIS App/Views/Level.swift"; sourceTree = SOURCE_ROOT; };
+		62DB8FDB2556A2E9006AA1D3 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Level.swift; path = Level.swift; sourceTree = "<group>"; };
 		62E05E58255EC32100BAE4FF /* NotificationCenter+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+CustomNames.swift"; sourceTree = "<group>"; };
 		62E119E5253ADEBF0037CEC5 /* SIS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SIS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E119E8253ADEBF0037CEC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				626A80DD25B039560039480D /* SwiftUIX in Frameworks */,
+				626A80DD25B039560039480D /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,22 +242,22 @@
 		621A877F2551833200FA810F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6233B3B525849412002AC002 /* Typealiases.swift */,
-				62D8CF61257CD15500651C28 /* UserUploadedData.swift */,
 				62FD70C625788D3900C785BE /* AlertItem.swift */,
-				62E857D82577D0C00028C89D /* MyErrorInfo.swift */,
-				62BFA560256E8F2900CD327D /* NavigationState.swift */,
+				621A877C2551832C00FA810F /* Block.swift */,
+				62FF081925564B9A00FD5D65 /* CheckInManager.swift */,
 				6202DDCC255821520017BC49 /* CheckInSession.swift */,
 				62D5D639255D38D60064D484 /* CheckInTarget.swift */,
 				62DB8FDB2556A2E9006AA1D3 /* Level.swift */,
-				621A877C2551832C00FA810F /* Block.swift */,
 				621A77E925566CCE00636B27 /* Location.swift */,
-				621A87802551838900FA810F /* Room.swift */,
-				62D5D643255D40330064D484 /* UserLocationManager.swift */,
+				62E857D82577D0C00028C89D /* MyErrorInfo.swift */,
+				62BFA560256E8F2900CD327D /* NavigationState.swift */,
 				62E05E58255EC32100BAE4FF /* NotificationCenter+CustomNames.swift */,
-				62FF081925564B9A00FD5D65 /* CheckInManager.swift */,
-				628FAAD1257484AB0010F040 /* SessionInvalidError.swift */,
 				6268CF08255D4AC200617FE1 /* OnRoomSelection.swift */,
+				621A87802551838900FA810F /* Room.swift */,
+				628FAAD1257484AB0010F040 /* SessionInvalidError.swift */,
+				6233B3B525849412002AC002 /* Typealiases.swift */,
+				62D5D643255D40330064D484 /* UserLocationManager.swift */,
+				62D8CF61257CD15500651C28 /* UserUploadedData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -274,10 +274,10 @@
 		6258F063256771E10021438C /* SISAppWidget */ = {
 			isa = PBXGroup;
 			children = (
-				6258F064256771E10021438C /* SISAppWidget.swift */,
-				6258F066256771E10021438C /* SISAppWidget.intentdefinition */,
 				6258F067256771E30021438C /* Assets.xcassets */,
 				6258F069256771E30021438C /* Info.plist */,
+				6258F066256771E10021438C /* SISAppWidget.intentdefinition */,
+				6258F064256771E10021438C /* SISAppWidget.swift */,
 			);
 			path = SISAppWidget;
 			sourceTree = "<group>";
@@ -285,19 +285,19 @@
 		62756C2A25598BEE0007C4F3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				62F75D7C2578ED600004FF9D /* String+HelperExtensions.swift */,
 				628BF885257F641E00CFA807 /* Array+UniqueRooms.swift */,
-				628FAAC72573D7A40010F040 /* IntersectionChecker.swift */,
-				6255C34C256E49450052B38C /* FileUtility.swift */,
-				629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */,
-				62868F322560009600F81842 /* UserNotificationHelper.swift */,
-				628D11E0255997FC00BF4D2E /* LevelColors.swift */,
-				62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */,
-				6202DDD225583CC90017BC49 /* RoomParentInfo.swift */,
-				6202DDD525595A230017BC49 /* DataProvider.swift */,
-				62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */,
 				62881EB0255657EE00787923 /* CategoryDisplayNames.swift */,
+				6202DDD525595A230017BC49 /* DataProvider.swift */,
+				62756C2725597B8E0007C4F3 /* Date+FormattedTime.swift */,
+				6255C34C256E49450052B38C /* FileUtility.swift */,
+				628FAAC72573D7A40010F040 /* IntersectionChecker.swift */,
+				628D11E0255997FC00BF4D2E /* LevelColors.swift */,
 				F2298881257D08C500C5B1D9 /* PlaySound.swift */,
+				62EC2D77255642A90040AF5D /* RawKeyedCodableDictionary.swift */,
+				6202DDD225583CC90017BC49 /* RoomParentInfo.swift */,
+				62F75D7C2578ED600004FF9D /* String+HelperExtensions.swift */,
+				62868F322560009600F81842 /* UserNotificationHelper.swift */,
+				629EB67F25638E64000FADD9 /* View+ConditionalModifiers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -305,23 +305,23 @@
 		62881EB625565C2600787923 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				62EA6FB52578DB610021951A /* TextFieldAlert.swift */,
-				623107912578C4390003DBAC /* MyTextFieldStyle.swift */,
 				621573112577D53900C39621 /* ActivityIndicator.swift */,
-				627D553F256E5AF200DF3B32 /* HistoryRow.swift */,
-				6202DDC925581EA70017BC49 /* ContentView.swift */,
-				62E119EC253ADEBF0037CEC5 /* HomeView.swift */,
-				62D5D63F255D3E850064D484 /* ChooseRoomView.swift */,
 				6292DCBD25564F4000352527 /* CategoriesView.swift */,
-				62881EB325565C2200787923 /* RoomsView.swift */,
-				62A53B4A256E41A30092E891 /* IconView.swift */,
 				6202DDC52558102F0017BC49 /* CheckedInView.swift */,
+				62D5D63F255D3E850064D484 /* ChooseRoomView.swift */,
+				6202DDC925581EA70017BC49 /* ContentView.swift */,
 				62FC0BB3256D48F900EACA79 /* GradientButtonStyle.swift */,
+				627D553F256E5AF200DF3B32 /* HistoryRow.swift */,
 				6202DDCF255827DF0017BC49 /* HistoryView.swift */,
-				628D11D625598F8D00BF4D2E /* SearchView.swift */,
+				62E119EC253ADEBF0037CEC5 /* HomeView.swift */,
+				62A53B4A256E41A30092E891 /* IconView.swift */,
 				628D11E7255AB44D00BF4D2E /* LevelIcon.swift */,
-				628D11E4255AB42100BF4D2E /* RoomRow.swift */,
 				62E11A00253AE2440037CEC5 /* MapView.swift */,
+				623107912578C4390003DBAC /* MyTextFieldStyle.swift */,
+				628D11E4255AB42100BF4D2E /* RoomRow.swift */,
+				62881EB325565C2200787923 /* RoomsView.swift */,
+				628D11D625598F8D00BF4D2E /* SearchView.swift */,
+				62EA6FB52578DB610021951A /* TextFieldAlert.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -329,11 +329,11 @@
 		62881EB725565C3300787923 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				F2D8D4FA257390ED0098B1A6 /* overlay_coords.json */,
 				62FC0BB8256D4A4D00EACA79 /* Constants.swift */,
-				628D11DD255997DB00BF4D2E /* colors.json */,
-				62EC2D732556377D0040AF5D /* rooms.json */,
 				62881EAD2556570A00787923 /* categories.json */,
+				628D11DD255997DB00BF4D2E /* colors.json */,
+				F2D8D4FA257390ED0098B1A6 /* overlay_coords.json */,
+				62EC2D732556377D0040AF5D /* rooms.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -341,8 +341,8 @@
 		62C2FB0025761D930024208C /* GPX FIles */ = {
 			isa = PBXGroup;
 			children = (
-				62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */,
 				62868F3625600F6700F81842 /* AppStoreVideoLocation.gpx */,
+				62F9BBD1255ED62A0090FA2C /* InsideSchool.gpx */,
 				62C2FB0125761DA60024208C /* RealisticWalking.gpx */,
 			);
 			path = "GPX FIles";
@@ -351,12 +351,12 @@
 		62E119DC253ADEBF0037CEC5 = {
 			isa = PBXGroup;
 			children = (
+				6258F05E256771E10021438C /* Frameworks */,
 				62C2FB0025761D930024208C /* GPX FIles */,
-				62427C55256E2A3B00903491 /* SISAppWidgetExtension.entitlements */,
+				62E119E6253ADEBF0037CEC5 /* Products */,
 				62E119E7253ADEBF0037CEC5 /* SIS App */,
 				6258F063256771E10021438C /* SISAppWidget */,
-				6258F05E256771E10021438C /* Frameworks */,
-				62E119E6253ADEBF0037CEC5 /* Products */,
+				62427C55256E2A3B00903491 /* SISAppWidgetExtension.entitlements */,
 			);
 			sourceTree = "<group>";
 		};
@@ -372,20 +372,20 @@
 		62E119E7253ADEBF0037CEC5 /* SIS App */ = {
 			isa = PBXGroup;
 			children = (
-				62C2FB0B25762D560024208C /* GoogleService-Info.plist */,
-				6278A18D256D04A2009A100F /* SIS App.entitlements */,
-				62756C2A25598BEE0007C4F3 /* Utilities */,
-				621A877F2551833200FA810F /* Models */,
 				62881EB725565C3300787923 /* Data */,
+				621A877F2551833200FA810F /* Models */,
+				62E119F3253ADEC10037CEC5 /* Preview Content */,
+				F229888A257D0F2400C5B1D9 /* Sounds */,
+				62756C2A25598BEE0007C4F3 /* Utilities */,
 				62881EB625565C2600787923 /* Views */,
 				62E119E8253ADEBF0037CEC5 /* AppDelegate.swift */,
-				62E119EA253ADEBF0037CEC5 /* SceneDelegate.swift */,
 				62E119F1253ADEC10037CEC5 /* Assets.xcassets */,
-				62E119F6253ADEC10037CEC5 /* LaunchScreen.storyboard */,
+				62C2FB0B25762D560024208C /* GoogleService-Info.plist */,
 				62E119F9253ADEC10037CEC5 /* Info.plist */,
+				62E119F6253ADEC10037CEC5 /* LaunchScreen.storyboard */,
+				6278A18D256D04A2009A100F /* SIS App.entitlements */,
 				62E119EE253ADEBF0037CEC5 /* SIS_App.xcdatamodeld */,
-				F229888A257D0F2400C5B1D9 /* Sounds */,
-				62E119F3253ADEC10037CEC5 /* Preview Content */,
+				62E119EA253ADEBF0037CEC5 /* SceneDelegate.swift */,
 			);
 			path = "SIS App";
 			sourceTree = "<group>";
@@ -422,8 +422,6 @@
 			dependencies = (
 			);
 			name = SISAppWidgetExtension;
-			packageProductDependencies = (
-			);
 			productName = SISAppWidgetExtension;
 			productReference = 6258F05D256771E10021438C /* SISAppWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -445,7 +443,7 @@
 			);
 			name = "SIS App";
 			packageProductDependencies = (
-				626A80DC25B039560039480D /* SwiftUIX */,
+				626A80DC25B039560039480D /* SwiftPackageProductDependency */,
 			);
 			productName = "SIS App";
 			productReference = 62E119E5253ADEBF0037CEC5 /* SIS App.app */;
@@ -478,7 +476,7 @@
 			);
 			mainGroup = 62E119DC253ADEBF0037CEC5;
 			packageReferences = (
-				628D11D92559970300BF4D2E /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				628D11D92559970300BF4D2E /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 62E119E6253ADEBF0037CEC5 /* Products */;
 			projectDirPath = "";
@@ -634,6 +632,7 @@
 				62E119F7253ADEC10037CEC5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -886,7 +885,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		628D11D92559970300BF4D2E /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+		628D11D92559970300BF4D2E /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
 			requirement = {
@@ -897,9 +896,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		626A80DC25B039560039480D /* SwiftUIX */ = {
+		626A80DC25B039560039480D /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 628D11D92559970300BF4D2E /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			package = 628D11D92559970300BF4D2E /* RemoteSwiftPackageReference */;
 			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */
